@@ -1,0 +1,447 @@
+{
+  "schema": "fixed-route-report-backup.v1",
+  "scope": "Exact byte backups of per-flight results, audit, test logs, execution provenance and prior nominal source. Full gzip evidence remains local.",
+  "runs": [
+    {
+      "label": "plan-tests",
+      "id": "20260905T211023Z-fixed-route-plan-tests-6ec3ce77",
+      "status": {
+        "id": "20260905T211023Z-fixed-route-plan-tests-6ec3ce77",
+        "stage": "system",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:10:23.772539+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:10:23.942600+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_fixed_route_plan.py",
+        "-v"
+      ]
+    },
+    {
+      "label": "first-original30",
+      "id": "20260905T211037Z-fixed-route-first-original30-d84699b1",
+      "status": {
+        "id": "20260905T211037Z-fixed-route-first-original30-d84699b1",
+        "stage": "dev",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:10:37.651010+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:11:13.633917+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "src/fixed_route_probe.py",
+        "--modes",
+        "nominal",
+        "--scenario-limit",
+        "1",
+        "--wall-seconds",
+        "210"
+      ]
+    },
+    {
+      "label": "nominal",
+      "id": "20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5",
+      "status": {
+        "id": "20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5",
+        "stage": "dev",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:11:57.872075+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:19:10.353386+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "src/fixed_route_probe.py",
+        "--modes",
+        "nominal",
+        "--scenario-limit",
+        "12",
+        "--wall-seconds",
+        "600"
+      ]
+    },
+    {
+      "label": "fallback-tests",
+      "id": "20260905T212003Z-fixed-route-fallback-tests-fd6bc8b9",
+      "status": {
+        "id": "20260905T212003Z-fixed-route-fallback-tests-fd6bc8b9",
+        "stage": "system",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:20:03.860245+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:20:04.032540+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_fixed_route_probe.py",
+        "-v"
+      ]
+    },
+    {
+      "label": "left",
+      "id": "20260905T212016Z-fixed-route-original12-left-6619f298",
+      "status": {
+        "id": "20260905T212016Z-fixed-route-original12-left-6619f298",
+        "stage": "dev",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:20:16.005534+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:30:51.330672+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "src/fixed_route_probe.py",
+        "--modes",
+        "left",
+        "--scenario-limit",
+        "12",
+        "--wall-seconds",
+        "720"
+      ]
+    },
+    {
+      "label": "audit-tests",
+      "id": "20260905T213100Z-fixed-route-audit-tests-801d34cb",
+      "status": {
+        "id": "20260905T213100Z-fixed-route-audit-tests-801d34cb",
+        "stage": "system",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:31:00.697861+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:31:00.919758+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_fixed_route_audit.py",
+        "-v"
+      ]
+    },
+    {
+      "label": "right",
+      "id": "20260905T213118Z-fixed-route-original12-right-430f662e",
+      "status": {
+        "id": "20260905T213118Z-fixed-route-original12-right-430f662e",
+        "stage": "dev",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:31:18.059694+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:41:55.291666+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "src/fixed_route_probe.py",
+        "--modes",
+        "right",
+        "--scenario-limit",
+        "12",
+        "--wall-seconds",
+        "720"
+      ]
+    },
+    {
+      "label": "trace-audit",
+      "id": "20260905T214237Z-fixed-route-full-trace-audit-9cb699a8",
+      "status": {
+        "id": "20260905T214237Z-fixed-route-full-trace-audit-9cb699a8",
+        "stage": "analysis",
+        "state": "succeeded",
+        "started_at": "2026-09-05T21:42:37.458607+00:00",
+        "pid": 4,
+        "finished_at": "2026-09-05T21:43:56.337756+00:00",
+        "reason": "completed",
+        "exit_code": 0,
+        "error": null
+      },
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "14",
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "/usr/bin/ionice",
+        "-c",
+        "3",
+        "/home/magic/ruitaozhou/low-altitude/.venv/bin/python",
+        "-B",
+        "src/fixed_route_audit.py",
+        "--artifacts",
+        "/tmp/low-altitude-fixed-route-audit-20260905/inputs/first-original30",
+        "/tmp/low-altitude-fixed-route-audit-20260905/inputs/nominal",
+        "/tmp/low-altitude-fixed-route-audit-20260905/inputs/left",
+        "/tmp/low-altitude-fixed-route-audit-20260905/inputs/right",
+        "--wall-seconds",
+        "360"
+      ]
+    }
+  ],
+  "backups": [
+    {
+      "source": "runs/20260905T211023Z-fixed-route-plan-tests-6ec3ce77/manifest.json",
+      "backup": "reports/fixed-route-20260905/plan-tests-lab-manifest.json",
+      "bytes": 27131,
+      "sha256": "fbc38a3e8206f91438fd58a5109b9b51eaa59ca44dac1281265a7105c9fe25dd"
+    },
+    {
+      "source": "runs/20260905T211023Z-fixed-route-plan-tests-6ec3ce77/log.txt",
+      "backup": "reports/fixed-route-20260905/plan-tests.log.txt",
+      "bytes": 1029,
+      "sha256": "eaeb519098d89219083b2265cf7f1515a9af90ccbc560ea4c62ea3d9c1b1d7e5"
+    },
+    {
+      "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/manifest.json",
+      "backup": "reports/fixed-route-20260905/first-original30-lab-manifest.json",
+      "bytes": 27818,
+      "sha256": "867ff2f4ed21d4b68a1c9628cb338ac4a4cfdfb711bdab77c8ea5123a5c2782a"
+    },
+    {
+      "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/result.json",
+      "backup": "reports/fixed-route-20260905/first-original30.json",
+      "bytes": 81099,
+      "sha256": "269129e1848239756ef102223285168c65a00f4f9fc7b5199179fed113519a15"
+    },
+    {
+      "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/manifest.json",
+      "backup": "reports/fixed-route-20260905/nominal-lab-manifest.json",
+      "bytes": 27828,
+      "sha256": "ce016c070b80d15ddebdc6fcc4af644b738ccebfe66986029a42f92f64962535"
+    },
+    {
+      "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/result.json",
+      "backup": "reports/fixed-route-20260905/nominal.json",
+      "bytes": 912324,
+      "sha256": "d235629553fa75a670042f33ab52ba8e5c95fd992ec6caa9940c9ab22ca292b6"
+    },
+    {
+      "source": "runs/20260905T212003Z-fixed-route-fallback-tests-fd6bc8b9/manifest.json",
+      "backup": "reports/fixed-route-20260905/fallback-tests-lab-manifest.json",
+      "bytes": 27521,
+      "sha256": "8155dccd0793df494037e9886b61245dd980b54bad645db7645f3f730c466693"
+    },
+    {
+      "source": "runs/20260905T212003Z-fixed-route-fallback-tests-fd6bc8b9/log.txt",
+      "backup": "reports/fixed-route-20260905/fallback-tests.log.txt",
+      "bytes": 671,
+      "sha256": "4ddf6e456f4c277e5baac4eed5ee1b47160ab24577d4d52acf69a95e2b2d8f6a"
+    },
+    {
+      "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/manifest.json",
+      "backup": "reports/fixed-route-20260905/left-lab-manifest.json",
+      "bytes": 28182,
+      "sha256": "d20e61f7cc3588fa8b0026d2f7cf5ba57698f17158b8512db6602dd8790dc758"
+    },
+    {
+      "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/result.json",
+      "backup": "reports/fixed-route-20260905/left.json",
+      "bytes": 1003362,
+      "sha256": "c364df8b060d067f4aa89b8bb4f140acaabfe8319272b884cf8caec8d130ed3e"
+    },
+    {
+      "source": "runs/20260905T213100Z-fixed-route-audit-tests-801d34cb/manifest.json",
+      "backup": "reports/fixed-route-20260905/audit-tests-lab-manifest.json",
+      "bytes": 27698,
+      "sha256": "91e04f823573ef2cacde44b8823d4cf86a24fbec2eb23cfb0bbc4b57b524cfc1"
+    },
+    {
+      "source": "runs/20260905T213100Z-fixed-route-audit-tests-801d34cb/log.txt",
+      "backup": "reports/fixed-route-20260905/audit-tests.log.txt",
+      "bytes": 488,
+      "sha256": "963e5a626185a9227fdc18294e8719248a33351f645b4fe49119da9e26f01639"
+    },
+    {
+      "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/manifest.json",
+      "backup": "reports/fixed-route-20260905/right-lab-manifest.json",
+      "bytes": 28377,
+      "sha256": "145def5257ed4cec8a044c1dfd309003e71f4ea28321c2992d678cd3cf2df026"
+    },
+    {
+      "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/result.json",
+      "backup": "reports/fixed-route-20260905/right.json",
+      "bytes": 1003944,
+      "sha256": "9d7019537535abc0088634f04981944e94bce116aef9265d457303813326d485"
+    },
+    {
+      "source": "runs/20260905T214237Z-fixed-route-full-trace-audit-9cb699a8/manifest.json",
+      "backup": "reports/fixed-route-20260905/trace-audit-lab-manifest.json",
+      "bytes": 28811,
+      "sha256": "6ec67e4293bdc5d85783de98ad23f128162fb3575e566f9f83cc69657f6f1391"
+    },
+    {
+      "source": "runs/20260905T214237Z-fixed-route-full-trace-audit-9cb699a8/artifacts/result.json",
+      "backup": "reports/fixed-route-20260905/trace-audit.json",
+      "bytes": 262939,
+      "sha256": "58192d155938317ac34d2f019ed18564b112af2c6dbf6892bb5956e405b9d8f3"
+    },
+    {
+      "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/source/src/fixed_route_probe.py",
+      "backup": "reports/fixed-route-20260905/nominal-probe-source.py.txt",
+      "bytes": 23330,
+      "sha256": "1c12e3181cdb0fa78a32faa7f4bb163fdb5c9399ed60790829dec82d3ed1c1a5"
+    }
+  ],
+  "backed_up_bytes": 3512552,
+  "local_only_gzip_evidence": [
+    {
+      "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/plans.jsonl.gz",
+      "bytes": 6611339,
+      "sha256": "7694708803f13d8ba7272ef45ee6bd0c2b826b1efc23f6c3361945900dfadfac",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/traces.jsonl.gz",
+      "bytes": 4470960,
+      "sha256": "c23c87d177f46172af6b1b0d6213f1b77d53ee7f1d4141236473d02242904e24",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/plans.jsonl.gz",
+      "bytes": 90707804,
+      "sha256": "515d16aed26e98e556932da659acd0233fcdbef7170a2816f4eb4474ba5ca0d7",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/traces.jsonl.gz",
+      "bytes": 60843947,
+      "sha256": "7516f2ce08bdb1691e790a49957a213ee7b262522ec432dc9f185361346a7a05",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/plans.jsonl.gz",
+      "bytes": 92066315,
+      "sha256": "15510d67b4d9a39666fe712abc66a2c44e3ff59ea392c15ae33b8e10e60ef15b",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/traces.jsonl.gz",
+      "bytes": 61532560,
+      "sha256": "652cf220271270cab216eb9bbe32247a250f41547f100b26e7b9962360be90cf",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/plans.jsonl.gz",
+      "bytes": 92052652,
+      "sha256": "6cb0e018f9d53351d2f9ecb71b1352c04a3a06764bd96087544cc24dec60ae0e",
+      "backed_up": false
+    },
+    {
+      "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/traces.jsonl.gz",
+      "bytes": 61540427,
+      "sha256": "c84af336bd8c15b085f4cbeaf1c367653b8640792f6e2060e7b43c6fd59c53ea",
+      "backed_up": false
+    }
+  ],
+  "local_only_gzip_bytes": 469826004,
+  "sha256_is_identity_not_correctness": true
+}

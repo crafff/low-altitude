@@ -838,3 +838,37 @@ root将仅本轮构造性路线的出口放到末两参考点的沿程中间，�
 20:36–20:39，[新报告](../reports/lateral-reference-20260905/README.md)及四批result/完整gzip轨迹/逐区间证书共12文件、12717652B逐字节备份，manifest记录SHA/源run及真实状态；独立review再次核对12份全部匹配，保留旧24负结果。全轮10测试、194次原生单机执行，唯一失败job为上述科学终止对齐失败，未启动训练/held-out/延迟，也未替换原执行核心。剩余为原固定场景的可行规划、在线请求/锁/后缀保留及NR/PPO统一；不宣称该研究总任务或baseline已完成。准备完成系统入口检查及按已有授权私有commit/push；最终只由root调用既有完成通知入口。
 
 20:39–20:43收尾：独立review确认最终报告解释无阻断；其结果审查沿同一已核验Astra/xhigh turn继续，audit速度推导新turn `01a0733c-566c-7012-8ee5-ce4eff04df93`再次只读取模型字段确认Astra/xhigh。`lab doctor`入口/链接issues与local_missing为空、diff/staged空白检查通过；没有再跑无必要项目测试，系统检查不冒充数学验证。只读确认GitHub账户crafff、同账户PRIVATE仓库/ADMIN权限后，23个明确文件提交`bfae7912a893dbff937d4a03476c19e84e68cca3`并按既有授权push到原研究分支，20:42本地/远端SHA精确一致、工作区干净；无本轮审批拒绝。当前只同步NOW/任务收尾记录，主线程随后使用既有完成通知，不据服务接受声称设备收到。
+
+### 2026-09-05 20:54 UTC起：原固定12开发场景执行测试
+
+用户在澄清“144例为构造性见证、12固定场景是开发评估而非全部训练集、及时指机动所需时间/距离”后授权“好，开始测试”。本轮锁定`reports/policy-modes-refresh-850-20260905/scenarios.json`原文件SHA`3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c`，直接读入，不按旧nr_pilot seeds重生成。种子53001–53012、3/4/5航道重复4次、48航道169航点121航段、360架次，所有原类型、入场时刻、有限航点/出口和宽高保持；原850模型及训练核心不改，不新训/held-out/延迟，不继承旧10h。
+
+五字段交接：复用`lateral_native_audit`只读≤10min核对固定输入/原对照/生命周期，来源scenarios、reused_nr、reference及corner-speed报告与PaperEnvironment；输出精确身份、协议限制、失败类别和下一步，无编辑/负载/嵌套。已确认旧NR360到达、16架217.5aircraft-s越界、54.905277778FH；旧NR限速360到达0越界、55.051458333FH，均作为保存对照，不忽略已有更强对照。复用`nr_replay_probe` builder独占新`src/fixed_route_plan.py`及对应聚焦测试，问题为在任意原固定折线中构造native有限计划；源为lateral_plan/原native次序和固定fixtures；输出success/failure、完整states/commands/实际进度及lane接受/拒绝原因，≤25min静态、无负载/清理/嵌套，保留他人工作。root独占联合native harness/config/报告及全部执行。复用`containment_proof_review`只读≤20min新代码/协议/原对照，输出阻断及科学解释限制，不编辑/执行/嵌套。三线程均要求Astra/xhigh，实际turn待定向元数据核验。
+
+预声明候选保留上轮1m边缘内收、弯前回中/12m/s连续限速的显式改编；通过原固定折线内中心圆弧与平滑横移生成参考，native反解采样及完整误差箱/capsule检查决定可执行性。不得用上轮“按轨迹中点安排出口”方法。首先原12中的第1场景/30架名义模式，按吞吐扩至12个名义场景，再做首航段左/右固定脚本（请求后捕获/保持20s/返回中心）；本轮先保持名义TAS和固定高度，避免把半速下原1200s截止不可完成混为导航失败。横移放不下则明确拒绝并保留名义续行，仍在全部360分母内。侧移组与NR的差异包含动作差异，不称同动作纯控制器消融。
+
+原生联合交通保持按(scheduled_entry,id)排序、.25s首次可入场tick、无动态筛选；初始heading由原第一航段geo.qdrdist计算，TAS由原type创建，固定高度106.68m。按当前ID取索引处理退出后的数组变化。原始containment在poststep记录、冲突在prestep计时、保留完整终止tick；真正最终航段进度和原finite_exit_crossing共同决定实际退出，1200s从各机实际入场计。若名义计划不可生成而不能保留全部实际交通，该场景须标明执行不完整，不给出公平联合冲突结论。所有负载经root唯一lab/Bubblewrap固定快照，CPU14/单线程/nice15/idleIO，先小后大，其他GPU进程不操作。
+
+21:10–21:20阶段结果：[5项规划测试](../runs/20260905T211023Z-fixed-route-plan-tests-6ec3ce77/log.txt).093s通过；[首原场景30架](../runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/result.json)35.657624s/59285aircraft ticks通过，据此扩至[全12名义](../runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/result.json)，内600/外630s、192MiB/2048MiB，实际432.053013s，21:19:10结束。360/360到达、0超时/计划耗尽、0横向/高度越界；最大原评分距中心20.245189m，总55.594444FH/3330829.803048m。相对已有NR限速55.051458FH/3329784.800936m，新名义航时约+0.9863%、航程约+0.03138%；LoWC/NMAC暴露有增加，不称避碰收益。
+
+独立复核补充并修正：侧向保持/返回中心增加5°航向检查；实际最终航段投影及方向作为合格出口条件；早期计划耗尽不得给公平联合风险标记；物理已创建但规划失败的飞机计入admitted并单列certified_admitted。名义完整run使用修正前固定源码快照，合格轨迹的物理指令不变，随后须从保存轨迹补审新条件，不能把当前源码SHA冒充旧run身份。[3项拒绝回退/早停风险回归](../runs/20260905T212003Z-fixed-route-fallback-tests-fd6bc8b9/log.txt).001s通过。侧移规划先认证完整候选，接受时不重复求解名义；几何拒绝只在全零offset/center-turn阶段且全计划认证时复用名义路径，否则单独认证回退。该计算优化不改变成功候选的物理轨迹。
+
+三实际线程再次只读取turn_context模型字段核验：builder turn`01a0735b-f4b7-7990-9759-4969c4e4ce44`、audit turn`01a0735a-3f0c-7e83-9aed-8b0afc135808`、review最新审计交接turn`01a07371-c010-7602-8fc0-aa959cd19385`均gpt-6-astra/xhigh。builder两文件静态交付、调查只读、root执行8测试及原生负载；无代理自跑实验。review源码审查无剩余阻断；再五字段交接≤8min只读新trace reducer及全名义结果，核对逐步原指标、实际入场/终止与prestep冲突还原，不编辑/负载/嵌套。21:20开始左侧12场景，右侧仍未开始，未据名义成功提前宣称侧移动作通过。
+
+21:30:51，[左侧全12](../runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/result.json)内720/外750s、192MiB/2048MiB完成，实际634.906421s/803822aircraft ticks。360/360到达、0横向/高度越界，339接受并完成≥20s保持与回中、21拒绝并名义到达；31架Amzn中10接受/21拒绝，其余11型号329架全部接受完成。最大原距中心75.237878m，总55.820972FH；拒绝均为当前完整模板及刹车预留放不下首段，不能证明不存在其它可行轨迹。
+
+独立reducer审查指出并修复了“整架无冲突飞机漏计划/漏轨迹却能逃过核对”和“直道第一段即最终段导致漏查回中”的完整性漏洞；补齐原ID集合/plan绑定、所有初态/posttick、保持TAS/course及真实第一段回中。[2项自建随机临时负夹具回归](../runs/20260905T213100Z-fixed-route-audit-tests-801d34cb/log.txt).003s通过；夹具仅测证据归约，不伪称物理证书。全轮目前10聚焦测试已执行通过，右侧全12从21:31:18运行中。
+
+审计依赖超过lab的64MiB源码快照上限，未放宽监督器或挂载原runs。root将已完成原始result/plans/traces逐字节复制至自己创建的专用`/tmp/low-altitude-fixed-route-audit-20260905/inputs`，总预算512MiB；文件只读，审计经显式runtime只读挂入。小[依赖manifest](../reports/fixed-route-20260905/audit-inputs.json)进入固定源码快照，审计前后核验大小/SHA；这些SHA只证明身份，不代替正确性检查。准备阶段宿主python3缺少hashlib.file_digest的一次复制脚本中断，未启动负载或改变原数据，随后用流式SHA续完并验证每份副本；正式审计仍使用uv托管Python3.11。完整原runs保留，未作测试/清理工作区。
+
+21:41:55，[右侧全12](../runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/result.json)内720/外750s、192MiB/2048MiB完成，实际636.836398s/803825aircraft ticks。360/360到达、0横向/高度越界，各339完成/21拒绝与左侧一致，拒绝仍全为Amzn。右侧最大原距中心75.238642m、55.821181FH/3342008.368103m。三正式臂共1080架次/2408207步；加首场景30架初测共37次场景执行/1110架次/2467492步，只有原12个独立场景，不能将重复模式当新场景。
+
+21:42:37–21:43:56，[四批完整轨迹独立归约](../runs/20260905T214237Z-fixed-route-full-trace-audit-9cb699a8/artifacts/result.json)内360/外390s、32MiB/2048MiB实际78.643692s，全部通过。472826733B的只读依赖开始/结束均与冻结manifest相同；四批原模式/种子、完整原flight ID、唯一plan及全部初态/posttick覆盖，原始越界、航程、完整航时、prestep风险事件/暴露、实际最终航段投影/方向及首次合格出口、≥20s保持/速度/course与第一段回中均与逐机记录一致。复用既有几何指标函数，只称独立数据归约，不称独立验证误差定理的外部假设。名义7架、右侧1架实际出口早参考1tick，均保留真实完整末步；实际新增判据也在旧名义快照轨迹上逐架通过，无须重新执行相同物理轨迹。
+
+21:44–21:48收尾整理：[报告](../reports/fixed-route-20260905/README.md)与[17份逐字节备份3512552B](../reports/fixed-route-20260905/manifest.json)保存5份原生/审计结果、8份执行manifest、3份测试日志及旧名义源码文本。469826004B完整gzip轨迹/逐步计划证书保留在精确runs路径，不随本轮Git提交，未声称全量异地备份。现行侧移/审计源码保留各自run身份，未以当前hash替代早期快照。NOW缩为本轮结果、明确限制与下一步，LESSONS修正同tick退出要求并记录模板拒绝/数据覆盖经验。
+
+最终五字段只读复核≤5min：同一reviewer核对新README、各臂结果/审计、manifest与必要源run，输出阻断/证据/限制/下一步；无修改、负载或嵌套。实际新turn`01a07389-c6e8-7420-9102-1a5086df025d`定向模型字段再次核验gpt-6-astra/xhigh。所有实验最晚21:43:56结束，没有PPO、held-out、延迟、GPU或他人进程操作。10项聚焦测试、完整原生执行和归约均实际完成；lab doctor入口/链接issues与local_missing为空、diff空白检查通过，这些系统检查不作为科学证据。
+
+本轮授权的原固定场景脚本测试完成。下一步是从实际途中可靠状态认证新续行、拒绝时保留旧后缀、验证动作切换与锁，再统一NR/策略执行；不得直接据本轮冻结旧850模型或自动续训。21:29只读GitHub确认当前账户crafff、同账户原remote `https://github.com/crafff/low-altitude.git`、PRIVATE/ADMIN；按既有授权准备提交推送当前研究分支。最后仅root调用既有完成通知入口，实际push/通知结果以工具记录为准。
+
+21:50最终review返回无阻断：独立汇总确认正式1080到达/0越界、678完成横移/42拒绝到达、含初测37执行1110架2467492步，8个lab job全部succeeded；17份备份与原对应文件的大小/SHA全部相同。review明确没有再次单独hash八个大gzip，相关字节身份已由root复制及隔离归约前后校验；没有把review重复陈述算为新原生证据。当前planner/probe也与左右两run实际源SHA精确一致，31个明确文件已暂存，staged空白检查通过，不再追加无必要实验。

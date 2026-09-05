@@ -1,0 +1,164 @@
+{
+  "schema": "fixed-route-audit-dependencies.v1",
+  "scope": "Dedicated read-only copies of completed evidence, not a test workspace in original runs",
+  "dependencies": [
+    {
+      "label": "first-original30",
+      "directory": "/tmp/low-altitude-fixed-route-audit-20260905/inputs/first-original30",
+      "run": "20260905T211037Z-fixed-route-first-original30-d84699b1",
+      "files": [
+        {
+          "name": "result.json",
+          "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/result.json",
+          "bytes": 81099,
+          "sha256": "269129e1848239756ef102223285168c65a00f4f9fc7b5199179fed113519a15"
+        },
+        {
+          "name": "plans.jsonl.gz",
+          "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/plans.jsonl.gz",
+          "bytes": 6611339,
+          "sha256": "7694708803f13d8ba7272ef45ee6bd0c2b826b1efc23f6c3361945900dfadfac"
+        },
+        {
+          "name": "traces.jsonl.gz",
+          "source": "runs/20260905T211037Z-fixed-route-first-original30-d84699b1/artifacts/traces.jsonl.gz",
+          "bytes": 4470960,
+          "sha256": "c23c87d177f46172af6b1b0d6213f1b77d53ee7f1d4141236473d02242904e24"
+        }
+      ],
+      "expected_modes": [
+        "nominal"
+      ],
+      "expected_seeds": [
+        53001
+      ]
+    },
+    {
+      "label": "nominal",
+      "directory": "/tmp/low-altitude-fixed-route-audit-20260905/inputs/nominal",
+      "run": "20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5",
+      "files": [
+        {
+          "name": "result.json",
+          "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/result.json",
+          "bytes": 912324,
+          "sha256": "d235629553fa75a670042f33ab52ba8e5c95fd992ec6caa9940c9ab22ca292b6"
+        },
+        {
+          "name": "plans.jsonl.gz",
+          "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/plans.jsonl.gz",
+          "bytes": 90707804,
+          "sha256": "515d16aed26e98e556932da659acd0233fcdbef7170a2816f4eb4474ba5ca0d7"
+        },
+        {
+          "name": "traces.jsonl.gz",
+          "source": "runs/20260905T211157Z-fixed-route-original12-nominal-8a3ec5d5/artifacts/traces.jsonl.gz",
+          "bytes": 60843947,
+          "sha256": "7516f2ce08bdb1691e790a49957a213ee7b262522ec432dc9f185361346a7a05"
+        }
+      ],
+      "expected_modes": [
+        "nominal"
+      ],
+      "expected_seeds": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012
+      ]
+    },
+    {
+      "label": "left",
+      "directory": "/tmp/low-altitude-fixed-route-audit-20260905/inputs/left",
+      "run": "20260905T212016Z-fixed-route-original12-left-6619f298",
+      "files": [
+        {
+          "name": "result.json",
+          "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/result.json",
+          "bytes": 1003362,
+          "sha256": "c364df8b060d067f4aa89b8bb4f140acaabfe8319272b884cf8caec8d130ed3e"
+        },
+        {
+          "name": "plans.jsonl.gz",
+          "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/plans.jsonl.gz",
+          "bytes": 92066315,
+          "sha256": "15510d67b4d9a39666fe712abc66a2c44e3ff59ea392c15ae33b8e10e60ef15b"
+        },
+        {
+          "name": "traces.jsonl.gz",
+          "source": "runs/20260905T212016Z-fixed-route-original12-left-6619f298/artifacts/traces.jsonl.gz",
+          "bytes": 61532560,
+          "sha256": "652cf220271270cab216eb9bbe32247a250f41547f100b26e7b9962360be90cf"
+        }
+      ],
+      "expected_modes": [
+        "left"
+      ],
+      "expected_seeds": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012
+      ]
+    },
+    {
+      "label": "right",
+      "directory": "/tmp/low-altitude-fixed-route-audit-20260905/inputs/right",
+      "run": "20260905T213118Z-fixed-route-original12-right-430f662e",
+      "files": [
+        {
+          "name": "result.json",
+          "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/result.json",
+          "bytes": 1003944,
+          "sha256": "9d7019537535abc0088634f04981944e94bce116aef9265d457303813326d485"
+        },
+        {
+          "name": "plans.jsonl.gz",
+          "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/plans.jsonl.gz",
+          "bytes": 92052652,
+          "sha256": "6cb0e018f9d53351d2f9ecb71b1352c04a3a06764bd96087544cc24dec60ae0e"
+        },
+        {
+          "name": "traces.jsonl.gz",
+          "source": "runs/20260905T213118Z-fixed-route-original12-right-430f662e/artifacts/traces.jsonl.gz",
+          "bytes": 61540427,
+          "sha256": "c84af336bd8c15b085f4cbeaf1c367653b8640792f6e2060e7b43c6fd59c53ea"
+        }
+      ],
+      "expected_modes": [
+        "right"
+      ],
+      "expected_seeds": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012
+      ]
+    }
+  ],
+  "bytes": 472826733
+}

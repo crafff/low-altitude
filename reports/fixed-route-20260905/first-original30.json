@@ -1,0 +1,2494 @@
+{
+  "schema": "bluesky.fixed-route-result.v1",
+  "config": {
+    "schema": "bluesky.fixed-route-probe.v1",
+    "device": "cpu",
+    "scenarios_path": "reports/policy-modes-refresh-850-20260905/scenarios.json",
+    "scenarios_sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c",
+    "reference_path": "reports/policy-modes-refresh-850-20260905/reused_nr.json",
+    "corner_reference_path": "reports/nr-containment-20260905/corner-speed.json",
+    "scenario_config": "configs/nr_pilot.json",
+    "types_config": "configs/uav_types.json",
+    "expected_seeds": [
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53007,
+      53008,
+      53009,
+      53010,
+      53011,
+      53012
+    ],
+    "dt_seconds": 0.25,
+    "maximum_aircraft_physics_samples": 6000000,
+    "maximum_result_bytes": 33554432,
+    "per_flight_timeout_seconds": 1200.0,
+    "latitude_band_deg": [
+      51.8,
+      52.2
+    ],
+    "position_defect_m_per_axis_tick": 0.0001,
+    "initial_position_error_m_per_axis": 1e-06,
+    "speed_uncertainty_mps": 0.0002,
+    "scoring_roundoff_m": 1e-06,
+    "protocol": "Original saved geometry/types/admissions remain fixed. Nominal arm has no lateral request; left/right request a first-leg lane at first global5s boundary at or after admission+5s, hold20s then return center before fixed bend. Infeasible lateral requests retain a certified nominal plan. No learned model, delay, original-scene regeneration or endpoint adjustment."
+  },
+  "source_sha256": {
+    "reports/policy-modes-refresh-850-20260905/scenarios.json": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c",
+    "reports/policy-modes-refresh-850-20260905/reused_nr.json": "9640146e99b7bff85d306bbe8c68bc16a847655a4453b2b8218d66cc0381bf0a",
+    "reports/nr-containment-20260905/corner-speed.json": "168452aeb631bf83a495de3f2dfad59bfb402e75a76d7e9a6903afc573f9083a",
+    "configs/fixed_route_probe.json": "6b3e83070657ef5ea2e029c1dd0cb3a944857f00b0a13a108cc9229f208518c5",
+    "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+    "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc",
+    "/workspace/src/fixed_route_probe.py": "1c12e3181cdb0fa78a32faa7f4bb163fdb5c9399ed60790829dec82d3ed1c1a5",
+    "src/fixed_route_plan.py": "2908d44a3c35ab61efa47a4e3c0cfece406d2d43571a680700ed77e8931046ab",
+    "src/lateral_plan.py": "896e1ca36bdecdcd3ed67d8a1bfb191843554c3305116654e64ead63ae9391a1"
+  },
+  "selected_seeds": [
+    53001
+  ],
+  "modes": [
+    "nominal"
+  ],
+  "cases": [
+    {
+      "seed": 53001,
+      "mode": "nominal",
+      "summary": {
+        "planned": 30,
+        "admitted": 30,
+        "complete_population": true,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_plan_exhausted": 0,
+        "flight_hours": 4.117013888888889,
+        "path_length_m": 277768.83251824696,
+        "outside_corridor_flights": 0,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "max_centerline_distance_m": 16.477966656040433,
+        "lane_requested": 0,
+        "lane_accepted": 0,
+        "lane_rejected": 0,
+        "accepted_lane_holds_complete": 0,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 3681.5,
+            "directed_pair_seconds": 7363.0,
+            "event_count": 46,
+            "events_ended_at_aircraft_exit": 6,
+            "unordered_seconds_per_flight_hour": 894.2160748924687,
+            "directed_seconds_per_flight_hour": 1788.4321497849373
+          },
+          "nmac": {
+            "unordered_pair_seconds": 966.25,
+            "directed_pair_seconds": 1932.5,
+            "event_count": 36,
+            "events_ended_at_aircraft_exit": 2,
+            "unordered_seconds_per_flight_hour": 234.69680357594672,
+            "directed_seconds_per_flight_hour": 469.39360715189343
+          }
+        },
+        "joint_risk_comparable": true
+      },
+      "terminal_flights": [
+        {
+          "id": "F001",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 0.0,
+          "plan_id": "nominal-53001-F001",
+          "actual_entry_s": 0.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1335,
+          "flight_seconds": 333.25,
+          "path_length_m": 9250.256606739684,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.511264639648124,
+          "max_reference_error_m": 0.009149714451075357,
+          "max_local_defect_m": 7.996181011549197e-06,
+          "max_tas_reference_error_mps": 3.327439901568141e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.45011831627189175,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1333,
+          "conditional_certificate": true,
+          "terminal_time_s": 333.25,
+          "terminal_state": {
+            "lat_deg": 51.97890581329196,
+            "lon_deg": 3.877110379509749,
+            "hdg_deg": 221.01480207391097,
+            "tas_mps": 28.39736660773235
+          },
+          "exit_crossing": {
+            "fraction": 0.9912114184859344,
+            "cross_track_m": 0.0049595456549346734,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F011",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 0.0,
+          "plan_id": "nominal-53001-F011",
+          "actual_entry_s": 0.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2310,
+          "flight_seconds": 577.0,
+          "path_length_m": 9261.246822456158,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.2453390338714705,
+          "max_reference_error_m": 0.010871673949605063,
+          "max_local_defect_m": 3.402907168492675e-06,
+          "max_tas_reference_error_mps": 1.882958465770912e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.013755865218556554,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2308,
+          "conditional_certificate": true,
+          "terminal_time_s": 577.0,
+          "terminal_state": {
+            "lat_deg": 52.07676848929682,
+            "lon_deg": 4.0804803751537335,
+            "hdg_deg": 43.71055729771795,
+            "tas_mps": 16.050685496251326
+          },
+          "exit_crossing": {
+            "fraction": 0.6896483856644584,
+            "cross_track_m": 3.6579250328358804e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F021",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 0.0,
+          "plan_id": "nominal-53001-F021",
+          "actual_entry_s": 0.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1061,
+          "flight_seconds": 264.75,
+          "path_length_m": 9261.554177360018,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.5541762838192406,
+          "max_reference_error_m": 0.010842393195877565,
+          "max_local_defect_m": 1.023795448418241e-05,
+          "max_tas_reference_error_mps": 4.09533128973294e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0008071834967250407,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1059,
+          "conditional_certificate": true,
+          "terminal_time_s": 264.75,
+          "terminal_state": {
+            "lat_deg": 52.09554602747711,
+            "lon_deg": 3.9988801452674885,
+            "hdg_deg": 0.8111284708099105,
+            "tas_mps": 34.982263175535124
+          },
+          "exit_crossing": {
+            "fraction": 0.8222897957182334,
+            "cross_track_m": 1.4318156164384527e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F002",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 62.19310047816073,
+          "plan_id": "nominal-53001-F002",
+          "actual_entry_s": 62.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1335,
+          "flight_seconds": 333.25,
+          "path_length_m": 9250.256606739684,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.511264639648124,
+          "max_reference_error_m": 0.009149714451075357,
+          "max_local_defect_m": 7.996181011549197e-06,
+          "max_tas_reference_error_mps": 3.327439901568141e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.45011831627189175,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1333,
+          "conditional_certificate": true,
+          "terminal_time_s": 395.5,
+          "terminal_state": {
+            "lat_deg": 51.97890581329196,
+            "lon_deg": 3.877110379509749,
+            "hdg_deg": 221.01480207391097,
+            "tas_mps": 28.39736660773235
+          },
+          "exit_crossing": {
+            "fraction": 0.9912114184859344,
+            "cross_track_m": 0.0049595456549346734,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F022",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 66.38000824103396,
+          "plan_id": "nominal-53001-F022",
+          "actual_entry_s": 66.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 8.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2003,
+          "flight_seconds": 500.0,
+          "path_length_m": 9260.010862082747,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.010861006268467453,
+          "max_reference_error_m": 0.010861218944683771,
+          "max_local_defect_m": 5.4302727221511304e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0004275224420397634,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2000,
+          "conditional_certificate": true,
+          "terminal_time_s": 566.5,
+          "terminal_state": {
+            "lat_deg": 52.09553214950018,
+            "lon_deg": 3.9988798254451887,
+            "hdg_deg": 0.8111287228616821,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9976542130591243,
+            "cross_track_m": 1.4476192828641457e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F012",
+          "type": "M200",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 76.16969534454748,
+          "plan_id": "nominal-53001-F012",
+          "actual_entry_s": 76.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 8.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2002,
+          "flight_seconds": 500.0,
+          "path_length_m": 9260.012350769017,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.010867401114113865,
+          "max_reference_error_m": 0.010868210850521795,
+          "max_local_defect_m": 3.925944838556461e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.01587142606617672,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2000,
+          "conditional_certificate": true,
+          "terminal_time_s": 576.25,
+          "terminal_state": {
+            "lat_deg": 52.076760464422854,
+            "lon_deg": 4.080467893048389,
+            "hdg_deg": 43.710562444868266,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9976528309558398,
+            "cross_track_m": 3.662321733131464e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F013",
+          "type": "Amzn",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 137.7015969605441,
+          "plan_id": "nominal-53001-F013",
+          "actual_entry_s": 137.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 462,
+          "flight_seconds": 115.0,
+          "path_length_m": 9276.479459458007,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 16.477966656040433,
+          "max_reference_error_m": 0.010744760609204847,
+          "max_local_defect_m": 1.6873108506842982e-05,
+          "max_tas_reference_error_mps": 9.33723842422296e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0690493635743894,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 460,
+          "conditional_certificate": true,
+          "terminal_time_s": 252.75,
+          "terminal_state": {
+            "lat_deg": 52.07686751146416,
+            "lon_deg": 4.0806343969031404,
+            "hdg_deg": 43.7104938127791,
+            "tas_mps": 80.66498226127314
+          },
+          "exit_crossing": {
+            "fraction": 0.18289368203465448,
+            "cross_track_m": 3.6186184266216825e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F003",
+          "type": "Phan4",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 144.593093084752,
+          "plan_id": "nominal-53001-F003",
+          "actual_entry_s": 144.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2317,
+          "flight_seconds": 578.75,
+          "path_length_m": 9251.865387360407,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.89530190129023,
+          "max_reference_error_m": 0.009161763011609642,
+          "max_local_defect_m": 4.524949872575235e-06,
+          "max_tas_reference_error_mps": 1.882958465770912e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.5,
+          "max_yaw_cap_ratio": 0.45011828178574975,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2315,
+          "conditional_certificate": true,
+          "terminal_time_s": 723.5,
+          "terminal_state": {
+            "lat_deg": 51.97889489658286,
+            "lon_deg": 3.877094965429981,
+            "hdg_deg": 221.01480899673123,
+            "tas_mps": 16.050685496251326
+          },
+          "exit_crossing": {
+            "fraction": 0.5835349218610316,
+            "cross_track_m": 0.004927950048749205,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F023",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 148.94839436769655,
+          "plan_id": "nominal-53001-F023",
+          "actual_entry_s": 149.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 6.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1061,
+          "flight_seconds": 264.75,
+          "path_length_m": 9261.554177360018,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.5541762838192406,
+          "max_reference_error_m": 0.010842393195877565,
+          "max_local_defect_m": 1.023795448418241e-05,
+          "max_tas_reference_error_mps": 4.09533128973294e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0008071834967250407,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1059,
+          "conditional_certificate": true,
+          "terminal_time_s": 413.75,
+          "terminal_state": {
+            "lat_deg": 52.09554602747711,
+            "lon_deg": 3.9988801452674885,
+            "hdg_deg": 0.8111284708099105,
+            "tas_mps": 34.982263175535124
+          },
+          "exit_crossing": {
+            "fraction": 0.8222897957182334,
+            "cross_track_m": 1.4318156164384527e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F014",
+          "type": "Cranfield",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 208.4273164047609,
+          "plan_id": "nominal-53001-F014",
+          "actual_entry_s": 208.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 6.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1061,
+          "flight_seconds": 264.75,
+          "path_length_m": 9261.556989800605,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.555506348817892,
+          "max_reference_error_m": 0.010849370734608874,
+          "max_local_defect_m": 7.400749382213689e-06,
+          "max_tas_reference_error_mps": 4.09533128973294e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.02997022617566327,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1059,
+          "conditional_certificate": true,
+          "terminal_time_s": 473.25,
+          "terminal_state": {
+            "lat_deg": 52.07677050558766,
+            "lon_deg": 4.08048351134695,
+            "hdg_deg": 43.71055600406093,
+            "tas_mps": 34.982263175535124
+          },
+          "exit_crossing": {
+            "fraction": 0.8221377106525145,
+            "cross_track_m": 3.660362989616122e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F004",
+          "type": "Tecnalia",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 220.93235974659444,
+          "plan_id": "nominal-53001-F004",
+          "actual_entry_s": 221.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 9.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 4284,
+          "flight_seconds": 1070.5,
+          "path_length_m": 9251.98545254312,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.498881477828442,
+          "max_reference_error_m": 0.009165470203264591,
+          "max_local_defect_m": 2.536355168558657e-06,
+          "max_tas_reference_error_mps": 1.0143022612041364e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.23347679978868516,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 4282,
+          "conditional_certificate": true,
+          "terminal_time_s": 1291.5,
+          "terminal_state": {
+            "lat_deg": 51.97889410110589,
+            "lon_deg": 3.8770938422021457,
+            "hdg_deg": 221.0148094844589,
+            "tas_mps": 8.64267680968928
+          },
+          "exit_crossing": {
+            "fraction": 0.17230971797165034,
+            "cross_track_m": 0.004927570101953851,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F024",
+          "type": "Amzn",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 230.72141399877836,
+          "plan_id": "nominal-53001-F024",
+          "actual_entry_s": 230.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 9.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 462,
+          "flight_seconds": 115.0,
+          "path_length_m": 9276.472963820286,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 16.47296273831575,
+          "max_reference_error_m": 0.01073782407113746,
+          "max_local_defect_m": 2.334076452825684e-05,
+          "max_tas_reference_error_mps": 9.33723842422296e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.001858973457293867,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 460,
+          "conditional_certificate": true,
+          "terminal_time_s": 345.75,
+          "terminal_state": {
+            "lat_deg": 52.09568018190261,
+            "lon_deg": 3.998883236898203,
+            "hdg_deg": 0.8111260316870217,
+            "tas_mps": 80.66498226127314
+          },
+          "exit_crossing": {
+            "fraction": 0.1831418156172187,
+            "cross_track_m": 1.420675920772972e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F015",
+          "type": "Cranfield",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 284.2578541275746,
+          "plan_id": "nominal-53001-F015",
+          "actual_entry_s": 284.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1061,
+          "flight_seconds": 264.75,
+          "path_length_m": 9261.556989800605,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.555506348817892,
+          "max_reference_error_m": 0.010849370734608874,
+          "max_local_defect_m": 7.400749382213689e-06,
+          "max_tas_reference_error_mps": 4.09533128973294e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.02997022617566327,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1059,
+          "conditional_certificate": true,
+          "terminal_time_s": 549.25,
+          "terminal_state": {
+            "lat_deg": 52.07677050558766,
+            "lon_deg": 4.08048351134695,
+            "hdg_deg": 43.71055600406093,
+            "tas_mps": 34.982263175535124
+          },
+          "exit_crossing": {
+            "fraction": 0.8221377106525145,
+            "cross_track_m": 3.660362989616122e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F005",
+          "type": "Mnet",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 287.5365354039149,
+          "plan_id": "nominal-53001-F005",
+          "actual_entry_s": 287.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 4284,
+          "flight_seconds": 1070.5,
+          "path_length_m": 9251.98545254312,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.498881477828442,
+          "max_reference_error_m": 0.009165470203264591,
+          "max_local_defect_m": 2.536355168558657e-06,
+          "max_tas_reference_error_mps": 1.0143022612041364e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.23347679978868516,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 4282,
+          "conditional_certificate": true,
+          "terminal_time_s": 1358.25,
+          "terminal_state": {
+            "lat_deg": 51.97889410110589,
+            "lon_deg": 3.8770938422021457,
+            "hdg_deg": 221.0148094844589,
+            "tas_mps": 8.64267680968928
+          },
+          "exit_crossing": {
+            "fraction": 0.17230971797165034,
+            "cross_track_m": 0.004927570101953851,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F025",
+          "type": "Mnet",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 291.1237076577844,
+          "plan_id": "nominal-53001-F025",
+          "actual_entry_s": 291.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 8.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 4288,
+          "flight_seconds": 1071.5,
+          "path_length_m": 9260.628201984693,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.6282009082225012,
+          "max_reference_error_m": 0.010868250606059445,
+          "max_local_defect_m": 2.5361823645653203e-06,
+          "max_tas_reference_error_mps": 1.0143022612041364e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.00019956366504991847,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 4286,
+          "conditional_certificate": true,
+          "terminal_time_s": 1362.75,
+          "terminal_state": {
+            "lat_deg": 52.095537700814965,
+            "lon_deg": 3.9988799533769415,
+            "hdg_deg": 0.811128622072966,
+            "tas_mps": 8.64267680968928
+          },
+          "exit_crossing": {
+            "fraction": 0.7092563232526552,
+            "cross_track_m": 1.4241472309820428e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F006",
+          "type": "M200",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 351.64644101051385,
+          "plan_id": "nominal-53001-F006",
+          "actual_entry_s": 351.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 8.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2014,
+          "flight_seconds": 503.0,
+          "path_length_m": 9250.370697264227,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.855003838749576,
+          "max_reference_error_m": 0.009158603340816291,
+          "max_local_defect_m": 5.220132152317092e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.4501182916590436,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2012,
+          "conditional_certificate": true,
+          "terminal_time_s": 854.75,
+          "terminal_state": {
+            "lat_deg": 51.97890503918074,
+            "lon_deg": 3.877109286990326,
+            "hdg_deg": 221.01480256547208,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9618903974841584,
+            "cross_track_m": 0.004931296984805536,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F016",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 352.4309903727735,
+          "plan_id": "nominal-53001-F016",
+          "actual_entry_s": 352.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2310,
+          "flight_seconds": 577.0,
+          "path_length_m": 9261.246822456158,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.2453390338714705,
+          "max_reference_error_m": 0.010871673949605063,
+          "max_local_defect_m": 3.402907168492675e-06,
+          "max_tas_reference_error_mps": 1.882958465770912e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.013755865218556554,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2308,
+          "conditional_certificate": true,
+          "terminal_time_s": 929.5,
+          "terminal_state": {
+            "lat_deg": 52.07676848929682,
+            "lon_deg": 4.0804803751537335,
+            "hdg_deg": 43.71055729771795,
+            "tas_mps": 16.050685496251326
+          },
+          "exit_crossing": {
+            "fraction": 0.6896483856644584,
+            "cross_track_m": 3.6579250328358804e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F026",
+          "type": "Phan4",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 377.5239993499751,
+          "plan_id": "nominal-53001-F026",
+          "actual_entry_s": 377.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2310,
+          "flight_seconds": 577.0,
+          "path_length_m": 9261.245532092144,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.2455310152946386,
+          "max_reference_error_m": 0.010864672750262823,
+          "max_local_defect_m": 4.707342668552883e-06,
+          "max_tas_reference_error_mps": 1.882958465770912e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0003705442214490539,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2308,
+          "conditional_certificate": true,
+          "terminal_time_s": 954.75,
+          "terminal_state": {
+            "lat_deg": 52.09554325204167,
+            "lon_deg": 3.9988800813067185,
+            "hdg_deg": 0.8111285211448224,
+            "tas_mps": 16.050685496251326
+          },
+          "exit_crossing": {
+            "fraction": 0.6896005430755306,
+            "cross_track_m": 1.437696198199204e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F007",
+          "type": "Mavic",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 438.0738326502577,
+          "plan_id": "nominal-53001-F007",
+          "actual_entry_s": 438.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 6.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2577,
+          "flight_seconds": 643.75,
+          "path_length_m": 9252.434069067062,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.410491583893746,
+          "max_reference_error_m": 0.009163271150377388,
+          "max_local_defect_m": 4.061282197653782e-06,
+          "max_tas_reference_error_mps": 1.6900175719314348e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.5,
+          "max_yaw_cap_ratio": 0.4501183115472474,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2575,
+          "conditional_certificate": true,
+          "terminal_time_s": 1082.0,
+          "terminal_state": {
+            "lat_deg": 51.978891037177036,
+            "lon_deg": 3.8770895158635628,
+            "hdg_deg": 221.01481143082455,
+            "tas_mps": 14.404461344620165
+          },
+          "exit_crossing": {
+            "fraction": 0.3780013225949982,
+            "cross_track_m": 0.004926918231366124,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F027",
+          "type": "Horsefly",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 440.4474287945392,
+          "plan_id": "nominal-53001-F027",
+          "actual_entry_s": 440.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 9.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2096,
+          "flight_seconds": 523.5,
+          "path_length_m": 9264.33220119167,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 4.332200115082833,
+          "max_reference_error_m": 0.010867002186975621,
+          "max_local_defect_m": 5.189294824958779e-06,
+          "max_tas_reference_error_mps": 2.0758331217507475e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0004085305425937967,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2094,
+          "conditional_certificate": true,
+          "terminal_time_s": 964.0,
+          "terminal_state": {
+            "lat_deg": 52.09557100834215,
+            "lon_deg": 3.9988807209593737,
+            "hdg_deg": 0.8111280163869122,
+            "tas_mps": 17.696909647220107
+          },
+          "exit_crossing": {
+            "fraction": 0.02080076098644541,
+            "cross_track_m": 1.4529454390517182e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F017",
+          "type": "M200",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 441.14664734291046,
+          "plan_id": "nominal-53001-F017",
+          "actual_entry_s": 441.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 8.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2002,
+          "flight_seconds": 500.0,
+          "path_length_m": 9260.012350769017,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.010867401114113865,
+          "max_reference_error_m": 0.010868210850521795,
+          "max_local_defect_m": 3.925944838556461e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.01587142606617672,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2000,
+          "conditional_certificate": true,
+          "terminal_time_s": 941.25,
+          "terminal_state": {
+            "lat_deg": 52.076760464422854,
+            "lon_deg": 4.080467893048389,
+            "hdg_deg": 43.710562444868266,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9976528309558398,
+            "cross_track_m": 3.662321733131464e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F018",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 509.5569850781947,
+          "plan_id": "nominal-53001-F018",
+          "actual_entry_s": 509.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2310,
+          "flight_seconds": 577.0,
+          "path_length_m": 9261.246822456158,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.2453390338714705,
+          "max_reference_error_m": 0.010871673949605063,
+          "max_local_defect_m": 3.402907168492675e-06,
+          "max_tas_reference_error_mps": 1.882958465770912e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.013755865218556554,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2308,
+          "conditional_certificate": true,
+          "terminal_time_s": 1086.75,
+          "terminal_state": {
+            "lat_deg": 52.07676848929682,
+            "lon_deg": 4.0804803751537335,
+            "hdg_deg": 43.71055729771795,
+            "tas_mps": 16.050685496251326
+          },
+          "exit_crossing": {
+            "fraction": 0.6896483856644584,
+            "cross_track_m": 3.6579250328358804e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F008",
+          "type": "M200",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 514.8340032644917,
+          "plan_id": "nominal-53001-F008",
+          "actual_entry_s": 515.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2014,
+          "flight_seconds": 503.0,
+          "path_length_m": 9250.370697264227,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.855003838749576,
+          "max_reference_error_m": 0.009158603340816291,
+          "max_local_defect_m": 5.220132152317092e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.4501182916590436,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2012,
+          "conditional_certificate": true,
+          "terminal_time_s": 1018.0,
+          "terminal_state": {
+            "lat_deg": 51.97890503918074,
+            "lon_deg": 3.877109286990326,
+            "hdg_deg": 221.01480256547208,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9618903974841584,
+            "cross_track_m": 0.004931296984805536,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F028",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 523.4077507049109,
+          "plan_id": "nominal-53001-F028",
+          "actual_entry_s": 523.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 6.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2003,
+          "flight_seconds": 500.0,
+          "path_length_m": 9260.010862082747,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.010861006268467453,
+          "max_reference_error_m": 0.010861218944683771,
+          "max_local_defect_m": 5.4302727221511304e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0004275224420397634,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2000,
+          "conditional_certificate": true,
+          "terminal_time_s": 1023.5,
+          "terminal_state": {
+            "lat_deg": 52.09553214950018,
+            "lon_deg": 3.9988798254451887,
+            "hdg_deg": 0.8111287228616821,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9976542130591243,
+            "cross_track_m": 1.4476192828641457e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F019",
+          "type": "Mavic",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 582.3588467688066,
+          "plan_id": "nominal-53001-F019",
+          "actual_entry_s": 582.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2574,
+          "flight_seconds": 643.0,
+          "path_length_m": 9262.06980335502,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 2.06831983784872,
+          "max_reference_error_m": 0.010873782521743558,
+          "max_local_defect_m": 3.0544788387487642e-06,
+          "max_tas_reference_error_mps": 1.6900175719314348e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.012345383114545562,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2572,
+          "conditional_certificate": true,
+          "terminal_time_s": 1225.5,
+          "terminal_state": {
+            "lat_deg": 52.07677383921148,
+            "lon_deg": 4.080488696555998,
+            "hdg_deg": 43.710553864839966,
+            "tas_mps": 14.404461344620165
+          },
+          "exit_crossing": {
+            "fraction": 0.42564465454665346,
+            "cross_track_m": 3.6919626403312525e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F009",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 590.0939587434566,
+          "plan_id": "nominal-53001-F009",
+          "actual_entry_s": 590.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 9.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1335,
+          "flight_seconds": 333.25,
+          "path_length_m": 9250.256606739684,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.511264639648124,
+          "max_reference_error_m": 0.009149714451075357,
+          "max_local_defect_m": 7.996181011549197e-06,
+          "max_tas_reference_error_mps": 3.327439901568141e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.45011831627189175,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1333,
+          "conditional_certificate": true,
+          "terminal_time_s": 923.5,
+          "terminal_state": {
+            "lat_deg": 51.97890581329196,
+            "lon_deg": 3.877110379509749,
+            "hdg_deg": 221.01480207391097,
+            "tas_mps": 28.39736660773235
+          },
+          "exit_crossing": {
+            "fraction": 0.9912114184859344,
+            "cross_track_m": 0.0049595456549346734,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F029",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 612.8304991619084,
+          "plan_id": "nominal-53001-F029",
+          "actual_entry_s": 613.0,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.0,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2003,
+          "flight_seconds": 500.0,
+          "path_length_m": 9260.010862082747,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 0.010861006268467453,
+          "max_reference_error_m": 0.010861218944683771,
+          "max_local_defect_m": 5.4302727221511304e-06,
+          "max_tas_reference_error_mps": 2.1722433395154894e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0004275224420397634,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2000,
+          "conditional_certificate": true,
+          "terminal_time_s": 1113.0,
+          "terminal_state": {
+            "lat_deg": 52.09553214950018,
+            "lon_deg": 3.9988798254451887,
+            "hdg_deg": 0.8111287228616821,
+            "tas_mps": 18.5200217224334
+          },
+          "exit_crossing": {
+            "fraction": 0.9976542130591243,
+            "cross_track_m": 1.4476192828641457e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F020",
+          "type": "Eh216",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 653.5471953907687,
+          "plan_id": "nominal-53001-F020",
+          "actual_entry_s": 653.75,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 6.25,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1307,
+          "flight_seconds": 326.25,
+          "path_length_m": 9264.643140916309,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 4.641656799529687,
+          "max_reference_error_m": 0.010862772834756416,
+          "max_local_defect_m": 6.013356141920667e-06,
+          "max_tas_reference_error_mps": 3.327439901568141e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.02433173932212799,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1305,
+          "conditional_certificate": true,
+          "terminal_time_s": 980.0,
+          "terminal_state": {
+            "lat_deg": 52.07679056759331,
+            "lon_deg": 4.08051471633156,
+            "hdg_deg": 43.71054313525862,
+            "tas_mps": 28.39736660773235
+          },
+          "exit_crossing": {
+            "fraction": 0.3461848954685713,
+            "cross_track_m": 3.6539631677597796e-06,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F010",
+          "type": "Horsefly",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 667.0795573168476,
+          "plan_id": "nominal-53001-F010",
+          "actual_entry_s": 667.25,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 7.75,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 2106,
+          "flight_seconds": 526.0,
+          "path_length_m": 9251.605372331587,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 10.68822252297171,
+          "max_reference_error_m": 0.009160497486477077,
+          "max_local_defect_m": 4.988435648556333e-06,
+          "max_tas_reference_error_mps": 2.0758331217507475e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 3.500000000000007,
+          "max_yaw_cap_ratio": 0.45011831226051463,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 2104,
+          "conditional_certificate": true,
+          "terminal_time_s": 1193.25,
+          "terminal_state": {
+            "lat_deg": 51.97889666083689,
+            "lon_deg": 3.877097456569836,
+            "hdg_deg": 221.0148078738457,
+            "tas_mps": 17.696909647220107
+          },
+          "exit_crossing": {
+            "fraction": 0.6810415441815079,
+            "cross_track_m": 0.00492975864512058,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        },
+        {
+          "id": "F030",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 694.4410471023417,
+          "plan_id": "nominal-53001-F030",
+          "actual_entry_s": 694.5,
+          "status": "arrived",
+          "requested_lane_m": 0.0,
+          "lane_request_age_s": 5.5,
+          "lane_request_status": "not_requested",
+          "lane_request_reason": null,
+          "reference_steps": 1061,
+          "flight_seconds": 264.75,
+          "path_length_m": 9261.554177360018,
+          "outside_corridor_seconds": 0.0,
+          "outside_altitude_seconds": 0.0,
+          "max_centerline_distance_m": 1.5541762838192406,
+          "max_reference_error_m": 0.010842393195877565,
+          "max_local_defect_m": 1.023795448418241e-05,
+          "max_tas_reference_error_mps": 4.09533128973294e-05,
+          "max_heading_error_deg": 0.0,
+          "max_tas_acceleration_mps2": 0.0,
+          "max_yaw_cap_ratio": 0.0008071834967250407,
+          "tube_failed_samples": 0,
+          "lane_hold_samples": 0,
+          "lane_hold_failed_samples": 0,
+          "lane_return_samples": 0,
+          "center_after_return_samples": 0,
+          "center_after_return_failed_samples": 0,
+          "actual_samples": 1059,
+          "conditional_certificate": true,
+          "terminal_time_s": 959.25,
+          "terminal_state": {
+            "lat_deg": 52.09554602747711,
+            "lon_deg": 3.9988801452674885,
+            "hdg_deg": 0.8111284708099105,
+            "tas_mps": 34.982263175535124
+          },
+          "exit_crossing": {
+            "fraction": 0.8222897957182334,
+            "cross_track_m": 1.4318156164384527e-07,
+            "altitude_m": 106.68,
+            "within_width": true,
+            "within_height": true
+          },
+          "lane_hold_complete": false
+        }
+      ],
+      "plan_failures": [],
+      "events": [
+        {
+          "level": "lowc",
+          "pair": [
+            "F011",
+            "F021"
+          ],
+          "start_s": 18.75,
+          "pair_seconds": 19.25,
+          "end_s": 38.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F012",
+            "F022"
+          ],
+          "start_s": 121.0,
+          "pair_seconds": 22.25,
+          "end_s": 143.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F012",
+            "F013"
+          ],
+          "start_s": 153.75,
+          "pair_seconds": 5.0,
+          "end_s": 158.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F013",
+            "F022"
+          ],
+          "start_s": 147.25,
+          "pair_seconds": 12.25,
+          "end_s": 159.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F012",
+            "F013"
+          ],
+          "start_s": 148.25,
+          "pair_seconds": 16.0,
+          "end_s": 164.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F012",
+            "F022"
+          ],
+          "start_s": 95.5,
+          "pair_seconds": 73.25,
+          "end_s": 168.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F011",
+            "F013"
+          ],
+          "start_s": 169.75,
+          "pair_seconds": 4.75,
+          "end_s": 174.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F011",
+            "F013"
+          ],
+          "start_s": 164.5,
+          "pair_seconds": 15.25,
+          "end_s": 179.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F022",
+            "F023"
+          ],
+          "start_s": 232.75,
+          "pair_seconds": 18.5,
+          "end_s": 251.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F014",
+            "F024"
+          ],
+          "start_s": 240.75,
+          "pair_seconds": 14.25,
+          "end_s": 255.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F022",
+            "F023"
+          ],
+          "start_s": 211.75,
+          "pair_seconds": 60.25,
+          "end_s": 272.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F022",
+            "F024"
+          ],
+          "start_s": 277.25,
+          "pair_seconds": 5.0,
+          "end_s": 282.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F022",
+            "F024"
+          ],
+          "start_s": 271.75,
+          "pair_seconds": 16.0,
+          "end_s": 287.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F023",
+            "F024"
+          ],
+          "start_s": 290.25,
+          "pair_seconds": 6.5,
+          "end_s": 296.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F023",
+            "F024"
+          ],
+          "start_s": 282.5,
+          "pair_seconds": 21.75,
+          "end_s": 304.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F012",
+            "F014"
+          ],
+          "start_s": 348.25,
+          "pair_seconds": 18.5,
+          "end_s": 366.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F012",
+            "F014"
+          ],
+          "start_s": 327.25,
+          "pair_seconds": 60.25,
+          "end_s": 387.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F011",
+            "F014"
+          ],
+          "start_s": 377.25,
+          "pair_seconds": 16.25,
+          "end_s": 393.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F011",
+            "F014"
+          ],
+          "start_s": 359.25,
+          "pair_seconds": 52.5,
+          "end_s": 411.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F016",
+            "F025"
+          ],
+          "start_s": 406.75,
+          "pair_seconds": 12.75,
+          "end_s": 419.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F005",
+            "F006"
+          ],
+          "start_s": 392.5,
+          "pair_seconds": 30.75,
+          "end_s": 423.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F016",
+            "F025"
+          ],
+          "start_s": 371.0,
+          "pair_seconds": 84.25,
+          "end_s": 455.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F005",
+            "F006"
+          ],
+          "start_s": 357.5,
+          "pair_seconds": 100.75,
+          "end_s": 458.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F004",
+            "F006"
+          ],
+          "start_s": 450.75,
+          "pair_seconds": 31.0,
+          "end_s": 481.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F025",
+            "F026"
+          ],
+          "start_s": 458.25,
+          "pair_seconds": 41.0,
+          "end_s": 499.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F006"
+          ],
+          "start_s": 416.0,
+          "pair_seconds": 100.5,
+          "end_s": 516.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F012",
+            "F015"
+          ],
+          "start_s": 509.75,
+          "pair_seconds": 18.5,
+          "end_s": 528.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F011",
+            "F015"
+          ],
+          "start_s": 517.75,
+          "pair_seconds": 16.25,
+          "end_s": 534.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F017",
+            "F027"
+          ],
+          "start_s": 468.25,
+          "pair_seconds": 67.5,
+          "end_s": 535.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F025",
+            "F026"
+          ],
+          "start_s": 411.75,
+          "pair_seconds": 134.0,
+          "end_s": 545.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F012",
+            "F015"
+          ],
+          "start_s": 488.75,
+          "pair_seconds": 60.25,
+          "end_s": 549.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F011",
+            "F015"
+          ],
+          "start_s": 499.5,
+          "pair_seconds": 49.75,
+          "end_s": 549.25,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F011",
+            "F012"
+          ],
+          "start_s": 370.75,
+          "pair_seconds": 205.5,
+          "end_s": 576.25,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F011",
+            "F012"
+          ],
+          "start_s": 510.25,
+          "pair_seconds": 66.0,
+          "end_s": 576.25,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F025",
+            "F027"
+          ],
+          "start_s": 566.25,
+          "pair_seconds": 33.75,
+          "end_s": 600.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F018",
+            "F028"
+          ],
+          "start_s": 552.25,
+          "pair_seconds": 66.75,
+          "end_s": 619.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F025",
+            "F027"
+          ],
+          "start_s": 528.25,
+          "pair_seconds": 109.75,
+          "end_s": 638.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F005",
+            "F007"
+          ],
+          "start_s": 637.75,
+          "pair_seconds": 52.75,
+          "end_s": 690.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F019",
+            "F029"
+          ],
+          "start_s": 650.25,
+          "pair_seconds": 53.5,
+          "end_s": 703.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F020",
+            "F029"
+          ],
+          "start_s": 667.75,
+          "pair_seconds": 46.75,
+          "end_s": 714.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F005",
+            "F008"
+          ],
+          "start_s": 698.5,
+          "pair_seconds": 31.0,
+          "end_s": 729.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F005",
+            "F009"
+          ],
+          "start_s": 715.0,
+          "pair_seconds": 15.5,
+          "end_s": 730.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F019",
+            "F020"
+          ],
+          "start_s": 716.25,
+          "pair_seconds": 21.75,
+          "end_s": 738.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F025",
+            "F028"
+          ],
+          "start_s": 711.5,
+          "pair_seconds": 30.75,
+          "end_s": 742.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F008",
+            "F009"
+          ],
+          "start_s": 716.0,
+          "pair_seconds": 31.0,
+          "end_s": 747.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F005",
+            "F009"
+          ],
+          "start_s": 697.5,
+          "pair_seconds": 50.25,
+          "end_s": 747.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F005",
+            "F007"
+          ],
+          "start_s": 578.0,
+          "pair_seconds": 172.25,
+          "end_s": 750.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F019",
+            "F020"
+          ],
+          "start_s": 691.75,
+          "pair_seconds": 71.0,
+          "end_s": 762.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F008",
+            "F009"
+          ],
+          "start_s": 755.0,
+          "pair_seconds": 10.75,
+          "end_s": 765.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F004",
+            "F009"
+          ],
+          "start_s": 744.25,
+          "pair_seconds": 26.25,
+          "end_s": 770.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F007",
+            "F009"
+          ],
+          "start_s": 736.0,
+          "pair_seconds": 35.5,
+          "end_s": 771.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F025",
+            "F028"
+          ],
+          "start_s": 676.5,
+          "pair_seconds": 100.75,
+          "end_s": 777.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F005",
+            "F008"
+          ],
+          "start_s": 663.75,
+          "pair_seconds": 113.75,
+          "end_s": 777.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F009"
+          ],
+          "start_s": 726.75,
+          "pair_seconds": 61.0,
+          "end_s": 787.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F004",
+            "F007"
+          ],
+          "start_s": 737.75,
+          "pair_seconds": 56.5,
+          "end_s": 794.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F005"
+          ],
+          "start_s": 784.75,
+          "pair_seconds": 9.75,
+          "end_s": 794.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F004",
+            "F008"
+          ],
+          "start_s": 756.75,
+          "pair_seconds": 37.75,
+          "end_s": 794.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F029",
+            "F030"
+          ],
+          "start_s": 777.0,
+          "pair_seconds": 18.5,
+          "end_s": 795.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F007",
+            "F009"
+          ],
+          "start_s": 711.25,
+          "pair_seconds": 84.75,
+          "end_s": 796.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F008",
+            "F009"
+          ],
+          "start_s": 681.25,
+          "pair_seconds": 115.5,
+          "end_s": 796.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F029",
+            "F030"
+          ],
+          "start_s": 756.25,
+          "pair_seconds": 60.25,
+          "end_s": 816.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F008"
+          ],
+          "start_s": 722.0,
+          "pair_seconds": 107.25,
+          "end_s": 829.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F007",
+            "F008"
+          ],
+          "start_s": 746.75,
+          "pair_seconds": 85.0,
+          "end_s": 831.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F025",
+            "F030"
+          ],
+          "start_s": 821.25,
+          "pair_seconds": 11.5,
+          "end_s": 832.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F025",
+            "F030"
+          ],
+          "start_s": 808.0,
+          "pair_seconds": 37.75,
+          "end_s": 845.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F018",
+            "F020"
+          ],
+          "start_s": 828.75,
+          "pair_seconds": 24.75,
+          "end_s": 853.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F007"
+          ],
+          "start_s": 678.0,
+          "pair_seconds": 176.0,
+          "end_s": 854.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F018",
+            "F020"
+          ],
+          "start_s": 800.75,
+          "pair_seconds": 80.5,
+          "end_s": 881.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F028",
+            "F030"
+          ],
+          "start_s": 877.75,
+          "pair_seconds": 18.5,
+          "end_s": 896.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F025",
+            "F029"
+          ],
+          "start_s": 879.25,
+          "pair_seconds": 30.75,
+          "end_s": 910.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F007",
+            "F008"
+          ],
+          "start_s": 663.0,
+          "pair_seconds": 252.25,
+          "end_s": 915.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F028",
+            "F030"
+          ],
+          "start_s": 856.75,
+          "pair_seconds": 60.5,
+          "end_s": 917.25,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F016",
+            "F017"
+          ],
+          "start_s": 817.0,
+          "pair_seconds": 112.5,
+          "end_s": 929.5,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F025",
+            "F029"
+          ],
+          "start_s": 844.25,
+          "pair_seconds": 100.75,
+          "end_s": 945.0,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F026",
+            "F027"
+          ],
+          "start_s": 750.75,
+          "pair_seconds": 204.0,
+          "end_s": 954.75,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F026",
+            "F030"
+          ],
+          "start_s": 937.0,
+          "pair_seconds": 17.75,
+          "end_s": 954.75,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F027",
+            "F030"
+          ],
+          "start_s": 926.0,
+          "pair_seconds": 33.25,
+          "end_s": 959.25,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F027",
+            "F030"
+          ],
+          "start_s": 945.75,
+          "pair_seconds": 13.5,
+          "end_s": 959.25,
+          "end_reason": "arrived"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F005",
+            "F010"
+          ],
+          "start_s": 1019.0,
+          "pair_seconds": 33.75,
+          "end_s": 1052.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F005",
+            "F010"
+          ],
+          "start_s": 981.0,
+          "pair_seconds": 109.75,
+          "end_s": 1090.75,
+          "end_reason": "separated"
+        },
+        {
+          "level": "nmac",
+          "pair": [
+            "F004",
+            "F010"
+          ],
+          "start_s": 1082.75,
+          "pair_seconds": 33.75,
+          "end_s": 1116.5,
+          "end_reason": "separated"
+        },
+        {
+          "level": "lowc",
+          "pair": [
+            "F004",
+            "F010"
+          ],
+          "start_s": 1044.75,
+          "pair_seconds": 109.75,
+          "end_s": 1154.5,
+          "end_reason": "separated"
+        }
+      ],
+      "physics_steps": 5451,
+      "wall_seconds": 29.28605254087597,
+      "all_checks_passed": true
+    }
+  ],
+  "validation_complete": true,
+  "all_checks_passed": true,
+  "wall_seconds": 35.65762373339385,
+  "aggregates": {
+    "nominal": {
+      "planned": 30,
+      "admitted": 30,
+      "completed": 30,
+      "failed_timeout": 0,
+      "failed_plan_exhausted": 0,
+      "flight_hours": 4.117013888888889,
+      "path_length_m": 277768.83251824696,
+      "outside_corridor_flights": 0,
+      "outside_corridor_aircraft_seconds": 0.0,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "lane_requested": 0,
+      "lane_accepted": 0,
+      "lane_rejected": 0,
+      "accepted_lane_holds_complete": 0,
+      "complete_population": true,
+      "max_centerline_distance_m": 16.477966656040433,
+      "joint_risk_comparable": true,
+      "risk": {
+        "lowc": {
+          "unordered_pair_seconds": 3681.5,
+          "directed_pair_seconds": 7363.0,
+          "event_count": 46,
+          "events_ended_at_aircraft_exit": 6,
+          "unordered_seconds_per_flight_hour": 894.2160748924687,
+          "directed_seconds_per_flight_hour": 1788.4321497849373
+        },
+        "nmac": {
+          "unordered_pair_seconds": 966.25,
+          "directed_pair_seconds": 1932.5,
+          "event_count": 36,
+          "events_ended_at_aircraft_exit": 2,
+          "unordered_seconds_per_flight_hour": 234.69680357594672,
+          "directed_seconds_per_flight_hour": 469.39360715189343
+        }
+      }
+    }
+  },
+  "aircraft_physics_samples": 59285,
+  "planning_wall_seconds": 23.95472373953089
+}

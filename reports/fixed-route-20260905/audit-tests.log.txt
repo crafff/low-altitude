@@ -1,0 +1,7 @@
+test_straight_leg_return_checks_actual_center_even_when_final_leg_starts_at_tick1 (test_fixed_route_audit.FixedRouteAuditTests.test_straight_leg_return_checks_actual_center_even_when_final_leg_starts_at_tick1) ... ok
+test_whole_missing_flight_cannot_escape_zero_conflict_audit (test_fixed_route_audit.FixedRouteAuditTests.test_whole_missing_flight_cannot_escape_zero_conflict_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK

@@ -44,7 +44,10 @@
 | 路线构造用固定原点纬度缩放经度，原始越界距离用飞机当前纬度，两者并非同一米制距离 | 证明先声明度量，再用线性变换的奇异值界桥接原始评分；不能仅因都标m就等同 | [源码对应与公式(1a)–(1b)](CONTAINMENT_DERIVATION.md)；两名Astra只读核验 |
 | BlueSky1.1.1垂向VS差的1.524阈值没有乘dt，近目标直接赋VS；1008例实际最大有限差分为6.096m/s² | 水平/垂向分别按真实分支证明；正常VS0与settled锁可归纳得到带量化假设的离散高度不变性，不冒充连续或完整浮点证书 | [命题7](CONTAINMENT_DERIVATION.md)；[1016次原生解锁及单调性核对](../reports/action-containment-20260905/README.md) |
 | Amzn约108m的45°CAP小于高速约589m原生flyby提前量，首个指令后物理步已切到远端N1；500m局部guide使8例捕获提前但6例仍越界 | 分开验证捕获、保持、返回与走廊合规；局部收敛改善不等于安全改善，也不能泛化为所有机型/边缘弯道修复 | [1008矩阵与精确前缀16例配对](../reports/action-containment-20260905/README.md)；原始越界时间11.5→83s完整保留 |
-| 安全参考的最后一点位于出口之后，不保证实际首次退出就在同一物理tick；首24个横向候选有6例早一tick退出 | 固定路线须认证所有此前误差箱在出口前、最终误差箱在出口后，并保留最后航段capsule和整个末步；仅构造性见证路线可按此条件设计出口，不据此事后调整评价场景 | [横向报告](../reports/lateral-reference-20260905/README.md)；test_near_penultimate_plane_rejected_mid_interval_plane_certified / test_mirrored_exit_and_any_earlier_crossing_are_checked |
+| 安全参考的最后一点位于出口之后，不保证实际首次退出就在同一物理tick；首24个横向候选有6例早一tick退出 | 若要求同tick退出，须认证此前/最终误差箱分别在出口前/后；也可保留完整认证续行，在实际首次合格退出后删机并单独报告到达。两者都保留整个末步，不能事后移动评价场景出口 | [横向报告](../reports/lateral-reference-20260905/README.md)及[固定原场景口径](LATERAL_EXECUTION_PROOF.md)；test_near_penultimate_plane_rejected_mid_interval_plane_certified / test_mirrored_exit_and_any_earlier_crossing_are_checked |
 | scalar TAS→CAS与vector CAS→TAS采用略异的大气式，固定106.68m的结构差异可解析界定；速度截断更新满足max范数非扩张 | 请求TAS不直接当作精确实际TAS；分别记录转换结构界、剩余浮点条件和实际误差，不将误差简单按tick累加或用实测最大值代替普适界 | [横向推导§2.1](LATERAL_EXECUTION_PROOF.md)及144例原生逐步数据 |
 
 不要把尚未运行的测试或待核对解释写成已证实经验。新bug只补最小相关回归，避免将每次失败升级成新审批层。
+
+| 固定原12场景中各侧21/31架Amzn被首段完整横移模板拒绝，其余329架全接受；拒绝后仍360/360到达且0越界 | 将动作完成、保守拒绝、任务到达分别计数。拒绝当前模板不能推导所有轨迹都不可行，也不能将被拒绝的动作计为成功 | [固定原场景全记录](../reports/fixed-route-20260905/README.md) |
+| 轨迹归约若只遍历已有plan/trace，整架无冲突飞机缺失可逃过检查；直道的首段等于最终段也会使错误进度筛选漏查回中 | 与原case/flight ID集合及声明计划完整绑定，再逐物理步检查保持、回中和首次真实退出。系统负夹具不当物理证明 | [两项回归与完整1110架次归约](../reports/fixed-route-20260905/README.md)；test_whole_missing_flight_cannot_escape_zero_conflict_audit / test_straight_leg_return_checks_actual_center_even_when_final_leg_starts_at_tick1 |

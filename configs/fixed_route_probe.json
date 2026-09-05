@@ -1,0 +1,21 @@
+{
+  "schema": "bluesky.fixed-route-probe.v1",
+  "device": "cpu",
+  "scenarios_path": "reports/policy-modes-refresh-850-20260905/scenarios.json",
+  "scenarios_sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c",
+  "reference_path": "reports/policy-modes-refresh-850-20260905/reused_nr.json",
+  "corner_reference_path": "reports/nr-containment-20260905/corner-speed.json",
+  "scenario_config": "configs/nr_pilot.json",
+  "types_config": "configs/uav_types.json",
+  "expected_seeds": [53001,53002,53003,53004,53005,53006,53007,53008,53009,53010,53011,53012],
+  "dt_seconds": 0.25,
+  "maximum_aircraft_physics_samples": 6000000,
+  "maximum_result_bytes": 33554432,
+  "per_flight_timeout_seconds": 1200.0,
+  "latitude_band_deg": [51.8,52.2],
+  "position_defect_m_per_axis_tick": 0.0001,
+  "initial_position_error_m_per_axis": 0.000001,
+  "speed_uncertainty_mps": 0.0002,
+  "scoring_roundoff_m": 0.000001,
+  "protocol": "Original saved geometry/types/admissions remain fixed. Nominal arm has no lateral request; left/right request a first-leg lane at first global5s boundary at or after admission+5s, hold20s then return center before fixed bend. Infeasible lateral requests retain a certified nominal plan. No learned model, delay, original-scene regeneration or endpoint adjustment."
+}

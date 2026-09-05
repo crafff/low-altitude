@@ -1,0 +1,8 @@
+test_early_plan_exhaustion_preserves_exposure_but_disallows_joint_comparison (test_fixed_route_probe.FixedRouteProbeTests.test_early_plan_exhaustion_preserves_exposure_but_disallows_joint_comparison) ... ok
+test_rejected_proposal_with_lateral_motion_cannot_be_nominal_fallback (test_fixed_route_probe.FixedRouteProbeTests.test_rejected_proposal_with_lateral_motion_cannot_be_nominal_fallback) ... ok
+test_uncertified_accepted_request_retains_certified_nominal (test_fixed_route_probe.FixedRouteProbeTests.test_uncertified_accepted_request_retains_certified_nominal) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

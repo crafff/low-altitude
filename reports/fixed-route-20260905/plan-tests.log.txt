@@ -1,0 +1,10 @@
+test_finite_failure_does_not_reposition_or_claim_arrival (test_fixed_route_plan.FixedRoutePlanTests.test_finite_failure_does_not_reposition_or_claim_arrival) ... ok
+test_first_leg_lane_inset_full_hold_return_and_exact_request_age (test_fixed_route_plan.FixedRoutePlanTests.test_first_leg_lane_inset_full_hold_return_and_exact_request_age) ... ok
+test_mirrored_fillets_preserve_original_vertices_and_finite_tangents (test_fixed_route_plan.FixedRoutePlanTests.test_mirrored_fillets_preserve_original_vertices_and_finite_tangents) ... ok
+test_short_first_leg_rejects_full_maneuver_and_keeps_original_geometry (test_fixed_route_plan.FixedRoutePlanTests.test_short_first_leg_rejects_full_maneuver_and_keeps_original_geometry) ... ok
+test_straight_reference_is_native_propagation_and_retains_fixed_exit_suffix (test_fixed_route_plan.FixedRoutePlanTests.test_straight_reference_is_native_propagation_and_retains_fixed_exit_suffix) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.093s
+
+OK

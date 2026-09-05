@@ -1,0 +1,406 @@
+"""Joint native replay on the ORIGINAL fixed twelve development scenes.
+
+Only this diagnostic selects the experimental heading-plan executor. It does
+not modify PaperEnvironment, ActionController, checkpoints or saved inputs.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from dataclasses import asdict
+import gzip
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import tempfile
+import time
+
+from fixed_route_plan import plan_fixed_route
+from lateral_plan import KinematicState, native_step, certify_plan, local_xy
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write_json(path,value,maximum):
+    payload=json.dumps(value,allow_nan=False,indent=2)+'\n'
+    if len(payload.encode())>maximum:
+        raise RuntimeError('Declared result bound reached')
+    temporary=path.with_suffix('.tmp')
+    temporary.write_text(payload)
+    temporary.replace(path)
+
+
+def requested_age(entry):
+    """First original5s decision boundary at or after the5s admission warmup."""
+    return math.ceil((entry+5.-1e-8)/5.)*5.-entry
+
+
+def signed_geometry(position,route):
+    origin=route[0]
+    points=[local_xy(p,origin) for p in route]
+    p=local_xy(position,origin)
+    def unit(a,b):
+        length=math.hypot(b[0]-a[0],b[1]-a[1])
+        return ((b[0]-a[0])/length,(b[1]-a[1])/length)
+    return p,points[-1],unit(points[-2],points[-1]),unit(points[0],points[1])
+
+
+def summarize(flights,tracker,*,planned,complete,admitted=None):
+    hours=sum(f['flight_seconds'] for f in flights)/3600.
+    risk=tracker.summary()
+    for row in risk.values():
+        row['unordered_seconds_per_flight_hour']=row['unordered_pair_seconds']/hours if hours else None
+        row['directed_seconds_per_flight_hour']=row['directed_pair_seconds']/hours if hours else None
+    return dict(planned=planned,admitted=len(flights) if admitted is None else admitted,
+        certified_admitted=len(flights),complete_population=complete,
+        completed=sum(f['status']=='arrived' for f in flights),
+        failed_timeout=sum(f['status']=='flight_timeout' for f in flights),
+        failed_plan_exhausted=sum(f['status']=='plan_exhausted' for f in flights),
+        flight_hours=hours,path_length_m=sum(f['path_length_m'] for f in flights),
+        outside_corridor_flights=sum(f['outside_corridor_seconds']>0 for f in flights),
+        outside_corridor_aircraft_seconds=sum(f['outside_corridor_seconds'] for f in flights),
+        outside_altitude_aircraft_seconds=sum(f['outside_altitude_seconds'] for f in flights),
+        max_centerline_distance_m=max((f['max_centerline_distance_m'] for f in flights),default=0.),
+        lane_requested=sum(f['requested_lane_m']!=0 for f in flights),
+        lane_accepted=sum(f['lane_request_status']=='accepted' for f in flights),
+        lane_rejected=sum(f['requested_lane_m']!=0 and f['lane_request_status']!='accepted' for f in flights),
+        accepted_lane_holds_complete=sum(f.get('lane_hold_complete',False) for f in flights),risk=risk,
+        joint_risk_comparable=complete and not any(f['status']=='plan_exhausted' for f in flights))
+
+
+def combine(cases):
+    if not cases:
+        return None
+    rows=[c['summary'] for c in cases]
+    keys=('planned','admitted','certified_admitted','completed','failed_timeout','failed_plan_exhausted','flight_hours','path_length_m',
+        'outside_corridor_flights','outside_corridor_aircraft_seconds','outside_altitude_aircraft_seconds',
+        'lane_requested','lane_accepted','lane_rejected','accepted_lane_holds_complete')
+    result={key:sum(r[key] for r in rows) for key in keys}
+    result.update(complete_population=all(r['complete_population'] for r in rows),
+        max_centerline_distance_m=max(r['max_centerline_distance_m'] for r in rows))
+    result['joint_risk_comparable']=all(r['joint_risk_comparable'] for r in rows)
+    result['risk']={}
+    for level in ('lowc','nmac'):
+        value={key:sum(r['risk'][level][key] for r in rows) for key in
+            ('unordered_pair_seconds','directed_pair_seconds','event_count','events_ended_at_aircraft_exit')}
+        hours=result['flight_hours']
+        value.update(unordered_seconds_per_flight_hour=value['unordered_pair_seconds']/hours if hours else None,
+                     directed_seconds_per_flight_hour=value['directed_pair_seconds']/hours if hours else None)
+        result['risk'][level]=value
+    return result
+
+
+class NativeFixedRouteProbe:
+    def __init__(self,bs,performance,types,cfg,scenario_cfg,deadline,traces,plans):
+        self.bs,self.performance,self.types=bs,performance,types
+        self.cfg,self.scenario_cfg,self.deadline=cfg,scenario_cfg,deadline
+        self.traces,self.plans=traces,plans
+        self.samples=0
+        self.planning_seconds=0.
+
+    def state(self,acid):
+        i=self.bs.traf.id2idx(acid)
+        if i<0:
+            raise RuntimeError('Unexpected native disappearance')
+        t=self.bs.traf
+        return KinematicState(float(t.lat[i]),float(t.lon[i]),float(t.hdg[i]),float(t.tas[i]))
+
+    def certificate(self,plan,route):
+        if not plan['success']:
+            return dict(conditional_certificate=False,failures=[plan['failure']],error_bounds=[],intervals=[])
+        return certify_plan(plan['states'],plan['commands'],route,origin_latlon=route[0],
+            half_width_m=self.scenario_cfg['corridor_width_ft']*.3048/2,
+            latitude_band_deg=self.cfg['latitude_band_deg'],
+            initial_error_xy_m=self.cfg['initial_position_error_m_per_axis'],
+            per_step_defect_m=self.cfg['position_defect_m_per_axis_tick'],dt=self.cfg['dt_seconds'],
+            speed_uncertainty_mps=self.cfg['speed_uncertainty_mps'],scoring_roundoff_m=self.cfg['scoring_roundoff_m'])
+
+    def build(self,initial,route,nominal,lane,request,cache):
+        before=time.perf_counter()
+        base_key=(initial,tuple(map(tuple,route)),nominal)
+        proposal=None
+        request_info=dict(requested_lane_m=lane,status='not_requested',reason=None)
+        if lane:
+            proposal=plan_fixed_route(initial,route,nominal,lane_m=lane,request_age_s=request)
+            trial_certificate=self.certificate(proposal,route)
+            request_info=dict(proposal['lane_request'])
+            # A complete certified proposal needs no duplicate nominal solve.
+            # Geometry-level rejection already returns the unchanged nominal
+            # plan; check that no lateral phase/offset was introduced.
+            nominal_fallback=(request_info['status']=='rejected'
+                and all(p=='center' or p=='turn' for p in proposal['phases'])
+                and all(p['reference_lane_m']==0. for p in proposal['progress']))
+            if trial_certificate['conditional_certificate'] and (request_info['status']=='accepted' or nominal_fallback):
+                self.planning_seconds+=time.perf_counter()-before
+                return proposal,trial_certificate,request_info,proposal
+            request_info.update(status='rejected',reason=request_info.get('reason') or trial_certificate['failures'])
+        if base_key not in cache:
+            plan=plan_fixed_route(initial,route,nominal,lane_m=0.,request_age_s=request)
+            cache[base_key]=(plan,self.certificate(plan,route))
+        nominal_plan,nominal_certificate=cache[base_key]
+        if not nominal_certificate['conditional_certificate']:
+            self.planning_seconds+=time.perf_counter()-before
+            return nominal_plan,nominal_certificate,dict(status='nominal_plan_unavailable',reason=nominal_certificate['failures']),proposal
+        self.planning_seconds+=time.perf_counter()-before
+        return nominal_plan,nominal_certificate,request_info,proposal
+
+    def run_scenario(self,scenario,mode):
+        from bluesky.core import simtime
+        from bluesky.core.entity import getproxied
+        from bluesky.traffic.asas import ConflictDetection, ConflictResolution
+        from bluesky.tools import geo
+        from bluesky.tools.aero import tas2cas
+        from bluesky_diagnostic import distance_m
+        from nr_pilot import ConflictEvents, centerline_distance_m
+        from route_completion import finite_exit_crossing
+
+        bs=self.bs
+        dt=self.cfg['dt_seconds']
+        half_width=self.scenario_cfg['corridor_width_ft']*.3048/2
+        altitude=self.scenario_cfg['altitude_ft']*.3048
+        half_height=self.scenario_cfg['corridor_height_ft']*.3048/2
+        lane={'nominal':0.,'left':-half_width,'right':half_width}[mode]
+        bs.sim.reset()
+        self.performance.select()
+        if type(getproxied(bs.traf.perf)) is not self.performance:
+            raise RuntimeError('Unexpected performance implementation')
+        ConflictDetection.setmethod('OFF')
+        ConflictResolution.setmethod('OFF')
+        bs.traf.wind.clear()
+        bs.traf.setnoise(False)
+        simtime.setdt(dt)
+        bs.sim.op()
+        pending=sorted(scenario['flights'],key=lambda f:(f['scheduled_entry_s'],f['id']))
+        corridors={c['id']:c['waypoints_lat_lon_deg'] for c in scenario['corridors']}
+        tracker=ConflictEvents(self.scenario_cfg)
+        active,records,cache={},{},{}
+        next_flight=steps=0
+        plan_failures=[]
+        started=time.perf_counter()
+        while next_flight<len(pending) or active:
+            if time.perf_counter()>=self.deadline:
+                raise TimeoutError('Declared wall budget reached')
+            t0=float(bs.sim.simt)
+            while next_flight<len(pending) and pending[next_flight]['scheduled_entry_s']<=t0+1e-8:
+                flight=pending[next_flight]
+                next_flight+=1
+                acid,kind=flight['id'],flight['type']
+                route=corridors[flight['corridor_id']]
+                heading=float(geo.qdrdist(*route[0],*route[1])[0])
+                nominal=self.types[kind]['nominal_tas_mps']
+                if bs.traf.cre(acid,kind,*route[0],heading,altitude,float(tas2cas(nominal,altitude))) is not True:
+                    raise RuntimeError('Native admission failed')
+                i=bs.traf.id2idx(acid)
+                bs.traf.ap.selaltcmd(i,altitude,0.)
+                bs.traf.ap.selhdgcmd(i,heading)
+                bs.traf.swvnav[i]=bs.traf.swvnavspd[i]=False
+                initial=self.state(acid)
+                request=requested_age(t0)
+                plan,certificate,request_info,proposal=self.build(initial,route,nominal,lane,request,cache)
+                plan_id=f'{mode}-{scenario["seed"]}-{acid}'
+                self.plans.write(json.dumps(dict(plan_id=plan_id,initial=asdict(initial),
+                    nominal_latlon=route,lane_request=request_info,geometry=plan['geometry'],
+                    states=[asdict(s) for s in plan['states']],commands=[asdict(c) for c in plan['commands']],
+                    phases=plan['phases'],progress=plan['progress'],certificate=certificate,
+                    proposed_failure=proposal['failure'] if proposal else None),allow_nan=False)+'\n')
+                if not certificate['conditional_certificate']:
+                    # This population cannot be compared fairly. Stop the case
+                    # explicitly instead of deleting or skipping a difficult type.
+                    plan_failures.append(dict(flight=flight,actual_entry_s=t0,failures=certificate['failures']))
+                    break
+                record=dict(flight,plan_id=plan_id,actual_entry_s=t0,status='active',
+                    requested_lane_m=lane,lane_request_age_s=request,lane_request_status=request_info['status'],
+                    lane_request_reason=request_info.get('reason'),reference_steps=len(plan['commands']),
+                    flight_seconds=0.,path_length_m=0.,outside_corridor_seconds=0.,outside_altitude_seconds=0.,
+                    max_centerline_distance_m=0.,max_reference_error_m=0.,max_local_defect_m=0.,
+                    max_tas_reference_error_mps=0.,max_heading_error_deg=0.,max_tas_acceleration_mps2=0.,
+                    max_yaw_cap_ratio=0.,tube_failed_samples=0,lane_hold_samples=0,lane_hold_failed_samples=0,
+                    max_hold_course_error_deg=0.,max_center_return_course_error_deg=0.,
+                    lane_return_samples=0,center_after_return_samples=0,center_after_return_failed_samples=0,
+                    actual_samples=0,conditional_certificate=True)
+                records[acid]=record
+                active[acid]=dict(plan=plan,certificate=certificate,k=0,route=route,nominal=nominal)
+                self.traces.write(json.dumps(dict(plan_id=plan_id,tick=0,time_s=t0,
+                    actual=asdict(initial),altitude_m=altitude,vs_mps=0.),allow_nan=False)+'\n')
+            if plan_failures:
+                break
+            before={acid:self.state(acid) for acid in active}
+            risk_before={acid:(s.lat_deg,s.lon_deg,float(bs.traf.alt[bs.traf.id2idx(acid)]),s.tas_mps)
+                         for acid,s in before.items()}
+            for acid,item in active.items():
+                if item['k']>=len(item['plan']['commands']):
+                    raise RuntimeError('Exhausted plan not terminated in its final physical tick')
+                command=item['plan']['commands'][item['k']]
+                i=bs.traf.id2idx(acid)
+                bs.traf.ap.selspdcmd(i,float(tas2cas(command.tas_mps,float(bs.traf.alt[i]))))
+                bs.traf.ap.selhdgcmd(i,command.hdg_deg)
+            bs.sim.step()
+            t1=float(bs.sim.simt)
+            if abs(t1-t0-dt)>1e-8 or set(bs.traf.id)!=set(active):
+                raise RuntimeError('Native timing or population changed unexpectedly')
+            tracker.observe(t0,risk_before,dt)
+            terminal=[]
+            for acid,item in active.items():
+                self.samples+=1
+                if self.samples>self.cfg['maximum_aircraft_physics_samples']:
+                    raise RuntimeError('Declared sample bound reached')
+                record=records[acid]
+                k=item['k']+1
+                plan,certificate,route=item['plan'],item['certificate'],item['route']
+                command,reference,phase=plan['commands'][k-1],plan['states'][k],plan['phases'][k-1]
+                prior,actual=before[acid],self.state(acid)
+                i=bs.traf.id2idx(acid)
+                height,vs=float(bs.traf.alt[i]),float(bs.traf.vs[i])
+                if (not all(math.isfinite(v) for v in (*asdict(actual).values(),height,vs))
+                    or height!=altitude or vs!=0. or bs.traf.wind.winddim or bs.traf.swlnav[i]
+                    or bs.traf.swvnav[i] or bs.traf.swvnavspd[i] or bs.traf.ap.turnphi[i]!=0.
+                    or abs(math.degrees(bs.traf.ap.bankdef[i])-25.)>1e-10):
+                    raise RuntimeError('Native execution mode or fixed altitude changed')
+                a,endpoint,final_unit,first_unit=signed_geometry((actual.lat_deg,actual.lon_deg),route)
+                b=local_xy((prior.lat_deg,prior.lon_deg),route[0])
+                r=local_xy((reference.lat_deg,reference.lon_deg),route[0])
+                predicted=native_step(prior.lat_deg,prior.lon_deg,reference.hdg_deg,reference.tas_mps,
+                    reference.hdg_deg,reference.tas_mps,dt=dt)
+                p=local_xy((predicted.lat_deg,predicted.lon_deg),route[0])
+                error=math.hypot(a[0]-r[0],a[1]-r[1])
+                local_defect=max(abs(a[0]-p[0]),abs(a[1]-p[1]))
+                bound=certificate['error_bounds'][k]
+                distance=centerline_distance_m((actual.lat_deg,actual.lon_deg),route)
+                heading_error=abs((actual.hdg_deg-command.hdg_deg+180.)%360.-180.)
+                yaw=abs((actual.hdg_deg-prior.hdg_deg+180.)%360.-180.)
+                cap=math.degrees(dt*9.80665*math.tan(math.radians(25.))/max(actual.tas_mps,.01))
+                record['actual_samples']+=1
+                record['flight_seconds']+=dt
+                record['path_length_m']+=distance_m((prior.lat_deg,prior.lon_deg),(actual.lat_deg,actual.lon_deg))
+                record['outside_corridor_seconds']+=dt*(distance>half_width)
+                record['outside_altitude_seconds']+=dt*(abs(height-altitude)>half_height)
+                record['tube_failed_samples']+=abs(a[0]-r[0])>bound['ex_m'] or abs(a[1]-r[1])>bound['ey_m']
+                for key,value in dict(max_centerline_distance_m=distance,max_reference_error_m=error,
+                    max_local_defect_m=local_defect,max_tas_reference_error_mps=abs(actual.tas_mps-reference.tas_mps),
+                    max_heading_error_deg=heading_error,max_tas_acceleration_mps2=abs(actual.tas_mps-prior.tas_mps)/dt,
+                    max_yaw_cap_ratio=yaw/cap).items():
+                    record[key]=max(record[key],value)
+                cross=a[0]*first_unit[1]-a[1]*first_unit[0]
+                first_course=math.degrees(math.atan2(first_unit[0],first_unit[1]))%360.
+                course_error=abs((actual.hdg_deg-first_course+180.)%360.-180.)
+                if phase=='lane_hold':
+                    record['lane_hold_samples']+=1
+                    record['lane_hold_failed_samples']+=abs(cross-lane)>2. or abs(actual.tas_mps-item['nominal'])>1e-3 or course_error>5.
+                    record['max_hold_course_error_deg']=max(record['max_hold_course_error_deg'],course_error)
+                if phase=='lane_return':
+                    record['lane_return_samples']+=1
+                if phase=='center' and record['lane_return_samples'] and plan['progress'][k]['nominal_leg_index']==0:
+                    record['center_after_return_samples']+=1
+                    record['center_after_return_failed_samples']+=abs(cross)>2. or course_error>5.
+                    record['max_center_return_course_error_deg']=max(record['max_center_return_course_error_deg'],course_error)
+                # The planned station is unique even on a crossing polyline;
+                # positional tracking is separately checked against its tube.
+                final_origin=local_xy(route[-2],route[0])
+                actual_along_before=sum((b[j]-final_origin[j])*final_unit[j] for j in (0,1))
+                final_course=math.degrees(math.atan2(final_unit[0],final_unit[1]))%360.
+                final_course_error=abs((actual.hdg_deg-final_course+180.)%360.-180.)
+                final_progress=(plan['progress'][k]['nominal_leg_index']==len(route)-2 and phase!='turn'
+                    and actual_along_before>=0. and final_course_error<=5. and not record['tube_failed_samples'])
+                crossing=finite_exit_crossing((*b,altitude),(*a,height),endpoint,final_unit,
+                    half_width,altitude-half_height,altitude+half_height) if final_progress else None
+                arrived=bool(crossing and crossing['within_width'] and crossing['within_height'])
+                timed_out=t1-record['actual_entry_s']>=self.cfg['per_flight_timeout_seconds']-1e-8
+                exhausted=k==len(plan['commands'])
+                self.traces.write(json.dumps(dict(plan_id=record['plan_id'],tick=k,time_s=t1,phase=phase,
+                    actual=asdict(actual),altitude_m=height,vs_mps=vs,centerline_distance_m=distance,
+                    reference_error_m=error,local_defect_m=local_defect,exit_crossing=crossing),allow_nan=False)+'\n')
+                item['k']=k
+                if arrived or timed_out or exhausted:
+                    reason='arrived' if arrived else ('flight_timeout' if timed_out else 'plan_exhausted')
+                    record.update(status=reason,terminal_time_s=t1,terminal_state=asdict(actual),exit_crossing=crossing,
+                        actual_final_leg_along_before_m=actual_along_before,final_course_error_deg=final_course_error,
+                        lane_hold_complete=(record['lane_request_status']=='accepted' and record['lane_hold_samples']*dt>=20.
+                            and not record['lane_hold_failed_samples'] and record['center_after_return_samples']>0
+                            and not record['center_after_return_failed_samples']))
+                    terminal.append((acid,reason))
+            for acid,reason in terminal:
+                tracker.exit(acid,t1,reason)
+                bs.traf.delete(bs.traf.id2idx(acid))
+                del active[acid]
+            steps+=1
+        tracker.finish(float(bs.sim.simt))
+        rows=list(records.values())
+        complete=not plan_failures and not active and next_flight==len(pending)
+        native_ok=complete and all(r['status']=='arrived' and not r['outside_corridor_seconds']
+            and not r['outside_altitude_seconds'] and not r['tube_failed_samples']
+            and r['max_local_defect_m']<=self.cfg['position_defect_m_per_axis_tick']
+            and r['max_tas_reference_error_mps']<=self.cfg['speed_uncertainty_mps']
+            and r['max_heading_error_deg']<=1e-9 and r['max_tas_acceleration_mps2']<=3.5+1e-8
+            and r['max_yaw_cap_ratio']<=1+1e-8
+            and (r['lane_request_status']!='accepted' or r['lane_hold_complete']) for r in rows)
+        return dict(seed=scenario['seed'],mode=mode,summary=summarize(rows,tracker,planned=len(pending),complete=complete,admitted=next_flight),
+            terminal_flights=rows,plan_failures=plan_failures,events=tracker.events,physics_steps=steps,
+            wall_seconds=time.perf_counter()-started,all_checks_passed=native_ok)
+
+
+def main(argv=None):
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--config',default='configs/fixed_route_probe.json')
+    parser.add_argument('--modes',nargs='+',choices=('nominal','left','right'),default=['nominal'])
+    parser.add_argument('--scenario-limit',type=int,default=12)
+    parser.add_argument('--wall-seconds',type=float,default=600.)
+    args=parser.parse_args(argv)
+    if os.environ.get('LAB_RUN_DIR')!='/output' or Path.cwd()!=Path('/workspace'):
+        raise ValueError('Use the isolated lab launcher')
+    if not 1<=args.scenario_limit<=12 or not 0<args.wall_seconds<=1800 or len(set(args.modes))!=len(args.modes):
+        raise ValueError('Invalid declared workload')
+    started=time.perf_counter()
+    cfg=json.loads(Path(args.config).read_text())
+    scenario_cfg=json.loads(Path(cfg['scenario_config']).read_text())
+    fixture=Path(cfg['scenarios_path'])
+    if digest(fixture)!=cfg['scenarios_sha256']:
+        raise ValueError('Original fixture identity changed')
+    scenes=json.loads(fixture.read_text())
+    if [s['seed'] for s in scenes]!=cfg['expected_seeds'] or any(len(s['flights'])!=30 for s in scenes):
+        raise ValueError('Original population changed')
+    if (cfg['dt_seconds']!=.25 or scenario_cfg['corridor_width_ft']!=500 or scenario_cfg['corridor_height_ft']!=200
+        or cfg['per_flight_timeout_seconds']!=1200. or scenario_cfg['per_flight_timeout_seconds']!=1200.):
+        raise ValueError('Original execution dimensions changed')
+    output=Path('/output')
+    (output/'scenarios.json').write_bytes(fixture.read_bytes())
+    sources={str(p):digest(p) for p in (fixture,Path(cfg['reference_path']),Path(cfg['corner_reference_path']),
+        Path(args.config),Path(cfg['scenario_config']),Path(cfg['types_config']),Path(__file__),
+        Path('src/fixed_route_plan.py'),Path('src/lateral_plan.py'))}
+    from bluesky_diagnostic import initialise
+    from paper_performance import install_performance, load_types
+    types=load_types(cfg['types_config'])
+    bs=initialise(Path(tempfile.mkdtemp(prefix='fixed-route-native-',dir='/tmp')))
+    performance=install_performance(bs,types)
+    result=dict(schema='bluesky.fixed-route-result.v1',config=cfg,source_sha256=sources,
+        selected_seeds=[s['seed'] for s in scenes[:args.scenario_limit]],modes=args.modes,
+        cases=[],validation_complete=False,all_checks_passed=False)
+    def save():
+        result.update(wall_seconds=time.perf_counter()-started,
+            aggregates={mode:combine([c for c in result['cases'] if c['mode']==mode]) for mode in args.modes})
+        write_json(output/'result.json',result,cfg['maximum_result_bytes'])
+    with gzip.open(output/'traces.jsonl.gz','wt',compresslevel=1) as traces, gzip.open(output/'plans.jsonl.gz','wt',compresslevel=1) as plans:
+        probe=NativeFixedRouteProbe(bs,performance,types,cfg,scenario_cfg,started+args.wall_seconds,traces,plans)
+        try:
+            for mode in args.modes:
+                for scenario in scenes[:args.scenario_limit]:
+                    case=probe.run_scenario(scenario,mode)
+                    result['cases'].append(case)
+                    save()
+                    print(json.dumps(dict(seed=case['seed'],mode=mode,summary=case['summary'],
+                        all_checks_passed=case['all_checks_passed'],wall_seconds=case['wall_seconds'])),flush=True)
+            result.update(validation_complete=True,all_checks_passed=all(c['all_checks_passed'] for c in result['cases']))
+        except Exception as exc:
+            result['interruption']=dict(kind=type(exc).__name__,detail=str(exc))
+            raise
+        finally:
+            result.update(aircraft_physics_samples=probe.samples,planning_wall_seconds=probe.planning_seconds)
+            save()
+    return 0 if result['all_checks_passed'] else 1
+
+
+if __name__=='__main__':
+    raise SystemExit(main())
