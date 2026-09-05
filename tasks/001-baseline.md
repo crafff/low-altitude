@@ -698,3 +698,9 @@ lane probe先前5fixture在[20260905T142256Z-lane-completion-tests-d45afac7](../
 14:46–14:48收尾只读检查：lab doctor入口/链接issues与local_missing均为空（系统Python3.10.12仅用于监督检查，不冒充项目3.11运行验证）；新probe/plot/test AST及两配置JSON通过。850恢复点/四模式/F020三manifest共12数据文件hash/字节数一致，两图全部6个输出hash/大小一致。事后通用绘图校验脚本首次假定outputs为字典，但learning元数据实际为列表，报AttributeError；按各自保存schema读取后全部通过，未修改元数据或重新渲染。37个明确科研文件暂存，两个明确小.pt强制加入，原始runs/PDF/私人目录未加入。staged diff检查通过，生成SVG原样保留尾空白。最终独立review及提交尚待。
 
 14:49 route_trace最终只读review返回无阻断：两sample全12case/aggregate精确、NR相等、四模式数字、35点37源行、850轮预算、12清单数据及图hash均独立核对，F020逐代CSV统计和端点球面方位最大差0.000033623346度复算；两PNG目视。唯一CAP图文差异已修正，无模型反序列化/实验/编辑。controller已有doctor/manifest/staging检查通过，准备私有commit/push。另交observation_reward_spec只读将下一500m配对建议细化为实际航点映射/前缀重放/时间边界方案，<=10min且15:00前返回；明确只读必要source与保存CSV，不实现或增加本轮负载，不改容差/名义进度，不扩展诊断菜单。
+
+14:50本批37文件提交`8e6e7cc921e34768b5d7ca9db5055217c5d1e892`已push当前私有研究分支，随后rev-parse与ls-remote精确相同。14:52仅核对三个指定子线程turn_context字段，shared_ppo第17、route_trace第19、observation_reward_spec第15turn实际均gpt-6-astra/xhigh，未读取认证或导出其它会话内容。
+
+14:51只读盘点本块05:15:13后81份launcher status：75 succeeded、5 failed、1遗留running；5失败均已有原记录及相应修正/重跑，不删负结果。遗留running是07:13训练中断的原状态，不代表当前负载，已另存07:33:56 controller_observation：外层143、最后完整65轮、launcher锁确认空闲、当时精确主机只读审计无对应负载，原因/发送者未知。80份有结束时刻的监督时间合计19612.98863s，排除该中断缺失尾时和所有工具/读写/研究思考时间，不能当整个10h工作时长。完整有界区间未发现重叠；缺失区间不能由该简单盘点补成精确时间证据。最后lab任务14:40:26结束，当前无科研负载，进入只读方案整理/文档交付。
+
+14:58 observation_reward_spec返回下一配对的只读实施细化，未编辑/加载模型/模拟：建议保存C02+F020单机固定响应（不复现30机风险/奖励），保留687实际入场/690首决策与0.25s偏移读取请求。188行前缀精确且两臂内态额外一致；t734记录后干预。500m固定投影guide映射nominal1，不增加原RouteGeometry顶点/名义进度或重置锁；原N1仍终点。发现addwpt内部direct的潜在共同干预，B只内部一次、A对N1匹配一次，A须精确保持原物理/目标/锁至1365s，否则归因无效。完整坐标、请求前缀、后段保持39选择、映射/事件顺序/停止条件已纳入F020 README和NOW。此为下一块待实施方案，不新增本块科研负载或现baseline配置变更。
