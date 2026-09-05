@@ -409,3 +409,28 @@ route_fidelity追加15min只读特刊核验：读PLAN/SOURCES与出版社/客座
 08:06 [exposure-audit-nr](../runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/result.json)88.46s正常完成，12例全部检查通过，LoWC/NMAC原分子、事件数及每例全部科学NR摘要精确复现；只有runtime/RSS排除。6000ft潜在230361.75无向pair-s、1516连续事件；LoWC35604.75/536，NMAC8838.5/362。累计197670 aircraft-s、17265 airspace-s，二者小时口径及有向乘2明确。全12 LoWC/potential15.456%、NMAC/potential3.837%，原有4个5走廊例11.988%/2.896%；与论文34.42%/9.32%差异不能用共同时间分母或共同pair因子抹平，不据较近的两项airspace小时数宣称辨认作者分母。
 
 构造观测3827帧、44421 ownship/103090 intruder entries，返回reset/decision3471帧、39557/92202 entries，NR实际推断0。终止预览构造、原生暴露、政策输入三个数量不可互换。小完整报告及命令另存[exposure审计](../reports/exposure-audit-20260905/README.md)，逐步CSV留原run。route_fidelity追加只读新结果/原pp11/17–18，≤10min，核对potential精确定义与共同缩放不能解释的差异，不调参/实验/联系作者。
+
+08:09 100轮恢复点与NR暴露审计随bd1ae0c99771ee7dd31f7a439235275afcb28152推送且远端SHA一致；doctor与本批diff检查通过。随后启动100→150（内1200/外1260s），继续同一配置、源码和CPU14限制，当前唯一launcher负载。
+
+08:10获准主机权限只读nvidia-smi复查：原两个GPU PID3059945/3062529均仍列在compute-apps，显存9891/9771MiB；RTX4090总用20616MiB、余3432MiB、利用率98%。未读取外部项目文件/日志/环境，未发信号、调整进程或向GPU提交计算。该快照支持二者仍运行，不构成对其吞吐完全无影响的证明；本项目继续单核低优先级CPU。
+
+08:17 policy_diagnostic builder已交付3个owned文件（56列流式CSV、4个纯夹具、同轮checkpoint/reference严格核验）；静态AST/JSON通过，尚未运行。独立reviewer窄审无阻断：C-order 4/5/3与名义37正确，条件熵/掩码归一熵/混合熵/经验熵分开，原forward/passive hook不追加随机draw，奖励按实际sampled ID记账并与逐机return对齐。归一熵排除valid=1且保留计数；分组仍是决策加权关联，不是时间占用或因果失败利用。当前训练结束后controller先4fixture再全12例100轮native精确对照，≤240s。
+
+route_fidelity针对新exposure返回：共同乘数若对齐论文，potential/LoWC/NMAC分别需4.0827/9.0924/9.9188，不是同一个单位转换；返回邻机entries92202×5s=461010，与真实有向potential460723.5仅差0.062%，不支持简单5s/0.25s解释。p11没有明确CPA、接近方向、最近邻上限或同走廊排除；不补隐含筛选。已从固定run复制24个scenario/events来源及SHA至报告pair_input，root写同/跨走廊纯重聚合脚本，逐例断言事件时长/计数还原原暴露；仅AST完成，待训练间隙通过lab执行，不修改物理或训练源码。
+
+08:18实际thread元数据再次核对均gpt-6-astra/xhigh：paper_features7turn、route_trace8、learning_integration_review7、observation_reward_spec5、shared_ppo5、route_fidelity9。追加shared_ppo只写ppo_gradient_probe.py/对应配置/聚焦测试，问题为既有低KL/频繁裁剪是否伴随共享梯度冲突；基于严格100轮副本和下一training seed610100，独立收集一完整batch，分开actor/加权critic共享层梯度范数/夹角与全batch KL(old||new)，原update只作用于可丢弃模型/Adam，绝不保存晋升或改变主训练。≤25min静态实现，controller后续≤120s串行执行；此测量不自动支持调参或因果归因。
+
+
+### 08:22起：总150轮与策略诊断
+
+[100→150](../runs/20260905T080929Z-execution-ppo-150-493a113d/artifacts/result.json)完成50轮，CLI774.236s/job776.085s，正常exit，best仍25。125轮sample227/360（53超时、80导航耗尽、347越界）、NMAC66.597/h；150轮230/360（53超时、77导航耗尽、344越界）、NMAC63.0828/LoWC365.7151无向pair-s/flight-hour、return−2081.0070。100轮初始恢复评价保持同科学汇总。当前没有足够任务改善，继续同配置学习且同时诊断，不据噪声直接改奖励或学习率。
+
+[150轮副本](../checkpoints/execution-150-20260905/README.md)约1.802MB，尚待本批远端备份。计划150→250内1800/外1860s；已实测50轮约13min，扩大为100轮仍单CPU/单launcher、每5轮原子保存并持续轮询。先执行当前有界诊断，不并行实验。
+
+[policy-diagnostic-tests](../runs/20260905T082304Z-policy-diagnostic-tests-32ea4b80/log.txt)4项通过，实际测试1.43s job。controller随后启动指定100轮checkpoint+同轮reference全12原生重放，≤240s/128MiB/4096MiB；独立review结论已记前文。梯度探针将保留完整collection与original update字段，便于同已完成150段首行真实episode101/seed610100比较，检查诊断不改变原采样/update语义。
+
+08:26 [policy-diagnostic-100](../runs/20260905T082427Z-policy-diagnostic-100-96e8dc93/artifacts/result.json)110.66s正常完成，所有12例科学sample摘要/动作直方图与原100轮精确一致、model hash不变、0梯度、hook已恢复。3770真实forward、47167逐机采样决策，CSV25694555 bytes留本地。条件熵均值2.125525、H/log(valid_count)=.991783；合法数4/20/60分别25581/17892/1688次，其余8/12/40共2006次。策略仍近似合法支持上的均匀分布，不能把约2.1熵认作塌缩。
+
+全部53超时确认为29 Mnet+24 Tecnalia，各自0到达；两类策略期望速度比.840643/.842913（全局.842507），与前述1200s可达性机制相符。到达/超时/导航耗尽组平均age569.70/1200/529.85s、return−4.583/−10.050/−5.441；耗尽组平均回报反而比到达组差，这些非匹配分组不证明主动利用失败。安全总项−1948.1603、未缩放eff−36031.65×.008、arrival236与总−2000.4135逐机对账。完整结果/身份小报告见[策略诊断](../reports/policy-diagnostic-100-20260905/README.md)；5.11MB JSON含完整分组，原25.69MB CSV/逐机原始文件仍本地。
+
+[事件重聚合](../runs/20260905T082648Z-exposure-pair-decomposition-aa29f123/artifacts/pair_decomposition.json)0.066s通过每case原始暴露/连续事件计数还原断言；同走廊占potential/LoWC/NMAC的60.91%/81.40%/92.90%，现有5走廊子集44.61%/74.89%/89.59%。记录共同航路主导当前NMAC，但标签自身不证明每例追赶/几何交叉。脚本、24来源SHA输入及结果补进[NR报告](../reports/exposure-audit-20260905/README.md)。这些诊断不改变现有PPO源码、任务定义或训练随机流。

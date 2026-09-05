@@ -15,6 +15,10 @@ Figure 10 of the source paper labels NR fractions about 34.42% and 9.32%. Changi
 
 Observation construction is separate from physics exposure and inference: 3827 constructed frames contain 44421 ownship and 103090 intruder entries, including terminal previews; 3471 returned reset/decision frames contain 39557/92202 entries. Actual NR policy inference calls are zero. The 359/360 arrival result, one route-exhaustion failure and 16 lateral-violation flights remain visible.
 
+The saved complete events were also decomposed in `runs/20260905T082648Z-exposure-pair-decomposition-aa29f123`, without rerunning the simulator. All per-case durations and event counts exactly reconstruct the original exposure. Same-corridor pairs contribute 60.91% of potential, 81.40% of LoWC and 92.90% of NMAC pair-seconds. In the four five-corridor cases, the corresponding shares are 44.61%, 74.89% and 89.59%. Shared-route exposure therefore dominates current NMAC, but corridor labels alone do not prove each event is overtaking. Different-route labels likewise do not prove a geometric crossing. Source file hashes and input are retained in `pair_input.json`; the result is `pair_decomposition.json`.
+
+Reproduce this separate aggregation with `--input` for both `reports/exposure-audit-20260905/decompose.py` and `reports/exposure-audit-20260905/pair_input.json`, a 30-second/16-MiB/1024-MiB lab budget, and `/usr/bin/python3 -B reports/exposure-audit-20260905/decompose.py --input reports/exposure-audit-20260905/pair_input.json` as the workload. The script and input are source snapshots; all output goes to the launcher's output directory.
+
 Reproduce with the locked CPU environment and one launcher at a time:
 
 ```bash

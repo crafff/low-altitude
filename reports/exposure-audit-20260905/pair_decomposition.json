@@ -1,0 +1,295 @@
+{
+  "schema": "exposure-pair-decomposition.v1",
+  "scope": "Descriptive decomposition of existing development NR; no rerun or tuning.",
+  "input_sha256": "f9e66f2a61eaf9190f6fb12d03ae4237761a83b731ba9fe9f4425153cd3b6706",
+  "script_sha256": "e171e0a20932a65aa89fea6f4829444eb5d6a7037e9469629b1e7c6dc3b37f09",
+  "source_run": "runs/20260905T080439Z-exposure-audit-nr-8d220f91",
+  "source_records": [
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53001/scenario.json",
+      "bytes": 7631,
+      "sha256": "3faeea8d5722570915d726a874263d586d72b79af50e44102cc6db3a79309a3c"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53001/sampled_events.json",
+      "bytes": 36272,
+      "sha256": "e22c5bed34b854dba08d21ff38feed58fddea0e3acf03a53adf875d19c5e068c"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53002/scenario.json",
+      "bytes": 8098,
+      "sha256": "35bdb8bc1db4548725d8811058992bc1b84da7c81fdd1498451f56d998f4edcf"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53002/sampled_events.json",
+      "bytes": 50875,
+      "sha256": "45b88581f255ed9f59e5d22a3b9dd7cb37e9b09745c1ed95697b682fc4263269"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53003/scenario.json",
+      "bytes": 8628,
+      "sha256": "035717e1e8b9035c5b594e9a305e2998d6d6f693589b16180b6b0a7c70f5e754"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53003/sampled_events.json",
+      "bytes": 46164,
+      "sha256": "1e85b2fa7600edd6a035bb39df9128f6d73086d893aaee2de3315e9e5f9f84c9"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53004/scenario.json",
+      "bytes": 7961,
+      "sha256": "626dbfd5fc53444cef469f8d74cdfd11c97cfac6aed22157f6730e0b276713fa"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53004/sampled_events.json",
+      "bytes": 42678,
+      "sha256": "be6dcf0abf606f63cc9b2248eed252db4f5d653fc8812e4c26ef2f4019d3cce4"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53005/scenario.json",
+      "bytes": 8639,
+      "sha256": "62dc6219eb83a520cd2ca0034eecb0cff3000b0b429487e8fa1992f9b9f9ae41"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53005/sampled_events.json",
+      "bytes": 23929,
+      "sha256": "caba0144dfdca7f35725cb4350891e23bc92d9ef606a55d0c25e28219f31610d"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53006/scenario.json",
+      "bytes": 8719,
+      "sha256": "b5623de9be3157eeb0359e5091d3557b8dfef04bff87016fdbacca86fb7a9f17"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53006/sampled_events.json",
+      "bytes": 48230,
+      "sha256": "49595062449f44145e2100431a86ed35e05db95d4f55d34384c70b5037d4e35d"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53007/scenario.json",
+      "bytes": 8024,
+      "sha256": "ddb19fdd9af8cf2f167e33675538116fd44cbd3cb18303975789ca16244f6a0f"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53007/sampled_events.json",
+      "bytes": 52339,
+      "sha256": "035a98e0fce2081b0b772f99c52b437ced49bf975dd095f14b28e0597bb5a3e1"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53008/scenario.json",
+      "bytes": 8332,
+      "sha256": "0783252661f8fe48e93fd4a7264da1c9855e362833c43749fea1d58ae4d2c2e5"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53008/sampled_events.json",
+      "bytes": 43151,
+      "sha256": "937cd333f54d483a5e292ac1e4a7d7502d365e985a55e5cb78626ac0feae747d"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53009/scenario.json",
+      "bytes": 8308,
+      "sha256": "18c1151bfef48fc92c41f4bf7fdab7b2923ab5b472c1251c3da7240c93beef40"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53009/sampled_events.json",
+      "bytes": 42481,
+      "sha256": "ec42e737578b76da15920155b4d5ea02f18a4e65a1f04e506de2e37b801837fb"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53010/scenario.json",
+      "bytes": 7886,
+      "sha256": "a4d60da32872f42353a7c99e438fdbc72db6bf785febb8b183db0bafe8cb973a"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53010/sampled_events.json",
+      "bytes": 36087,
+      "sha256": "cc29fecff4cc761ca7089c2230f3baca29b12e6aca6f8e5520a079790c1a969d"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53011/scenario.json",
+      "bytes": 8345,
+      "sha256": "fdb83966fe70a9fb09e06a745f5865af74f6e95757f4ba33a5b15e4cf1d4694e"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53011/sampled_events.json",
+      "bytes": 70536,
+      "sha256": "2e355cbdb14d87461194a8204d1b544e16cec94318f9e88cbef3f578df7c4f2d"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53012/scenario.json",
+      "bytes": 8567,
+      "sha256": "11a72e1a12a9abd11a3959fdd737f608fbb2061e3aa50244ff751418d3729a66"
+    },
+    {
+      "path": "runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/53012/sampled_events.json",
+      "bytes": 35556,
+      "sha256": "e975c9e16cf0497bcc58fadbe721346ad5854b576f73931e00a0d9ce154c2edb"
+    }
+  ],
+  "all_twelve": {
+    "seeds": [
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53007,
+      53008,
+      53009,
+      53010,
+      53011,
+      53012
+    ],
+    "full_population_hours": {
+      "aircraft": 54.90833333333333,
+      "airspace": 4.795833333333333
+    },
+    "groups": {
+      "same_corridor": {
+        "risk": {
+          "potential": {
+            "unordered_pair_seconds": 140317.5,
+            "directed_pair_seconds": 280635.0,
+            "continuous_unordered_event_count": 512,
+            "fraction_of_all_corridor_exposure": 0.6091180501971356,
+            "directed_seconds_per_full_population_aircraft_hour": 5110.972833510396,
+            "directed_seconds_per_full_population_airspace_hour": 58516.42050390964
+          },
+          "lowc": {
+            "unordered_pair_seconds": 28982.75,
+            "directed_pair_seconds": 57965.5,
+            "continuous_unordered_event_count": 353,
+            "fraction_of_all_corridor_exposure": 0.8140135796487828,
+            "directed_seconds_per_full_population_aircraft_hour": 1055.6776445591138,
+            "directed_seconds_per_full_population_airspace_hour": 12086.637706342312
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8211.0,
+            "directed_pair_seconds": 16422.0,
+            "continuous_unordered_event_count": 318,
+            "fraction_of_all_corridor_exposure": 0.9290037902358997,
+            "directed_seconds_per_full_population_aircraft_hour": 299.0802853240249,
+            "directed_seconds_per_full_population_airspace_hour": 3424.222415291051
+          }
+        },
+        "within_group_exposure_ratios": {
+          "lowc_over_potential": 0.20655121421062947,
+          "nmac_over_potential": 0.05851729114330002
+        }
+      },
+      "cross_corridor": {
+        "risk": {
+          "potential": {
+            "unordered_pair_seconds": 90044.25,
+            "directed_pair_seconds": 180088.5,
+            "continuous_unordered_event_count": 1004,
+            "fraction_of_all_corridor_exposure": 0.3908819498028644,
+            "directed_seconds_per_full_population_aircraft_hour": 3279.8027014721506,
+            "directed_seconds_per_full_population_airspace_hour": 37551.0338835795
+          },
+          "lowc": {
+            "unordered_pair_seconds": 6622.0,
+            "directed_pair_seconds": 13244.0,
+            "continuous_unordered_event_count": 183,
+            "fraction_of_all_corridor_exposure": 0.18598642035121718,
+            "directed_seconds_per_full_population_aircraft_hour": 241.20200333889818,
+            "directed_seconds_per_full_population_airspace_hour": 2761.5638575152043
+          },
+          "nmac": {
+            "unordered_pair_seconds": 627.5,
+            "directed_pair_seconds": 1255.0,
+            "continuous_unordered_event_count": 44,
+            "fraction_of_all_corridor_exposure": 0.07099620976410025,
+            "directed_seconds_per_full_population_aircraft_hour": 22.856275610866597,
+            "directed_seconds_per_full_population_airspace_hour": 261.68549087749784
+          }
+        },
+        "within_group_exposure_ratios": {
+          "lowc_over_potential": 0.07354161981470221,
+          "nmac_over_potential": 0.006968795897572582
+        }
+      }
+    }
+  },
+  "existing_five_corridor_four": {
+    "seeds": [
+      53003,
+      53006,
+      53009,
+      53012
+    ],
+    "full_population_hours": {
+      "aircraft": 18.701805555555556,
+      "airspace": 1.5931944444444444
+    },
+    "groups": {
+      "same_corridor": {
+        "risk": {
+          "potential": {
+            "unordered_pair_seconds": 33096.25,
+            "directed_pair_seconds": 66192.5,
+            "continuous_unordered_event_count": 130,
+            "fraction_of_all_corridor_exposure": 0.4461373072360617,
+            "directed_seconds_per_full_population_aircraft_hour": 3539.3641433907896,
+            "directed_seconds_per_full_population_airspace_hour": 41547.03164501787
+          },
+          "lowc": {
+            "unordered_pair_seconds": 6659.75,
+            "directed_pair_seconds": 13319.5,
+            "continuous_unordered_event_count": 88,
+            "fraction_of_all_corridor_exposure": 0.7488755200719667,
+            "directed_seconds_per_full_population_aircraft_hour": 712.2039612931015,
+            "directed_seconds_per_full_population_airspace_hour": 8360.247580856072
+          },
+          "nmac": {
+            "unordered_pair_seconds": 1924.5,
+            "directed_pair_seconds": 3849.0,
+            "continuous_unordered_event_count": 84,
+            "fraction_of_all_corridor_exposure": 0.895949720670391,
+            "directed_seconds_per_full_population_aircraft_hour": 205.80900536935678,
+            "directed_seconds_per_full_population_airspace_hour": 2415.9009676575715
+          }
+        },
+        "within_group_exposure_ratios": {
+          "lowc_over_potential": 0.20122370359179664,
+          "nmac_over_potential": 0.05814858178796691
+        }
+      },
+      "cross_corridor": {
+        "risk": {
+          "potential": {
+            "unordered_pair_seconds": 41087.75,
+            "directed_pair_seconds": 82175.5,
+            "continuous_unordered_event_count": 424,
+            "fraction_of_all_corridor_exposure": 0.5538626927639383,
+            "directed_seconds_per_full_population_aircraft_hour": 4393.987508633302,
+            "directed_seconds_per_full_population_airspace_hour": 51579.07767413478
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2233.25,
+            "directed_pair_seconds": 4466.5,
+            "continuous_unordered_event_count": 50,
+            "fraction_of_all_corridor_exposure": 0.2511244799280333,
+            "directed_seconds_per_full_population_aircraft_hour": 238.8272077116737,
+            "directed_seconds_per_full_population_airspace_hour": 2803.487054310871
+          },
+          "nmac": {
+            "unordered_pair_seconds": 223.5,
+            "directed_pair_seconds": 447.0,
+            "continuous_unordered_event_count": 11,
+            "fraction_of_all_corridor_exposure": 0.10405027932960893,
+            "directed_seconds_per_full_population_aircraft_hour": 23.901435541725768,
+            "directed_seconds_per_full_population_airspace_hour": 280.568389852672
+          }
+        },
+        "within_group_exposure_ratios": {
+          "lowc_over_potential": 0.05435318312635761,
+          "nmac_over_potential": 0.0054395774896410735
+        }
+      }
+    }
+  },
+  "checks": "Every case event duration/count exactly reconstructs its saved physical exposure; groups exhaust all pairs.",
+  "interpretation": "Corridor labels distinguish shared routes from different routes. Same-route does not by itself prove overtaking; cross-route does not by itself prove a geometrical crossing. Ratios are exposure durations, not event probabilities."
+}

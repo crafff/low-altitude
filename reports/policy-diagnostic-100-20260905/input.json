@@ -1,0 +1,75 @@
+{
+  "diagnostic_config": {
+    "schema": "bluesky.policy-diagnostic.v1",
+    "scope": "Observational development-policy diagnostic; no training, causal early-failure claim, or held-out evidence.",
+    "training_config": "configs/paper_train_execution.json",
+    "wall_seconds": 225.0,
+    "csv_max_rows": 60000,
+    "csv_max_bytes": 100663296,
+    "development_cases": [
+      {
+        "seed": 53001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53012,
+        "corridor_count": 5
+      }
+    ],
+    "reconstruction_choices": [
+      "The controller must explicitly supply both the completed checkpoint and the full development JSON/JSONL through lab --input. Select exactly one reference evaluation with the checkpoint's completed episode count; never search runs, choose a nearby episode, or deserialize outside the standalone lab entry point.",
+      "Resolve the original training, environment, action, observation, aircraft-type and PPO configurations from source, and apply the original strict checkpoint validator and source/software version identity checks. Diagnostic settings are separate and do not relax resume compatibility.",
+      "Replay all 12 original development cases with the original sampled-policy seeds and select_actions. A passive model forward hook copies its already-computed masked logits and mask. Compute diagnostic probabilities in float64 without another policy forward or random draw; do not replace the original sampling calculation.",
+      "Conditional entropy is computed over the legal joint actions at this decision. Divide by log(valid_count), returning JSON null and literal CSV null for one legal action. Entropy of the pooled probability mixture and empirical selected-action entropy are different statistics, reported separately.",
+      "Component indices and probability marginals use C-order (4,5,3), with nominal action 37. Repeated locked targets remain decisions, so marginal frequencies describe the visited state and mask distribution rather than an unmasked preference or time occupancy.",
+      "Record reward components returned by the original env.step, actual entry/terminal ages, true pre-decision state, selected and accepted targets, locks and per-flight outcomes. Group by type, terminal status, type/status, and pre-decision lock state. These observations cannot establish that a policy intentionally exploits early termination.",
+      "The original reference NR summaries are reused and explicitly labeled; no NR simulation is performed. Replay sample summaries and action histograms must match reference exactly, excluding only wall_seconds and process_peak_rss_mib.",
+      "No optimizer, backward pass, checkpoint save, PPO collector or training update. Preserve model tensor identity, disable gradients, count real forwards and sampled aircraft decisions, and retain the private per-case sampling generator's state digests.",
+      "One streaming CSV has a 60000-row and 96 MiB limit, leaving space for JSON under a 128 MiB lab output budget. All files are under LAB_RUN_DIR; native scratch belongs to /tmp. Exceptions or failed comparisons return nonzero and preserve partial artifacts. Hooks are removed in finally."
+    ]
+  },
+  "checkpoint": "checkpoints/execution-100-20260905/latest.pt",
+  "reference": "checkpoints/execution-100-20260905/development.jsonl",
+  "checkpoint_sha256": "45f9e3a66519f99b0c93fe040b65c87f9e41191cd14a273013f40744407f552c",
+  "reference_sha256": "553ed9877e3feab0bb90d16fd07521c1d4382d7414d9f773ffa5d5a4dd8a5ff4"
+}
