@@ -4,7 +4,9 @@
 
 最新范围：用户已启动10h，2026-09-05 05:15:13–15:15:13 UTC；14:45:13起预留收尾。用户要求不停止/不影响其他人的两个GPU实验，当前块使用CPU且不提交GPU负载；执行预算与交接见末节。此前15分钟预算均已结束。
 
-本次执行块已结束：用户再次明确“开始”，2026-09-05 04:29:42 UTC起，预算至04:44:42 UTC、≤15分钟/≤2GiB输出；12类性能、论文式场景生成/入场退出、小批无避让诊断，不训练。6个串行job最后于04:41:05 UTC结束，约11分23秒内完成；保存80,354,700字节产物（约76.6MiB），随后仅记录和Git交付。两个具名Astra/xhigh builder分别只写paper_performance及机型配置/测试、paper_scenarios及NR配置/测试；只读scholar核对原PDF场景语义。主线程写NR执行器/事件统计、集成并独占实验执行。
+当前可恢复结果：新refresh累计850轮、保存best775，仍无有效baseline。最终850sample233/360完成、340架次横向越界；best775为260/360完成、336越界。35点曲线、48例解码重放、F0203188行判据诊断均已完成；当前只做收尾复核和私有备份。入口：[NOW](../paper/NOW.md)、[850恢复点](../checkpoints/refresh-850-20260905/README.md)、[F020机制与下一配对方案](../reports/lane-completion-f020-20260905/README.md)。实际运行与交接在本文件末尾14:22–14:43节；后续训练需新的授权块。
+
+此前04:29执行块已结束：用户再次明确“开始”，2026-09-05 04:29:42 UTC起，预算至04:44:42 UTC、≤15分钟/≤2GiB输出；12类性能、论文式场景生成/入场退出、小批无避让诊断，不训练。6个串行job最后于04:41:05 UTC结束，约11分23秒内完成；保存80,354,700字节产物（约76.6MiB），随后仅记录和Git交付。两个具名Astra/xhigh builder分别只写paper_performance及机型配置/测试、paper_scenarios及NR配置/测试；只读scholar核对原PDF场景语义。主线程写NR执行器/事件统计、集成并独占实验执行。
 
 此前执行块（用户已明确“开始”）：2026-09-05 02:53:15 UTC起，最多15分钟至03:08:15 UTC，输出总目标≤2GiB；环境安装、单机与固定种子多机NR诊断，不训练。最后负载03:06:51 UTC结束，约13分37秒内完成；6个job严格串行，保存产物约75.5MiB（含源码快照与沙箱临时导航缓存，不含uv环境/缓存）。随后仅整理记录和Git交付。
 
@@ -593,3 +595,106 @@ route_trace获新绘图handoff：仅turn_geometry_plot.py与可选聚焦fixture�
 12:14交observation_reward_spec只读后续判别设计，<=20min、审计完整样本+paper_actions必要helper；最多一个小固定响应/旁路诊断，必须区分已存首峰末样本与未观察区间，核对实际完成条件，不改主训练或执行实验。
 
 [几何4fixture](../runs/20260905T121137Z-turn-geometry-tests-7d3df300/log.txt)0.022s通过；[render](../runs/20260905T121145Z-turn-geometry-plot-940007d3/status.json)3.501s正常，四artifact逐字节/输出SHA核对、PNG目视通过，理想/实际差异和两类排除含义明确。新[0–300 render](../runs/20260905T121247Z-refresh-learning-figure-300-0254bc91/status.json)3.296s，四artifact复制核对/PNG目视通过；13actual评价、重复100 aggregate精确，报告更新。PDF本地、SVG/PNG/meta入Git。当前无launcher，准备本批备份；下一较长同配置目标300→850，按12:20前可用窗口内8100/外8160s，不跨14:45收尾或硬截止。
+
+12:17提交f1cfb8574ea5c48956a5da4977ffb9d209a1de6b已私有push且ls-remote同SHA，保存300恢复点/完整侧向诊断/几何推导图与0–300图；doctor无问题、staged diff检查通过（原样生成SVG排除尾空白）。12:18:15启动[refresh300→850](../runs/20260905T121815Z-refresh-ppo-850-5786ced9/status.json)，内8100/外8160s、256MiB/4096MiB，原科学源码535cad4与原配置严格恢复。当前唯一launcher/CPU14单线程低优先级；目标850与实际完成分开，最迟监督截止14:34:15，保留最终验证和14:45收尾。原10h硬截止15:15:13不变，主线程不提前通知。
+
+12:21 refresh300→850恢复初评188.696362s完成，整个NR/sample aggregate与300副本末评精确相同；开始新轮次，当前唯一job保持原资源/源码/配置与截止。
+
+
+### 12:24–12:26 UTC：锁条件只读核查与一个后续判别诊断
+
+observation_reward_spec只读原审计+paper_actions/config，未修改/测试/项目负载。seed53004 M600/F020存活797s、outside670.75s、lane-active631.25s、active普通航点630.25s，实际5commands/5captures、终态锁关闭，capture_beyond_leg_end_commands0，故不能称一直未完成。全360终态均满足commands-captures=int(lane_active)，仅计数一致证据。F020首706.5s距离76.644649m/target+76.2/计数1-0/普通N1/LNAVon；峰837.25s82.187604m/target−76.2/3-2；末1484s76.295421m/5-5/锁off/LNAVoff，终态导航耗尽，保留航点索引不等于LNAV还在运行。
+
+释放需普通名义航点映射、有限平移航段0<=along<=length且length>0、相对目标侧向误差<=2m、实际track相对名义方向误差<=5度同时成立。CAP切换本身不释放。静态可构造边缘target76.2/actual77.2仍满足2m容差而严格越界；这是现有明确重建选择，未发现违反源码规则的bug。完成几何用固定原点当前段有符号横向坐标，暴露用当前位置投影完整有限折线最近距离，两者不能用centerline_distance−76.2简单替代。
+
+仅交shared_ppo新lane_completion_probe.py/对应refresh100配置/聚焦fixture，<=25min静态、禁止负载与核心改动：原100模型/原case53004采样种子重放完整30traffic，仅F020保存完整3188期望物理记录（由实际存活/dt推导），直接读取原纯几何helper的lane_error/track_error/along/length/映射判据、代次与lock/CAP/LNAV/真实目标速度。原case科学摘要+actionhist及prior audit逐机终态精确核对，模型/输入/hooks不变；内<=60/外90s/32MiB，当前850结束后controller串行执行。预先区分侧误差尾段、有限段条件、所有判据真仍锁定的矛盾、已解锁但容差/几何仍越界；不直接推因果。
+
+12:29获准只读GPU快照：原PID3059945/3062529仍9891/9771MiB，4090 used20616/free3432MiB，利用率100%；不计算/不信号/不调整进程。load3.446/3.275/3.158，MemAvailable60.701GiB，磁盘free143.257GiB。快照不证明他人吞吐绝对零影响；我们继续CPU14单线程低优先级。新refresh325评价103.810s：237/360、53超时70耗尽、340width/48334.5s、NMAC73.757107/LoWC416.124495每flight-hour、return−2498.740555，仍0height。
+
+12:31追加observation_reward_spec只读下一冻结策略延迟协议审查，<=20min、<=1200词，读取现环境/actions/train接口及已存近邻源：区分generation/acceptance/application、零延迟精确基线、排队动作生效时已masked、FIFO与latest-overwrite分开、队列信息公平性及未来PPO请求动作logprob与实际执行动作区别。输出一个最小推荐诊断和未定项，不实现或启动延迟，不提保证。当前主线已350，继续850目标。
+
+12:33 refresh350全12sample：242/360、53超时65耗尽、337width/50575.25s、NMAC77.594533/LoWC420.858109每flight-hour、return−2600.232214。后续原v2四模式配置仅新建checkpoint_policy_modes_refresh_850.json并显式设轮次850，未执行；须实际同轮checkpoint/reference产生后才用，若目标未达则使用明确实际轮次的新配置，不放宽验证器或重标文件。
+
+
+### 12:38 UTC：下一冻结策略延迟协议的只读设计核对
+
+observation_reward_spec静态读取环境/actions/train及已索引Ramstedt/Molnar原文，无修改/测试/模型加载/实验。建议把未来输出延迟置于“请求生成入队→执行器接收”之间，入队不改变accepted目标/锁/航线；保存绝对60类索引，交付被接受时才用当时位置/名义航段构造CAP。提前生成整条航线再延迟是不同协议。
+
+记录t_generate（按当前观测/mask生成）、t_ready（最早可交付）、t_attempt（实际交付校验）、t_accept（接受，拒绝为空）、t_apply（有变化分量下发API，重复目标可能无新API）及原捕获完成时刻。完成机动不等于通信延迟结束。生成时合法不保证交付合法，先前在途动作可能开启锁，最后航段防回折mask也会随位置变化；推荐交付时沿原执行器整联合动作拒绝，保持先前目标、原生导航继续，不重采样/部分执行/自动等解锁重试。这是建议协议，尚未实现或冻结。
+
+不能直接以出队子集调用现env.step：它要求当前全飞机批次，非法动作是异常，而延迟子集与拒绝应是正常事件；补伪“保持动作”会污染decision/acceptance计数。未来应分开请求生成与交付尝试，changed_instructions只计真正目标变化。FIFO逐机生成序交付，随机delay会有队首阻塞，同步多到期逐条重校验；latest-overwrite须进一步指定在收到新请求还是在生成新请求时丢旧。后者在delay>5s可能一直取消在途请求，不能隐去。Ramstedt原文§5按收到信息的生成时间辨新旧，不包含本项目分量锁拒绝规则：[原文](https://arxiv.org/html/2010.02966v3#S5)。
+
+零delay应走原即时路径、保持观测/mask/排序采样/API/物理/终止顺序，不增加.25s或5s等待。验收需输入、请求、accepted目标、逐步物理、终止和科学摘要；额外观测调用也可能改变clipping计数。延迟RNG独立，不消耗策略sampling generator。冻结策略仍接收原7/10及真实执行器状态mask，在途意图不冒充accepted；这明确只延迟动作输出、不新增状态/锁反馈延迟。
+
+未来memory/显式历史/预测比较应统一自己的请求/时间戳、接收拒绝ack是否可见及何时可见、delay是否事前已知；不能把模拟器未来随机到达时刻只给某方法。历史增强不保证消除所有部分可观测性。[Ramstedt§2.1](https://arxiv.org/html/2010.02966v3#S2.SS1)。未来延迟PPO仍记录生成请求及其原mask下logprob，不用后来执行/保持动作替代轨迹标签；当前下一冻结评价没有PPO更新。[Molnar定理3–4](https://tamasmolnar.com/publication/2023_Molnar-et-al_safety%20with%20input%20delay%20in%20dynamic%20environment_TCST.pdf)依赖输入历史/模型/初始等待段安全，不能给当前离散拒绝和BlueSky直接提供保证。
+
+最小候选验收：有效名义模型冻结后，一个已有case配对0s/固定6s、逐机FIFO、到期整联合校验拒绝。6s只用于超过5s周期且非整数周期的机制测试，不是实测网络分布。建议事件序为前一步update/终止完→决策边界照常生成入队→下一物理步前交付到期；出生原名义初始化，终止清除该机队列，reset清空。检查24物理步延迟、未交付目标保持、拒绝与终止清理、零delay精确。固定等delay无乱序，不能判FIFO/覆盖优劣或形成退化曲线。delay分布/相关性/乱序/丢包/容量/覆盖时机/ack/边界顺序仍需明确；本10h不提前进入该实验阶段。
+
+12:39 refresh375全12评价103.766778s：237/360、53超时70耗尽、344width/48392s、NMAC83.923429/LoWC425.328793每flight-hour、return−2738.278595，0height，出现回升，不据早期点外推改善。12:39训练已382，850目标继续。
+
+12:42 shared_ppo交付lane_completion_probe/config/4fixture，仅AST/JSON/空白静态检查，无执行；交route_trace只读独立review，<=20min，范围新3文件和必要helper，核对实际判据、被动身份、生命周期/代次/类别与限额，不改核心。root读取集成接口，提示tail当前由capture计数增加（解锁）定义，须与CAP→普通航点的锁内跟踪阶段分开；完整CSV仍保留事件，不按术语推因果。
+
+12:44 refresh400全12评价103.902165s：249/360、53超时58耗尽、338width/50640.5s、NMAC87.854245/LoWC432.393305每flight-hour、return−2557.674974，0height。新谱系400不是旧cached400，不混表或合并训练；当前已402，继续850目标。
+
+12:48 laneprobe摘要窄修正完成，独立route_trace后续只读复核通过：保留release-tail并显式tail_start_event=lane_lock_release；新增每代lane_active且nominalmapping的实际tick/秒/越界/category/predicate汇总，不要求此前观察CAP，不由首末时间推连续。第五fixture覆盖该区别。两Python AST/JSON静态通过，无测试/模型/负载；待主线程850结束后执行5fixture+单case。无其它静态阻断，原sideflag仅along/track通过的限制保留。
+
+12:50 refresh425全12评价103.807239s：248/360、53超时59耗尽、333width/42966.25s、NMAC71.844492/LoWC402.707686每flight-hour、return−2315.209318，0height。当前较低暴露点不等于稳定改善；已429继续850。
+
+12:55 refresh450全12评价103.870827s：241/360、53超时66耗尽、338width/48772.5s、NMAC78.870587/LoWC435.674586每flight-hour、return−2614.469758，0height。与0相近，best仍200，当前继续850。
+
+13:00仅读指定3个研究线程自身turn_context模型字段：shared_ppo第16turn、route_trace第18turn、observation_reward_spec第13turn实际均gpt-6-astra/xhigh。未复制认证配置。当前475评价中，唯一850job持续。
+
+13:01 refresh475全12评价103.748723s：238/360、53超时69耗尽、336width/45102.5s、NMAC78.049901/LoWC433.527550每flight-hour、return−2562.454145，0height。当前已484，继续850。
+
+13:06 refresh500全12评价103.266523s：244/360、53超时63耗尽、339width/41466s、NMAC75.037531/LoWC419.568960每flight-hour、return−2551.603753，0height。越界秒数下降但架次仍339，未有效；已505继续850。
+
+13:11 refresh525全12评价104.633205s：249/360、53超时58耗尽、332width/42327.75s、NMAC74.767197/LoWC395.523218每flight-hour、return−2364.008343，0height。安全暴露变化仍不能弥补完成/containment，不冻结；850继续。
+
+13:17 refresh550全12评价103.433280s：251/360、53超时56耗尽、334width/44643.75s、NMAC72.092093/LoWC409.751034每flight-hour、return−2353.937419，0height。仍无有效baseline，继续850；当前10h已8h、硬截止和收尾预留不变。
+
+13:22 refresh575全12评价103.408472s：234/360、53超时73耗尽、341width/43378.75s、NMAC75.384188/LoWC390.486495每flight-hour、return−2195.317440，0height。LoWC较低而完成数回落，不能单项晋升，继续850。
+
+13:28 refresh600全12评价103.436640s：243/360、53超时64耗尽、335width/45695s、NMAC74.344265/LoWC406.614333每flight-hour、return−2336.230563，0height。实际已601，继续850；仍无可信有效baseline。
+
+13:29:58获准只读资源审计：原PID3059945/3062529仍9893/9771MiB，4090 used20618/free3430MiB、99%；未提交GPU或信号/调整其他进程。load3.329/3.521/3.431，MemAvailable60.652GiB、磁盘free143.250GiB。快照不证明外部吞吐绝对无变化；当前CPU14单线程nice15/idleIO唯一850job继续。
+
+13:33 refresh625全12评价103.289707s：241/360、53超时66耗尽、339width/41323.5s、NMAC72.686927/LoWC395.637948每flight-hour、return−2320.639810，0height。当前已628，继续850；低outside秒数不等于低outside架次或完成改善。
+
+13:39 refresh650全12评价102.895889s：245/360、53超时62耗尽、340width/42007s、NMAC71.377091/LoWC373.264432每flight-hour、return−2155.189827，0height。冲突暴露较低点仍无可靠完成/containment，已653继续850。
+
+13:44 refresh675全12评价102.358593s：245/360、53超时62耗尽、334width/46993.25s、NMAC76.654116/LoWC393.731129每flight-hour、return−2407.864919，0height。持续波动，未达到冻结条件；850继续。
+
+13:50 refresh700全12评价102.654906s：241/360、53超时66耗尽、336width/46038s、NMAC78.157014/LoWC405.494940每flight-hour、return−2623.194678，0height。仍近初始风险且任务失败，未有效；当前已703继续850。
+
+13:55 refresh725全12评价102.995811s：247/360、53超时60耗尽、335width/45650.75s、NMAC68.553083/LoWC385.516615每flight-hour、return−2238.895624，0height。NMAC较低仍未达到任务/containment要求，继续850。
+
+14:01 refresh750全12评价102.421270s：252/360、53超时55耗尽、336width/43197.5s、NMAC81.638022/LoWC395.775343每flight-hour、return−2453.180668，0height。NMAC回升，未有效；已751进入最后100目标轮。
+
+14:07 refresh775全12评价101.932546s：260/360、53超时47耗尽、336width/43305.25s、NMAC72.489263/LoWC371.703895每flight-hour、return−2136.494436，0height。当前新谱系最高完成数，比200多1架，但仍未满足有效baseline或containment；最终best文件轮次待结束结果核对。已779继续850。
+
+14:12 refresh800全12评价102.316941s：245/360、53超时62耗尽、336width/44538.5s、NMAC65.559434/LoWC353.234667每flight-hour、return−1980.971038，0height。新的较低风险点仍未同步达到任务/containment要求，不冻结或推显著性；已806，最后50目标轮继续。
+
+14:17 refresh825全12评价102.752525s：255/360、53超时52耗尽、334width/42852.75s、NMAC73.710630/LoWC389.965168每flight-hour、return−2275.121892，0height。已827继续最后25目标轮，最终850及best文件尚待完成核对。
+
+
+### 14:22–14:43 UTC：850完成、最终重放与锁条件诊断
+
+[20260905T121815Z-refresh-ppo-850-5786ced9](../runs/20260905T121815Z-refresh-ppo-850-5786ced9/status.json)14:22:44.977正常完成300→850的550新增轮及最终全12评价，CLI7467.619323s/job7469.470164s、best775。最终850sample233/360、53timeout74route-exhaust、340width/47582.5aircraft-s、0height；FH64.25805556，LoWC23174/NMAC4144.25无向pair-s，360.6396085/64.4938594每flight-hour，return−2059.1171031，max偏离665.487062m。46284决策、54238changed、3463828.088m路径。best775为260/360、336width，仍非有效baseline；不冻结或开始延迟实验。
+
+[850恢复点](../checkpoints/refresh-850-20260905/README.md)latest.pt/best.pt/result.json/development.jsonl/training.jsonl共3870813B，逐字节复制及manifest核对。最新模型/Adam/RNG/embeddedbest775完整，下一seed610850；旧400另系不迁移。新训练预算3日志1–850连续精确，3460683转移/样本访问、54484Adam步、279848全局决策、25500计划架次、4804.916250训练FH，收集更新日志7770.229432s（不含开发/setup/备份）。850仅原250k的0.34%；没有论文规模失败结论。
+
+lane probe先前5fixture在[20260905T142256Z-lane-completion-tests-d45afac7](../runs/20260905T142256Z-lane-completion-tests-d45afac7/log.txt)通过，测试0.007s/job1.430226s。随后[20260905T142340Z-lane-completion-f020-a4377b08](../runs/20260905T142340Z-lane-completion-f020-a4377b08/status.json)18.836452s内部/20.509682s监督正常：完整原100sample/seed53004的30traffic，314forward/4067policyrows、F0203188行/1488768CSV字节；17检查全通过，原case科学摘要/actionhist、逐机终态/原审计样本与暴露精确，模型/输入不变0grad/updates/checkpoint写入/hooks恢复。全局RNG只读核对不单独证明私有generator，严格原sample参考重放提供进一步证据。
+
+14:26交observation_reward_spec只读实际3188CSV/result/必要源码，<=15min：输出实测阶段/误差、机制解释与未定项及下一单一对照；禁止修改/实验/模型/GPU/信号/通知/嵌套。14:28交shared_ppo独占新lane_completion_plot.py，<=10min静态：完整样本四面板SVG/300dpiPNG/PDF/metadata、容差与采样边界明确；不执行render/tests，不改核心或他人文件。14:40原builder返回仅AST/空白检查通过；controller以唯一lab运行[20260905T144023Z-lane-completion-figure-3dc28cdd](../runs/20260905T144023Z-lane-completion-figure-3dc28cdd/status.json)，45s/32MiB/2048MiB、显式CSV/result输入，3.241902s正常。4artifact逐字节核对，PNG目视通过；PDF本地，CAP状态在CSV/阶段表、图中标代次与锁释放而非CAP事件。
+
+独立解释实际只读重算确认F020第三代641.25s锁内，其中630.5s普通航点、628.25s仅侧误差失败（2513点全部越界），全部判据通过仍锁定0点；t1361.50侧误差−1.995739m时当步释放。第三代误差曾由−5.779288增至−5.995923m，再缓慢减小，实际航迹接近远端球面方位（重算最大差0.000033624度），支持远端归航残差慢收敛解释，未干预分离CAP/变速/几何因素。第四代60.25s侧误差失败但不越界；释放后总39.5s越界与2m容差并存，非永久锁或规则bug。详细实测数、证据和一个预声明500m引导航点配对建议在[F020报告](../reports/lane-completion-f020-20260905/README.md)，留给下一授权块，不本轮修改核心。
+
+[最终四模式](../reports/policy-modes-refresh-850-20260905/README.md)run `20260905T142440Z-refresh-policy-modes-850-d139c180`14:31:27.894正常，CLI405.327780s/job407.029534s：0/850 × sample/argmax共48真实native例全通过，两sample逐case摘要/hist及aggregate精确；NR明确复用相同参考、0新增NR。850argmax295/360、0timeout65exhaust、321width，NMAC154.816/LoWC599.450每FH；initial0argmax240/360、30timeout90exhaust342width、175.887/765.717。无更新/模型选择/输入修改。sample为主，不能据argmax替作者声明部署方式。5数据副本/manifest及README保存。controller一处事后只读打印将modes列表误作字典报AttributeError，复制已完成；随后正确读取并写README，无实验失败或重跑。
+
+[新曲线](../reports/refresh-learning-20260905/README.md)已扩展35实际0–850点，重复100/300的完整aggregate及全部NR精确一致，保留每行源SHA。render `20260905T143227Z-refresh-learning-figure-850-24c2df91`监督3.350697s，4artifact复制核对并目视通过，无新增科学实验；README更新最终850/best775/渲染来源。
+
+14:41只读GPU快照原PID3059945/3062529仍9893/9771MiB，RTX4090 used20618/free3430MiB/99%；全块未提交GPU或信号/调整其进程，不能由快照宣称外部吞吐绝对零变化。当前无lab负载。14:40交route_trace最终只读review，<=12min/14:55前，明确850模型/四模式/曲线/F020/预算报告与源manifest，root同步文档；检查证据和解释、禁止实验/编辑/模型加载/信号/GPU/通知/嵌套，待返回。14:43已更新NOW为实际850终态，当前进入14:45收尾窗口，最终push与截止通知尚待实际完成。
+
+14:46–14:48收尾只读检查：lab doctor入口/链接issues与local_missing均为空（系统Python3.10.12仅用于监督检查，不冒充项目3.11运行验证）；新probe/plot/test AST及两配置JSON通过。850恢复点/四模式/F020三manifest共12数据文件hash/字节数一致，两图全部6个输出hash/大小一致。事后通用绘图校验脚本首次假定outputs为字典，但learning元数据实际为列表，报AttributeError；按各自保存schema读取后全部通过，未修改元数据或重新渲染。37个明确科研文件暂存，两个明确小.pt强制加入，原始runs/PDF/私人目录未加入。staged diff检查通过，生成SVG原样保留尾空白。最终独立review及提交尚待。
+
+14:49 route_trace最终只读review返回无阻断：两sample全12case/aggregate精确、NR相等、四模式数字、35点37源行、850轮预算、12清单数据及图hash均独立核对，F020逐代CSV统计和端点球面方位最大差0.000033623346度复算；两PNG目视。唯一CAP图文差异已修正，无模型反序列化/实验/编辑。controller已有doctor/manifest/staging检查通过，准备私有commit/push。另交observation_reward_spec只读将下一500m配对建议细化为实际航点映射/前缀重放/时间边界方案，<=10min且15:00前返回；明确只读必要source与保存CSV，不实现或增加本轮负载，不改容差/名义进度，不扩展诊断菜单。

@@ -1,0 +1,31 @@
+{
+  "source_run": "runs/20260905T142340Z-lane-completion-f020-a4377b08",
+  "inputs": {
+    "checkpoint": {
+      "path": "checkpoints/refresh-100-20260905/latest.pt",
+      "sha256": "e6e0a1f6dff84d989f98b08e19da5c2fc08f21ddce62d8057942fccecc070016"
+    },
+    "reference": {
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211"
+    },
+    "prior_audit": {
+      "path": "reports/lateral-exposure-refresh-100-20260905/result.json",
+      "sha256": "f803fe1901d3ec2cb0b4901787080b873ca354c5f6dc8241aa98cf071e67a38c"
+    },
+    "config": {
+      "path": "configs/lane_completion_probe_refresh_100.json",
+      "sha256": "fcf88d56cb07c6c7f9c69ac639de74628e2299ff3fc6c1c151f33aff155199ed"
+    }
+  },
+  "files": {
+    "result.json": {
+      "bytes": 120081,
+      "sha256": "3ecfe81228ae1beeb6d534fcc4560006dcf5fe07646d6173164f2f3dbbbcbf2a"
+    },
+    "F020-physics.csv": {
+      "bytes": 1488768,
+      "sha256": "11eb55895f2da85fed0bda99afbd8ed92a8105d71b6972cbb9f36f14a8b19e18"
+    }
+  }
+}

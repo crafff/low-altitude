@@ -1,0 +1,38 @@
+{
+  "schema": "bluesky.lane-completion-probe.v1",
+  "scope": "Passive lane-completion predicate diagnostic; one selected flight in full traffic; no causal claim",
+  "training_config": "configs/paper_train_execution_refresh.json",
+  "completed_episodes": 100,
+  "scenario_seed": 53004,
+  "aircraft": "F020",
+  "aircraft_type": "M600",
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "wall_seconds": 60,
+  "maximum_target_rows": 6000,
+  "maximum_csv_bytes": 16777216,
+  "development_cases": [
+    {"seed": 53001, "corridor_count": 3},
+    {"seed": 53002, "corridor_count": 4},
+    {"seed": 53003, "corridor_count": 5},
+    {"seed": 53004, "corridor_count": 3},
+    {"seed": 53005, "corridor_count": 4},
+    {"seed": 53006, "corridor_count": 5},
+    {"seed": 53007, "corridor_count": 3},
+    {"seed": 53008, "corridor_count": 4},
+    {"seed": 53009, "corridor_count": 5},
+    {"seed": 53010, "corridor_count": 3},
+    {"seed": 53011, "corridor_count": 4},
+    {"seed": 53012, "corridor_count": 5}
+  ],
+  "reconstruction_choices": [
+    "Require the original fresh-refresh100 checkpoint, its embedded same-round full12 development reference, and the previously validated full12 lateral audit as explicit read-only lab inputs. Preserve strict source/config/software identities and original sampling seeds. Select only case53004 for this diagnostic; retain its entire original30-aircraft population, with no extra policy inference or RNG draw.",
+    "Record only M600/F020 after ActionController.update and before terminal accounting/deletion. Derive the exact row count from its retained terminal flight_seconds divided by unchanged physics dt. Keep every entry-to-terminal interval, including the whole raw terminal interval; no fabricated entry row or exposure subtraction.",
+    "Call the existing pure ActionController._geometry_state. Record its lane error, track error and on_parallel result. Reconstruct along/length with the identical RouteGeometry.to_xy/offset/dot formula and assert agreement with the original finite-segment/nominal-mapping predicate. Read the original2m and5degree tolerances from the strict action configuration.",
+    "Keep each inclusive completion predicate, native nominal versus CAP mapping, LNAV, actual/accepted speeds, accepted lane, post-update lock, generation and cumulative command/capture counters. A post-update all-true-and-locked sample is an explicit contradiction flag, not silently removed.",
+    "Report exclusive observational categories plus overlapping flags for side-error failure with along/track passing, along failure, locked/all-true, unlocked outside lane tolerance, and unlocked outside corridor. Generation tail_start_event is lane_lock_release: its first observed lane-capture-counter increase, including that whole tick, not CAP-to-nominal passage. Separately sum per-generation samples, seconds, outside seconds and category/predicate counts for every post-update tick with lane_active and active_mapping_is_nominal both true. This requires no previously sampled CAP waypoint. Durations sum actual sampled intervals and never infer a continuous lock or a CAP transition from first/last timestamp gaps.",
+    "Require exact case science/action histogram, full F020 terminal record and prior-audit fields in its exposure/first/peak/last samples. Additional predicate fields remain in output and are excluded only from the explicit prior-field projection. This is one deliberately selected development flight, not a causal experiment or representative population estimate.",
+    "Restore the previous physics callback and passive forward-count hook even on error. Check consumed physical/control fields and global Python/NumPy/torch RNG before/after target callbacks; the original helper retains its private sampling generator. No optimizer, model promotion, checkpoint write, observation/reward modification or training edit.",
+    "Bound the inner replay to60s and CSV to16MiB, with a4MiB result, under oneCPU/90s/32MiB/4096MiB outer launcher. Preserve explicit errors and partial artifacts on any limit; do not substitute a shorter case or truncate scientific rows silently."
+  ]
+}

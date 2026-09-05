@@ -1,0 +1,206 @@
+{
+  "schema": "lane-completion-plot.v1",
+  "scope": "Passive lane-completion predicate diagnostic; one selected flight in full traffic; no causal claim",
+  "source_files": {
+    "csv": {
+      "path": "reports/lane-completion-f020-20260905/F020-physics.csv",
+      "sha256": "11eb55895f2da85fed0bda99afbd8ed92a8105d71b6972cbb9f36f14a8b19e18",
+      "bytes": 1488768
+    },
+    "result": {
+      "path": "reports/lane-completion-f020-20260905/result.json",
+      "sha256": "3ecfe81228ae1beeb6d534fcc4560006dcf5fe07646d6173164f2f3dbbbcbf2a",
+      "bytes": 120081
+    }
+  },
+  "renderer_sha256": "0334f9ea20d6dc633bad26136b5783e94e32107ca16c34101010216b12c5a585",
+  "rows": 3188,
+  "all_source_rows_retained": true,
+  "source_result_all_checks_passed": true,
+  "source_model_sha256": "07c4047a902747d5d68fa5a8e8723317d513bce6e859953d234e18389da40ba2",
+  "terminal_status": "route_exhausted_without_arrival",
+  "facts": {
+    "dt_seconds": 0.25,
+    "entry_sim_time_s": 687.0,
+    "duration_s": 797.0,
+    "half_width_m": 76.2,
+    "lane_tolerance_m": 2.0,
+    "track_tolerance_deg": 5.0,
+    "generations": [
+      {
+        "generation": 0,
+        "samples": 32,
+        "first_elapsed_s": 0.25,
+        "last_elapsed_s": 8.0
+      },
+      {
+        "generation": 1,
+        "samples": 60,
+        "first_elapsed_s": 8.25,
+        "last_elapsed_s": 23.0
+      },
+      {
+        "generation": 2,
+        "samples": 40,
+        "first_elapsed_s": 23.25,
+        "last_elapsed_s": 33.0
+      },
+      {
+        "generation": 3,
+        "samples": 2580,
+        "first_elapsed_s": 33.25,
+        "last_elapsed_s": 678.0
+      },
+      {
+        "generation": 4,
+        "samples": 300,
+        "first_elapsed_s": 678.25,
+        "last_elapsed_s": 753.0
+      },
+      {
+        "generation": 5,
+        "samples": 176,
+        "first_elapsed_s": 753.25,
+        "last_elapsed_s": 797.0
+      }
+    ],
+    "generation_boundaries": [
+      {
+        "generation": 1,
+        "elapsed_s": 8.25,
+        "sim_time_s": 695.25
+      },
+      {
+        "generation": 2,
+        "elapsed_s": 23.25,
+        "sim_time_s": 710.25
+      },
+      {
+        "generation": 3,
+        "elapsed_s": 33.25,
+        "sim_time_s": 720.25
+      },
+      {
+        "generation": 4,
+        "elapsed_s": 678.25,
+        "sim_time_s": 1365.25
+      },
+      {
+        "generation": 5,
+        "elapsed_s": 753.25,
+        "sim_time_s": 1440.25
+      }
+    ],
+    "lane_lock_releases": [
+      {
+        "generation": 1,
+        "elapsed_s": 19.75,
+        "sim_time_s": 706.75
+      },
+      {
+        "generation": 2,
+        "elapsed_s": 33.0,
+        "sim_time_s": 720.0
+      },
+      {
+        "generation": 3,
+        "elapsed_s": 674.5,
+        "sim_time_s": 1361.5
+      },
+      {
+        "generation": 4,
+        "elapsed_s": 751.5,
+        "sim_time_s": 1438.5
+      },
+      {
+        "generation": 5,
+        "elapsed_s": 762.75,
+        "sim_time_s": 1449.75
+      }
+    ]
+  },
+  "plotted_columns": [
+    "age_s",
+    "lane_error_m",
+    "track_error_deg",
+    "centerline_distance_m",
+    "post_update_category"
+  ],
+  "raw_column_ranges": {
+    "lane_error_m": {
+      "minimum": -77.83513328274935,
+      "maximum": 77.81251368059979
+    },
+    "track_error_deg": {
+      "minimum": -53.872453157619304,
+      "maximum": 50.95186959576475
+    },
+    "centerline_distance_m": {
+      "minimum": 0.0036322681276475194,
+      "maximum": 82.18760443964294
+    }
+  },
+  "parameters": {
+    "figure_size_inches": [
+      12.0,
+      10.0
+    ],
+    "png_dpi": 300,
+    "x_axis": "elapsed time from actual entry",
+    "x_axis_limits_s": [
+      0.0,
+      797.0
+    ],
+    "panel_y_limits": {
+      "1": [
+        -91.84342150945078,
+        91.82080190730122
+      ],
+      "2": [
+        -8.0,
+        8.0
+      ],
+      "3": [
+        -63.30664220542387,
+        60.386058643569314
+      ],
+      "4": [
+        0.0,
+        89.5844888392108
+      ]
+    },
+    "detail_window_m": [
+      -8.0,
+      8.0
+    ],
+    "detail_window_clipped_samples": 186,
+    "clipped_values_modified": false,
+    "smoothing": false,
+    "fitting": false,
+    "downsampling": false,
+    "matplotlib_path_simplification": false,
+    "error_bars": false,
+    "event_definition": "Markers use the first post-update sample with increased generation or lane_capture_count. Release is not CAP passage.",
+    "highlight_definition": "Detail overlay uses original locked_side_error_only rows. Generation3 shading covers its first-to-last recorded sample, not a claim of continuous lock.",
+    "interpretation": "One selected development trace. Connecting sampled points establishes neither continuous-time safety nor a causal mechanism."
+  },
+  "software": {
+    "python": "3.11.13",
+    "matplotlib": "3.11.1"
+  },
+  "wall_seconds": 3.095547766890377,
+  "outputs": {
+    "lane_completion.svg": {
+      "sha256": "6d12f44355535f1de59195814b7fd4f00e20585019df7808ccf0969a4f935a83",
+      "bytes": 424980
+    },
+    "lane_completion.png": {
+      "sha256": "b2cc7facb779a251ad44a01d722412dcb2bbdf489a85ffb73c2917c5091e8e47",
+      "bytes": 506948
+    },
+    "lane_completion.pdf": {
+      "sha256": "7eb717fc3a64b94e8f420394fb391cbd52e1780ba014a3df40284e5ff7beba10",
+      "bytes": 177037
+    }
+  }
+}

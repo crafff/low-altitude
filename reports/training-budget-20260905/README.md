@@ -19,6 +19,11 @@ The paper's 120-second real-time collection safeguard (p.7) and per-aircraft 120
 
 No explicit nominal-baseline warmup, imitation initialization, difficulty curriculum, learning-rate schedule or critic-only pretraining was found in the checked sections. Advantage normalization, return scaling, batch shuffle/tail treatment and gradient clipping are not sufficiently specified. Current whole-episode advantage normalization, unscaled returns, global gradient clipping at 0.5 and fixed learning rate remain labeled reconstruction choices. The paper's approximate 20k/80% learning-curve observation is not a warmup instruction.
 
-Old cached-guidance 400 episodes are 0.16% of the paper's 250k outer-loop count and 2% of its 20k early-learning point. A fresh refresh model reaching 100 would be 0.04% and 0.5%, respectively; the lineages cannot be added together. The defensible conclusion is that the completed small-budget reconstruction has not yet produced an effective baseline. No hyperparameters were changed from this source audit.
+Old cached-guidance 400 episodes are 0.16% of the paper's 250k outer-loop count and 2% of its 20k early-learning point. The separate fresh refresh model actually completed 850 episodes, 0.34% of 250k and 4.25% of 20k; the lineages cannot be added together. The defensible conclusion is that the completed small-budget reconstruction has not yet produced an effective baseline. No hyperparameters were changed from this source audit.
 
 Sources: [original PDF](../../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf), especially pp.6–7, 13, 17–18; [current reproduction table](../../paper/REPRODUCTION.md); exact saved log sources indexed in `result.json`.
+
+
+## 新refresh850谱系的独立预算
+
+[refresh-850.json](refresh-850.json)只读聚合三份已保存日志，逐项验证1–850完整且不重复、训练seed连续、每轮30计划架次、K1/样本访问/ceil(batch64)一致；源SHA保留。共25500计划架次、3460683转移与访问、54484Adam步、279848全局决策，训练flight-hours 4804.916250。收集/更新日志墙钟7770.229s，排除开发评价/初始化/备份/监督。850轮是原文250k外层预算的0.34%，不是完成深度规模复现；不与旧400相加，仍仅单训练轨迹和开发诊断。

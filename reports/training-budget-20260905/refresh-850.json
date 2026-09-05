@@ -1,0 +1,56 @@
+{
+  "schema": "training-log-budget-audit.v1",
+  "lineage": "current_state_refresh; fresh initialization61001",
+  "completed_episodes": 850,
+  "source_records": [
+    {
+      "path": "checkpoints/refresh-100-20260905/training.jsonl",
+      "sha256": "d8cc205e51a3e03ee1e5c1922ac3fca17fdd2d3e80e20c691de85d82f2f54819",
+      "first_episode": 1,
+      "last_episode": 100,
+      "rows": 100
+    },
+    {
+      "path": "checkpoints/refresh-300-20260905/training.jsonl",
+      "sha256": "adb5353489e31622140ffb8abc5f5a4e43f4f73fd46b8bf76ae58528bbfe9487",
+      "first_episode": 101,
+      "last_episode": 300,
+      "rows": 200
+    },
+    {
+      "path": "checkpoints/refresh-850-20260905/training.jsonl",
+      "sha256": "d210eeb45171e671ea392e52e5b73611f0acd625fe6ff9ef767f5a7138fee1b4",
+      "first_episode": 301,
+      "last_episode": 850,
+      "rows": 550
+    }
+  ],
+  "checks": {
+    "complete_episode_range_1_to_850": true,
+    "exact_scenario_seed_stream": true,
+    "thirty_planned_flights_each": true,
+    "one_visit_per_sample_and_ceil_batch64_each": true
+  },
+  "totals": {
+    "planned_aircraft": 25500,
+    "transitions": 3460683,
+    "sample_visits": 3460683,
+    "adam_steps": 54484,
+    "global_decisions": 279848,
+    "training_flight_hours": 4804.916250000004,
+    "collection_and_update_wall_seconds": 7770.229432091117
+  },
+  "transitions_per_episode": {
+    "min": 2955,
+    "max": 5221,
+    "mean": 4071.3917647058825
+  },
+  "paper_outer_episode_budget": 250000,
+  "fraction_of_paper_episode_count": 0.0034,
+  "limits": [
+    "Read-only aggregation of saved logs, not new rollout or model load.",
+    "Logged wall excludes development, setup, backup and supervision.",
+    "Single training trajectory and development diagnosis only.",
+    "Old native_cached400 is separate and never added to this model budget."
+  ]
+}
