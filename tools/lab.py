@@ -223,7 +223,32 @@ def inherited_cap(requested, hard_limit):
     return requested if hard_limit == resource.RLIM_INFINITY else min(requested, hard_limit)
 
 
+class _SupervisorSignal(Exception):
+    """Raised only at a safe boundary, never by the asynchronous handler."""
+
+
+def _check_supervisor_signal(received_signal):
+    if received_signal() is not None:
+        raise _SupervisorSignal
+
+
 def run(args, project):
+    received_signal = None
+
+    def remember_signal(number, _frame):
+        nonlocal received_signal
+        # Repeated TERM must not interrupt Popen assignment or owned cleanup.
+        if received_signal is None:
+            received_signal = number
+
+    previous_handler = signal.signal(signal.SIGTERM, remember_signal)
+    try:
+        return _run(args, project, lambda: received_signal)
+    finally:
+        signal.signal(signal.SIGTERM, previous_handler)
+
+
+def _run(args, project, received_signal):
     command = args.command[1:] if args.command[:1] == ["--"] else args.command
     if not command or not command[0].strip():
         raise ValueError("provide a command after --")
@@ -268,9 +293,12 @@ def run(args, project):
         file_cap = inherited_cap(budget, resource.getrlimit(resource.RLIMIT_FSIZE)[1])
         memory_cap = inherited_cap(args.memory_mib * 1024**2, resource.getrlimit(resource.RLIMIT_AS)[1])
         try:
+            _check_supervisor_signal(received_signal)
             assets = snapshot(project, directory / "source", extras)
+            _check_supervisor_signal(received_signal)
             launch = sandbox_command(bwrap, directory / "source", directory / "artifacts", directory / "scratch", command, runtimes, args.gpu)
             head = subprocess.run(["git", "-c", "gc.auto=0", "rev-parse", "HEAD"], cwd=project, capture_output=True, text=True).stdout.strip() or None
+            _check_supervisor_signal(received_signal)
             put_json(directory / "manifest.json", {
                 "schema": "lab.run.v3", "id": identifier, "stage": args.stage,
                 "created_at": stamp(), "command": command, "sandbox_command": launch,
@@ -287,12 +315,15 @@ def run(args, project):
                 resource.setrlimit(resource.RLIMIT_FSIZE, (file_cap, file_cap))
                 resource.setrlimit(resource.RLIMIT_AS, (memory_cap, memory_cap))
             with (directory / "log.txt").open("xb") as log:
+                _check_supervisor_signal(received_signal)
                 process = subprocess.Popen(launch, cwd=directory, env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"}, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, start_new_session=True, close_fds=True, preexec_fn=limits)
                 status["pid"] = process.pid
+                _check_supervisor_signal(received_signal)
                 put_json(directory / "status.json", status, update=True)
                 deadline = time.monotonic() + args.seconds
                 reason = "completed"
                 while process.poll() is None:
+                    _check_supervisor_signal(received_signal)
                     if time.monotonic() >= deadline:
                         reason = "timeout"
                         break
@@ -300,6 +331,7 @@ def run(args, project):
                         reason = "output_limit"
                         break
                     time.sleep(0.05)
+                _check_supervisor_signal(received_signal)
                 if reason != "completed":
                     stop(process)
                 code = process.wait()
@@ -308,6 +340,8 @@ def run(args, project):
             output_bytes = sum(tree_size(directory / part) for part in ("artifacts", "scratch")) + (directory / "log.txt").stat().st_size
             if output_bytes > budget:
                 reason = "output_limit"
+        except _SupervisorSignal:
+            reason, code = "supervisor_signal", 128 + received_signal()
         except KeyboardInterrupt:
             reason, code = "interrupted", 130
         except Exception as exc:
@@ -316,10 +350,15 @@ def run(args, project):
         finally:
             if process is not None:
                 stop(process)
+            if received_signal() is not None:
+                reason, code = "supervisor_signal", 128 + received_signal()
+                status["received_signal"] = received_signal()
             success = reason == "completed" and code == 0 and error is None
             status.update(state="succeeded" if success else "failed", finished_at=stamp(), reason=reason, exit_code=code, error=error)
             put_json(directory / "status.json", status, update=True)
         print(json.dumps({**status, "run_dir": str(directory)}, ensure_ascii=False))
+        if reason == "supervisor_signal":
+            return code
         return 0 if success else (code if 1 <= code <= 125 else 1)
 
 

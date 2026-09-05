@@ -360,3 +360,29 @@ route_fidelity追加15min只读特刊核验：读PLAN/SOURCES与出版社/客座
 [execution-ppo-25结果](../runs/20260905T070231Z-execution-ppo-25-834d0f28/artifacts/result.json)实际15轮，CLI394.76s/job396.60s；因保守的15s/episode初始估计、1.5安全因子及12-case末次评价预留，在轮间停止，非资源中断或25轮完成。末次开发94.45s，sample244/360（63导航耗尽、53超时）、342横向越界、最大618.641m、0高度越界，65.434167flight-hours；LoWC26029.25/NMAC4773.25无向pair-s，即397.793/72.947s per flight-hour。初始239/360、NMAC63.799/h；完成略升而冲突指标较初始恶化，不能判为有效改善。NR359/360、54.908333h、LoWC35604.75/NMAC8838.5无向pair-s（648.440/160.968每flight-hour）。best仍不达标。
 
 源/诊断图提交ea37154366ecc9bba058de35a1ae1e338b9e8380已push，git ls-remote同SHA；新恢复点checkpoints/execution-pilot-20260905保存15轮latest/best及完整小型开发/学习记录，约1.65MB，正在准备独立远端备份。随后计划沿同配置恢复到总100轮、内1800s/外1860s，CPU资源限制不变；实际8s左右/episode支持该有界扩大，25轮评价间隔保留。训练有效性与横向可行性仍分开，尚不开始延迟效果实验。
+
+### 07:12–07:49 UTC：恢复点、中断恢复与扰动接口
+
+15轮恢复点已随私有分支提交6c008e49282849b4791d09f5af3cf8a417989bd4并push，远端SHA核对一致。[100轮目标负载](../runs/20260905T071311Z-execution-ppo-100-620c1921/status.json)于07:13:11启动，实际最后完整训练65轮，最新日志07:26:06；外层session72625返回143，旧launcher状态遗留running且无result.json。**发送者和原因未知，不能据此宣称固定工具时限或100轮完成。** 主线程未发信号；随后确认launcher锁空闲，经获准主机只读精确项目进程审计无仍存负载，才开始新job。原始状态不修改，另存[controller_observation](../runs/20260905T071311Z-execution-ppo-100-620c1921/controller_observation.json)。
+
+该段初始15轮开发科学汇总与上段完全一致。25轮sample248/360（59导航耗尽、53超时），NMAC64.1499、LoWC407.4062无向pair-s/flight-hour；50轮234/360（73导航耗尽、53超时），NMAC66.2211、LoWC378.5755。最好选模25轮，仍未达95%完成门槛；65轮无开发评价。[65轮完整性](../runs/20260905T073653Z-checkpoint-65-integrity-ba7452f1/artifacts/result.json)实际沙箱weights-only读取通过：35325个参数全部有限、completed/next seed index均65、所有科学源码hash一致、内嵌best25。独立小副本见[恢复说明](../checkpoints/execution-recovery-65-20260905/README.md)，待本批push后再续65→100，保持科学源码ea37154兼容，内900/外960s且持续轮询。较短分段是预防措施，不是退出原因诊断。
+
+全开发NR唯一失败另以[seed53008定向重放](../runs/20260905T071053Z-development-nr-endpoint-68b4ebc4/artifacts/result.json)确认：F029/Amzn无策略命令，age114.25s、t473s导航耗尽，终点距离94.016m、最大偏离599.314m、越界61s。这是当前路线执行问题，不能归因学习。
+
+**扰动实测。** [纯层15测试](../runs/20260905T073355Z-observation-perturbation-tests-8c19ee06/log.txt)通过，包含零RNG消耗、共享噪声/可见性、严格同刻缓存、重叠/到期、JSON恢复与无效输入原子性。[5例native诊断](../runs/20260905T073432Z-perturbation-native-probe-b8a3c19f/artifacts/result.json)9.84s通过：plain与zero的编码/掩码、动作、逐物理轨迹和科学汇总完全一致；100%通信中断时0次策略推理、46个逐机保持决策、226.5真实不可用aircraft-s，NR轨迹/终态/真值风险完全一致，LoWC39.75/NMAC12.25无向pair-s仍记录。plain/zero/position100%各52次推理、LoWC26.5/NMAC4.0；该未训练小模型在此例动作未变，不能称定位鲁棒性。模型只初始化一次，未训练、未加载checkpoint，不改变现有PPO或GAE语义。
+
+**新增交接与实际回执。** 各任务仍禁止嵌套委派；builder不执行负载/清理/通知且保留他人修改。07:48只读实际thread元数据：paper_features第7turn、route_trace第6、route_fidelity第8、observation_reward_spec第3、shared_ppo第5、learning_integration_review第5，最新均gpt-6-astra/xhigh，线程ID见前文。
+
+- shared_ppo：只写learning_curve_plot.py，读取开发JSON格式和报告约束，交付6面板未平滑静态曲线模块及严格输入核验，≤20min，已完成静态检查未渲染；随后仅写tools/lab.py、test_lab.py，问题为可捕获SIGTERM留下状态，交付flag handler、安全边界、只回收自有Popen组、恢复旧handler与3回归，≤20min。主线程[lab-sigterm-tests](../runs/20260905T074648Z-lab-sigterm-tests-befad413/log.txt)全部26项通过，10.74s，包括仅对随机临时fixture自己启动的supervisor发SIGTERM、子进程不再延迟写入和锁可重用。不处理SIGKILL或保证任意外部终止能清理。
+- learning_integration_review：只读上述两个launcher变更文件/差异与中断旁注，问题为自有清理、异步flag和恢复handler是否正确；≤10min，独立review已返回无阻断问题，未运行测试或发信号；真实fixture readiness只来自父payload，不单独证明SIGKILL升级分支，当前亦不作该断言。
+- paper_features：此前纯扰动层完成，当前仅写exposure_audit.py、对应配置/聚焦测试；问题为原文potential/LoWC/NMAC时长与小时分母；读取原PDF pp.11/17–18及15轮备份首行NR，输出原生6000ft潜在pair-s、完整/占用airspace-time、aircraft-time、真实构造/推理次数、12例及5走廊子集加权汇总，≤25min，controller执行。要求只旁路观测、不改物理/训练，风险与原参考精确核对。
+- route_trace：仅写perturbation_probe.py/配置，问题为零扰动原生不变和缺失ownship的明确保持目标；来源纯层规范/现env API，交付上述5case与真值不可用时长积分，≤25min，静态完成，controller已执行。
+- route_fidelity：只读原PDF图10/指标与保存NR JSON，≤15min，返回下列口径事实/歧义，不改文件、不实验。下一步是原生potential及双分母审计，不能直接校准到论文数值。
+
+**指标来源核验。** PDF p.17称累计各受控agent约1400 flight-hours，p.11按time×ownship×intruder累加；图10标注potential/LoWC/NMAC每小时NR为34257/11791.77/3193.22，训练为498/6.88/0.59。但印出的极限式没有明确累计aircraft-time除数，图轴与标注斜率不能唯一反解；没有原始曲线数据，不能猜一个修正系数。正文6000ft与Fig4的6080ft亦不一致，当前采用正文。34.42%/9.32%等是成对暴露比，不是独立相遇事件概率；多邻居pair-s/flight-hour可以大于3600。
+
+首行12例NR累计197670 aircraft-s、17265完整airspace-s，平均同时在场11.449。LoWC/NMAC有向71209.5/17677pair-s，除aircraft-hours为1296.880/321.937，除airspace-hours为14848.202/3685.908。现有4个5走廊case分别为951.031/229.710和11163.735/2696.469。后者靠近论文标注只构成待核验分母假说，不证明作者使用airspace-hours，不据此调场景或宣称复现吻合。后续所有比较保留原始分子、两类小时分母及完成/失败/越界。
+
+本10h仍进行中，截止15:15:13 UTC、14:45收尾不变；继续CPU14/单线程/nice15/idle IO，不向共享GPU提交任务，不干预其他人的进程。
+
+07:50 [首张学习曲线](../reports/execution-learning-20260905/README.md)已通过lab实际渲染（3.28s）并目视核对，保留0/15/25/50轮原始未平滑开发汇总；重复15轮aggregate精确一致后合并一次，没有伪造65轮评价。当前形态显示完成率/越界无稳定改善，低于NR的冲突暴露在第0轮就存在，不能当训练增益。

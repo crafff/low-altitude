@@ -92,6 +92,10 @@ Table4以events/flight-hour报告：专门定位扰动6.48、其他专门扰动2
 
 首个两轮pilot只使用预声明开发集前两例。native训练和反向更新实际完成，但初始/两轮后sample完成分别42/60、40/60，NR60/60；策略严重偏航，最大约75km。这是保留的执行/学习负结果，不能据较低风险率宣称改善；原文250k训练规模尚未尝试。准确来源与恢复路径见任务001最新记录。
 
+07:24–07:27主线程再次定向读取pp.7–8、11–13、16–18并渲染Fig10核对。p.17明确称未深入研究飞行包络，假定各机可在数秒内完成机动；这不能确定其bank/角速率实现，也不证明当前原生25°具有同样机动能力。原文250k轮中约20k轮达到其最终表现的80%，约220k轮训练NMAC约4s/episode；当前几十至数百轮是早期诊断，不能用未达收敛宣判论文方法失败。
+
+Fig10(b)图内NR标注potential encounters34257、LoWC11791.77、NMAC3193.22 per flight-hour，Fig10(d)训练后为498/6.88/.59；其p.11有ownship→intruder求和、时间步因子和flight-hour描述，尚缺足以无歧义还原原始累计量的代码。当前开发NR有向LoWC/NMAC约1296.880/321.937每累计飞机flight-hour，且开发混合3/4/5走廊、论文extensive evaluation固定5走廊；不以任意倍数校准或据绝对值宣布接近论文。原文潜在观察量及分母还需独立核对；保留我们的原始pair-s、飞机flight-hours和终止原因。
+
 ## 前序公开资料与导航实现差异（2026-09-05新增来源）
 
 2024 [ICRAT原文](../resources/literature/local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf) p.8参考文献27直接链接[作者数据仓库](https://github.com/RodolpheFmd/ICRAT2024/tree/26ed1a0d128944643017e7ba5e9511dfc273a9bd)。p.5明确高度和横向机动分别等待同类动作完成，支持当前分量锁解释；仍未给几何可行性mask、bank或航线出口算法。p.4及公开CSV明确两个FC层5120/7680、ReLU，仅是2024来源，不能认作2026已披露。2024正文3档高度/5走廊/150m宽，CSV却有5档高度/3走廊/750ft及7/8维ownship多版本，学习率也不同；保存的小配置及固定源SHA见[来源清单](../resources/literature/author-configs-icrat2024/manifest.json)，不以这些表静默覆盖2026规范。会议PPT18页的文本也未补充导航细节；只检查XML文字，未据未渲染图形做结论。

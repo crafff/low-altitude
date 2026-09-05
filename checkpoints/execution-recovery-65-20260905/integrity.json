@@ -1,0 +1,10 @@
+{
+  "completed_episodes": 65,
+  "next_seed_index": 65,
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "source_hashes_match": true,
+  "finite_model": true,
+  "model_parameters": 35325,
+  "best_completed_episodes": 25,
+  "evaluation_at_latest": false
+}

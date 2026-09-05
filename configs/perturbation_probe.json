@@ -1,0 +1,32 @@
+{
+  "schema": "bluesky.perturbation-probe.v1",
+  "scope": "Native perception integration diagnostic; no perturbation training or robustness-efficacy claim.",
+  "environment_config": "configs/paper_environment_execution.json",
+  "policy_config": "configs/paper_ppo.json",
+  "perturbation_config": "configs/paper_perturbations.json",
+  "bluesky_version": "1.1.1",
+  "scenario_seed": 920001,
+  "model_seed": 930001,
+  "sampling_seed": 940001,
+  "perturbation_seed": 950001,
+  "cases": [
+    {"id": "nr", "mode": "nr", "position_probability": 0.0, "communication_probability": 0.0},
+    {"id": "plain", "mode": "plain", "position_probability": 0.0, "communication_probability": 0.0},
+    {"id": "zero", "mode": "perception", "position_probability": 0.0, "communication_probability": 0.0},
+    {"id": "position", "mode": "perception", "position_probability": 1.0, "communication_probability": 0.0},
+    {"id": "communication", "mode": "perception", "position_probability": 0.0, "communication_probability": 1.0}
+  ],
+  "position_sigma_m": 9.63,
+  "reconstruction_choices": [
+    "Use the existing constructed_scenario('crossing','M100',seed): two2km crossing routes, both aircraft admitted at0. All five cases share exactly this geometry, initial population and execution environment.",
+    "Initialize one SharedActorCritic on CPU with torch.manual_seed930001, set eval and disable gradients. No checkpoint is loaded, optimizer constructed, update performed, or training collector called. Reset a separate CPU sampling generator to940001 for every case; perception uses its own seed950001.",
+    "Plain uses the original observations returned by PaperEnvironment. Perception cases use snapshot.encode(observation_config), attaching the currently visible aircraft's true action mask. Zero compares all normalized feature bytes, masks and encoding metadata against the original environment observation at every decision.",
+    "Perception snapshots occur at0,5,10,... until the native episode ends. Repeat the identical snapshot once to check cache reuse without additional events. Snapshot/encoding must preserve the full supplied truth values and native physical state, which are hashed before and after.",
+    "An unavailable ownship receives no policy inference and is absent from every neighbor input. Complete the active-ID action mapping for env.step with its last accepted action, preserving targets. Count these holds separately from actual policy inference; do not fabricate log-probabilities, values, PPO samples or missing-ownship training transitions.",
+    "Stream actual positions, TAS, ground speed, vertical speed, heading and track for all live aircraft at each0.25s callback before terminal deletion. The physical digest excludes availability metadata so true trajectories can be compared across perception modes.",
+    "Unavailable aircraft-seconds sum the intersection of each real native lifetime interval and the currently registered half-open blackout interval using availability_at and known until. Initial rows have zero duration. Independently reconcile totals with saved merged blackout intervals clipped by actual entry/terminal times.",
+    "Zero must match plain observation/mask bytes, sampled action stream, physical trajectory digest and the complete environment summary excluding only wall_seconds/process_peak_rss_mib. Communication100percent must use no policy inference, preserve nominal targets and match NR physical trajectories and truth-risk exposure; action/hold bookkeeping is intentionally reported separately.",
+    "Position100percent checks immutable truth, full visibility and complete population accounting. Its policy actions and resulting physical trajectory may change; no same-trajectory or improvement requirement is imposed.",
+    "This standalone inference/holding probe is not connected to PPO collection, missing-decision GAE, or the running training job. Invariant failures return nonzero while retaining results and diagnostic artifacts."
+  ]
+}

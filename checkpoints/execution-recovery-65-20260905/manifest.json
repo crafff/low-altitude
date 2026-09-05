@@ -1,0 +1,34 @@
+{
+  "source_run": "runs/20260905T071311Z-execution-ppo-100-620c1921",
+  "compatible_source_commit": "ea37154366ecc9bba058de35a1ae1e338b9e8380",
+  "scope": "Interrupted execution-semantics learning diagnostic; not a completed 100-episode run or effective baseline",
+  "files": {
+    "latest.pt": {
+      "bytes": 969289,
+      "sha256": "582dfa26f9ca63d3a3a222b28be1d3200fa74301fff37bce2bb7c45525ceb0a2"
+    },
+    "best.pt": {
+      "bytes": 506262,
+      "sha256": "cd851bd54ad00a0666ab1fa776ba7ec934e511b83f6a6eb37cb48cf223e193f5"
+    },
+    "training.jsonl": {
+      "bytes": 118995,
+      "sha256": "86b9b5df7ee113b73be569eb1d16386ec067a02b7122b375b97bc351dfeecbb5"
+    },
+    "development.jsonl": {
+      "bytes": 125898,
+      "sha256": "0fdf6d7bf078f5740d675bec184e34aaf56084e0246b2c081564059c2a742f42"
+    },
+    "interruption.json": {
+      "bytes": 743,
+      "sha256": "5168ff66619f19c238f402a2e47cad710d7c7a91fcaba1d220ddaeb3e0964d07"
+    },
+    "integrity.json": {
+      "bytes": 293,
+      "sha256": "c4e2fa5cd4f07492a303c26aa675991c9e71ac347b7990326c31146e90cb8f20"
+    }
+  },
+  "completed_episodes": 65,
+  "best_completed_episodes": 25,
+  "integrity_run": "runs/20260905T073653Z-checkpoint-65-integrity-ba7452f1"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "paper.observation-perturbation.v1",
+  "decision_seconds": 5.0,
+  "position_probability": 0.0,
+  "communication_probability": 0.0,
+  "position_sigma_m": 9.63,
+  "communication_duration_seconds": [5.0, 10.0, 15.0],
+  "communication_duration_probabilities": [0.25, 0.5, 0.25],
+  "earth_radius_m": 6371000.0,
+  "pole_guard_degrees": 0.000001,
+  "rng_bit_generator": "PCG64",
+  "source": "Fremond et al. 2026, physical PDF pp.9-10, Eqs.8-11 and communication-loss section; paper/REPRODUCTION.md",
+  "reconstruction_choices": [
+    "This module is perception only. It changes no truth position, altitude, velocity, accepted target, lock, waypoint, action queue or simulator state. Sensor missing/aberrant/falsified modes and noncooperative traffic are outside this implementation.",
+    "At each global 5 s decision, sort stable aircraft IDs and make one categorical none/position/communication selection per aircraft in the supplied full physical snapshot, including aircraft already in a communication blackout. p_position+p_communication must not exceed one. Persistent blackout can hide a newly drawn position error.",
+    "Both probabilities default to zero. This path consumes neither the private perturbation RNG nor any global/external RNG and preserves each supplied AircraftState instance. The snapshot mapping is an immutable sorted view of these references, not the caller's mutable mapping object.",
+    "Use an explicitly seeded private NumPy Generator(PCG64). For each sorted aircraft, draw category first, then two independent normal EN components for a position event or one inverse-CDF uniform for communication duration. With sigma=0, a position event consumes its category draw but no normal draw and returns the original state exactly.",
+    "The independent two-axis EN Gaussian is an explicit reconstruction choice: the paper does not fully specify its two-dimensional distribution. Default sigma=9.63 m follows Eq.11/text; 4.59 m is the alternate disclosed precision setting. Table1's 9.33 discrepancy is not silently substituted.",
+    "Convert the EN vector to an initial compass bearing and geodesic arc length on a sphere of radius 6371000 m. Preserve actual altitude and every other AircraftState field. Nonzero shifts whose starting or resulting point lies within pole_guard_degrees of a geographic pole are rejected; zero displacement is an exact identity even at a pole.",
+    "Communication duration is 5/10/15 s with probabilities .25/.50/.25. Trigger before availability is formed and set until=max(previous_until,t+duration). Information recovers from the current physical snapshot; no stale observation or old action is replayed.",
+    "Availability intervals are half-open [start,until). Overlapping or exactly touching blackouts form one continuous segment. A retrigger means the aircraft was already unavailable strictly before this trigger (t<old_until); a trigger exactly at expiry can extend the segment without inventing a positive-duration recovery gap.",
+    "Only the latest decision snapshot is cached. Time starts at 0 after reset; a new call must be at the same time with identical physical state values or exactly 5 s later. Reordered mappings reuse the cache. Skipped/reversed decisions and changed same-time inputs raise instead of fabricating missing draws or returning stale data.",
+    "Snapshot.encode calls the existing observe using only available aircraft. A missing ownship therefore has no encoded observation here. Its control, transition, log-probability and GAE treatment belongs to the future driver and is not claimed implemented by this module.",
+    "availability_at is a read-only query of registered communication intervals, independent of physical presence. Unknown IDs have no registered blackout. Future queries assume only currently registered events; they do not predict or sample future triggers. The driver must separately track real admission/deletion and integrate actual physical intervals.",
+    "Statistics distinguish eligible aircraft-decisions, each event type, active retriggers, continuous-blackout segment starts and currently unavailable aircraft at the latest decision. No flight-hours or aircraft-seconds are inferred from decision snapshots.",
+    "Checkpoint state contains primitive JSON data, full configuration identity, NumPy/PCG64 state, clock, interval history and cached truth/sensed snapshots. Load validates their consistency atomically. Python object identity cannot be preserved across JSON serialization, but values and subsequent draws are restored.",
+    "Candidate p_position=.009 and p_communication=.003 can be calculated from 6.48 and 2.16 events per flight-hour divided by 720 five-second opportunities. These are unconfirmed rate-to-probability reconstructions, not author-confirmed defaults, and overlapping triggers further separate trigger rates from unavailable duration."
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "schema": "execution-learning-curve.v1",
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "rows": [
+    {
+      "completed_episodes": 0,
+      "nr": {
+        "completed": 359,
+        "failed_timeout": 0,
+        "path_length_m": 3324292.090783506,
+        "outside_corridor_aircraft_seconds": 362.25,
+        "outside_corridor_flights": 16,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3003.455153002713,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 54.90833333333333,
+        "completed_fraction": 0.9972222222222222,
+        "max_centerline_distance_m": 599.313991626042,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 35604.75,
+            "directed_pair_seconds": 71209.5,
+            "unordered_seconds_per_flight_hour": 648.4398239490059,
+            "directed_seconds_per_flight_hour": 1296.8796478980119
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8838.5,
+            "directed_pair_seconds": 17677.0,
+            "unordered_seconds_per_flight_hour": 160.96828046744574,
+            "directed_seconds_per_flight_hour": 321.9365609348915
+          }
+        }
+      },
+      "sample": {
+        "completed": 239,
+        "failed_timeout": 53,
+        "path_length_m": 3368149.702540742,
+        "outside_corridor_aircraft_seconds": 80057.0,
+        "outside_corridor_flights": 341,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 53540,
+        "policy_decisions": 47285,
+        "return_sum": -2176.7562901381298,
+        "failed_route_exhausted": 68,
+        "outside_exit_crossings": 66,
+        "planned": 360,
+        "flight_hours": 65.64368055555555,
+        "completed_fraction": 0.6638888888888889,
+        "max_centerline_distance_m": 618.6410408862126,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 24059.25,
+            "directed_pair_seconds": 48118.5,
+            "unordered_seconds_per_flight_hour": 366.5128127548878,
+            "directed_seconds_per_flight_hour": 733.0256255097756
+          },
+          "nmac": {
+            "unordered_pair_seconds": 4188.0,
+            "directed_pair_seconds": 8376.0,
+            "unordered_seconds_per_flight_hour": 63.798982088696455,
+            "directed_seconds_per_flight_hour": 127.59796417739291
+          }
+        }
+      }
+    },
+    {
+      "completed_episodes": 15,
+      "nr": {
+        "completed": 359,
+        "failed_timeout": 0,
+        "path_length_m": 3324292.090783506,
+        "outside_corridor_aircraft_seconds": 362.25,
+        "outside_corridor_flights": 16,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3003.455153002713,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 54.90833333333333,
+        "completed_fraction": 0.9972222222222222,
+        "max_centerline_distance_m": 599.313991626042,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 35604.75,
+            "directed_pair_seconds": 71209.5,
+            "unordered_seconds_per_flight_hour": 648.4398239490059,
+            "directed_seconds_per_flight_hour": 1296.8796478980119
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8838.5,
+            "directed_pair_seconds": 17677.0,
+            "unordered_seconds_per_flight_hour": 160.96828046744574,
+            "directed_seconds_per_flight_hour": 321.9365609348915
+          }
+        }
+      },
+      "sample": {
+        "completed": 244,
+        "failed_timeout": 53,
+        "path_length_m": 3364292.165408408,
+        "outside_corridor_aircraft_seconds": 83275.0,
+        "outside_corridor_flights": 342,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 53382,
+        "policy_decisions": 47136,
+        "return_sum": -2410.152046333514,
+        "failed_route_exhausted": 63,
+        "outside_exit_crossings": 59,
+        "planned": 360,
+        "flight_hours": 65.43416666666667,
+        "completed_fraction": 0.6777777777777778,
+        "max_centerline_distance_m": 618.6410408862126,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 26029.25,
+            "directed_pair_seconds": 52058.5,
+            "unordered_seconds_per_flight_hour": 397.7929471096904,
+            "directed_seconds_per_flight_hour": 795.5858942193807
+          },
+          "nmac": {
+            "unordered_pair_seconds": 4773.25,
+            "directed_pair_seconds": 9546.5,
+            "unordered_seconds_per_flight_hour": 72.94736439933266,
+            "directed_seconds_per_flight_hour": 145.8947287986653
+          }
+        }
+      }
+    },
+    {
+      "completed_episodes": 25,
+      "nr": {
+        "completed": 359,
+        "failed_timeout": 0,
+        "path_length_m": 3324292.090783506,
+        "outside_corridor_aircraft_seconds": 362.25,
+        "outside_corridor_flights": 16,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3003.455153002713,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 54.90833333333333,
+        "completed_fraction": 0.9972222222222222,
+        "max_centerline_distance_m": 599.313991626042,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 35604.75,
+            "directed_pair_seconds": 71209.5,
+            "unordered_seconds_per_flight_hour": 648.4398239490059,
+            "directed_seconds_per_flight_hour": 1296.8796478980119
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8838.5,
+            "directed_pair_seconds": 17677.0,
+            "unordered_seconds_per_flight_hour": 160.96828046744574,
+            "directed_seconds_per_flight_hour": 321.9365609348915
+          }
+        }
+      },
+      "sample": {
+        "completed": 248,
+        "failed_timeout": 53,
+        "path_length_m": 3369538.609284107,
+        "outside_corridor_aircraft_seconds": 92506.0,
+        "outside_corridor_flights": 342,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 53551,
+        "policy_decisions": 47273,
+        "return_sum": -2369.404521240685,
+        "failed_route_exhausted": 59,
+        "outside_exit_crossings": 57,
+        "planned": 360,
+        "flight_hours": 65.63534722222224,
+        "completed_fraction": 0.6888888888888889,
+        "max_centerline_distance_m": 785.5567672120604,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 26740.25,
+            "directed_pair_seconds": 53480.5,
+            "unordered_seconds_per_flight_hour": 407.40623965110257,
+            "directed_seconds_per_flight_hour": 814.8124793022051
+          },
+          "nmac": {
+            "unordered_pair_seconds": 4210.5,
+            "directed_pair_seconds": 8421.0,
+            "unordered_seconds_per_flight_hour": 64.14988536199053,
+            "directed_seconds_per_flight_hour": 128.29977072398106
+          }
+        }
+      }
+    },
+    {
+      "completed_episodes": 50,
+      "nr": {
+        "completed": 359,
+        "failed_timeout": 0,
+        "path_length_m": 3324292.090783506,
+        "outside_corridor_aircraft_seconds": 362.25,
+        "outside_corridor_flights": 16,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3003.455153002713,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 54.90833333333333,
+        "completed_fraction": 0.9972222222222222,
+        "max_centerline_distance_m": 599.313991626042,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 35604.75,
+            "directed_pair_seconds": 71209.5,
+            "unordered_seconds_per_flight_hour": 648.4398239490059,
+            "directed_seconds_per_flight_hour": 1296.8796478980119
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8838.5,
+            "directed_pair_seconds": 17677.0,
+            "unordered_seconds_per_flight_hour": 160.96828046744574,
+            "directed_seconds_per_flight_hour": 321.9365609348915
+          }
+        }
+      },
+      "sample": {
+        "completed": 234,
+        "failed_timeout": 53,
+        "path_length_m": 3368473.6217434728,
+        "outside_corridor_aircraft_seconds": 87626.75,
+        "outside_corridor_flights": 346,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 53565,
+        "policy_decisions": 47221,
+        "return_sum": -2233.791143940484,
+        "failed_route_exhausted": 73,
+        "outside_exit_crossings": 70,
+        "planned": 360,
+        "flight_hours": 65.55694444444444,
+        "completed_fraction": 0.65,
+        "max_centerline_distance_m": 701.7120299888662,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 24818.25,
+            "directed_pair_seconds": 49636.5,
+            "unordered_seconds_per_flight_hour": 378.5754539098748,
+            "directed_seconds_per_flight_hour": 757.1509078197496
+          },
+          "nmac": {
+            "unordered_pair_seconds": 4341.25,
+            "directed_pair_seconds": 8682.5,
+            "unordered_seconds_per_flight_hour": 66.22105463867291,
+            "directed_seconds_per_flight_hour": 132.44210927734582
+          }
+        }
+      }
+    }
+  ],
+  "source_records": [
+    {
+      "run": "runs/20260905T070231Z-execution-ppo-25-834d0f28",
+      "path": "checkpoints/execution-pilot-20260905/development.jsonl",
+      "line": 1,
+      "sha256": "710fe74b70119275afca3e4ea41005ad4411cfb6d0cc5213e58ae1d8c28e9845",
+      "completed_episodes": 0
+    },
+    {
+      "run": "runs/20260905T070231Z-execution-ppo-25-834d0f28",
+      "path": "checkpoints/execution-pilot-20260905/development.jsonl",
+      "line": 2,
+      "sha256": "710fe74b70119275afca3e4ea41005ad4411cfb6d0cc5213e58ae1d8c28e9845",
+      "completed_episodes": 15
+    },
+    {
+      "run": "runs/20260905T071311Z-execution-ppo-100-620c1921",
+      "path": "checkpoints/execution-recovery-65-20260905/development.jsonl",
+      "line": 1,
+      "sha256": "0fdf6d7bf078f5740d675bec184e34aaf56084e0246b2c081564059c2a742f42",
+      "completed_episodes": 15
+    },
+    {
+      "run": "runs/20260905T071311Z-execution-ppo-100-620c1921",
+      "path": "checkpoints/execution-recovery-65-20260905/development.jsonl",
+      "line": 2,
+      "sha256": "0fdf6d7bf078f5740d675bec184e34aaf56084e0246b2c081564059c2a742f42",
+      "completed_episodes": 25
+    },
+    {
+      "run": "runs/20260905T071311Z-execution-ppo-100-620c1921",
+      "path": "checkpoints/execution-recovery-65-20260905/development.jsonl",
+      "line": 3,
+      "sha256": "0fdf6d7bf078f5740d675bec184e34aaf56084e0246b2c081564059c2a742f42",
+      "completed_episodes": 50
+    }
+  ],
+  "notes": [
+    "Single training seed, 12 predeclared development cases; no held-out result.",
+    "65 episodes completed but no evaluation at 65. Run targeting100 was interrupted after65; evaluations at25/50 were fully recorded.",
+    "Duplicate episode15 has exactly equal aggregate data and is included once."
+  ]
+}

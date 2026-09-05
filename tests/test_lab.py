@@ -3,6 +3,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import signal
 import subprocess
 import sys
 import tempfile
@@ -135,6 +136,110 @@ else: raise AssertionError('runtime writable')
         self.assertEqual(result["reason"], "timeout")
         time.sleep(2.2)
         self.assertFalse((self.project / "runs" / result["id"] / "artifacts/late").exists())
+
+    def test_supervisor_sigterm_records_failure_reaps_owned_child_and_releases_lock(self):
+        code = '''
+import signal,subprocess,time
+from pathlib import Path
+subprocess.Popen(['/usr/bin/python3','-c',
+    "import signal,time;from pathlib import Path;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(4);Path('/output/late').write_text('bad')"])
+signal.signal(signal.SIGTERM,signal.SIG_IGN)
+Path('/output/ready').write_text('ready')
+time.sleep(20)
+'''
+        first = subprocess.Popen([sys.executable, "-B", str(LAB), "--project", str(self.project),
+            "run", "--label", "term-fixture", "--seconds", "12", "--disk-mib", "8",
+            "--", "/usr/bin/python3", "-c", code],
+            text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        try:
+            deadline = time.monotonic() + 5
+            ready = []
+            while not ready:
+                self.assertIsNone(first.poll(), "owned inner lab exited before its fixture was ready")
+                self.assertLess(time.monotonic(), deadline, "owned fixture did not become ready")
+                ready = list((self.project / "runs").glob("*/artifacts/ready"))
+                time.sleep(.01)
+            self.assertEqual(len(ready), 1)
+            # This path comes from our fixture root, never from child stdout.
+            directory = ready[0].parent.parent
+            # Signal only the supervisor represented by this Popen object.
+            first.send_signal(signal.SIGTERM)
+            first.send_signal(signal.SIGTERM)
+            out, err = first.communicate(timeout=8)
+        finally:
+            if first.poll() is None:
+                first.send_signal(signal.SIGTERM)
+                first.communicate(timeout=16)
+        self.assertEqual(first.returncode, 143, out + err)
+        status = json.loads((directory / "status.json").read_text())
+        self.assertEqual(status["state"], "failed")
+        self.assertEqual(status["reason"], "supervisor_signal")
+        self.assertEqual(status["received_signal"], 15)
+        self.assertEqual(status["exit_code"], 143)
+        self.assertIsNotNone(status["finished_at"])
+        self.assertIsNotNone(status["pid"])
+        self.assertEqual(json.loads(out)["id"], directory.name)
+        time.sleep(4.2)
+        self.assertFalse((directory / "artifacts/late").exists())
+        call, result = self.invoke("from pathlib import Path;Path('/output/restarted').write_text('ok')")
+        self.assertEqual(call.returncode, 0, call.stderr + str(result))
+        self.assertEqual(result["state"], "succeeded")
+        self.assertEqual(self.marker.read_text(), "DO NOT CHANGE")
+        self.assertEqual(self.external.read_text(), "OUTSIDE")
+
+    def test_sigterm_before_spawn_skips_workload_and_restores_previous_handler(self):
+        args = mock.Mock(command=["--", "/bin/true"], label="before-term", seconds=1,
+                         disk_mib=1, memory_mib=128, stage="dev", config=None, input=[], runtime=[], gpu=False)
+        previous_handler = signal.getsignal(signal.SIGTERM)
+
+        def interrupted_snapshot(*_args):
+            handler = signal.getsignal(signal.SIGTERM)
+            handler(signal.SIGTERM, None)
+            handler(signal.SIGTERM, None)
+            return []
+
+        with mock.patch.object(MODULE.shutil, "which", return_value="/bin/false"), \
+                mock.patch.object(MODULE, "snapshot", side_effect=interrupted_snapshot), \
+                mock.patch.object(MODULE.subprocess, "Popen") as spawn:
+            self.assertEqual(MODULE.run(args, self.project), 143)
+            spawn.assert_not_called()
+        self.assertIs(signal.getsignal(signal.SIGTERM), previous_handler)
+        status_path, = (self.project / "runs").glob("*/status.json")
+        status = json.loads(status_path.read_text())
+        self.assertEqual(status["state"], "failed")
+        self.assertEqual(status["reason"], "supervisor_signal")
+        self.assertEqual(status["received_signal"], 15)
+        self.assertEqual(status["exit_code"], 143)
+        self.assertIsNone(status["pid"])
+
+    def test_sigterm_during_popen_assignment_keeps_owned_handle_and_cleanup_uninterrupted(self):
+        args = mock.Mock(command=["--", "/bin/true"], label="popen-term", seconds=1,
+                         disk_mib=1, memory_mib=128, stage="dev", config=None, input=[], runtime=[], gpu=False)
+        previous_handler = signal.getsignal(signal.SIGTERM)
+        # No OS process or actionable PID exists in this race regression.
+        owned = mock.Mock(pid=None)
+
+        def interrupted_popen(*_args, **_kwargs):
+            signal.getsignal(signal.SIGTERM)(signal.SIGTERM, None)
+            return owned
+
+        def repeated_term_during_stop(process):
+            self.assertIs(process, owned)
+            signal.getsignal(signal.SIGTERM)(signal.SIGTERM, None)
+            signal.getsignal(signal.SIGTERM)(signal.SIGTERM, None)
+
+        with mock.patch.object(MODULE.shutil, "which", return_value="/bin/false"), \
+                mock.patch.object(MODULE.subprocess, "run", return_value=mock.Mock(stdout="")), \
+                mock.patch.object(MODULE.subprocess, "Popen", side_effect=interrupted_popen), \
+                mock.patch.object(MODULE, "stop", side_effect=repeated_term_during_stop) as stop_owned:
+            self.assertEqual(MODULE.run(args, self.project), 143)
+            stop_owned.assert_called_once_with(owned)
+        self.assertIs(signal.getsignal(signal.SIGTERM), previous_handler)
+        status_path, = (self.project / "runs").glob("*/status.json")
+        status = json.loads(status_path.read_text())
+        self.assertEqual(status["reason"], "supervisor_signal")
+        self.assertEqual(status["received_signal"], 15)
+        self.assertEqual(status["exit_code"], 143)
 
     def test_normal_exit_reaps_background_child(self):
         code = "import subprocess;subprocess.Popen(['/usr/bin/python3','-c',\"import time;from pathlib import Path;time.sleep(1);Path('/output/late').write_text('bad')\"])"

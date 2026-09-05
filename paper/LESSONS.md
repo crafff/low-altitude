@@ -24,5 +24,10 @@
 | BlueSky原生垂直速度更新使用高度差决定方向、取VS幅值 | 非对称爬降包络须按目标高度方向选上/下限，不能只看命令VS符号 | paper_performance.clip_intent；[12机型实测](../runs/20260905T043537Z-paper-performance-probe-1319e270/artifacts/performance_probe.json)，正VS命令下降也受正确下降限制 |
 | 仅看终点距离会使近闭合路线在起点附近提前完成 | 同时要求最后航点已激活；保留终点状态和最后区间暴露 | nr_pilot.arrived_on_route；test_nearly_closed_route_cannot_arrive_at_its_origin |
 | 240架次全到达仍有7架Amzn越出走廊半宽 | 单列路线偏离、终止完整性和冲突指标；先追踪实际转弯状态，再改变动力学或宣称复现 | [NR新诊断](../runs/20260905T044040Z-paper-nr-final-44ce1be4/artifacts/result.json)；fly-by/25°bank只是当前有依据的原因解释 |
+| 高度已捕获时BlueSky仍可能保留非零VS；下一次5s命令反向会越出高度边界 | 完成语义区分位置误差与速度稳定，同时记录锁释放和实际命令时刻，不能仅看前者 | [8例原生对照](../runs/20260905T065518Z-vertical-lock-eight-fixed-a518ad01/artifacts/result.json)；test_settled_vertical_variant_keeps_lock_at_target_with_residual_climb |
+| native末端LNAV关闭不代表已经满足25m到达或有限宽高出口；9超时中只有2例严重远飞 | 单列真实慢速超时、导航耗尽和成功，保留删前轨迹；不要只扩大到达阈值 | [原random逐步复现](../runs/20260905T062910Z-action-failure-trace-89478f96/artifacts/result.json)；route_completion聚焦回归 |
+| 改mask或删除时间会改变全局Random.choice后续draw分配 | 同seed只保证初始输入/随机源，不保证同一逐机动作流；纯因果动作对照需固定可比干预与流分配 | [执行候选比较](../tasks/001-baseline.md)；paper_rollout的sorted-ID共享Random |
+| BlueSky Proxy缓存bound method，普通setattr可能只改底层对象而未改变调用入口 | 包装实际调用facade并精确finally恢复，核对真实调用计数，不只看赋值成功 | [navigation敏感性](../runs/20260905T065855Z-navigation-sensitivity-seven-c4774d42/artifacts/result.json)；test_navigation_sensitivity的fake Proxy回归 |
+| 假环境恢复测试不能覆盖BlueSky跨进程reset的隐式状态 | 首次集成保留真实native断点续训与连续运行参数/Adam/RNG比较；随后源码变更严格校验身份 | [native三轮精确比较](../runs/20260905T062109Z-literal-native-resume-compare-fe7da12f/artifacts/result.json)；checkpoint_compare.py |
 
 不要把尚未运行的测试或待核对解释写成已证实经验。新bug只补最小相关回归，避免将每次失败升级成新审批层。
