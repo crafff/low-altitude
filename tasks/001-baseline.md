@@ -516,3 +516,31 @@ route_fidelity只读原p6§3.4/Algorithm1确认训练采样；p17§6.1frozenpoli
 接着启动refresh-ppo-100：新配置current_state_refresh、从seed61001初始化和原training610000流起，100轮目标/内1800s/外1860s、256MiB输出/4096MiB每进程地址空间，CPU14单线程nice15/idle IO、每25全12开发评价/每5原子保存。严格新源码/配置，不恢复旧400模型，其余Table3/执行动作/观测/奖励/终止口径不变。10h截止和14:45收尾不变。
 
 追加shared_ppo仅拥有checkpoint_policy_modes.py/原测试/新refresh100配置：问题为复用四模式诊断于新训练轮次，交付保留v1旧400、显式v2轮次派生固定四模式、generic reference参数、严格源码/配置/同轮参考、原0sample精确对照；≤20min静态，禁止运行实验/测试/GPU/信号/清理/通知/嵌套。追加observation_reward_spec只读原p6/Algorithm1/训练预算与当前循环，问题为250k episodes单位和更新节奏的可比性，交付有页码事实/歧义与有限预算解释，≤15min，不重审reward、不改参、不执行负载。两任务与controller串行原生训练独立。
+
+10:40刷新源码/原生报告已随`535cad4cd6ebffe3f13034459ca59fc2669997e0` push且远端同SHA。实际新训练run为[runs/20260905T103813Z-refresh-ppo-100-4e103166](../runs/20260905T103813Z-refresh-ppo-100-4e103166/status.json)，10:38:13启动；初始全12评价187.787s，NR360/360、16width/217.5aircraft-s、max412.216m；sample246/360、53超时61耗尽、339width/51139.5aircraft-s、max465.519m，66.945833flight-hours，LoWC29185.25/NMAC5283.75 pair-s（435.953196/78.925748每flight-hour），return−2641.982548，0height。它是修正环境中的未训练起点，不能把与旧0轮的差异当学习收益。
+
+10:43 observation_reward_spec只读预算回执：原p6/Algorithm1、p17和p18图轴确认250k为计划30机场景外层收集/更新循环，K1是一次样本遍历、B64为小批量大小。120s real-time截断与1200s每机及临时空人口仍有歧义，不能认定作者750万条完整flight。原文未明确名义预热/课程/advantage或return归一化/尾batch/clip；现选择继续明确标记，不因此调参。其只读核查251–400段150轮=606847transitions/9558Adam steps/842.5383flight-hours。controller随后定向读取6份现有备份日志并逐轮核对1–400连续无重复、seed610000起、每轮30planned/K1/sample_visits=samples=rollout_samples、minibatches=ceil(samples/64)：完整400为12000planned、1616717transitions、25463Adam steps、131621global decisions、2244.607361training flight-hours，日志collection+update3306.347s（不含评价等）。[预算JSON和源hash](../reports/training-budget-20260905/README.md)保留。无新实验/模型加载；不能用此小预算称论文规模训练失败，旧/新谱系轮数不相加。
+
+四模式v2三owned文件已静态交付，controller窄读diff未见阻断；v1保持400，v2按正整数轮次派生固定四模式并严格同轮引用，generic/旧reference别名互斥。新增3fixture加旧5项，等待当前唯一训练job结束后再执行；当前未宣称测试/native已通过。
+
+10:54新refresh25/50轮全12开发评价各105.41/105.39s；25完成240、53超时67耗尽、334width、outside46975s、NMAC88.123168/LoWC443.938988每flight-hour、return−2720.126896；50完成252、53超时55耗尽、336width、outside46619.5s、66.767014flight-hours、NMAC76.568498/LoWC423.420164、return−2435.113311。均0height；50较新0的246完成/78.925748NMAC有所改善，不把单点评价当稳定收敛。NOW压缩为当前运行/关键证据/约束与入口，完整历史仍在此任务与reports，doctor无断链。
+
+10:48追加route_trace只读当前PLAN/SOURCES/REPRODUCTION及最多3篇一手近邻，问题为后续action-delay队列/预测过滤/多机CBF的具体假设和公平对照；≤20min定向浏览，不改变主线、无修改/实验/外部消息/嵌套。10:54回执已将ICLR2021 Random Delays/DCAC、TCST2023动态环境输入延迟CBF、T-RO2025 GCBF+的正文/官方代码入口、延迟/可见信息/保证假设与适用边界写入SOURCES。下一步候选明确零延迟是否有隐含一步、FIFO/覆盖/过期丢弃、初始保持和生效合法性，再比较同信息RNN/队列、当前/预测/误差余量过滤。此为后续来源核验，不宣告创新或转移连续控制定理到60离散动作/5s锁；当前继续无延迟基线。
+
+10:59新refresh75轮评价107.325s：251/360、53超时56耗尽、337width/51753aircraft-s，NMAC84.147763/LoWC459.933228每flight-hour、return−2801.831348，0height；冲突回升，不把50单点判收敛。10:59只读实际turn_context复核shared_ppo第11turn、route_trace第14、observation_reward_spec第8均gpt-6-astra/xhigh。当前100段结束并备份/四模式核验后，预计按实测9.1s收集更新、105s每12例评价，可分段100→300（约45–50min）继续原配置；仍以结果/剩余墙钟决定，不跨14:45收尾预留和15:15硬截止。
+
+### 11:04–11:07 UTC：新100轮完成与同谱系解码核验
+
+[refresh-ppo-100](../runs/20260905T103813Z-refresh-ppo-100-4e103166/artifacts/result.json)正常完成100轮及五次完整开发评价，内部1541.836s/监督1543.665s，11:03:57结束，stop=episode_target_reached，best50。100sample240/360、53超时67耗尽、341width/47057.5aircraft-s、max465.519m、0height，66.782361flight-hours；LoWC27779/NMAC5214 pair-s即415.963131/78.074508每flight-hour，return−2380.929450，48101policy decisions。尚无持续有效基线；旧新执行谱系不合并。
+
+[新100小副本](../checkpoints/refresh-100-20260905/README.md)5数据1988998字节，逐字节复制及SHA核对，含latest100/model/Adam/RNG/best50，源535cad4兼容，下一training seed610100。准备本批push后同配置100→300、内3300/外3360s（约45–50min），CPU边界/截止不变。
+
+[通用四模式8测试](../runs/20260905T110514Z-checkpoint-policy-modes-v2-tests-3a87d157/log.txt)1.429s job全通过；controller窄读v2保留严格身份与同轮reference、v1兼容后，启动refresh-policy-modes-100，外600s/128MiB/4096MiB，两个reference均从新100副本development.jsonl分别明确选0/100，无模型更新或选优。实际结果待完成。renderer只增加可选单行title及源码hash，默认标题保持，纠正原docstring误称PDF；新0–100五点评价输入已准备，真实渲染待单launcher间隙，不新增镜像实现测试。
+
+### 11:13–11:18 UTC：四模式完整结果与图表核对
+
+[refresh-policy-modes-100](../runs/20260905T110609Z-refresh-policy-modes-100-13b09003/artifacts/result.json)内部409.995s/监督411.688s，48实际native全部通过，两sample逐case/aggregate（含动作hist）精确参考，严格源码/配置/软件和checkpoint内嵌参考通过、NR两个记录一致后引用，模型/输入不变、0optimizer/update/checkpoint writes/selection。新100argmax306/360、1超时53耗尽、334width/69514.25aircraft-s、55.655556flight-hours、NMAC162.229986/LoWC657.167099每flight-hour；新0argmax240/360、30超时90耗尽、342width/74250.5s、60.490694h、175.886557/765.716949。均0height；任务改善66架次不等于有效baseline，100argmax NMAC仍稍高于NR161.163924。完整小资料另存[同谱系四模式报告](../reports/policy-modes-refresh-100-20260905/README.md)。
+
+新图首[render](../runs/20260905T111403Z-refresh-learning-figure-100-af4a767e/status.json)数值正确但总标题被subplot循环变量覆盖，controller目视发现；仅renderer将figure_title与子标题分开。新增1个owned随机临时夹具，实际导出默认/自定义两组六子图；首[fixture](../runs/20260905T111600Z-learning-title-regression-ea9c6c10/log.txt)误假定SVG文字存为path注释而失败，metadata标题已正确；改为解析真实SVG text节点后[回归](../runs/20260905T111652Z-learning-title-regression-svg-text-a1fa873b/log.txt)通过，4.081s job。该测试不改任何模型/指标。固定图[render](../runs/20260905T111615Z-refresh-learning-figure-100-title-fixed-0e6283ec/status.json)3.343s，SVG/PNG/PDF/metadata逐字节复制、PNG目视通过，见[新学习曲线](../reports/refresh-learning-20260905/README.md)。
+
+另纠正此前README的PDF缺失推断：rg文件枚举遵从ignore而未列PDF，但输出常量和实际文件表明renderer一直生成PDF。400图PDF38072B已从明确源run复制，旧README已改回“PDF本地保留、不入Git”；不改原run。不是数据丢失或新增PDF功能。当前无launcher负载，准备将本批已验证新100/图/报告/工具与来源记录私有备份，再同源码535cad4恢复100→300。

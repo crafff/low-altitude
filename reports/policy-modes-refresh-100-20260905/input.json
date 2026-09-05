@@ -1,0 +1,114 @@
+{
+  "config": {
+    "schema": "bluesky.checkpoint-policy-modes.v2",
+    "scope": "Independent development deployment-mode diagnostic for the configured refresh checkpoint and original initialization; no training, checkpoint promotion, or held-out efficacy claim.",
+    "training_config": "configs/paper_train_execution_refresh.json",
+    "checkpoint_completed_episodes": 100,
+    "initialization_seed": 61001,
+    "device": "cpu",
+    "torch_num_threads": 1,
+    "torch_num_interop_threads": 1,
+    "wall_seconds": 570,
+    "primary_policy": "sample",
+    "development_cases": [
+      {
+        "seed": 53001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53012,
+        "corridor_count": 5
+      }
+    ],
+    "reconstruction_choices": [
+      "The controller supplies the configured completed-episode checkpoint, its same-round full development reference through --reference-trained, and this refresh lineage's initial-0 reference through --reference-0. All are explicit lab --input files. No path discovery, nearest-round fallback, migration or relabeling occurs.",
+      "Schema v2 derives exactly four modes from the positive integer checkpoint_completed_episodes: episodeN_sample, episodeN_argmax, initial0_sample, initial0_argmax. Preserve that order and all twelve original development scenarios. Changing the diagnostic round requires an explicit new configured integer and matching checkpoint/reference inputs, not a different driver.",
+      "Require exact scientific source/software versions and resolved refresh training/environment/action/observation/type/PPO configurations through the unchanged paper_train._validate_checkpoint. The supplied checkpoint and its embedded evaluation must both have the configured completed episode. Its embedded evaluation must match the external same-round reference exactly except wall_seconds and process_peak_rss_mib.",
+      "Reconstruct the original model with random.seed, np.random.seed and torch.manual_seed at training_seed61001, then SharedActorCritic. Never load a checkpoint into that model. Construct the trained model as an independent copy and load only the strictly validated supplied model tensors. CPU eval/no_grad, no optimizer, unchanged model identities and no gradients are required.",
+      "Execute 48 actual native evaluations through the original _evaluate_case. Each case recreates the original private action generator from dev_action_seed_base plus scenario seed. Both sampled modes must reproduce every same-lineage reference case, histogram and aggregate exactly except wall/RSS. The original model is evaluated under the same refresh environment as the trained checkpoint.",
+      "Sample remains primary. Argmax is the original legal joint 60-class decision with its original tie convention, never separately maximized action components. No model selection, metric switch, checkpoint write, update or promotion is performed. The source paper does not establish the actual deployment decoder.",
+      "Require both initial and trained NR references to agree per case and aggregate before reusing them. Report zero NR native evaluations; these cached records never substitute for actual sample or argmax rollouts. Retain failures, navigation exhaustion, containment violations and existing whole-tick terminal exposure.",
+      "Use the existing passive forward-count hook and model/mask/population/input-identity checks. Restore the hook in finally. The 570-second inner budget remains bounded by a planned 600-second single-CPU lab job; incomplete cases and errors stay explicit and return nonzero. This remains development diagnosis, not an effective baseline or a held-out efficacy claim."
+    ],
+    "modes": [
+      {
+        "id": "episode100_sample",
+        "model": "episode100",
+        "policy": "sample",
+        "completed_episodes": 100
+      },
+      {
+        "id": "episode100_argmax",
+        "model": "episode100",
+        "policy": "argmax",
+        "completed_episodes": 100
+      },
+      {
+        "id": "initial0_sample",
+        "model": "initial0",
+        "policy": "sample",
+        "completed_episodes": 0
+      },
+      {
+        "id": "initial0_argmax",
+        "model": "initial0",
+        "policy": "argmax",
+        "completed_episodes": 0
+      }
+    ]
+  },
+  "explicit_inputs": {
+    "checkpoint": {
+      "path": "checkpoints/refresh-100-20260905/latest.pt",
+      "sha256": "e6e0a1f6dff84d989f98b08e19da5c2fc08f21ddce62d8057942fccecc070016"
+    },
+    "reference_trained": {
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211"
+    },
+    "reference0": {
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211"
+    }
+  }
+}

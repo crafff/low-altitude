@@ -21,23 +21,32 @@ from policy_diagnostic import (canonical, difference_paths, file_digest, model_d
 from shared_ppo import SharedActorCritic
 
 
-MODE_SPECS = (
-    ('episode400_sample', 'episode400', 'sample', 400),
-    ('episode400_argmax', 'episode400', 'argmax', 400),
-    ('initial0_sample', 'initial0', 'sample', 0),
-    ('initial0_argmax', 'initial0', 'argmax', 0),
-)
+def mode_specs(episode):
+    if type(episode) is not int or episode <= 0:
+        raise ValueError('The trained checkpoint episode must be a positive integer')
+    return ((f'episode{episode}_sample', f'episode{episode}', 'sample', episode),
+            (f'episode{episode}_argmax', f'episode{episode}', 'argmax', episode),
+            ('initial0_sample', 'initial0', 'sample', 0),
+            ('initial0_argmax', 'initial0', 'argmax', 0))
+
+
+MODE_SPECS = mode_specs(400)  # Public v1 contract retained.
 ORIGINAL_CASES = tuple((53001+i, 3+i%3) for i in range(12))
 
 
 def validate_config(cfg):
-    if cfg['schema'] != 'bluesky.checkpoint-policy-modes.v1':
+    if cfg['schema'] not in ('bluesky.checkpoint-policy-modes.v1', 'bluesky.checkpoint-policy-modes.v2'):
         raise ValueError('Unknown checkpoint policy modes configuration')
-    modes = tuple((m['id'], m['model'], m['policy'], m['completed_episodes']) for m in cfg['modes'])
-    if modes != MODE_SPECS:
-        raise ValueError('Preserve all four predeclared modes and their order')
-    if cfg['checkpoint_completed_episodes'] != 400 or cfg['initialization_seed'] != 61001:
-        raise ValueError('This diagnostic is explicitly episode 400 and original seed 61001')
+    expected_modes = mode_specs(cfg['checkpoint_completed_episodes'])
+    v1 = cfg['schema'] == 'bluesky.checkpoint-policy-modes.v1'
+    if v1 and cfg['checkpoint_completed_episodes'] != 400:
+        raise ValueError('The v1 diagnostic is explicitly episode 400')
+    if v1 or 'modes' in cfg:
+        modes = tuple((m['id'], m['model'], m['policy'], m['completed_episodes']) for m in cfg['modes'])
+        if modes != expected_modes or any(type(m['completed_episodes']) is not int for m in cfg['modes']):
+            raise ValueError('Preserve all four derived modes and their order')
+    if cfg['initialization_seed'] != 61001:
+        raise ValueError('Preserve original initialization seed 61001')
     if cfg['primary_policy'] != 'sample':
         raise ValueError('Sample remains the primary policy; argmax cannot select or promote a model')
     if cfg['device'] != 'cpu' or cfg['torch_num_threads'] != 1 or cfg['torch_num_interop_threads'] != 1:
@@ -46,11 +55,27 @@ def validate_config(cfg):
         raise ValueError('The inner diagnostic deadline is at most 570 seconds')
     if tuple((c['seed'], c['corridor_count']) for c in cfg['development_cases']) != ORIGINAL_CASES:
         raise ValueError('Preserve all 12 original development cases')
-    return cfg
+    if v1:
+        return cfg
+    return dict(cfg, modes=[dict(zip(('id', 'model', 'policy', 'completed_episodes'), spec))
+                           for spec in expected_modes])
+
+
+def resolve_trained_reference(episode, reference_trained=None, reference_400=None):
+    """One explicit reference; the historical spelling retains its 400 meaning."""
+    if (reference_trained is None) == (reference_400 is None):
+        raise ValueError('Supply exactly one of --reference-trained or --reference-400')
+    if reference_400 is not None and episode != 400:
+        raise ValueError('--reference-400 is only valid for episode 400; use --reference-trained')
+    path = reference_trained if reference_trained is not None else reference_400
+    if not path:
+        raise ValueError('The trained reference path must not be empty')
+    return path
 
 
 def select_reference(rows, episode):
-    matches = [r for r in rows if r.get('completed_episodes') == episode and 'cases' in r]
+    matches = [r for r in rows if type(r.get('completed_episodes')) is int
+               and r['completed_episodes'] == episode and 'cases' in r]
     if len(matches) != 1:
         raise ValueError(f'Require exactly one full reference evaluation for episode {episode}, found {len(matches)}')
     return matches[0]
@@ -83,7 +108,7 @@ def summary_checks(summary, policy, seed, action_seed, forward_rows=None):
 
 
 def validate_reference(reference, episode, training, scope):
-    if (reference['completed_episodes'] != episode or reference['scope'] != scope
+    if (type(reference['completed_episodes']) is not int or reference['completed_episodes'] != episode or reference['scope'] != scope
             or reference['primary_policy'] != 'sample' or reference['case_count'] != 12
             or len(reference['cases']) != 12):
         raise ValueError('Reference episode/scope/policy/population differs from the declared evaluation')
@@ -193,13 +218,19 @@ def run_mode(env, model, mode, scenarios, reference, output, deadline):
     return result
 
 
-def main(argv=None):
+def parse_arguments(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', required=True)
-    parser.add_argument('--checkpoint', required=True, help='Explicit completed-400 checkpoint included by lab --input')
-    parser.add_argument('--reference-400', required=True, help='Explicit full 400-episode development JSON/JSONL')
+    parser.add_argument('--checkpoint', required=True, help='Explicit configured-episode checkpoint included by lab --input')
+    references = parser.add_mutually_exclusive_group(required=True)
+    references.add_argument('--reference-trained', help='Explicit full development JSON/JSONL for the configured trained episode')
+    references.add_argument('--reference-400', help='Historical spelling for an explicit full episode-400 development JSON/JSONL')
     parser.add_argument('--reference-0', required=True, help='Explicit original episode-0 development JSON/JSONL')
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_arguments(argv)
     output = Path(os.environ['LAB_RUN_DIR']).resolve(strict=True)
     if not output.is_dir():
         raise ValueError('LAB_RUN_DIR must be the existing launcher output directory')
@@ -207,11 +238,15 @@ def main(argv=None):
     result = dict(all_checks_passed=False, modes=[], primary_policy='sample')
     try:
         cfg = validate_config(json.loads(Path(args.config).read_text()))
-        input_paths = dict(checkpoint=args.checkpoint, reference400=args.reference_400, reference0=args.reference_0)
+        episode = cfg['checkpoint_completed_episodes']
+        trained_key = f'episode{episode}'
+        trained_reference = resolve_trained_reference(episode, args.reference_trained, args.reference_400)
+        reference_key = 'reference400' if cfg['schema'] == 'bluesky.checkpoint-policy-modes.v1' else 'reference_trained'
+        input_paths = dict(checkpoint=args.checkpoint, **{reference_key: trained_reference}, reference0=args.reference_0)
         input_identity = {key: dict(path=path, sha256=file_digest(path)) for key, path in input_paths.items()}
         write_json(output/'input.json', dict(config=cfg, explicit_inputs=input_identity))
         training = json.loads(Path(cfg['training_config']).read_text())
-        _validate_train_config(training, 400, training['wall_seconds'], None)
+        _validate_train_config(training, episode, training['wall_seconds'], None)
         if training['training_seed'] != cfg['initialization_seed'] or training['development_cases'] != cfg['development_cases']:
             raise ValueError('Current training configuration differs from original initialization or development cases')
 
@@ -236,38 +271,38 @@ def main(argv=None):
         # No module-level deserialization; this is reached only inside the CLI.
         payload = torch.load(args.checkpoint, weights_only=True, map_location='cpu')
         _validate_checkpoint(payload, configs, versions)
-        if payload['completed_episodes'] != 400:
-            raise ValueError('The supplied checkpoint is not completed episode 400')
-        refs = {400: load_reference(args.reference_400, 400), 0: load_reference(args.reference_0, 0)}
-        for episode, reference in refs.items():
-            validate_reference(reference, episode, training, payload['scope'])
+        if payload['completed_episodes'] != episode:
+            raise ValueError(f'The supplied checkpoint is not completed episode {episode}')
+        refs = {episode: load_reference(trained_reference, episode), 0: load_reference(args.reference_0, 0)}
+        for reference_episode, reference in refs.items():
+            validate_reference(reference, reference_episode, training, payload['scope'])
         stored = payload['evaluation']
-        if stored is None or stored.get('completed_episodes') != 400:
-            raise ValueError('Checkpoint lacks its own completed-400 evaluation')
-        differences = difference_paths(scientific(stored), scientific(refs[400]))
+        if stored is None or type(stored.get('completed_episodes')) is not int or stored['completed_episodes'] != episode:
+            raise ValueError(f'Checkpoint lacks its own completed-{episode} evaluation')
+        differences = difference_paths(scientific(stored), scientific(refs[episode]))
         if differences:
-            raise ValueError('400 reference differs from checkpoint evaluation: '+', '.join(differences[:8]))
+            raise ValueError(f'{episode} reference differs from checkpoint evaluation: '+', '.join(differences[:8]))
         nr_differences = difference_paths(scientific([case['nr'] for case in refs[0]['cases']]),
-                                         scientific([case['nr'] for case in refs[400]['cases']]))
-        nr_differences += difference_paths(scientific(refs[0]['aggregate']['nr']), scientific(refs[400]['aggregate']['nr']))
+                                         scientific([case['nr'] for case in refs[episode]['cases']]))
+        nr_differences += difference_paths(scientific(refs[0]['aggregate']['nr']), scientific(refs[episode]['aggregate']['nr']))
         if nr_differences:
-            raise ValueError('Original and 400 NR references differ: '+', '.join(nr_differences[:8]))
+            raise ValueError(f'Original and {episode} NR references differ: '+', '.join(nr_differences[:8]))
         checkpoint_model = copy.deepcopy(initial_model)
         checkpoint_model.load_state_dict(payload['model'], strict=True)
-        models = dict(episode400=checkpoint_model, initial0=initial_model)
+        models = {trained_key: checkpoint_model, 'initial0': initial_model}
         identities = {key: model_digest(model) for key, model in models.items()}
         independent_storage = not ({p.data_ptr() for p in initial_model.parameters()} &
                                    {p.data_ptr() for p in checkpoint_model.parameters()})
-        if not independent_storage or identities['episode400']==identities['initial0']:
+        if not independent_storage or identities[trained_key]==identities['initial0']:
             raise ValueError('Trained and original model states are unexpectedly aliased or identical')
         write_json(output/'effective_config.json', dict(diagnostic=cfg, checkpoint_configs=configs,
             scientific_versions=versions, model_initial_sha256=identities,
             diagnostic_source_sha256=file_digest(__file__), identity_helper_source_sha256=file_digest(Path(__file__).with_name('policy_diagnostic.py')),
-            initialization='Original random.seed/np.random.seed/torch.manual_seed then SharedActorCritic; seed 61001. Model400 is an independent copy loaded strictly from supplied tensors. No optimizer is constructed.',
+            initialization=f'Original random.seed/np.random.seed/torch.manual_seed then SharedActorCritic; seed 61001. Model{episode} is an independent copy loaded strictly from supplied tensors. No optimizer is constructed.',
             source_fact='Paper p.6 specifies sampling during training; its p.17 frozen-policy/Monte-Carlo text does not settle sample versus argmax deployment.'))
         write_json(output/'reused_nr.json', dict(source='both explicit references, verified exact except wall/RSS',
-            nr_native_episodes_executed=0, cases=[dict(seed=c['seed'], nr=c['nr']) for c in refs[400]['cases']],
-            aggregate=refs[400]['aggregate']['nr']))
+            nr_native_episodes_executed=0, cases=[dict(seed=c['seed'], nr=c['nr']) for c in refs[episode]['cases']],
+            aggregate=refs[episode]['aggregate']['nr']))
         # Match the original main's restoration of global RNGs across BlueSky init.
         startup_torch = torch.random.get_rng_state().clone()
         startup_numpy, startup_python = np.random.get_state(), random.getstate()

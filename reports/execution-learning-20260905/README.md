@@ -4,7 +4,7 @@ The figure shows 19 evaluations from 0 through 400 completed episodes from one t
 
 Completion fluctuates between 63.1% and 68.9%, versus NR 359/360, and more than 94% of sampled-policy flights leave the lateral corridor. A lower conflict exposure than NR already occurs in the untrained policy; it is not evidence of learning or an effective baseline. Failures, flight time and containment must be read alongside the risk panels.
 
-`input.json` retains exact aggregate numerators/denominators and source file SHA-256/line references. Repeated episode-15, 100, 150 and 250 sample/NR aggregates were each checked for exact equality and included only once. The renderer checks all rates and population accounting. The original interrupted run and its complete evaluation records remain unchanged. SVG/PNG and metadata are tracked; this renderer produces no PDF.
+`input.json` retains exact aggregate numerators/denominators and source file SHA-256/line references. Repeated episode-15, 100, 150 and 250 sample/NR aggregates were each checked for exact equality and included only once. The renderer checks all rates and population accounting. The original interrupted run and its complete evaluation records remain unchanged. SVG/PNG and metadata are tracked; the renderer also produces PDF, kept locally under the repository exclusion rule.
 
 Actual render: `runs/20260905T100952Z-execution-learning-figure-400-a22a1834`, 3.29 seconds; controller visually checked the PNG for labels, bounds and clipping. Reproduce through the launcher:
 

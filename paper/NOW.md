@@ -1,43 +1,48 @@
 # 当前状态
 
-更新：2026-09-05 UTC。发布分支 `research/trc-baseline-system-20260905`。
+更新：2026-09-05 11:18 UTC。发布分支 `research/trc-baseline-system-20260905`。
 
-## 当前任务与下一步
+## 当前任务
 
-[001：无延迟、无扰动基线](../tasks/001-baseline.md)。12类包络、场景、60动作、7/10维观测/奖励和共享attention PPO已接通。两轮literal训练与跨进程续到第三轮的参数/Adam/RNG及科学开发评价与连续三轮完全一致。7单机诊断已证实有限转弯率与边缘目标仍有越界；8高度成对诊断支持机动完成需同时等待VS稳定。原生末端导航耗尽和真正任务超时已分开记账；比较端点/有限出口及最后capture约束后准备执行语义明确的小训练。当前没有可信有效baseline，所有已观察场景仅作开发诊断。
+[001：无延迟、无扰动基线](../tasks/001-baseline.md)。12类Table3包络、场景入场/退出、60动作、7/10维观测与奖励、共享attention PPO已在真实BlueSky接通。**仍无可信有效baseline，不冻结或开始延迟效果结论。** 所有已观察场景均为开发诊断，未打开新held-out。
 
-10:22已完成旧execution总400轮：sample236/360、53超时、71导航耗尽、343横向越界；仍无有效基线。四部署模式48例全部执行，0/400两sample逐项精确复现；400 argmax298/360但338越界，不能切换主指标或晋升模型。[0–400曲线](../reports/execution-learning-20260905/README.md)、[四模式](../reports/policy-modes-400-20260905/README.md)、[实际Adam首步](../reports/ppo-gradient-100-20260905/README.md)、[传感器六例](../reports/encoded-sensors-20260905/README.md)已验证并保存，400小副本及本批报告已随cc482f0私有备份，远端SHA核对一致。
+用户10h授权：**05:15:13–15:15:13 UTC**，**14:45:13开始收尾**。有效名义基线为主，论文扰动/后续延迟机制核验为辅；不跨截止启动负载、不提前发送完成通知。
 
-**下一步已因新证据调整：**[50例速度变化/镜像诊断](../reports/route-response-20260905/README.md)证实减速后普通flyby仍沿起始速度缓存，半速Amzn当前半径355.727m而缓存1422.908m；按当前状态刷新中心最大偏离916.518→102.676m，不能保证所有速度改善。新适配器默认关闭、配置显式开启，19项core与3项比较测试通过，独立审查无阻断；[原生集成验证](../reports/navigation-refresh-20260905/README.md)205.973s全部通过，原12例默认关闭精确重放、四固定响应2382物理行及30机NR/sample完整摘要/调用/物理流均精确一致，reset/出生删除/恢复审计通过。开始原初始化的新100轮训练，暂停旧400→600，不跨源码/配置恢复。Table3、bank、宽度、观测、奖励、动作、终止口径均保持；两例唯一末步越界发生于有效出口之后，解释已记录，未静默修统计。
+## 正在运行与下一步
 
-100→101实际Adam探针全部原科学摘要/update精确重现，单步critic目标上升可受历史动量影响，不证明优化器bug。位置/通信及传感器缺陷只完成独立接口和native验证，未训练抗扰PPO；同走廊占NR NMAC92.90%，共同单位缩放不能解释论文三项暴露差异。原143中断原因仍未知。
+[refresh-ppo-100](../runs/20260905T103813Z-refresh-ppo-100-4e103166/status.json)已于11:03:57正常完成100轮及最终评价（内部1541.836s），[小恢复点](../checkpoints/refresh-100-20260905/README.md)含model/Adam/RNG与best50，待本批私有备份。下一段计划同配置100→300、内3300s/外3360s；继续原科学源码535cad4，不跨谱系恢复。
 
-用户已明确启动10h：**2026-09-05 05:15:13–15:15:13 UTC**，14:45:13起预留收尾，不启动跨截止负载。有效名义baseline为主、扰动/非合作机制复现为辅。用户要求保留且不影响其他人的两个GPU实验；本块采用CPU、不向共享GPU提交计算，单launcher、低优先级、初始单线程与小负载，资源紧张则缩减/暂停我们的任务。共享主机无法保证绝对零影响，不能据当前空闲资源作此承诺。详细预算/交接见任务001最新执行记录。
+新100/原0的[四模式对照](../reports/policy-modes-refresh-100-20260905/README.md)已完成48例、两sample精确复现，模型/输入不变；100argmax306/360、334width、NMAC162.230/h，原0argmax240/360，仍未形成有效baseline。8项模式fixture、标题实际导出回归及[0–100五点图](../reports/refresh-learning-20260905/README.md)已验证。当前本批待push，随后恢复100→300。
 
-项目Python 3.11.13及BlueSky 1.1.1由uv独立管理并在实际沙箱中验证，配置/锁文件随Git保存，见 [环境说明](../docs/ENVIRONMENT.md)。系统启动器仍可用3.10.12；主机权限下启动lab后已验证RTX4090/CUDA12.8实际计算，本块安装并锁定PyTorch2.9.1+cpu，CPU前向/反向与参数更新已通过；不使用共享GPU。
+| 新refresh谱系，原12开发例/360架次 | 完成 | 超时 | 导航耗尽 | 横向越界架次 | NMAC / LoWC无向pair-s每flight-hour |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NR初评 | 360 | 0 | 0 | 16 | 161.164 / 648.535 |
+| 未训练sample | 246 | 53 | 61 | 339 | 78.926 / 435.953 |
+| 25轮sample | 240 | 53 | 67 | 334 | 88.123 / 443.939 |
+| 50轮sample | 252 | 53 | 55 | 336 | 76.568 / 423.420 |
+| 75轮sample | 251 | 53 | 56 | 337 | 84.148 / 459.933 |
+| 100轮sample | 240 | 53 | 67 | 341 | 78.075 / 415.963 |
 
-## 最新可信结论
+上述各项均0高度越界；50轮较初始有所改善，75轮冲突暴露回升，尚无稳定趋势或可信containment。完成本段后保存实际checkpoint/完整评价与曲线，再按剩余墙钟及实测吞吐决定同配置续训。新四模式诊断v2的8项fixture和native重放均通过；sample保持主指标，argmax单独报告。不得把两种解码/旧新执行版本混成一条学习曲线。
 
-- [CUDA核函数实测](../runs/20260905T050609Z-cuda-kernel-probe-20d365fd/log.txt)：RTX4090、驱动580.173.02、Toolkit/Runtime12.8，lab/Bubblewrap内4096个整数计算全部正确，输出分配16KiB。普通受限会话没有/dev/nvidia*，不能直接启动GPU负载；通过获准的主机执行权限启动原有lab成功，未修改隔离/驱动/设备权限。查询时显存空闲3492MiB（约3.4GiB），该探针本身不提供PyTorch/PPO训练性能结论。
-- 用户要求追查显存：2026-09-05 05:08–05:09 UTC只读查询显示两个其他项目的IsaacLab训练进程（PID3059945/3062529）分别占9831/9771MiB，各1024并行环境、已运行约20h22m；GPU当时利用率99%。详情见任务001末节，PID与占用仅为该时刻快照，未来运行前重查。
-- 05:12 UTC资源评估：Ryzen9 7950X、当前CPU affinity可用32线程，1/5/15分钟load约2.06/2.12/2.18，MemAvailable约61.6GiB。后续用户要求不影响其他GPU实验，因此当前块CPU先行，取消原拟共享GPU性能比较；不把小CUDA探针当训练速度证据。
-- [新NR诊断](../runs/20260905T044040Z-paper-nr-final-44ce1be4/artifacts/result.json)：8个新开发场景、240/240架次完成、0超时；LoWC/NMAC连续采样事件397/253，暴露27557.25/6285.25无向pair-s，累计38.9025 flight-hours。所有场景均有冲突；其中17/3个事件入场即出现。冲突信号不稀缺，尚不证明策略可学会解脱。
-- 发现训练前需处理的跟踪问题：7/240架次（全部Amzn）超过走廊半宽76.2m，最大偏离363.15m，累计64.25 aircraft-s。保存的seed51005/F025单机逐步重放精确复现363.146m偏离，峰值原生bank25°/转弯半径1422.908m，见任务最新记录；到达率100%不证明走廊约束满足。最终NR的all_checks_passed仅指其列明的运行/计数检查。
-- [12机型原生包络诊断](../runs/20260905T043537Z-paper-performance-probe-1319e270/artifacts/performance_probe.json)22个检查通过，实际测到最大TAS、爬升/下降及±3.5m/s²；原生bank、垂直加速度和高度捕获未改。[最新回归](../runs/20260905T044023Z-paper-environment-final-tests-d38dfe5b/log.txt)44项通过。本项性能诊断不构成PPO有效性证据。
-- 主线程通知已接入[随Git维护的脚本](../tools/notify.py)，沿用已有ntfy订阅，用户已确认收到；子agent过滤、去重与重试测试通过。入口/恢复见[系统说明](../docs/SYSTEM.md)。
-- 系统重建及精简复核完成，见 [任务000](../tasks/000-system.md)。日常只维护NOW与当前任务，其余文档按事件更新；移除无消费者的index，新增doctor入口/断链检查；旧技能整套归档，退出自动发现路径。
-- 早前[3种构造诊断](../runs/20260905T030644Z-bluesky-nr-final-b9a03656/artifacts/result.json)保留作回归，不计为新增独立训练/测试场景。Python实际身份见[uv-environment](../runs/20260905T024306Z-uv-environment-49a6e0d4/artifacts/environment.json)。
-- [新环境同链路人口诊断](../runs/20260905T054206Z-paper-env-population-be961306/artifacts/result.json)：seed51001 NR与固定名义动作完全一致，也复现先前NR的30/30完成及安全暴露；随机合法动作只有21/30完成、27/30越界，最远偏离20.23km，不能把其较低NMAC率视为有效改善。构造双机交叉的固定上下分层则2/2完成且消除冲突；这仅证明该构造场景可解脱。
-- [执行几何图](../reports/route-execution-20260905/README.md)7例全到达但6例越界；[高度机动诊断](../runs/20260905T065518Z-vertical-lock-eight-fixed-a518ad01/artifacts/result.json)四机型成对反复上下动作，settled-VS条件均无高度越界，literal Amzn最大高出16.283m。完整random人口的该候选也无高度越界，但横向边缘仍不满足约束；较早失败删除减少长尾，不可当安全改善。默认literal原参考重放仍一致。
-- 作者2024论文、少量公开CSV、BlueSky fork及另4个旧仓库已定向只读核验，见REPRODUCTION/SOURCES。尚不足确定2026完整导航/网络；旧fork Amzn44m/s与Table3 196kt不一致，当前不替换论文包络，正做分离速度/普通flyby刷新敏感性。
-- 旧surrogate模型没有改善冲突；新PPO仍无可信有效基线证据，不能冻结后跳到延迟结论。旧24个已看过场景仅可用于诊断。
-- 原论文已恢复并核对身份，见 [文献记录](../resources/literature/manifest.json)。历史材料和恢复缺失情况见 [归档入口](../legacy/README.md)，不激活旧半成品。
-- 目的、参照论文、四条改进方向和目标期刊集中在PLAN，原文参数/页码在REPRODUCTION。目标特刊联合客座编辑现行主页仍公开征稿，列截止2026-12-30，出版社搜索索引一致；完整CFP、具体投稿要求及系统实时选项仍未核实，见SOURCES。
+## 支持当前选择的证据
 
-## 剩余边界
+- [导航刷新验证](../reports/navigation-refresh-20260905/README.md)：19相关core测试+3比较测试通过；205.973s原生集成全部通过。默认关闭原12例NR/sample科学摘要逐项复现；开启四固定响应2382物理行，以及30机NR/sample每机记录、实际调用与物理流，均精确等于已审计外部刷新。出生/删除/reset/恢复已实测。
+- [50例固定响应](../reports/route-response-20260905/README.md)：减速后原生缓存仍1422.908m，而半速Amzn当前半径355.727m；中心最大偏离916.518→102.676m。1.05倍速度并非改善，不能声称普遍安全。Table3、bank、宽度、动作、观测、奖励及终止口径保持；两例唯一末步越界位于有效出口之后，保留原始统计与单独解释。
+- [旧400轮模型](../checkpoints/execution-400-20260905/README.md)及[0–400曲线](../reports/execution-learning-20260905/README.md)完整保留，暂停旧400→600。旧sample400为236/360、53超时71耗尽、343width；[四解码对照](../reports/policy-modes-400-20260905/README.md)中400argmax298/360但338width，仍不构成有效基线。严格源码/配置身份禁止将其恢复或迁移到新refresh谱系。
+- [训练预算](../reports/training-budget-20260905/README.md)：原文250k指每轮计划30机场景的外层收集/训练次数；旧400仅0.16%。已存全部400轮实际1616717转移、25463Adam步。新旧轮数不相加，不能称按论文规模验证失败。[真实Adam探针](../reports/ppo-gradient-100-20260905/README.md)完整原更新精确重现，未发现可据此确诊的优化器bug。
+- [位置/通信规范](PERTURBATIONS.md)和[传感器六例](../reports/encoded-sensors-20260905/README.md)独立接口已验证，零扰动逐bit/物理重放一致；尚无扰动PPO/抗扰收益或NC实现。[暴露审计](../reports/exposure-audit-20260905/README.md)显示同走廊占NR NMAC92.90%，共同单位缩放不能解释原文暴露比例差异。
 
-首个小型CPU诊断恢复点已随私有GitHub分支备份（提交82fd7cf），包含模型/Adam/RNG及配置、评价和native续训比较，见checkpoints/literal-pilot-20260905。原始runs、本地PDF及历史恢复归档仍未独立备份；后续重要checkpoint继续另行保存，不能把这一份小诊断当成全项目备份。
+## 运行与恢复约束
 
-旧完整Git历史保留在本地 `research/trc-reboot-20260904`；其中历史大文件被GitHub拒收，因此发布分支从当前系统快照开始，详见任务000。
+本块只用**CPU14、单线程、nice15、idle IO、一个lab job**；每进程地址空间4096MiB、当前输出预算256MiB。用户要求不干预其他人的两个GPU实验；不向GPU提交计算，不发信号/调整其进程。10:30只读快照仍见PID3059945/3062529，显存9891/9771MiB、GPU98%；快照不证明外部吞吐绝对零影响。负载紧张则缩减/暂停我们自己的任务。
 
-接手读本页、任务001与 [PLAN](PLAN.md)，再按需查 [复现表](REPRODUCTION.md) 和SOURCES。提交与远端同步状态直接查Git，不在本页重复维护。
+Python3.11.13/BlueSky1.1.1由uv独立管理，PyTorch2.9.1+cpu已锁定并完成真实前向/反向更新。CUDA12.8曾通过16KiB小核函数诊断，仅证明可见性/计算；本10h不用GPU。入口见[环境](../docs/ENVIRONMENT.md)与[系统](../docs/SYSTEM.md)。所有项目测试/实验走lab/Bubblewrap固定只读源码快照，不运行legacy或裸负载。旧143中断原因仍未知，后续正常退出不能反推发送者；原证据保留在任务中。
+
+已备份私有GitHub：旧400及诊断`cc482f0`，已验证刷新源码/报告`535cad4`，均核对远端SHA。新100小副本已保存、待本批远端备份；原始runs、本地PDF及历史恢复归档仍无完整独立备份。Git实际状态以查询为准。
+
+主线程完成本10h后沿已确认ntfy渠道执行 `python3 -B tools/notify.py --complete`；子agent不通知。完成前更新本页和任务、保存模型/报告并同步私有分支。
+
+## 按需入口
+
+[PLAN：目的、期刊和研究路线](PLAN.md) · [REPRODUCTION：论文参数/重建差异](REPRODUCTION.md) · [SOURCES：源索引](SOURCES.md) · [DECISIONS：选择依据](DECISIONS.md) · [LESSONS：可复用教训](LESSONS.md)。系统重建历史见[任务000](../tasks/000-system.md)，不重新启用旧控制链。

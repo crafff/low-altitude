@@ -118,6 +118,9 @@ def load_input(path):
         raise ValueError(f"input schema must be {INPUT_SCHEMA!r}")
     if document.get("scope") != SCOPE:
         raise ValueError("input scope must match the execution-semantics development diagnostic")
+    figure_title = document.get("title", TITLE)
+    if not isinstance(figure_title, str) or not figure_title.strip() or len(figure_title) > 120 or "\n" in figure_title:
+        raise ValueError("title must be a nonempty single line of at most 120 characters")
     rows = document.get("rows")
     if not isinstance(rows, list) or not rows:
         raise ValueError("rows must contain at least one completed-checkpoint evaluation")
@@ -155,6 +158,7 @@ def load_input(path):
 def render(input_path, output_directory):
     """Render SVG/PNG/PDF with CPU Agg and an owned writable font-cache directory."""
     document, rows, planned, input_sha = load_input(input_path)
+    figure_title = document.get("title", TITLE)
     output = Path(output_directory)
     if not output.is_dir():
         raise ValueError("LAB_RUN_DIR must be the launcher's existing output directory")
@@ -242,7 +246,7 @@ def render(input_path, output_directory):
                     handles, labels = axes[0, 0].get_legend_handles_labels()
                     figure.legend(handles, labels, loc="upper center", bbox_to_anchor=(.5, .929),
                                   ncol=2, frameon=False, fontsize=10)
-                    figure.suptitle(TITLE, fontsize=16, fontweight="semibold", y=.992)
+                    figure.suptitle(figure_title, fontsize=16, fontweight="semibold", y=.992)
                     figure.text(.5, .949, "Development only / containment unresolved",
                                 ha="center", va="center", fontsize=11, color="#8C2D04")
                     figure.text(.075, .045,
@@ -264,7 +268,8 @@ def render(input_path, output_directory):
                 os.environ["MPLCONFIGDIR"] = previous_mpl_config
     metadata = {"schema": "execution-learning-curve-plot-metadata.v1", "scope": document["scope"],
                 "input_schema": INPUT_SCHEMA, "input_path": str(input_path), "input_sha256": input_sha,
-                "title": TITLE, "parameters": parameters, "checkpoint_count": len(rows),
+                "title": figure_title, "parameters": parameters, "checkpoint_count": len(rows),
+                "renderer_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "source_records": document["source_records"],
                 "source_record_verification": "Provenance copied from controller input; referenced source files are not read by this renderer.",
                 "interpretation": "Paired development observations; not held-out evidence, independent replicates, an effective baseline or a containment guarantee.",

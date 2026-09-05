@@ -1,0 +1,25 @@
+{
+  "source_run": "runs/20260905T110609Z-refresh-policy-modes-100-13b09003",
+  "files": {
+    "result.json": {
+      "bytes": 231854,
+      "sha256": "f32c3f65267fb90bb067dfb2b7eae4d6d00bdc1035938e4205c4d0506430fe48"
+    },
+    "effective_config.json": {
+      "bytes": 36567,
+      "sha256": "4812c39794a144d180903c1c5331804cdab8af1c0af0062928b3c7c828c40fd0"
+    },
+    "input.json": {
+      "bytes": 5528,
+      "sha256": "031e34e16344dce289010eb8b1ccbd358ea7c02406ad02e5f2741bfdc9abefc8"
+    },
+    "reused_nr.json": {
+      "bytes": 35910,
+      "sha256": "7ea887c40c54c62988d31e59de9273541e9c39dcec2e9209eca177ef634b3422"
+    },
+    "scenarios.json": {
+      "bytes": 105833,
+      "sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c"
+    }
+  }
+}

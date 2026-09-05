@@ -1,0 +1,77 @@
+{
+  "schema": "training-log-budget-audit.v1",
+  "lineage": "native_cached execution",
+  "completed_episodes": 400,
+  "source_records": [
+    {
+      "path": "checkpoints/execution-pilot-20260905/training.jsonl",
+      "sha256": "94817bef5073a656dce7665632d17ebd743a0a15962d10c631497dd129c9c00e",
+      "first_episode": 1,
+      "last_episode": 15,
+      "rows": 15
+    },
+    {
+      "path": "checkpoints/execution-recovery-65-20260905/training.jsonl",
+      "sha256": "86b9b5df7ee113b73be569eb1d16386ec067a02b7122b375b97bc351dfeecbb5",
+      "first_episode": 16,
+      "last_episode": 65,
+      "rows": 50
+    },
+    {
+      "path": "checkpoints/execution-100-20260905/training.jsonl",
+      "sha256": "dfffef641359f1655937910fc1b323a5a5f9dc488ea2dd8f75b15b6a2aaa919c",
+      "first_episode": 66,
+      "last_episode": 100,
+      "rows": 35
+    },
+    {
+      "path": "checkpoints/execution-150-20260905/training.jsonl",
+      "sha256": "e6a7d4d3e0b6ce490bc5163533371ba8dbf053e448ac5d2383439f3574e349d7",
+      "first_episode": 101,
+      "last_episode": 150,
+      "rows": 50
+    },
+    {
+      "path": "checkpoints/execution-250-20260905/training.jsonl",
+      "sha256": "4d72c2503d3b6c1ee644371949c1f57e5822a7fea83f1938535cde01b843720a",
+      "first_episode": 151,
+      "last_episode": 250,
+      "rows": 100
+    },
+    {
+      "path": "checkpoints/execution-400-20260905/training.jsonl",
+      "sha256": "4ee55f7128b23f41b8a8e9b4edcc17a099f2de3a91bc2cc8dbb20d46637b9d92",
+      "first_episode": 251,
+      "last_episode": 400,
+      "rows": 150
+    }
+  ],
+  "checks": {
+    "complete_episode_range_1_to_400": true,
+    "exact_scenario_seed_stream": true,
+    "thirty_planned_flights_each": true,
+    "one_visit_per_sample_and_ceil_batch64_each": true
+  },
+  "totals": {
+    "planned_aircraft": 12000,
+    "transitions": 1616717,
+    "sample_visits": 1616717,
+    "adam_steps": 25463,
+    "global_decisions": 131621,
+    "training_flight_hours": 2244.6073611111115,
+    "collection_and_update_wall_seconds": 3306.3474149871618
+  },
+  "transitions_per_episode": {
+    "min": 3116,
+    "max": 5082,
+    "mean": 4041.7925
+  },
+  "paper_outer_episode_budget": 250000,
+  "fraction_of_paper_episode_count": 0.0016,
+  "limits": [
+    "Read-only aggregation of saved logs, not a new rollout or model load.",
+    "Wall total includes the logged collection/update only; it excludes development evaluations, setup and backup overhead.",
+    "One training trajectory, no held-out evidence.",
+    "Author truncation frequency and total training transitions/Adam steps are not disclosed; episode count does not ensure equal data budgets."
+  ]
+}

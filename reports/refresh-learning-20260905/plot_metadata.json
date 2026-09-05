@@ -1,0 +1,240 @@
+{
+  "schema": "execution-learning-curve-plot-metadata.v1",
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "input_schema": "execution-learning-curve.v1",
+  "input_path": "reports/refresh-learning-20260905/input.json",
+  "input_sha256": "42937556696a14e83ea746c2222f21a33c067d2fcf6b231bbd6fb3be3663a555",
+  "title": "Current-state flyby refresh: PPO development diagnostic",
+  "parameters": {
+    "figure_size_inches": [
+      14.0,
+      8.7
+    ],
+    "png_dpi": 300,
+    "x_scale": "linear",
+    "episode_coordinates": [
+      0,
+      25,
+      50,
+      75,
+      100
+    ],
+    "smoothing": false,
+    "error_bars": false,
+    "significance_annotations": false,
+    "policy": "sample",
+    "comparison": "NR",
+    "fraction_denominator": "planned",
+    "planned_flights_per_policy_per_checkpoint": 360,
+    "risk_units": "unordered pair-seconds / flight-hour",
+    "risk_rate_formula": "sum(unordered_pair_seconds) / sum(flight_hours)",
+    "mean_flight_seconds_formula": "flight_hours * 3600 / planned",
+    "percentage_axis_limits": [
+      -3.0,
+      103.0
+    ],
+    "percentage_axis_padding": "Visual marker padding around the complete physical 0\u2013100% range",
+    "numeric_consistency_relative_tolerance": 1e-10,
+    "numeric_consistency_absolute_tolerance": 1e-10,
+    "x_axis_limits": [
+      0.0,
+      104.0
+    ],
+    "y_axis_limits": {
+      "completed_percent": [
+        -3.0,
+        103.0
+      ],
+      "nmac_seconds_per_flight_hour": [
+        0.0,
+        180.50359457449446
+      ],
+      "lowc_seconds_per_flight_hour": [
+        0.0,
+        726.3593157913376
+      ],
+      "outside_corridor_percent": [
+        -3.0,
+        103.0
+      ],
+      "mean_flight_seconds": [
+        0.0,
+        749.8913333333336
+      ],
+      "failure_percent": [
+        -3.0,
+        103.0
+      ]
+    }
+  },
+  "checkpoint_count": 5,
+  "renderer_source_sha256": "273665aa2233ae1b6435f39a16c8432c07c5acaea14339f9af39dbd7a2f76a63",
+  "source_records": [
+    {
+      "run": "runs/20260905T103813Z-refresh-ppo-100-4e103166",
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
+      "line": 1,
+      "completed_episodes": 0
+    },
+    {
+      "run": "runs/20260905T103813Z-refresh-ppo-100-4e103166",
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
+      "line": 2,
+      "completed_episodes": 25
+    },
+    {
+      "run": "runs/20260905T103813Z-refresh-ppo-100-4e103166",
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
+      "line": 3,
+      "completed_episodes": 50
+    },
+    {
+      "run": "runs/20260905T103813Z-refresh-ppo-100-4e103166",
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
+      "line": 4,
+      "completed_episodes": 75
+    },
+    {
+      "run": "runs/20260905T103813Z-refresh-ppo-100-4e103166",
+      "path": "checkpoints/refresh-100-20260905/development.jsonl",
+      "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
+      "line": 5,
+      "completed_episodes": 100
+    }
+  ],
+  "source_record_verification": "Provenance copied from controller input; referenced source files are not read by this renderer.",
+  "interpretation": "Paired development observations; not held-out evidence, independent replicates, an effective baseline or a containment guarantee.",
+  "plotted_values": [
+    {
+      "completed_episodes": 0,
+      "sample": {
+        "completed_percent": 68.33333333333333,
+        "outside_corridor_percent": 94.16666666666667,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 16.944444444444443,
+        "mean_flight_seconds": 669.4583333333334,
+        "nmac_seconds_per_flight_hour": 78.92574842845583,
+        "lowc_seconds_per_flight_hour": 435.95319599178436
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 25,
+      "sample": {
+        "completed_percent": 66.66666666666667,
+        "outside_corridor_percent": 92.77777777777777,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 18.61111111111111,
+        "mean_flight_seconds": 669.5458333333335,
+        "nmac_seconds_per_flight_hour": 88.1231680679067,
+        "lowc_seconds_per_flight_hour": 443.93898849344384
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 50,
+      "sample": {
+        "completed_percent": 70.0,
+        "outside_corridor_percent": 93.33333333333333,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 15.277777777777779,
+        "mean_flight_seconds": 667.6701388888888,
+        "nmac_seconds_per_flight_hour": 76.56849845805013,
+        "lowc_seconds_per_flight_hour": 423.4201644399836
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 75,
+      "sample": {
+        "completed_percent": 69.72222222222223,
+        "outside_corridor_percent": 93.61111111111111,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 15.555555555555555,
+        "mean_flight_seconds": 668.5263888888888,
+        "nmac_seconds_per_flight_hour": 84.1477628033465,
+        "lowc_seconds_per_flight_hour": 459.93322793291213
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 100,
+      "sample": {
+        "completed_percent": 66.66666666666667,
+        "outside_corridor_percent": 94.72222222222223,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 18.61111111111111,
+        "mean_flight_seconds": 667.8236111111111,
+        "nmac_seconds_per_flight_hour": 78.07450819723273,
+        "lowc_seconds_per_flight_hour": 415.9631306503506
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    }
+  ],
+  "versions": {
+    "python": "3.11.13",
+    "matplotlib": "3.11.1",
+    "backend": "Agg"
+  },
+  "outputs": [
+    {
+      "filename": "learning_curve.svg",
+      "sha256": "d6aab3f08e5208fb3f05136ee54d1aa3fb4318bc4db21689eb13b37050ec7670",
+      "bytes": 64529
+    },
+    {
+      "filename": "learning_curve.png",
+      "sha256": "8ff85fafe75538caa4060a95d8c1bb274a03d0484b6fee700a72b2f68912dc18",
+      "bytes": 471285
+    },
+    {
+      "filename": "learning_curve.pdf",
+      "sha256": "64c797d2a7dc788d8708c8b55da10b6d44d59af1a2cd7cd9218f7847a6dd554a",
+      "bytes": 41068
+    }
+  ]
+}

@@ -21,6 +21,12 @@
 | 原baseline规模 | 250k训练episodes；每场景对照相同初态No Resolution；评价约1300–1400累计飞行小时 | 6、17–18、29 |
 | 原baseline结果参照 | 报告6.88 s LoWC/h、0.59 s NMAC/h；需先统一计数和分母再比较，不把该值当任意小pilot的硬门槛 | 18、29 |
 
+## 训练预算口径（10:43续核）
+
+原文核对：p.6/Algorithm1的episode由整场experience收集和随后training组成，p.17每轮随机3–5走廊、计划30架次，故250k不是逐机架次/decision/minibatch数。p.18 Fig10(c)虽标Epoch，正文对应外层250k episodes。K=1是收集结束后一次小批次遍历、B=64为样本数；当前每轮Adam步数是ceil(逐机transitions/64)。当前旧400只是原文外层预算0.16%，不能称按论文规模验证失败；新refresh从头计数，不能加到旧400上。
+
+作者p.7的120s real-time收集截止、p.17每机1200s与暂时空人口的处理仍有歧义，不能保证250k恰好750万完整飞行轨迹；原文未报告总transitions/Adam步数或实时截断频率。未找到名义baseline明确预热、模仿初始化、难度课程、lr调度或critic预训练；也未明确advantage/return归一化、尾batch/打乱或梯度裁剪。当前整episode合并优势标准化一次、returns不缩放、全局clip.5、固定lr且无KL提前停止，继续标为重建选择。原文约20k达到80%是学习曲线描述，非课程切换。详细源页/当前日志预算见[预算记录](../reports/training-budget-20260905/README.md)。
+
 ## 机型表（Table3，PDF p.16–17）
 
 名义巡航速度为下列最大速度的80%，保留异质性能。作者未深入验证flight envelope；这些不是实机安全保证。各行加速度均为±3.5 m/s²。
