@@ -1,0 +1,66 @@
+{
+  "schema": "research.evidence-backup.v1",
+  "scope": "Fixed action diagnostics; raw whole-tick records unchanged",
+  "files": [
+    {
+      "source": "runs/20260905T193130Z-action-containment-smoke-1bdb3f94/artifacts/result.json",
+      "backup": "smoke-result.json",
+      "bytes": 575419,
+      "sha256": "99efa043950107f86a7de1de00ad2132e4566af75810582111313d841b4eddd0"
+    },
+    {
+      "source": "runs/20260905T193130Z-action-containment-smoke-1bdb3f94/artifacts/fixtures.json",
+      "backup": "smoke-fixtures.json",
+      "bytes": 18589,
+      "sha256": "3fb97ec95fae6aafc9f04ff5fc9480a986b9c10bc4aed4924a610aab70963dfc"
+    },
+    {
+      "source": "runs/20260905T193347Z-action-containment-full-d422bb68/artifacts/result.json",
+      "backup": "full-result.json",
+      "bytes": 12864559,
+      "sha256": "31800271ad48bc8af31ce17d0126ce3fdd0d975d235b88dc3e6d2f88e9f3d8f9"
+    },
+    {
+      "source": "runs/20260905T193347Z-action-containment-full-d422bb68/artifacts/fixtures.json",
+      "backup": "full-fixtures.json",
+      "bytes": 394588,
+      "sha256": "5470143abeeb62135aa1f2e73723ea78af344a58eb47f712b44331aad61a2041"
+    },
+    {
+      "source": "runs/20260905T194917Z-capture-guide-baseline-61f3eef4/artifacts/result.json",
+      "backup": "guide-baseline-result.json",
+      "bytes": 228449,
+      "sha256": "e3818db99a553228a940aaa96d8cdafcb2489dd80e2cfd58135ae89d1a3089e9"
+    },
+    {
+      "source": "runs/20260905T194917Z-capture-guide-baseline-61f3eef4/artifacts/fixtures.json",
+      "backup": "guide-baseline-fixtures.json",
+      "bytes": 8761,
+      "sha256": "43e6042071e2fbdf85722d665e56f96d01299a620bb4b2f806af6c8a2962c9c8"
+    },
+    {
+      "source": "runs/20260905T194917Z-capture-guide-baseline-61f3eef4/artifacts/intervention.json",
+      "backup": "guide-baseline-intervention.json",
+      "bytes": 30929,
+      "sha256": "27fbc268ba73bb1b414385ec5fc2f2e2672c6cfd3e72cd5effbbea3505f92ba9"
+    },
+    {
+      "source": "runs/20260905T195030Z-capture-guide-candidate-1bc88170/artifacts/result.json",
+      "backup": "guide-candidate-result.json",
+      "bytes": 216489,
+      "sha256": "3e005de9f732e294d417b03db6627eba11ab31b3efebc291a88d7ddb112e62e6"
+    },
+    {
+      "source": "runs/20260905T195030Z-capture-guide-candidate-1bc88170/artifacts/fixtures.json",
+      "backup": "guide-candidate-fixtures.json",
+      "bytes": 8761,
+      "sha256": "43e6042071e2fbdf85722d665e56f96d01299a620bb4b2f806af6c8a2962c9c8"
+    },
+    {
+      "source": "runs/20260905T195030Z-capture-guide-candidate-1bc88170/artifacts/intervention.json",
+      "backup": "guide-candidate-intervention.json",
+      "bytes": 140456,
+      "sha256": "bbf89ff170571867edf22179bed60cd98de3765443f6eb6cb0b70f7389219d28"
+    }
+  ]
+}
