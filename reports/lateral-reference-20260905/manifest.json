@@ -1,0 +1,128 @@
+{
+  "schema": "research.artifact-backup.v1",
+  "files": [
+    {
+      "path": "first2-result.json",
+      "source_path": "runs/20260905T202557Z-lateral-reference-first2-a2a5418c/artifacts/result.json",
+      "bytes": 8545,
+      "sha256": "5922382df5002aadc7de0ec38fc1b10f2f4e7300b7902bbcb867444871b55936"
+    },
+    {
+      "path": "first2-traces.jsonl.gz",
+      "source_path": "runs/20260905T202557Z-lateral-reference-first2-a2a5418c/artifacts/traces.jsonl.gz",
+      "bytes": 82161,
+      "sha256": "2ba522cd05f0121b8f61a6a8b574544ae33f509bb0e189d0a21c0f7d6200a4d9"
+    },
+    {
+      "path": "first2-certificates.jsonl.gz",
+      "source_path": "runs/20260905T202557Z-lateral-reference-first2-a2a5418c/artifacts/certificates.jsonl.gz",
+      "bytes": 55527,
+      "sha256": "94c4377ec696c9d8828d171ae4065a0239df8e62116768b562202ed83eb04c9c"
+    },
+    {
+      "path": "initial24-result.json",
+      "source_path": "runs/20260905T202649Z-lateral-reference-smoke-055d8347/artifacts/result.json",
+      "bytes": 92926,
+      "sha256": "bbf71d16d29d9865ff4136eb9a67cfdc9de51e85d79dea0cf3d5484b8906e34d"
+    },
+    {
+      "path": "initial24-traces.jsonl.gz",
+      "source_path": "runs/20260905T202649Z-lateral-reference-smoke-055d8347/artifacts/traces.jsonl.gz",
+      "bytes": 809288,
+      "sha256": "fbacdc74970fec993556fdece96a95726eff31bc9524e51688e09fe0e4f33bb1"
+    },
+    {
+      "path": "initial24-certificates.jsonl.gz",
+      "source_path": "runs/20260905T202649Z-lateral-reference-smoke-055d8347/artifacts/certificates.jsonl.gz",
+      "bytes": 603339,
+      "sha256": "2a1acb1a14bde672f13a3cfe5b9eabbf56f614e9636f204d8aae20960958c1e9"
+    },
+    {
+      "path": "corrected24-result.json",
+      "source_path": "runs/20260905T203154Z-lateral-reference-exit-fixed-7e279eb2/artifacts/result.json",
+      "bytes": 104223,
+      "sha256": "0faa8f4bc8b30c74008a52371c8c158ae8dd86580eb176622bc6fe8df139ee7d"
+    },
+    {
+      "path": "corrected24-traces.jsonl.gz",
+      "source_path": "runs/20260905T203154Z-lateral-reference-exit-fixed-7e279eb2/artifacts/traces.jsonl.gz",
+      "bytes": 809170,
+      "sha256": "115cbac25b2fb8ce9e822bb37ef4b048614dbc2622e5d3fb4658f27dafec23c6"
+    },
+    {
+      "path": "corrected24-certificates.jsonl.gz",
+      "source_path": "runs/20260905T203154Z-lateral-reference-exit-fixed-7e279eb2/artifacts/certificates.jsonl.gz",
+      "bytes": 604844,
+      "sha256": "dcbf5b205c3a5cafaea230bf202afe2f2730ae6ad45f40303987951973c51037"
+    },
+    {
+      "path": "types12-result.json",
+      "source_path": "runs/20260905T203330Z-lateral-reference-types12-a55b4178/artifacts/result.json",
+      "bytes": 626676,
+      "sha256": "1535157f934d87aaeef2c8486c3d7294d8ffe0e2ebbc3d8694b866cd1cc273b1"
+    },
+    {
+      "path": "types12-traces.jsonl.gz",
+      "source_path": "runs/20260905T203330Z-lateral-reference-types12-a55b4178/artifacts/traces.jsonl.gz",
+      "bytes": 5186711,
+      "sha256": "8318eabfce3828e613353349780ef23e726be72273815a468133cfccf973f114"
+    },
+    {
+      "path": "types12-certificates.jsonl.gz",
+      "source_path": "runs/20260905T203330Z-lateral-reference-types12-a55b4178/artifacts/certificates.jsonl.gz",
+      "bytes": 3734242,
+      "sha256": "49361dd3ba2f3b4dd0a39a61737475ccbb4562b2b12642d5a84a409583e2b96e"
+    }
+  ],
+  "runs": [
+    {
+      "run_path": "runs/20260905T202557Z-lateral-reference-first2-a2a5418c",
+      "state": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-09-05T20:25:57.391646+00:00",
+      "finished_at": "2026-09-05T20:26:05.405860+00:00"
+    },
+    {
+      "run_path": "runs/20260905T202649Z-lateral-reference-smoke-055d8347",
+      "state": "failed",
+      "exit_code": 1,
+      "started_at": "2026-09-05T20:26:49.603497+00:00",
+      "finished_at": "2026-09-05T20:27:09.847816+00:00"
+    },
+    {
+      "run_path": "runs/20260905T203154Z-lateral-reference-exit-fixed-7e279eb2",
+      "state": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-09-05T20:31:54.752930+00:00",
+      "finished_at": "2026-09-05T20:32:15.193829+00:00"
+    },
+    {
+      "run_path": "runs/20260905T203330Z-lateral-reference-types12-a55b4178",
+      "state": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-09-05T20:33:30.309533+00:00",
+      "finished_at": "2026-09-05T20:35:01.395164+00:00"
+    },
+    {
+      "run_path": "runs/20260905T202547Z-lateral-plan-tests-3aab4c3d",
+      "state": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-09-05T20:25:47.843870+00:00",
+      "finished_at": "2026-09-05T20:25:47.963746+00:00"
+    },
+    {
+      "run_path": "runs/20260905T203126Z-lateral-exit-tests-d355da61",
+      "state": "succeeded",
+      "exit_code": 0,
+      "started_at": "2026-09-05T20:31:26.489492+00:00",
+      "finished_at": "2026-09-05T20:31:26.609455+00:00"
+    }
+  ],
+  "total_bytes": 12717652,
+  "runtime_sources": {
+    ".venv/lib/python3.11/site-packages/bluesky/traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+    ".venv/lib/python3.11/site-packages/bluesky/traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+    ".venv/lib/python3.11/site-packages/bluesky/traffic/aporasas.py": "8705c1e64998a1ab173af3f97a52fd91d06435e02dc3e6a61a05475a6c8c9748",
+    ".venv/lib/python3.11/site-packages/bluesky/tools/aero.py": "4e49e27c04de5fa73659b890d1268a0d6691e5d8052091129a1cbf0c326e2ce1"
+  }
+}

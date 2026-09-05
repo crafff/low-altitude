@@ -1,0 +1,276 @@
+{
+  "schema": "bluesky.lateral-reference-probe.v1",
+  "suite": "smoke",
+  "cases": [
+    {
+      "case_id": "Mavic-v0.5-lane-1-turn+0",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.015043719596624
+        ]
+      ],
+      "reference_steps": 572,
+      "reference_duration_s": 143.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953144,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 4.0230635061645525e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1133083097759673
+        },
+        {
+          "event": "reference_exit",
+          "tick": 572,
+          "time_s": 143.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 572,
+        "fraction": 0.0761517269887748,
+        "cross_track_m": -1.6196793213037026e-07,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0012198672394085077,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.11330844276110545,
+      "target_hold_samples": 96,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane-1-turn-1",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.01244846426726
+        ],
+        [
+          52.009063718690754,
+          4.01244846426726
+        ]
+      ],
+      "reference_steps": 1052,
+      "reference_duration_s": 263.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953144,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 4.0230635061645525e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1133083097759673
+        },
+        {
+          "event": "bend_started",
+          "tick": 464,
+          "time_s": 116.0,
+          "applied_tas_mps": 7.202222222222223,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "bend_ended",
+          "tick": 478,
+          "time_s": 119.5,
+          "nominal_vertex_xy_m": [
+            852.2023518483929,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 624,
+          "time_s": 156.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999998265,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330428955851793
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 720,
+          "time_s": 180.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 844,
+          "time_s": 211.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 0.0,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1132947194699102
+        },
+        {
+          "event": "reference_exit",
+          "tick": 1052,
+          "time_s": 263.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 1052,
+        "fraction": 0.0761712006053349,
+        "cross_track_m": 0.001009404440878825,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0015564746005371766,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7068473532645773,
+      "target_hold_samples": 192,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    }
+  ],
+  "declared_count": 24,
+  "selected_count": 2,
+  "all_checks_passed": true,
+  "validation_complete": true,
+  "promoted": false,
+  "scope": "Constructive cardinal finite single-aircraft demonstrations, not original development scenarios, the paper controller, arbitrary RL actions, or an effectiveness comparison.",
+  "execution_changes": {
+    "lane_inward_reference_bias_m": 1.0,
+    "bend_tas_cap_mps": 12.0,
+    "center_return_before_bend_and_exit": true,
+    "direct_ap_heading_every_s": 0.25,
+    "native_lnav": false,
+    "finite_plans_precomputed": true,
+    "altitude_m": 106.68
+  },
+  "certificate_conditions": {
+    "position_defect_each_axis_m_per_tick": 0.0001,
+    "initial_position_error_each_axis_m": 1e-06,
+    "latitude_band_deg": [
+      51.8,
+      52.2
+    ],
+    "numerical_defect_bound_formally_established": false,
+    "interval_curve": "Linear interpolation of native stored position samples only"
+  },
+  "source_sha256": {
+    "src/lateral_plan.py": "a80972e7a4d5a3586a1fd49712e56ee007dc04b22a07f3f34f8cd95959a2fff8",
+    "src/lateral_reference_probe.py": "0ffe268525bdd8793675515b02a2de0923102c6cc26a3a0f9e2121ca370e540e",
+    "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+  },
+  "wall_seconds": 7.729939649812877
+}

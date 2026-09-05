@@ -1,0 +1,3109 @@
+{
+  "schema": "bluesky.lateral-reference-probe.v1",
+  "suite": "smoke",
+  "cases": [
+    {
+      "case_id": "Mavic-v0.5-lane-1-turn+0",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.015043719596624
+        ]
+      ],
+      "reference_steps": 572,
+      "reference_duration_s": 143.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953144,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 4.0230635061645525e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1133083097759673
+        },
+        {
+          "event": "reference_exit",
+          "tick": 572,
+          "time_s": 143.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 572,
+        "fraction": 0.0761517269887748,
+        "cross_track_m": -1.6196793213037026e-07,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0012198672394085077,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.11330844276110545,
+      "target_hold_samples": 96,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane-1-turn-1",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.01244846426726
+        ],
+        [
+          52.009063718690754,
+          4.01244846426726
+        ]
+      ],
+      "reference_steps": 1052,
+      "reference_duration_s": 263.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953144,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 4.0230635061645525e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1133083097759673
+        },
+        {
+          "event": "bend_started",
+          "tick": 464,
+          "time_s": 116.0,
+          "applied_tas_mps": 7.202222222222223,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "bend_ended",
+          "tick": 478,
+          "time_s": 119.5,
+          "nominal_vertex_xy_m": [
+            852.2023518483929,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 624,
+          "time_s": 156.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999998265,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330428955851793
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 720,
+          "time_s": 180.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 844,
+          "time_s": 211.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 0.0,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1132947194699102
+        },
+        {
+          "event": "reference_exit",
+          "tick": 1052,
+          "time_s": 263.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 1052,
+        "fraction": 0.0761712006053349,
+        "cross_track_m": 0.001009404440878825,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0015564746005371766,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7068473532645773,
+      "target_hold_samples": 192,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane-1-turn+1",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.012448463902589
+        ],
+        [
+          51.99093639227558,
+          4.012448463902589
+        ]
+      ],
+      "reference_steps": 1052,
+      "reference_duration_s": 263.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953144,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 4.0230635061645525e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.1133083097759673
+        },
+        {
+          "event": "bend_started",
+          "tick": 464,
+          "time_s": 116.0,
+          "applied_tas_mps": 7.202222222222223,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "bend_ended",
+          "tick": 478,
+          "time_s": 119.5,
+          "nominal_vertex_xy_m": [
+            852.2023268835907,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 624,
+          "time_s": 156.0,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999998262,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11331232992378057
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 720,
+          "time_s": 180.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 844,
+          "time_s": 211.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.074469631021474e-11,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11332189955967076
+        },
+        {
+          "event": "reference_exit",
+          "tick": 1052,
+          "time_s": 263.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 1052,
+        "fraction": 0.07617137700363617,
+        "cross_track_m": -0.0010094045015875963,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20762696609076,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0015562328461539924,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7068473532645773,
+      "target_hold_samples": 192,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane+1-turn+0",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.015043553770964
+        ]
+      ],
+      "reference_steps": 572,
+      "reference_duration_s": 143.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953147,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801347176734265e-09,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330830977747672
+        },
+        {
+          "event": "reference_exit",
+          "tick": 572,
+          "time_s": 143.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 572,
+        "fraction": 0.07615174134058555,
+        "cross_track_m": 1.6196793213037026e-07,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0012198413981466098,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.11330844276261486,
+      "target_hold_samples": 96,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane+1-turn-1",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.0124482984415994
+        ],
+        [
+          52.00906371869077,
+          4.0124482984415994
+        ]
+      ],
+      "reference_steps": 1052,
+      "reference_duration_s": 263.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953147,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801347176734265e-09,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330830977747672
+        },
+        {
+          "event": "bend_started",
+          "tick": 464,
+          "time_s": 116.0,
+          "applied_tas_mps": 7.202222222222223,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "bend_ended",
+          "tick": 478,
+          "time_s": 119.5,
+          "nominal_vertex_xy_m": [
+            852.1909996835749,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 624,
+          "time_s": 156.0,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000004336,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330428955852105
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 720,
+          "time_s": 180.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 844,
+          "time_s": 211.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 6.070877134334296e-11,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11329471946991333
+        },
+        {
+          "event": "reference_exit",
+          "tick": 1052,
+          "time_s": 263.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 1052,
+        "fraction": 0.07617138139166234,
+        "cross_track_m": 0.0010093653442027062,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008841822064,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0015562014348504901,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7068473532645773,
+      "target_hold_samples": 192,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v0.5-lane+1-turn+1",
+      "type": "Mavic",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.0124482980769285
+        ],
+        [
+          51.99093639227559,
+          4.0124482980769285
+        ]
+      ],
+      "reference_steps": 1052,
+      "reference_duration_s": 263.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 144,
+          "time_s": 36.0,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953147,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11324429912333467
+        },
+        {
+          "event": "request_return",
+          "tick": 240,
+          "time_s": 60.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 364,
+          "time_s": 91.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801347176734265e-09,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11330830977747672
+        },
+        {
+          "event": "bend_started",
+          "tick": 464,
+          "time_s": 116.0,
+          "applied_tas_mps": 7.202222222222223,
+          "requested_tas_mps": 7.202222222222223
+        },
+        {
+          "event": "bend_ended",
+          "tick": 478,
+          "time_s": 119.5,
+          "nominal_vertex_xy_m": [
+            852.1909747187725,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 624,
+          "time_s": 156.0,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999998268,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11331232992378057
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 720,
+          "time_s": 180.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 844,
+          "time_s": 211.0,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 7.776187084963781e-14,
+          "ticks": 124,
+          "heading_rate_fraction": 0.11332189955981452
+        },
+        {
+          "event": "reference_exit",
+          "tick": 1052,
+          "time_s": 263.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 1052,
+        "fraction": 0.07617119621748854,
+        "cross_track_m": -0.0010093652227851635,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20560802115317,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0015564551814541948,
+      "max_local_position_defect_m": 4.225039091920735e-06,
+      "max_tas_reference_error_mps": 1.6900175719314348e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7068473532645773,
+      "target_hold_samples": 192,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v1.05-lane-1-turn+0",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.023695004112648
+        ]
+      ],
+      "reference_steps": 440,
+      "reference_duration_s": 110.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000111162,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 5.371502978933443e-14,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "reference_exit",
+          "tick": 440,
+          "time_s": 110.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 440,
+        "fraction": 0.9994966890550618,
+        "cross_track_m": 0.0,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008822701948,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0019031040274057887,
+      "max_local_position_defect_m": 4.436209110281197e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 2.8808922656654943,
+      "max_actual_yaw_cap_ratio": 0.4357137948090462,
+      "target_hold_samples": 97,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v1.05-lane-1-turn-1",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.019128926288449
+        ],
+        [
+          52.01466235407491,
+          4.019128926288449
+        ]
+      ],
+      "reference_steps": 801,
+      "reference_duration_s": 200.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000111162,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 5.371502978933443e-14,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "bend_started",
+          "tick": 348,
+          "time_s": 87.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "bend_ended",
+          "tick": 370,
+          "time_s": 92.5,
+          "nominal_vertex_xy_m": [
+            1309.5363107740625,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 380,
+          "time_s": 95.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 443,
+          "time_s": 110.75,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999998254,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43569500067912126
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 603,
+          "time_s": 150.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 0.0,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4356385048688268
+        },
+        {
+          "event": "reference_exit",
+          "tick": 801,
+          "time_s": 200.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 800,
+        "fraction": 0.9994945266416225,
+        "cross_track_m": 0.0015379378774014185,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008822701948,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0024566997426858357,
+      "max_local_position_defect_m": 4.436341669133981e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7494552732634564,
+      "target_hold_samples": 194,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Mavic-v1.05-lane-1-turn+1",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.0191289238854955
+        ],
+        [
+          51.98533778801215,
+          4.0191289238854955
+        ]
+      ],
+      "reference_steps": 801,
+      "reference_duration_s": 200.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000111162,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 5.371502978933443e-14,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "bend_started",
+          "tick": 348,
+          "time_s": 87.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "bend_ended",
+          "tick": 370,
+          "time_s": 92.5,
+          "nominal_vertex_xy_m": [
+            1309.53614627164,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 380,
+          "time_s": 95.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 443,
+          "time_s": 110.75,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.2000000000432,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43573156612943753
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 603,
+          "time_s": 150.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.2130910342693474e-10,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43578805806286475
+        },
+        {
+          "event": "reference_exit",
+          "tick": 801,
+          "time_s": 200.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 800,
+        "fraction": 0.9994945299847243,
+        "cross_track_m": -0.0015379375122392958,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.21169175689634,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0024566895801209016,
+      "max_local_position_defect_m": 4.436341441760305e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7494552732634616,
+      "target_hold_samples": 194,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Mavic-v1.05-lane+1-turn+0",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.023694745474919
+        ]
+      ],
+      "reference_steps": 440,
+      "reference_duration_s": 110.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000111165,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801212336677548e-09,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4357132836389176
+        },
+        {
+          "event": "reference_exit",
+          "tick": 440,
+          "time_s": 110.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 440,
+        "fraction": 0.9994967011315394,
+        "cross_track_m": -1.5801749476133685e-09,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008822701948,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0019030583644052967,
+      "max_local_position_defect_m": 4.436087920112186e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 2.8808922656654943,
+      "max_actual_yaw_cap_ratio": 0.43571379482093775,
+      "target_hold_samples": 97,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Mavic-v1.05-lane+1-turn-1",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.01912866765072
+        ],
+        [
+          52.01466235407492,
+          4.01912866765072
+        ]
+      ],
+      "reference_steps": 801,
+      "reference_duration_s": 200.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000111165,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801212336677548e-09,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4357132836389176
+        },
+        {
+          "event": "bend_started",
+          "tick": 348,
+          "time_s": 87.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "bend_ended",
+          "tick": 370,
+          "time_s": 92.5,
+          "nominal_vertex_xy_m": [
+            1309.5186048405267,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 380,
+          "time_s": 95.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 443,
+          "time_s": 110.75,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999998277,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43569500067912786
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 603,
+          "time_s": 150.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 0.0,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4356385048688268
+        },
+        {
+          "event": "reference_exit",
+          "tick": 801,
+          "time_s": 200.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 800,
+        "fraction": 0.9994945266415023,
+        "cross_track_m": 0.0015378706896171934,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20008822701948,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0024566576826699966,
+      "max_local_position_defect_m": 4.436341441760305e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7494552732634564,
+      "target_hold_samples": 194,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Mavic-v1.05-lane+1-turn+1",
+      "type": "Mavic",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.0191286652477665
+        ],
+        [
+          51.98533778801217,
+          4.0191286652477665
+        ]
+      ],
+      "reference_steps": 801,
+      "reference_duration_s": 200.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 83,
+          "time_s": 20.75,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000111165,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43571328362702605
+        },
+        {
+          "event": "request_return",
+          "tick": 180,
+          "time_s": 45.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 243,
+          "time_s": 60.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -1.5801212336677548e-09,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4357132836389176
+        },
+        {
+          "event": "bend_started",
+          "tick": 348,
+          "time_s": 87.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 15.124666666666668
+        },
+        {
+          "event": "bend_ended",
+          "tick": 370,
+          "time_s": 92.5,
+          "nominal_vertex_xy_m": [
+            1309.518440338104,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 380,
+          "time_s": 95.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 443,
+          "time_s": 110.75,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000004352,
+          "ticks": 63,
+          "heading_rate_fraction": 0.43573156612943753
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 603,
+          "time_s": 150.75,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.060033208359198e-11,
+          "ticks": 63,
+          "heading_rate_fraction": 0.4357880580629829
+        },
+        {
+          "event": "reference_exit",
+          "tick": 801,
+          "time_s": 200.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 800,
+        "fraction": 0.9994945299847243,
+        "cross_track_m": -0.0015378705068087584,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20861553724613,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.00245664767227967,
+      "max_local_position_defect_m": 4.436341441760305e-06,
+      "max_tas_reference_error_mps": 1.774436987034278e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7494552732634616,
+      "target_hold_samples": 194,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Amzn-v0.5-lane-1-turn+0",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.064973006617202
+        ]
+      ],
+      "reference_steps": 400,
+      "reference_duration_s": 100.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953139,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.5505002575641433e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629705671
+        },
+        {
+          "event": "reference_exit",
+          "tick": 400,
+          "time_s": 100.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 400,
+        "fraction": 0.9994584306762698,
+        "cross_track_m": -3.1346720523280194e-05,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20011930194991,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.005460797962738886,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 90,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v0.5-lane-1-turn-1",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.054080960281523
+        ],
+        [
+          52.03741435031863,
+          4.054080960281523
+        ]
+      ],
+      "reference_steps": 780,
+      "reference_duration_s": 195.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953139,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.5505002575641433e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629705671
+        },
+        {
+          "event": "bend_started",
+          "tick": 337,
+          "time_s": 84.25,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "bend_ended",
+          "tick": 359,
+          "time_s": 89.75,
+          "nominal_vertex_xy_m": [
+            3702.297773657558,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 400,
+          "time_s": 100.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 450,
+          "time_s": 112.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.1999999999216,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6670425908938071
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 590,
+          "time_s": 147.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 6.139089236967266e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6668508795100797
+        },
+        {
+          "event": "reference_exit",
+          "tick": 780,
+          "time_s": 195.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 780,
+        "fraction": 0.9995276384211007,
+        "cross_track_m": 0.004723862684386404,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20011930194991,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.006708175720159288,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v0.5-lane-1-turn+1",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": -1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.054080957878569
+        ],
+        [
+          51.9625858114541,
+          4.054080957878569
+        ]
+      ],
+      "reference_steps": 780,
+      "reference_duration_s": 195.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999953139,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.5505002575641433e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629705671
+        },
+        {
+          "event": "bend_started",
+          "tick": 337,
+          "time_s": 84.25,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "bend_ended",
+          "tick": 359,
+          "time_s": 89.75,
+          "nominal_vertex_xy_m": [
+            3702.297609155136,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 400,
+          "time_s": 100.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 450,
+          "time_s": 112.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000016525,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6672047289164694
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 590,
+          "time_s": 147.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.06612758810376e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6673963840294865
+        },
+        {
+          "event": "reference_exit",
+          "tick": 780,
+          "time_s": 195.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 780,
+        "fraction": 0.999533856944201,
+        "cross_track_m": -0.004723862562059367,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.23123196692332,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.006663802978867847,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v0.5-lane+1-turn+0",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.064972352338729
+        ]
+      ],
+      "reference_steps": 400,
+      "reference_duration_s": 100.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953153,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.550472831060998e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629769023
+        },
+        {
+          "event": "reference_exit",
+          "tick": 400,
+          "time_s": 100.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 400,
+        "fraction": 0.9994584472775155,
+        "cross_track_m": 3.1346720523280194e-05,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20011930194991,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.0054606305729970285,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 90,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v0.5-lane+1-turn-1",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.0540803060030495
+        ],
+        [
+          52.03741435031863,
+          4.0540803060030495
+        ]
+      ],
+      "reference_steps": 780,
+      "reference_duration_s": 195.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953153,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.550472831060998e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629769023
+        },
+        {
+          "event": "bend_started",
+          "tick": 337,
+          "time_s": 84.25,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "bend_ended",
+          "tick": 359,
+          "time_s": 89.75,
+          "nominal_vertex_xy_m": [
+            3702.25298277881,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 400,
+          "time_s": 100.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 450,
+          "time_s": 112.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999992115,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6670425908938246
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 590,
+          "time_s": 147.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.093614501878619e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6668508795100623
+        },
+        {
+          "event": "reference_exit",
+          "tick": 780,
+          "time_s": 195.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 780,
+        "fraction": 0.9995338560822526,
+        "cross_track_m": 0.004723660572835797,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.20011930194991,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.006663666010728089,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v0.5-lane+1-turn+1",
+      "type": "Amzn",
+      "speed_ratio": 0.5,
+      "lane_sign": 1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.054080303600096
+        ],
+        [
+          51.9625858114541,
+          4.054080303600096
+        ]
+      ],
+      "reference_steps": 780,
+      "reference_duration_s": 195.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999953153,
+          "ticks": 50,
+          "heading_rate_fraction": 0.7859071815321796
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 1.550472831060998e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6671236629769023
+        },
+        {
+          "event": "bend_started",
+          "tick": 337,
+          "time_s": 84.25,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 40.33244444444445
+        },
+        {
+          "event": "bend_ended",
+          "tick": 359,
+          "time_s": 89.75,
+          "nominal_vertex_xy_m": [
+            3702.2528182763867,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 400,
+          "time_s": 100.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 450,
+          "time_s": 112.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000016499,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6672047289164694
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 540,
+          "time_s": 135.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 590,
+          "time_s": 147.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 2.7486913774859527e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6673963840302916
+        },
+        {
+          "event": "reference_exit",
+          "tick": 780,
+          "time_s": 195.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 780,
+        "fraction": 0.999527639283049,
+        "cross_track_m": -0.004723660451873002,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.22178112481578,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.006708027182300732,
+      "max_local_position_defect_m": 2.3343117504737165e-05,
+      "max_tas_reference_error_mps": 9.33723842422296e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7859082273832955,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v1.05-lane-1-turn+0",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.123283710147677
+        ]
+      ],
+      "reference_steps": 401,
+      "reference_duration_s": 100.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999874128,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 7.903579155123829e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "reference_exit",
+          "tick": 401,
+          "time_s": 100.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 400,
+        "fraction": 0.9995393582085241,
+        "cross_track_m": 9.48104968568021e-09,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.200086913104,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.00977836241691352,
+      "max_local_position_defect_m": 2.447600536470418e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.6622823695939035,
+      "target_hold_samples": 90,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Amzn-v1.05-lane-1-turn-1",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.107697165282485
+        ],
+        [
+          52.083111528419614,
+          4.107697165282485
+        ]
+      ],
+      "reference_steps": 880,
+      "reference_duration_s": 220.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999874128,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 7.903579155123829e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "bend_started",
+          "tick": 388,
+          "time_s": 97.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "bend_ended",
+          "tick": 410,
+          "time_s": 102.5,
+          "nominal_vertex_xy_m": [
+            7372.7791292715865,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 550,
+          "time_s": 137.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000010441,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6620092052002888
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 640,
+          "time_s": 160.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 690,
+          "time_s": 172.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 6.184563972055912e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6616135128628168
+        },
+        {
+          "event": "reference_exit",
+          "tick": 880,
+          "time_s": 220.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 880,
+        "fraction": 0.9995368996532814,
+        "cross_track_m": 0.009402974927979812,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.200086913104,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.013585729801218744,
+      "max_local_position_defect_m": 2.4476120415783953e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7494552732634564,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v1.05-lane-1-turn+1",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": -1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.107697162879532
+        ],
+        [
+          51.916888658611356,
+          4.107697162879532
+        ]
+      ],
+      "reference_steps": 880,
+      "reference_duration_s": 220.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.19999999874128,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 7.903579155123829e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "bend_started",
+          "tick": 388,
+          "time_s": 97.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "bend_ended",
+          "tick": 410,
+          "time_s": 102.5,
+          "nominal_vertex_xy_m": [
+            7372.778964769165,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": -76.2,
+          "reference_lane_m": -75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 550,
+          "time_s": 137.5,
+          "reference_lane_m": -75.2,
+          "achieved_reference_lane_m": -75.20000000010232,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6624716458837615
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 640,
+          "time_s": 160.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 690,
+          "time_s": 172.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": 6.390694622531795e-13,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6628670318453839
+        },
+        {
+          "event": "reference_exit",
+          "tick": 880,
+          "time_s": 220.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 880,
+        "fraction": 0.999536899690564,
+        "cross_track_m": -0.009402974683325738,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.27238594506642,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.013585729104889255,
+      "max_local_position_defect_m": 2.4476121325278655e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7494552732634616,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v1.05-lane+1-turn+0",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": 0,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.123282403520433
+        ]
+      ],
+      "reference_steps": 401,
+      "reference_duration_s": 100.25,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999874145,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -7.898170375781971e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "reference_exit",
+          "tick": 401,
+          "time_s": 100.25,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 400,
+        "fraction": 0.9995393678943402,
+        "cross_track_m": -9.48104968568021e-09,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.200086913104,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.009778157329496249,
+      "max_local_position_defect_m": 2.447564202157082e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.5,
+      "max_actual_yaw_cap_ratio": 0.6622823695939035,
+      "target_hold_samples": 90,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": false
+      },
+      "all_native_checks_passed": false
+    },
+    {
+      "case_id": "Amzn-v1.05-lane+1-turn-1",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": -1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.107695858655241
+        ],
+        [
+          52.08311152841963,
+          4.107695858655241
+        ]
+      ],
+      "reference_steps": 880,
+      "reference_duration_s": 220.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999874145,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -7.898170375781971e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "bend_started",
+          "tick": 388,
+          "time_s": 97.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "bend_ended",
+          "tick": 410,
+          "time_s": 102.5,
+          "nominal_vertex_xy_m": [
+            7372.689679618444,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 550,
+          "time_s": 137.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000010532,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6620092052002153
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 640,
+          "time_s": 160.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 690,
+          "time_s": 172.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.002665031701326e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6616135128627433
+        },
+        {
+          "event": "reference_exit",
+          "tick": 880,
+          "time_s": 220.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 880,
+        "fraction": 0.9995368988323782,
+        "cross_track_m": 0.00940266574434645,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.200086913104,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.013585528441170308,
+      "max_local_position_defect_m": 2.4476120415783953e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7494552732634564,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    },
+    {
+      "case_id": "Amzn-v1.05-lane+1-turn+1",
+      "type": "Amzn",
+      "speed_ratio": 1.05,
+      "lane_sign": 1,
+      "mirror": 1,
+      "nominal_waypoints_latlon": [
+        [
+          52.0,
+          4.0
+        ],
+        [
+          52.0,
+          4.107695856252287
+        ],
+        [
+          51.91688865861137,
+          4.107695856252287
+        ]
+      ],
+      "reference_steps": 880,
+      "reference_duration_s": 220.0,
+      "events": [
+        {
+          "event": "request_target",
+          "tick": 20,
+          "time_s": 5.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "capture_inbound_ended",
+          "tick": 70,
+          "time_s": 17.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.19999999874145,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622816040632774
+        },
+        {
+          "event": "request_return",
+          "tick": 160,
+          "time_s": 40.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_inbound_ended",
+          "tick": 210,
+          "time_s": 52.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -7.898170375781971e-10,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6622404510120639
+        },
+        {
+          "event": "bend_started",
+          "tick": 388,
+          "time_s": 97.0,
+          "applied_tas_mps": 12.0,
+          "requested_tas_mps": 84.69813333333335
+        },
+        {
+          "event": "bend_ended",
+          "tick": 410,
+          "time_s": 102.5,
+          "nominal_vertex_xy_m": [
+            7372.6895151160215,
+            0.0
+          ]
+        },
+        {
+          "event": "request_outbound_target",
+          "tick": 500,
+          "time_s": 125.0,
+          "requested_lane_m": 76.2,
+          "reference_lane_m": 75.2
+        },
+        {
+          "event": "capture_outbound_ended",
+          "tick": 550,
+          "time_s": 137.5,
+          "reference_lane_m": 75.2,
+          "achieved_reference_lane_m": 75.20000000010468,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6624716458837615
+        },
+        {
+          "event": "request_outbound_return",
+          "tick": 640,
+          "time_s": 160.0,
+          "requested_lane_m": 0.0
+        },
+        {
+          "event": "return_outbound_ended",
+          "tick": 690,
+          "time_s": 172.5,
+          "reference_lane_m": 0.0,
+          "achieved_reference_lane_m": -6.120657025830613e-11,
+          "ticks": 50,
+          "heading_rate_fraction": 0.6628670318461923
+        },
+        {
+          "event": "reference_exit",
+          "tick": 880,
+          "time_s": 220.0,
+          "full_terminal_tick_preserved": true
+        }
+      ],
+      "certificate_passed": true,
+      "certificate_failures": [],
+      "native_executed": true,
+      "actual_exit": {
+        "tick": 880,
+        "fraction": 0.9995369005115531,
+        "cross_track_m": -0.00940266543875623,
+        "altitude_m": 106.68,
+        "within_width": true,
+        "within_height": true
+      },
+      "max_centerline_distance_m": 75.25356457824249,
+      "raw_outside_seconds": 0.0,
+      "max_reference_error_m": 0.013585502482735306,
+      "max_local_position_defect_m": 2.4476120415783953e-05,
+      "max_tas_reference_error_mps": 9.790248535068713e-05,
+      "max_command_heading_error_deg": 0.0,
+      "max_tas_acceleration_mps2": 3.500000000000007,
+      "max_actual_yaw_cap_ratio": 0.7494552732634616,
+      "target_hold_samples": 180,
+      "target_hold_failed_samples": 0,
+      "samples_outside_declared_position_tube": 0,
+      "native_checks": {
+        "raw_sampled_containment": true,
+        "observed_local_defect_within_hypothesis": true,
+        "observed_speed_error_within_hypothesis": true,
+        "observed_positions_in_declared_tube": true,
+        "heading_commands_realized": true,
+        "tas_acceleration_within_table": true,
+        "yaw_within_native_bank": true,
+        "complete_target_holds": true,
+        "genuine_final_exit": true,
+        "terminal_sample_is_first_exit": true
+      },
+      "all_native_checks_passed": true
+    }
+  ],
+  "declared_count": 24,
+  "selected_count": 24,
+  "all_checks_passed": false,
+  "validation_complete": true,
+  "promoted": false,
+  "scope": "Constructive cardinal finite single-aircraft demonstrations, not original development scenarios, the paper controller, arbitrary RL actions, or an effectiveness comparison.",
+  "execution_changes": {
+    "lane_inward_reference_bias_m": 1.0,
+    "bend_tas_cap_mps": 12.0,
+    "center_return_before_bend_and_exit": true,
+    "direct_ap_heading_every_s": 0.25,
+    "native_lnav": false,
+    "finite_plans_precomputed": true,
+    "altitude_m": 106.68
+  },
+  "certificate_conditions": {
+    "position_defect_each_axis_m_per_tick": 0.0001,
+    "initial_position_error_each_axis_m": 1e-06,
+    "latitude_band_deg": [
+      51.8,
+      52.2
+    ],
+    "numerical_defect_bound_formally_established": false,
+    "interval_curve": "Linear interpolation of native stored position samples only"
+  },
+  "source_sha256": {
+    "src/lateral_plan.py": "a80972e7a4d5a3586a1fd49712e56ee007dc04b22a07f3f34f8cd95959a2fff8",
+    "src/lateral_reference_probe.py": "0ffe268525bdd8793675515b02a2de0923102c6cc26a3a0f9e2121ca370e540e",
+    "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+  },
+  "wall_seconds": 19.930484713055193
+}
