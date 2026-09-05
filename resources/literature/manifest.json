@@ -1,0 +1,11 @@
+{
+  "schema": "local-paper.v1",
+  "title": "Resilient multi-agent reinforcement learning for centralised tactical conflict resolution under uncertain perturbations and non-cooperative traffic in urban air mobility",
+  "doi": "10.1016/j.trc.2026.105542",
+  "local_file": "local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf",
+  "sha256": "d60671217c061892017a6c3a5ec755a78b3f132f46b10d48ff7807e8dafc97a4",
+  "bytes": 14819702,
+  "pages": 30,
+  "provenance": "User re-supplied the PDF at project root; exact pre-incident SHA-256 verified before moving to this descriptive name.",
+  "local_only": true
+}

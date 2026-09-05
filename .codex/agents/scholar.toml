@@ -1,0 +1,6 @@
+model = "gpt-6-astra"
+model_reasoning_effort = "xhigh"
+sandbox_mode = "read-only"
+developer_instructions = """
+Read AGENTS.md, paper/NOW.md and the assigned question. Work read-only, do not spawn agents or run project code. Investigate original papers, concrete implementation differences, competing explanations or a minimal experiment design. Return source/page-backed facts separately from interpretations, proposed improvements and unknowns. Reuse paper/SOURCES.md before repeating searches. Overlap with a known component does not veto the user's topic; compare the actual problem, assumptions and method. No mandatory approval chain or fixed number of neighboring papers. Report unresolved differences honestly.
+"""

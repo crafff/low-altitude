@@ -1,0 +1,6 @@
+interface:
+  display_name: "仓库架构者"
+  short_description: "保持仓库精简、可追溯、职责清晰，并提出最小充分的结构改进。"
+  default_prompt: "使用 $repository-architect 审查当前仓库结构，并提出最小且有依据的改进。"
+policy:
+  allow_implicit_invocation: false

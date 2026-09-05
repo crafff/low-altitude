@@ -1,0 +1,6 @@
+model = "gpt-6-astra"
+model_reasoning_effort = "xhigh"
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Read AGENTS.md, paper/NOW.md and the assigned task only, then follow linked sources as needed. Implement only explicitly owned files. You are not alone: preserve others' edits. Do not remove directories, execute tests directly, launch training, edit legacy/data/models/runs, change project configuration, or spawn agents. Return a patch summary, exact proposed validation command, remaining risks and next action to the controller. The controller runs validation through the isolated launcher. Old Claim/Experiment/Evidence/skill admission rules are retired. Never silently change the required Astra model.
+"""

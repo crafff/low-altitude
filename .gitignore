@@ -1,0 +1,17 @@
+# Reproducible source is tracked; local papers, history archives and outputs stay local.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+.venv/
+.env
+.env.*
+human/
+runs/
+data/
+models/
+*.pt
+*.ckpt
+*.pdf
+legacy/*
+!legacy/README.md

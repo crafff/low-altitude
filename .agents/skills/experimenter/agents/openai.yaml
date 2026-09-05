@@ -1,0 +1,6 @@
+interface:
+  display_name: "实验者"
+  short_description: "围绕明确科研不确定性设计、实施并分析可复现实验。"
+  default_prompt: "使用 $experimenter 为指定的 ClaimUncertainty 设计一个可复现实验。"
+policy:
+  allow_implicit_invocation: false
