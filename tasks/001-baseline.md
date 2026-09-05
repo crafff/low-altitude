@@ -354,3 +354,9 @@ trainer第二scope传播与严格恢复兼容的 [scope-tests](../runs/20260905T
 observation_reward_spec只读规范返回，事实/歧义与具体选择写入 [PERTURBATIONS](../paper/PERTURBATIONS.md)：二维噪声定义、p与events/h差异、blackout重叠与缺失ownship控制均不冒称作者代码。追加paper_features实现交接：仅observation_perturbation.py/配置/测试，纯独立感知层，零扰动不消费RNG、同刻cache、JSON恢复、事件/可见性分离；不改正在训练的源模块，不执行测试/实验/清理，≤30min，返回后controller验证。真实aircraft-s与缺失决策PPO尚不由离散接口伪造。
 
 route_fidelity追加15min只读特刊核验：读PLAN/SOURCES与出版社/客座编辑官方入口，不修改、不实验、不联系他人。返回大学官网明确链接的编辑现行主页仍征稿、截止2026-12-30；出版社征稿列表搜索索引一致，CFP正文/作者指南403。已更新PLAN/SOURCES/NOW，访问日期与deadline分开、投稿系统未核实。当前10h截止15:15:13 UTC不变。
+
+### 07:09–07:12 UTC：首批execution模型与继续预算
+
+[execution-ppo-25结果](../runs/20260905T070231Z-execution-ppo-25-834d0f28/artifacts/result.json)实际15轮，CLI394.76s/job396.60s；因保守的15s/episode初始估计、1.5安全因子及12-case末次评价预留，在轮间停止，非资源中断或25轮完成。末次开发94.45s，sample244/360（63导航耗尽、53超时）、342横向越界、最大618.641m、0高度越界，65.434167flight-hours；LoWC26029.25/NMAC4773.25无向pair-s，即397.793/72.947s per flight-hour。初始239/360、NMAC63.799/h；完成略升而冲突指标较初始恶化，不能判为有效改善。NR359/360、54.908333h、LoWC35604.75/NMAC8838.5无向pair-s（648.440/160.968每flight-hour）。best仍不达标。
+
+源/诊断图提交ea37154366ecc9bba058de35a1ae1e338b9e8380已push，git ls-remote同SHA；新恢复点checkpoints/execution-pilot-20260905保存15轮latest/best及完整小型开发/学习记录，约1.65MB，正在准备独立远端备份。随后计划沿同配置恢复到总100轮、内1800s/外1860s，CPU资源限制不变；实际8s左右/episode支持该有界扩大，25轮评价间隔保留。训练有效性与横向可行性仍分开，尚不开始延迟效果实验。

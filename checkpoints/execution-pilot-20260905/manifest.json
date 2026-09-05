@@ -1,0 +1,30 @@
+{
+  "scope": "Execution-semantics learning diagnostic; not an effective or corridor-valid baseline",
+  "source_run": "runs/20260905T070231Z-execution-ppo-25-834d0f28",
+  "compatible_source_commit": "ea37154366ecc9bba058de35a1ae1e338b9e8380",
+  "latest_completed_episodes": 15,
+  "best_completed_episodes": 15,
+  "development_cases": "all predeclared 12 cases, 53001-53012",
+  "files": {
+    "latest.pt": {
+      "bytes": 985929,
+      "sha256": "d0bdac82669b518ee787ba1c1169b25e1bf2dba43ec116a3a780812723687fc5"
+    },
+    "best.pt": {
+      "bytes": 506326,
+      "sha256": "6a1dc704087c6a760de5a0f4c9c47c4ed50512adae7a91ba4aa1ea981e7686b7"
+    },
+    "result.json": {
+      "bytes": 35807,
+      "sha256": "6731928b5ff611fc14ff839faf8b28d1e3271a9d7c78b46b100841f08f776df7"
+    },
+    "training.jsonl": {
+      "bytes": 35844,
+      "sha256": "94817bef5073a656dce7665632d17ebd743a0a15962d10c631497dd129c9c00e"
+    },
+    "development.jsonl": {
+      "bytes": 83945,
+      "sha256": "710fe74b70119275afca3e4ea41005ad4411cfb6d0cc5213e58ae1d8c28e9845"
+    }
+  }
+}
