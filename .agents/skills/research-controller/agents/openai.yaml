@@ -1,6 +1,0 @@
-interface:
-  display_name: "研究主控"
-  short_description: "维护科研主线，并主动编排适合并行的多 Agent 工作。"
-  default_prompt: "使用 $research-controller 读取当前科研状态，决定下一项行动，并按仓库规则主动编排必要的多 Agent 工作。"
-policy:
-  allow_implicit_invocation: false

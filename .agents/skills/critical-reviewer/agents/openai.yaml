@@ -1,6 +1,0 @@
-interface:
-  display_name: "批判性审查者"
-  short_description: "独立质疑 Claim、Evidence、实验和论文，并按严重程度报告问题。"
-  default_prompt: "使用 $critical-reviewer 独立审查这项工作，并按严重程度报告 findings。"
-policy:
-  allow_implicit_invocation: false

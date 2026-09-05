@@ -19,26 +19,3 @@ config_file = "agents/scholar.toml"
 [agents.reviewer]
 description = "Astra read-only independent review of a concrete code change or scientific interpretation."
 config_file = "agents/reviewer.toml"
-
-# Retain historical skills as files, but retire their old governance workflow.
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/research-controller"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/experimenter"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/literature-scout"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/critical-reviewer"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/research-brainstormer"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/research-explainer"
-enabled = false
-[[skills.config]]
-path = "/home/magic/ruitaozhou/low-altitude/.agents/skills/repository-architect"
-enabled = false

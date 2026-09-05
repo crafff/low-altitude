@@ -1,6 +1,0 @@
-interface:
-  display_name: "科研解释者"
-  short_description: "用清晰中文解释科研输出、技术概念和仓库内容，并保持严格只读。"
-  default_prompt: "使用 $research-explainer 向我解释这段内容，并且不要修改仓库。"
-policy:
-  allow_implicit_invocation: false

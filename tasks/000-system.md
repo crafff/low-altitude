@@ -46,11 +46,12 @@
 - 修复：以实际项目及祖先/私人/隐藏路径校验runtime；显式输入禁止隐藏配置；源码快照完整保留普通资产和可执行位，超限、符号链接、遍历错误明确失败。搜索仍限小文本，包含README/AGENTS。
 - 首轮 [system-simplify](../runs/20260905T022321Z-system-simplify-e4bc6284/log.txt)：21项通过、无跳过，6.293秒。复核补充隐藏runtime和源码遍历错误回归后，最终 [system-simplify-final](../runs/20260905T022553Z-system-simplify-final-87328e2c/log.txt)：22项通过、无跳过。
 - 两次均经外层launcher，每次90秒/256MiB上限、串行执行。最终命令：`python3 -B tools/lab.py run --label system-simplify-final --stage system --seconds 90 --disk-mib 256 -- /usr/bin/python3 -B -m unittest discover -s tests -v`。运行器、测试完整快照及日志在各run中保留。
-- `doctor`无活动断链或缺失本地材料，search实际调用成功。官方Codex配置参考重新读取，现有配置键有对应依据；四份角色/主配置本轮没有修改。当前系统Python实测3.10.12，尝试python3.11及tomllib/pip解析入口均不可用，因此不把上轮3.11解析结果说成本轮重验；子agent实际加载/模型元数据已核对。
+- `doctor`无活动断链或缺失本地材料，search实际调用成功。官方Codex配置参考重新读取，保留的配置键有对应依据；三个角色配置未改，主配置仅移除下述旧技能禁用项。当前系统Python实测3.10.12，尝试python3.11及tomllib/pip解析入口均不可用，因此不把上轮3.11解析结果说成本轮重验；子agent实际加载/模型元数据已核对。
 - 保留的限制：runtime实时只读挂载而非依赖快照；SIGTERM/SIGKILL可能留下未核验running记录；磁盘/RAM不是硬总配额；doctor只处理普通内联Markdown路径。这些边界已写入运行/系统说明，不扩展为新审批流程。
 - Git发布范围为已核对的新系统与旧活动路径退出；本地PDF、权重、run和恢复归档不加入Git。提交身份/远端同步状态以当前研究分支的Git记录为准，避免再维护一份可过期状态表。
 - GitHub目标核验（2026-09-05）：现有origin为 `https://github.com/crafff/low-altitude.git`。首次push被自动审批以缺少目标归属证据为由拒绝，未执行推送；随后只读 `gh api user --jq .login` 返回 `crafff`，`gh repo view crafff/low-altitude --json nameWithOwner,url,viewerPermission,isPrivate` 返回同名私有仓库及ADMIN权限。以该证据重试用户本轮已授权的当前研究分支推送，不强推、不改变其他分支。
 - 普通推送随后被GitHub的GH001限制拒收：旧历史中 `experiments/E000-action-induced-conflict-definition/development/DEV-E000-015/branches.json` 为221.32MB，`experiments/E002-fixed-cascade-replication/runs/RUN-E002-001/branches.json` 为221.54MB，超过其100MB单文件限制；本次没有将旧文件重新加入当前树。系统实现提交为 `0cebfa8`，目标核验记录为 `3c4fe7e`。
 - 发布处理：完整旧历史及上述提交继续保留在本地 `research/trc-reboot-20260904`。使用当前已验证文件树建立无历史父提交的新分支 `research/trc-baseline-system-20260905`，向同一个已核验私有仓库做普通推送。远端发布分支只保存当前系统；旧Git历史与大型本地产物仍需独立备份。没有改写原分支历史、删除对象或强推。
+- 发布树复查发现14个旧技能文件（7个SKILL.md及角色YAML）仍在 `.agents/skills/`，禁用设置依赖本机绝对路径。将该目录完整移动到 `legacy/retired-skills-20260905/skills/`，14/14文件与移动前Git内容逐字节核对一致；移除7条失去用途的禁用配置。旧技能退出自动发现路径，三个Astra角色和模型键保留。原历史分支仍保留原路径版本；本次移动不删除归档或改动技能内容。
 
 下一步：任务001的干净BlueSky环境与无控制小样。先≤15分钟DEV，不把本轮系统检查当作训练授权或科学结果。

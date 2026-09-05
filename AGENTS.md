@@ -1,6 +1,6 @@
 # Working contract — TR-C baseline-first research
 
-This is the active project contract. Historical rules in `legacy/` and the disabled `.agents/skills/` tree are reference material, not active instructions.
+This is the active project contract. Historical rules and retired skills live in `legacy/` as reference material, outside active skill discovery.
 
 ## Start small
 

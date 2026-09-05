@@ -1,6 +1,0 @@
-interface:
-  display_name: "科研头脑风暴者"
-  short_description: "只读生成机制假设、反例与高信息增益实验点子。"
-  default_prompt: "使用 $research-brainstormer 围绕当前科研瓶颈生成一组可证伪、机制多样的研究点子。"
-policy:
-  allow_implicit_invocation: false
