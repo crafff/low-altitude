@@ -123,3 +123,22 @@ Fig10(b)图内NR标注potential encounters34257、LoWC11791.77、NMAC3193.22 per
 [作者CBF/MVP示例](https://github.com/RodolpheFmd/Conflict-Detection-Resolution-methods/tree/a7c330aab37a0ae44512ce7b1c2b085498ffe974)是独立二维点质量/路径参数示例，无BlueSky/PPO/执行延迟；存在绕过部分约束的分支，不能由CBF命名推出保证。此组件重合不否定我们的延迟问题路线，但后续比较须明确其动力学、延迟假设和不可行处理。本轮未运行这些作者程序、下载大数据/权重或联系作者。
 
 2026-09-05 08:06 [原生NR双分母审计](../reports/exposure-audit-20260905/README.md)全12例精确复现原科学摘要，新增6000ft潜在pair-s。当前LoWC/potential15.456%、NMAC/potential3.837%，原有5走廊子集11.988%/2.896%；论文34.42%/9.32%。共同时间分母或有向计数因子会在比值中抵消，因此单一缩放不能同时对齐三项，尚有场景/定义/原图实现差异，不能只据两项数值接近认定分母。
+
+## 2026-09-05：共享名义导航与动作反馈接口
+
+新增显式配置[paper_environment_shared_navigation.json](../configs/paper_environment_shared_navigation.json)，由现有PaperEnvironment承载NR和策略；每次reset在入场前安装同一个弯道速度dispatcher。原配置和850结果保留。使用同一名义弯角/宽度/相邻段预算和当前状态fly-by刷新，连续执行速度取当前请求与有效弯道上限的较小值。共享模式独立维护已过弯状态，避免低速过弯后加速重新触发旧限速；偏移lane按其目标端点检查出弯航向；CAP的next_qdr不当成名义转角。实航向恰好反向、理想fillet无定义时，退回已声明名义转角计算并单列次数。这些是执行重建和健壮性处理，不是2026作者实现或轨迹安全证明。
+
+| 接口/状态 | 含义 | 是否直接进入策略 |
+| --- | --- | --- |
+| 60类动作及accepted_action_index | 持久绝对速度/高度/横向目标；37请求全部名义值 | 动作及既有target特征 |
+| target_speed_mps | 模型接受后的巡航请求，自动减速不改写它 | own速度与intruder相对目标速度；效率奖励按请求计算 |
+| execution_speed_target_mps / actual_tas_mps | 当前下发、供下一物理步使用的速度目标 / 本步实际TAS | 新增info诊断，未加网络维度 |
+| lane_active / altitude_active | 同类动作未完成时锁定该分量；完成只解锁、不自动返回；释放后不因漂移重锁 | 既有两标志；不是实时安全状态 |
+| step(None) | 不发新指令，保持先前目标；只有从名义reset一直如此才叫NR | 没有伪造策略指令 |
+| info.execution_feedback | 按上一决策观察到的ID给目标/实际、锁释放次数、本区间越界时长和终止状态，删除前保留末步 | 诊断字段，PPO collate/collect不使用 |
+
+原动作语义继续保留按分量锁及末段后向CAP guard，速度仍可在锁内改变；环境在任何物理步之前拒绝非法batch。直接ActionController拒绝原因现区分component_locked和final_leg_capture_beyond_exit。合法并接受仅表示命令已发出，不表示目标已到达或轨迹已证明安全。
+
+奖励仍为交通间隔、请求目标效率和有效到达，没有直接越界罚项。7/10输入也没有实际横向误差、走廊余量或限速器状态；实际位置/GS/track仍参与CPA和物理风险，实际高度差参与安全阈值。论文Table2/机动标志的描述与持续目标、偏离后不重锁及自动限速间仍有重建边界，不能声称网络已获得越界反馈或能靠当前奖励自动学会全部航道约束。要加入新观测/边界惩罚须另行声明为训练变体。
+
+未加入实验脚本的边缘内收、固定保持/弯前回中、完整续行认证或安全拒绝。固定脚本仅用于检查接口。共享原12场景与动作切换证据见[本轮报告](../reports/shared-navigation-20260905/README.md)；不据测试通过称MARL有效。准备了[未来小训练配置](../configs/paper_train_shared_navigation.json)，本轮没有训练或加载模型。训练源身份新增nominal_turn_speed.py，旧checkpoint不能绕过严格源/config检查继续训练。

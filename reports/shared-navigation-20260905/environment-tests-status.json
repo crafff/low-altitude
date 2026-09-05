@@ -1,0 +1,11 @@
+{
+  "id": "20260905T223409Z-shared-navigation-environment-tests-cb2194ec",
+  "stage": "system",
+  "state": "succeeded",
+  "started_at": "2026-09-05T22:34:09.067626+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T22:34:09.289509+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

@@ -117,9 +117,6 @@ class NominalTurnSpeed:
             requested_speed_mps=record.target_speed, execution_target_mps=record.target_speed,
             minimum_execution_target_mps=record.target_speed, overridden_dispatches=0,
             dispatches=0, corners=corners, actual_tas_min_mps=None, actual_tas_max_mps=None)
-        if self.shared:
-            result.update(opposite_bearing_fallback_dispatches=0,
-                          first_opposite_bearing_fallback_s=None)
         self.audit['flights'][acid] = result
         # Generation changes rebuild the same aircraft's native route. They do
         # not reset nominal corner progress; a newly admitted record does.
@@ -183,15 +180,6 @@ class NominalTurnSpeed:
                     following = float(bs.traf.actwp.next_qdr[i])
                     if following > -900:
                         angle = max(angle, abs(angle_difference(float(qdr), following)))
-                if self.shared and angle >= 180.:
-                    # A backward capture may leave real N_j active while the
-                    # bearing to it opposes next_qdr. Its infinite fillet is not
-                    # the declared nominal corner; retain that corner's braking
-                    # rule and record the fallback, without certifying the route.
-                    angle = abs(corner['turn_deg'])
-                    flight['opposite_bearing_fallback_dispatches'] += 1
-                    if flight['first_opposite_bearing_fallback_s'] is None:
-                        flight['first_opposite_bearing_fallback_s'] = now
                 should_brake, trigger = predictive_braking(distance, speed, requested, cap,
                     accel, self.gravity*math.tan(bank), angle, corner['tangent_m'], env.dt,
                     self.settings['prediction_reserve_m'])

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
+import copy
 import json
 import math
 from pathlib import Path
@@ -31,8 +32,10 @@ def load_environment_config(path):
 class PaperEnvironment:
     """Variable-population global five-second decisions; IDs survive array shifts.
 
-    `step(None)` is No Resolution. A policy supplies exactly the IDs observed at
-    the previous boundary. New admissions receive no fabricated prior action.
+    `step(None)` issues no new instruction and preserves earlier targets; it is
+    No Resolution only when used from nominal reset without earlier actions.
+    A policy supplies exactly the IDs observed at the previous boundary. New
+    admissions receive no fabricated prior action.
     """
 
     def __init__(self, cfg, parts, *, bs=None):
@@ -43,6 +46,17 @@ class PaperEnvironment:
         self.decision_dt = cfg['decision_seconds']
         self.ordinary_flyby_guidance = validate_guidance(cfg.get('ordinary_flyby_guidance', 'native_cached'))
         self.navigation_audit = navigation_audit(self.ordinary_flyby_guidance)
+        self.shared_navigation = copy.deepcopy(cfg.get('shared_navigation'))
+        self.report_execution = cfg.get('execution_feedback', False)
+        if not isinstance(self.report_execution, bool):
+            raise ValueError('execution_feedback must be boolean')
+        if self.shared_navigation is not None:
+            from nominal_turn_speed import validate_settings
+            validate_settings(self.shared_navigation)
+            if (self.shared_navigation['mode'] != 'shared_corner_speed'
+                    or self.ordinary_flyby_guidance != 'current_state_refresh'
+                    or cfg.get('nominal_turn_speed') is not None):
+                raise ValueError('Shared navigation requires its explicit mode and current-state flyby guidance')
         self.terminal_policy = cfg.get('terminal_policy', 'sampled_endpoint')
         if self.terminal_policy not in ('sampled_endpoint', 'swept_endpoint', 'finite_exit'):
             raise ValueError('Unknown explicitly selected terminal policy')
@@ -90,6 +104,13 @@ class PaperEnvironment:
                         policy_decisions=0, changed_instructions=0, return_sum=0.,
                         final_leg_activated=False, outside_exit_crossings=0) for f in self.flights}
         self.actions = ActionController(bs, self.types, self.action_cfg)
+        if self.shared_navigation is not None:
+            from nominal_turn_speed import NominalTurnSpeed
+            self.turn_speed = NominalTurnSpeed(self, self.shared_navigation)
+            self.route_execution_audit = self.turn_speed.audit
+            # Install before admission so newborns and policy-controlled flights
+            # have the same dispatcher, including their first physical tick.
+            self.actions.speed_dispatcher = self.turn_speed.command
         self.tracker = ConflictEvents(self.scenario_cfg)
         self.next_flight = self.physics_steps = self.decision_steps = self.max_active = 0
         self.flight_seconds = 0.
@@ -173,6 +194,8 @@ class PaperEnvironment:
         if self.done:
             raise RuntimeError('reset is required after scenario termination')
         controlled = set(self.bs.traf.id)
+        execution_start = {acid: self._execution_counters(acid) for acid in controlled} if self.report_execution else {}
+        execution_feedback = {}
         if proposed_actions is not None:
             if set(proposed_actions) != controlled:
                 raise ValueError('Supply one action per observed flight ID')
@@ -261,6 +284,9 @@ class PaperEnvironment:
                         values = reward_components(snapshot[acid], snapshot, self.observation_cfg, arrived=reason=='arrived')
                         rewards[acid], components[acid], terminated[acid] = values['total'], values, True
                         terminal_observations[acid] = final_observations[acid]
+                        if self.report_execution:
+                            execution_feedback[acid] = self._execution_feedback(acid, execution_start[acid],
+                                None if proposed_actions is None else proposed_actions[acid])
                 for acid, reason in terminal:
                     self.tracker.exit(acid, t1, reason)
                     fields = self.actions.forget(acid)
@@ -279,13 +305,51 @@ class PaperEnvironment:
         for acid in controlled - set(rewards):
             values = reward_components(snapshot[acid], snapshot, self.observation_cfg)
             rewards[acid], components[acid], terminated[acid] = values['total'], values, False
+            if self.report_execution:
+                execution_feedback[acid] = self._execution_feedback(acid, execution_start[acid],
+                    None if proposed_actions is None else proposed_actions[acid])
         for acid, value in rewards.items():
             self.records[acid]['return_sum'] += value
         self.decision_steps += 1
         if self.done:
             self.tracker.finish(float(self.bs.sim.simt))
-        return observations, rewards, terminated, {'done':self.done, 'reward_components':components,
+        info = {'done':self.done, 'reward_components':components,
             'terminal_observations':terminal_observations, 'sim_time_s':float(self.bs.sim.simt)}
+        if self.report_execution:
+            info['execution_feedback'] = execution_feedback
+        return observations, rewards, terminated, info
+
+    def _execution_counters(self, acid):
+        record, stats = self.records[acid], self.actions._aircraft[acid].stats
+        return {**{key: record[key] for key in ('outside_corridor_seconds', 'outside_altitude_seconds')},
+                **{key: stats[key] for key in ('lane_captures', 'altitude_captures')}}
+
+    def _execution_feedback(self, acid, start, proposal):
+        """Truth diagnostics for this transition, outside the paper's 7/10 inputs.
+
+        A legal target is accepted, not certified safe. Completion unlocks a
+        component without restoring its nominal target. `step(None)` preserves
+        any earlier targets. Terminal feedback is captured before deletion.
+        """
+        fields, record = self.actions.state_fields(acid), self.records[acid]
+        i = self.bs.traf.id2idx(acid)
+        selected = fields['target_speed_mps']
+        if self.shared_navigation is not None:
+            selected = self.route_execution_audit['flights'][acid]['execution_target_mps']
+        end = self._execution_counters(acid)
+        return dict(proposed_action_index=None if proposal is None else int(proposal),
+            accepted_action_index=fields['accepted_action_index'],
+            target_speed_mps=fields['target_speed_mps'], execution_speed_target_mps=selected,
+            actual_tas_mps=float(self.bs.traf.tas[i]), target_alt_m=fields['target_alt_m'],
+            actual_alt_m=float(self.bs.traf.alt[i]), actual_vs_mps=float(self.bs.traf.vs[i]),
+            target_lane_m=fields['target_lane_m'], actual_cross_track_m=fields['actual_cross_track_m'],
+            lane_error_m=fields['lane_error_m'], lane_track_error_deg=fields['lane_track_error_deg'],
+            centerline_distance_m=fields['centerline_distance_m'],
+            lane_active=fields['lane_active'], altitude_active=fields['altitude_active'],
+            nominal_waypoint_index=fields['nominal_waypoint_index'],
+            speed_limited=selected < fields['target_speed_mps'],
+            interval={key: end[key]-start[key] for key in start},
+            status=record['status'], policy_input=False, boundary_reward_included=False)
 
     def summary(self, *, include_flights=False):
         if not self.done:

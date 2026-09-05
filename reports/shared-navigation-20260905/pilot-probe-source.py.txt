@@ -1,0 +1,347 @@
+"""Bounded shared-executor equivalence and transition-feedback checks; no model."""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import sys
+import time
+
+import numpy as np
+
+from bluesky_diagnostic import FT
+from nr_containment_probe import aggregate, differences, scientific
+from nr_pilot import centerline_distance_m
+from paper_environment import PaperEnvironment, load_environment_config
+from paper_scenarios import _bearing, _direct
+
+SCENARIOS = 'reports/policy-modes-refresh-850-20260905/scenarios.json'
+REFERENCE = 'reports/nr-containment-20260905/corner-speed.json'
+SCENARIOS_SHA = '3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c'
+
+
+def digest(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def save(result):
+    data = json.dumps(result, indent=2, allow_nan=False)+'\n'
+    if len(data.encode()) > 16*1024**2:
+        raise RuntimeError('Probe output limit exceeded')
+    Path('/output/result.json').write_text(data)
+
+
+class Audit:
+    def __init__(self, env, deadline):
+        self.env, self.deadline = env, deadline
+        self.hash = hashlib.sha256()
+        self.samples = self.transitions = self.feedback_rows = self.terminal_rows = 0
+        self.outside, self.altitude, self.flight_seconds = {}, {}, {}
+        self.feedback_outside, self.feedback_altitude = {}, {}
+        self.prefix, self.feedback_counters = {}, {}
+        self.limited_feedback_rows = self.target_actual_different_rows = 0
+        self.max_accel = 0.
+        self.last_speed = {}
+        self.events, self.last_flags = [], {}
+        self.minimum_selected = {}
+        self.return_requested_at = self.return_completed_at = None
+        self.first_limited_feedback = self.first_outside_feedback = None
+
+    def begin_transition(self, observations):
+        for acid in observations:
+            if acid not in self.prefix:
+                self.prefix[acid] = self.env._execution_counters(acid)
+
+    def capture(self, env):
+        if time.perf_counter() >= self.deadline:
+            raise TimeoutError('Probe wall deadline reached')
+        traf, now = env.bs.traf, float(env.bs.sim.simt)
+        physical = []
+        for i, acid in enumerate(traf.id):
+            position = (float(traf.lat[i]), float(traf.lon[i]))
+            distance = centerline_distance_m(position, env.corridors[env.records[acid]['corridor_id']])
+            self.outside[acid] = self.outside.get(acid, 0.) + env.dt*(distance > env.scenario_cfg['corridor_width_ft']*FT/2)
+            self.altitude[acid] = self.altitude.get(acid, 0.) + env.dt*(abs(float(traf.alt[i])-env.scenario_cfg['altitude_ft']*FT) > env.scenario_cfg['corridor_height_ft']*FT/2+1e-6)
+            self.flight_seconds[acid] = self.flight_seconds.get(acid, 0.)+env.dt
+            speed = float(traf.tas[i])
+            spec = env.types[env.records[acid]['type']]
+            if not 0 <= speed <= spec['maximum_tas_mps']+1e-3:
+                raise AssertionError('Actual speed outside declared type envelope')
+            if acid in self.last_speed:
+                accel = abs(speed-self.last_speed[acid])/env.dt
+                self.max_accel = max(self.max_accel, accel)
+                if accel > spec['acceleration_mps2']+1e-6:
+                    raise AssertionError('Actual horizontal acceleration exceeds envelope')
+            self.last_speed[acid] = speed
+            record = env.actions._aircraft[acid]
+            flags = (record.lane_active, record.altitude_active)
+            if flags != self.last_flags.get(acid, (False, False)):
+                if len(self.events) >= 300:
+                    raise RuntimeError('Bounded event limit exceeded')
+                fields = env.actions.state_fields(acid)
+                self.events.append(dict(id=acid, time_s=now, lane_active=flags[0], altitude_active=flags[1],
+                    lane_error_m=fields['lane_error_m'], track_error_deg=fields['lane_track_error_deg'],
+                    altitude_error_m=float(traf.alt[i])-record.target_alt, vs_mps=float(traf.vs[i])))
+            self.last_flags[acid] = flags
+            selected = env.route_execution_audit['flights'][acid]['execution_target_mps']
+            if self.return_requested_at is not None and self.return_completed_at is None:
+                fields = env.actions.state_fields(acid)
+                if (fields['accepted_action_index'] == 37 and not any(flags)
+                        and abs(fields['lane_error_m']) <= 2. and abs(fields['lane_track_error_deg']) <= 5.
+                        and abs(speed-record.target_speed) <= 1e-3
+                        and abs(float(traf.alt[i])-record.target_alt) <= .5
+                        and abs(float(traf.vs[i])) <= .05):
+                    self.return_completed_at = now
+            self.minimum_selected[acid] = min(selected, self.minimum_selected.get(acid, selected))
+            physical.append((acid, *position, float(traf.alt[i]), speed, float(traf.trk[i]),
+                             float(traf.vs[i]), record.next_index, selected))
+        self.hash.update(json.dumps((now, physical), separators=(',', ':')).encode()+b'\n')
+        self.samples += len(physical)
+        if self.samples > 2000000:
+            raise RuntimeError('Per-episode sample limit exceeded')
+
+    def transition(self, observations, proposals, following, rewards, terminated, info):
+        env = self.env
+        ids = set(observations)
+        feedback = info['execution_feedback']
+        if set(feedback) != ids or set(rewards) != ids or set(terminated) != ids:
+            raise AssertionError('Feedback/reward identity differs from previous observation IDs')
+        for acid, row in feedback.items():
+            proposal = None if proposals is None else proposals[acid]
+            if row['proposed_action_index'] != proposal or (proposal is not None and row['accepted_action_index'] != proposal):
+                raise AssertionError('Requested/accepted action mismatch')
+            self.feedback_outside[acid] = self.feedback_outside.get(acid, 0.)+row['interval']['outside_corridor_seconds']
+            self.feedback_altitude[acid] = self.feedback_altitude.get(acid, 0.)+row['interval']['outside_altitude_seconds']
+            counters = self.feedback_counters.setdefault(acid, dict.fromkeys(self.prefix[acid], 0.))
+            for key, value in row['interval'].items():
+                counters[key] += value
+            if row['speed_limited'] and self.first_limited_feedback is None:
+                self.first_limited_feedback = copy.deepcopy(row)
+            if row['interval']['outside_corridor_seconds'] and self.first_outside_feedback is None:
+                self.first_outside_feedback = copy.deepcopy(row)
+            if row['policy_input'] or row['boundary_reward_included']:
+                raise AssertionError('Diagnostics misrepresented as policy input/reward')
+            obs = info['terminal_observations'][acid] if terminated[acid] else following[acid]
+            p = env.observation_cfg
+            expected = np.asarray([row['target_speed_mps']/(p['speed_reference_kt']*1852/3600),
+                (row['target_alt_m']-(p['nominal_altitude_ft']-p['corridor_height_ft']/2)*FT)/(p['corridor_height_ft']*FT),
+                row['target_lane_m']/(p['corridor_width_ft']*FT)+.5,
+                float(row['altitude_active']), float(row['lane_active'])], dtype=np.float32)
+            if obs['own'].shape != (7,) or obs['intruders'].shape[1] != 10 or not np.array_equal(obs['own'][2:], expected):
+                raise AssertionError('Observation is not the declared requested-target/lock encoding')
+            if not obs['action_mask'][row['accepted_action_index']]:
+                raise AssertionError('Accepted target must remain legal to hold')
+            nominal = env.types[env.records[acid]['type']]['nominal_tas_mps']
+            efficiency = -math.fsum((p['efficiency_speed_weight']*(row['target_speed_mps'] != nominal),
+                p['efficiency_altitude_weight']*(row['target_alt_m'] != p['nominal_altitude_ft']*FT),
+                p['efficiency_lane_weight']*(row['target_lane_m'] != 0.)))
+            values = info['reward_components'][acid]
+            arrival = p['arrival_reward'] if row['status'] == 'arrived' else 0.
+            if (values['efficiency'] != efficiency or values['arrival'] != arrival
+                    or rewards[acid] != values['safety']+p['efficiency_reward_scale']*efficiency+arrival
+                    or terminated[acid] != (row['status'] != 'active')):
+                raise AssertionError('Reward/terminal feedback mismatch')
+            self.limited_feedback_rows += row['speed_limited']
+            self.target_actual_different_rows += abs(row['target_speed_mps']-row['actual_tas_mps']) > 1e-3
+            self.terminal_rows += terminated[acid]
+        self.transitions += 1
+        self.feedback_rows += len(feedback)
+
+    def finish(self):
+        for acid, record in self.env.records.items():
+            if (record['outside_corridor_seconds'] != self.outside.get(acid, 0.)
+                    or record['outside_altitude_seconds'] != self.altitude.get(acid, 0.)
+                    or record['flight_seconds'] != self.flight_seconds.get(acid, 0.)):
+                raise AssertionError('Whole physical intervals do not reconcile with records')
+            stats = record['action_execution']['command_counts']
+            total = {**{key:record[key] for key in ('outside_corridor_seconds', 'outside_altitude_seconds')},
+                     **{key:stats[key] for key in ('lane_captures', 'altitude_captures')}}
+            # Birth-to-first-observation exposure has no policy transition. An
+            # aircraft which dies before any observation has only this prefix.
+            prefix = self.prefix.get(acid, total)
+            feedback = self.feedback_counters.get(acid, dict.fromkeys(total, 0.))
+            if any(prefix[key]+feedback[key] != total[key] for key in total):
+                raise AssertionError('Feedback/prefix boundary or completion counters do not reconcile')
+        return dict(physics_samples=self.samples, physics_sha256=self.hash.hexdigest(),
+            transitions=self.transitions, feedback_rows=self.feedback_rows, terminal_feedback_rows=self.terminal_rows,
+            limited_feedback_rows=self.limited_feedback_rows,
+            requested_actual_speed_different_rows=self.target_actual_different_rows,
+            max_abs_acceleration_mps2=self.max_accel, events=self.events, minimum_selected_speed=self.minimum_selected,
+            feedback_outside_seconds=sum(self.feedback_outside.values()),
+            all_physical_outside_seconds=sum(self.outside.values()),
+            uncontrolled_prefix_counters=self.prefix,
+            first_limited_feedback=self.first_limited_feedback, first_outside_feedback=self.first_outside_feedback,
+            return_completed_at=self.return_completed_at,
+            all_checks_passed=True)
+
+
+def run_case(env, scenario, mode, deadline):
+    observations = env.reset(scenario['seed'], scenario=copy.deepcopy(scenario))
+    audit = Audit(env, deadline)
+    env.on_physics_step = audit.capture
+    dispatches, stage, completed_at, invalid_checked = [], 0, None, False
+    try:
+        while not env.done:
+            now = float(env.bs.sim.simt)
+            proposals = None
+            if mode == 'nominal':
+                proposals = dict.fromkeys(observations, 37)
+            if mode in ('speed', 'lane_altitude') and observations:
+                fields = env.actions.state_fields('F001')
+                action = None
+                if stage == 0 and now >= 5:
+                    action = 7 if mode == 'speed' else 44
+                    stage = 1
+                elif stage == 1:
+                    ready = (fields['nominal_waypoint_index'] >= 2 and abs(fields['lane_track_error_deg']) <= 1
+                             if mode == 'speed' else not fields['lane_active'] and not fields['altitude_active'])
+                    if ready:
+                        if completed_at is None:
+                            completed_at = now
+                        if now >= completed_at+5:
+                            action = 52 if mode == 'speed' else 37
+                            stage = 2
+                elif stage == 2 and mode == 'speed' and now >= dispatches[-1]['time_s']+20:
+                    action, stage = 37, 3
+                if action is not None and observations['F001']['action_mask'][action]:
+                    proposals = {'F001': action}
+                    dispatches.append(dict(time_s=now, action=action))
+                    if action == 37:
+                        audit.return_requested_at = now
+                elif action is not None:
+                    raise AssertionError('Predeclared script attempted a masked transition')
+                if not invalid_checked and (fields['lane_active'] or fields['altitude_active']):
+                    forbidden = np.flatnonzero(~observations['F001']['action_mask'])
+                    if len(forbidden):
+                        before = copy.deepcopy(env.actions.state_fields('F001'))
+                        try:
+                            env.step({'F001': int(forbidden[0])})
+                        except ValueError:
+                            pass
+                        else:
+                            raise AssertionError('Invalid policy proposal was not rejected')
+                        if env.bs.sim.simt != now or before != env.actions.state_fields('F001'):
+                            raise AssertionError('Invalid proposal changed execution state')
+                        invalid_checked = True
+            audit.begin_transition(observations)
+            following, rewards, terminated, info = env.step(proposals)
+            audit.transition(observations, proposals, following, rewards, terminated, info)
+            observations = following
+    finally:
+        env.on_physics_step = None
+    summary = env.summary(include_flights=True)
+    summary.pop('wall_seconds')
+    summary.pop('process_peak_rss_mib')
+    return dict(mode=mode, seed=scenario['seed'], summary=summary, audit=audit.finish(),
+                route_execution_audit=copy.deepcopy(env.route_execution_audit),
+                script_dispatches=dispatches, script_stage=stage, invalid_proposal_checked=invalid_checked,
+                target_completion_observed_at=completed_at, return_requested_at=audit.return_requested_at,
+                return_completed_at=audit.return_completed_at,
+                script_sequence_complete=(audit.return_completed_at is not None) if mode in ('speed', 'lane_altitude') else None,
+                incomplete_sequence_reason=('target_not_completed_before_terminal' if stage == 1 else
+                    'return_not_completed_before_terminal') if mode in ('speed', 'lane_altitude') and audit.return_completed_at is None else None)
+
+
+def scripted_scenarios(cfg):
+    result = []
+    for kind in ('Amzn', 'Eh216'):
+        for mirror in (-1, 1):
+            origin = list(map(float, cfg['origin_lat_lon_deg']))
+            corner = _direct(origin, 90., 4630., cfg['earth_radius_m'])
+            incoming = (_bearing(corner, origin)+180.) % 360
+            end = _direct(corner, incoming+90*mirror, 4630., cfg['earth_radius_m'])
+            for mode in ('speed', 'lane_altitude'):
+                result.append((mode, dict(seed=970001+len(result),
+                    corridors=[dict(id='C01', waypoints_lat_lon_deg=[origin, corner, end])],
+                    flights=[dict(id='F001', type=kind, corridor_id='C01', scheduled_entry_s=0.)])))
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--config', default='configs/paper_environment_shared_navigation.json')
+    parser.add_argument('--suite', choices=('pair', 'switch'), required=True)
+    parser.add_argument('--case-limit', type=int, default=12)
+    parser.add_argument('--wall-seconds', type=float, default=450.)
+    args = parser.parse_args()
+    if os.environ.get('LAB_RUN_DIR') != '/output' or Path.cwd() != Path('/workspace'):
+        raise ValueError('This probe requires the isolated lab launcher')
+    if not 0 < args.wall_seconds <= 900 or not 1 <= args.case_limit <= 12:
+        raise ValueError('Invalid bounded probe parameters')
+    started = time.perf_counter()
+    result = dict(schema='bluesky.shared-navigation-probe.v1', suite=args.suite, cases=[],
+        all_checks_passed=False, validation_complete=False,
+        scope='Shared navigation integration and feedback verification; fixed scripts are not trained policies or containment guarantees.')
+    try:
+        cfg, parts = load_environment_config(args.config)
+        paths = [args.config]+[cfg[f'{part}_config'] for part in ('scenario', 'action', 'observation', 'types')]
+        if args.suite == 'pair':
+            paths += [SCENARIOS, REFERENCE]
+        inputs = {path: digest(path) for path in paths}
+        source_names = ('shared_navigation_probe.py', 'nominal_turn_speed.py', 'paper_environment.py',
+            'paper_actions.py', 'paper_observation.py', 'paper_performance.py', 'paper_scenarios.py',
+            'navigation_refresh.py', 'route_completion.py', 'nr_pilot.py', 'nr_containment_probe.py', 'bluesky_diagnostic.py')
+        result.update(config=cfg, input_sha256=inputs,
+            source_sha256={name:digest(Path(__file__).parent/name) for name in source_names})
+        env = PaperEnvironment(cfg, parts)
+        if env.shared_navigation is None or not env.report_execution:
+            raise ValueError('Shared navigation and diagnostic feedback must be enabled')
+        if args.suite == 'pair':
+            if inputs[SCENARIOS] != SCENARIOS_SHA:
+                raise ValueError('Original fixed scenarios changed')
+            scenarios = json.loads(Path(SCENARIOS).read_text())[:args.case_limit]
+            references = json.loads(Path(REFERENCE).read_text())['cases']
+            if ([row['seed'] for row in scenarios] != list(range(53001, 53001+args.case_limit))
+                    or [row['seed'] for row in references] != list(range(53001, 53013))):
+                raise AssertionError('Original scenario/reference populations are incomplete or reordered')
+            by_seed = {row['seed']:row for row in references}
+            for scenario in scenarios:
+                reference = by_seed[scenario['seed']]
+                pair = [run_case(env, scenario, mode, started+args.wall_seconds) for mode in ('nr', 'nominal')]
+                summary = {k:v for k,v in pair[0]['summary'].items() if k != 'flights'}
+                source = {k:v for k,v in scientific(reference['summary']).items() if k not in ('policy', 'action_seed', 'action_histogram')}
+                reference_difference = differences(summary, source)
+                if reference_difference:
+                    raise AssertionError(f'Shared NR differs from validated NR: {reference_difference}')
+                same = pair[0]['audit']['physics_sha256'] == pair[1]['audit']['physics_sha256']
+                if not same:
+                    raise AssertionError('No instruction and explicit nominal policy changed physical execution')
+                result['cases'].append(dict(seed=scenario['seed'], physical_trace_equal=same,
+                    validated_nr_summary_exact=True, arms=pair))
+                save(result)
+                print(json.dumps(dict(seed=scenario['seed'], physical_equal=same, completed=summary['completed'])), flush=True)
+            result['aggregate'] = {mode: aggregate([row['arms'][i]['summary'] for row in result['cases']]) for i,mode in enumerate(('nr','nominal'))}
+            if len(result['cases']) != args.case_limit:
+                raise AssertionError('Requested paired population incomplete')
+        else:
+            fixtures = scripted_scenarios(env.scenario_cfg)
+            result['fixtures'] = [dict(mode=mode, scenario=scenario) for mode,scenario in fixtures]
+            for mode, scenario in fixtures:
+                row = run_case(env, scenario, mode, started+args.wall_seconds)
+                result['cases'].append(row)
+                save(result)
+                print(json.dumps(dict(seed=scenario['seed'], mode=mode, completed=row['summary']['completed'],
+                    outside_seconds=row['summary']['outside_corridor_aircraft_seconds'], dispatches=row['script_dispatches'])), flush=True)
+            result['script_coverage'] = dict(requested=len(fixtures), executed=len(result['cases']),
+                target_dispatched=sum(bool(row['script_dispatches']) for row in result['cases']),
+                return_requested=sum(row['return_requested_at'] is not None for row in result['cases']),
+                return_completed=sum(row['script_sequence_complete'] for row in result['cases']))
+            if result['script_coverage']['executed'] != 8 or result['script_coverage']['target_dispatched'] != 8:
+                raise AssertionError('Declared switch fixtures were not exercised')
+        if any(digest(path) != value for path,value in inputs.items()) or 'torch' in sys.modules:
+            raise AssertionError('Input mutation or unexpected model import')
+        result.update(all_checks_passed=True, validation_complete=True)
+    except Exception as exc:
+        result['error'] = dict(type=type(exc).__name__, message=str(exc))
+        raise
+    finally:
+        result['wall_seconds'] = time.perf_counter()-started
+        save(result)
+
+
+if __name__ == '__main__':
+    main()

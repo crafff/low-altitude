@@ -336,7 +336,8 @@ def _versions():
     directory = Path(__file__).resolve().parent
     names = ("paper_train.py", "shared_ppo.py", "paper_environment.py", "paper_actions.py",
              "paper_observation.py", "paper_scenarios.py", "paper_performance.py",
-             "nr_pilot.py", "bluesky_diagnostic.py", "route_completion.py", "navigation_refresh.py")
+             "nr_pilot.py", "bluesky_diagnostic.py", "route_completion.py", "navigation_refresh.py",
+             "nominal_turn_speed.py")
     return {"python": platform.python_version(), "torch": str(torch.__version__),
             "numpy": str(np.__version__), "bluesky": importlib.metadata.version("bluesky-simulator"),
             "source_sha256": {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in names}}

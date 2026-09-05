@@ -1,0 +1,11 @@
+{
+  "id": "20260905T223227Z-shared-navigation-observation-tests-94e91fee",
+  "stage": "system",
+  "state": "succeeded",
+  "started_at": "2026-09-05T22:32:27.430554+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T22:32:27.651823+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

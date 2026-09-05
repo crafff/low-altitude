@@ -1,0 +1,26 @@
+Creating directory "/tmp/bluesky-paper-p9xgu27g/scenario"
+Creating directory "/tmp/bluesky-paper-p9xgu27g/plugins"
+Creating directory "/tmp/bluesky-paper-p9xgu27g/output"
+Creating directory "/tmp/bluesky-paper-p9xgu27g/cache"
+Copying default configfile to /tmp/bluesky-paper-p9xgu27g/settings.cfg
+Reading config from /tmp/bluesky-paper-p9xgu27g/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-p9xgu27g/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-p9xgu27g/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-p9xgu27g/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-p9xgu27g/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-p9xgu27g/cache/navdata.p
+{"seed": 53001, "physical_equal": true, "completed": 30}

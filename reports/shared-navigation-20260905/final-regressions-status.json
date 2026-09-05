@@ -1,0 +1,11 @@
+{
+  "id": "20260905T223831Z-shared-navigation-final-regressions-41484bcc",
+  "stage": "system",
+  "state": "succeeded",
+  "started_at": "2026-09-05T22:38:31.977158+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T22:38:32.248954+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

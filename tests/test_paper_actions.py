@@ -109,6 +109,7 @@ class ActionTests(unittest.TestCase):
         self.assertEqual(permitted, [action(s, 4, 2) for s in range(4)])
         rejected = self.controller.apply({'A': action(0, 2, 1)})['A']
         self.assertFalse(rejected['accepted'])
+        self.assertEqual(rejected['reason'], 'component_locked')
         self.assertEqual(rejected['accepted_action_index'], action(2, 4, 2))
         after = self.controller.state_fields('A')
         for key in ('target_speed_mps', 'target_alt_m', 'target_lane_m', 'accepted_action_index'):
@@ -198,7 +199,9 @@ class ActionTests(unittest.TestCase):
         self.assertFalse(mask[action(lane=0)])
         self.assertFalse(mask[action(lane=2)])
         before = self.controller.state_fields('A')['native_route_plan']
-        self.assertFalse(self.controller.apply({'A': action(lane=2)})['A']['accepted'])
+        rejected = self.controller.apply({'A': action(lane=2)})['A']
+        self.assertFalse(rejected['accepted'])
+        self.assertEqual(rejected['reason'], 'final_leg_capture_beyond_exit')
         self.assertEqual(self.controller.state_fields('A')['native_route_plan'], before)
         self.put_xy(end[0], end[1]-200., track=0.)
         self.advance_observation()

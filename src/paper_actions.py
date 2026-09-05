@@ -1,6 +1,7 @@
 """Paper's absolute 4 x 5 x 3 actions through native BlueSky guidance.
 
-No additional dynamics, bank envelope, speed governor, or containment guarantee.
+No additional dynamics, bank envelope, or containment guarantee. The environment
+may install an explicitly configured speed dispatcher without changing targets.
 Call register after native creation, update after every physics step, and forget
 before native deletion. Apply consumes joint actions; a masked proposal changes
 no component. The caller must use the same mask when sampling/logging a policy.
@@ -141,6 +142,7 @@ class ActionController:
         validate_config(cfg)
         self.bs, self.types, self.cfg = bs, copy.deepcopy(types), copy.deepcopy(cfg)
         self._aircraft = {}
+        self.speed_dispatcher = None
 
     def _index(self, acid):
         i = self.bs.traf.id2idx(acid)
@@ -149,6 +151,8 @@ class ActionController:
         return i
 
     def _speed(self, acid, record):
+        if self.speed_dispatcher is not None:
+            return self.speed_dispatcher(acid, record)
         # Refresh CAS as altitude changes so the accepted instruction remains TAS.
         from bluesky.tools.aero import tas2cas
         i = self._index(acid)
@@ -300,7 +304,10 @@ class ActionController:
             record.stats['proposals'] += 1
             if not self.action_mask(acid)[int(actions[acid])]:
                 record.stats['rejected_actions'] += 1
-                results[acid] = dict(accepted=False, reason='component_locked',
+                locked = ((record.altitude_active and components[1] != record.accepted[1])
+                          or (record.lane_active and components[2] != record.accepted[2]))
+                results[acid] = dict(accepted=False,
+                                    reason='component_locked' if locked else 'final_leg_capture_beyond_exit',
                                     accepted_action_index=int(np.ravel_multi_index(record.accepted, ACTION_SHAPE)))
                 continue
             speed, alt, lane = components

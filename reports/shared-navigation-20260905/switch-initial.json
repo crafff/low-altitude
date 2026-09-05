@@ -1,0 +1,2422 @@
+{
+  "schema": "bluesky.shared-navigation-probe.v1",
+  "suite": "switch",
+  "cases": [
+    {
+      "mode": "speed",
+      "seed": 970001,
+      "summary": {
+        "seed": 970001,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.04847222222222222,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9204.959952731007,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 37.76530109700385,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 3,
+        "policy_decisions": 3,
+        "return_sum": 0.9352,
+        "sim_seconds": 174.5,
+        "physics_steps": 698,
+        "decision_steps": 35,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 174.5,
+            "path_length_m": 9204.959952731007,
+            "max_centerline_distance_m": 37.76530109700385,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 3,
+            "changed_instructions": 3,
+            "return_sum": 0.9352,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 174.5,
+            "terminal_state": [
+              52.041651534573944,
+              4.067695312278906,
+              106.68,
+              80.66498226127314
+            ],
+            "endpoint_distance_m": 3.594689841798666,
+            "terminal_geometry": {
+              "fraction": 0.8217471948393136,
+              "cross_track_m": 1.8670115234780428e-08,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 80.6648888888889,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 3,
+                "accepted_actions": 3,
+                "rejected_actions": 0,
+                "speed_commands": 3,
+                "altitude_commands": 0,
+                "lane_commands": 0,
+                "route_rebuilds": 0,
+                "altitude_captures": 0,
+                "lane_captures": 0,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 698,
+                "physics_steps": 698,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 37.76530109700385
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": 0.002255037208902269,
+              "lane_error_m": 0.002255037208902269,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 698,
+        "physics_sha256": "714e7b24f8f9c1004584987dda7222ddba42c43265f51ecbdc439101e894af49",
+        "transitions": 35,
+        "feedback_rows": 35,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 3,
+        "requested_actual_speed_different_rows": 8,
+        "max_abs_acceleration_mps2": 3.5000000000000284,
+        "events": [],
+        "minimum_selected_speed": {
+          "F001": 24.38958671360718
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 7,
+          "target_speed_mps": 40.33244444444445,
+          "execution_speed_target_mps": 24.38958671360718,
+          "actual_tas_mps": 24.38961530501615,
+          "target_alt_m": 106.68,
+          "actual_alt_m": 106.68,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 0.0,
+          "actual_cross_track_m": -0.0935431198449414,
+          "lane_error_m": -0.0935431198449414,
+          "lane_track_error_deg": 0.024353940039361532,
+          "centerline_distance_m": 0.09354311984494859,
+          "lane_active": false,
+          "altitude_active": false,
+          "nominal_waypoint_index": 1,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": null,
+        "return_completed_at": 141.25,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 80.6648888888889,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 80.6648888888889,
+            "execution_target_mps": 80.6648888888889,
+            "minimum_execution_target_mps": 24.38958671360718,
+            "overridden_dispatches": 67,
+            "dispatches": 702,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": -89.9999999999881,
+                "radius_m": 130.08153672644752,
+                "tangent_m": 130.0815367264205,
+                "speed_limit_mps": 24.38958671360718,
+                "ideal_deviation_m": 38.099999999999994,
+                "active": false,
+                "released": true,
+                "braking_started_s": 95.25,
+                "released_s": 112.0,
+                "trigger_distance_m": 366.8101648566642,
+                "trigger_actual_distance_m": 358.96881504501187,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 24.38961530501615,
+            "actual_tas_max_mps": 84.6982312358187
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 7
+        },
+        {
+          "time_s": 120.0,
+          "action": 52
+        },
+        {
+          "time_s": 140.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 3,
+      "invalid_proposal_checked": false,
+      "target_completion_observed_at": 115.0,
+      "return_requested_at": 140.0,
+      "return_completed_at": 141.25,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "lane_altitude",
+      "seed": 970002,
+      "summary": {
+        "seed": 970002,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.04201388888888889,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9358.674074320374,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 75.48123363188479,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 4,
+        "policy_decisions": 2,
+        "return_sum": 0.8992,
+        "sim_seconds": 151.25,
+        "physics_steps": 605,
+        "decision_steps": 31,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 151.25,
+            "path_length_m": 9358.674074320374,
+            "max_centerline_distance_m": 75.48123363188479,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 2,
+            "changed_instructions": 4,
+            "return_sum": 0.8992,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 151.25,
+            "terminal_state": [
+              52.041654183808255,
+              4.067694290495922,
+              106.68,
+              80.66498226127314
+            ],
+            "endpoint_distance_m": 3.889798190609429,
+            "terminal_geometry": {
+              "fraction": 0.8071134176411399,
+              "cross_track_m": -2.1065816391998577e-07,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 80.6648888888889,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 2,
+                "accepted_actions": 2,
+                "rejected_actions": 0,
+                "speed_commands": 0,
+                "altitude_commands": 2,
+                "lane_commands": 2,
+                "route_rebuilds": 2,
+                "altitude_captures": 2,
+                "lane_captures": 2,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 605,
+                "physics_steps": 605,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 75.48123363188479
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": -0.06796886050085836,
+              "lane_error_m": -0.06796886050085836,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 605,
+        "physics_sha256": "ebfe7f20085b3d062fa70d2c995d4529366bf512a3be6f35c7cdd6d503ecfb63",
+        "transitions": 31,
+        "feedback_rows": 31,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 10,
+        "requested_actual_speed_different_rows": 14,
+        "max_abs_acceleration_mps2": 3.5,
+        "events": [
+          {
+            "id": "F001",
+            "time_s": 5.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": -76.0940473403845,
+            "track_error_deg": 0.7898006851035291,
+            "altitude_error_m": -30.384749999999997,
+            "vs_mps": 0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 15.5,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": -61.69420452016605,
+            "track_error_deg": 1.00256886442952,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 86.5,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": -0.755724196041399,
+            "track_error_deg": 2.3878059084601944,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 95.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": 75.2993510955271,
+            "track_error_deg": -0.9995105251905443,
+            "altitude_error_m": 30.384749999999997,
+            "vs_mps": -0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 105.5,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": 64.3656285598766,
+            "track_error_deg": -0.9996279689328276,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 150.0,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": 1.693885301797322,
+            "track_error_deg": -1.0003110375682809,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          }
+        ],
+        "minimum_selected_speed": {
+          "F001": 24.38958671360718
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 80.6648888888889,
+          "execution_speed_target_mps": 24.38958671360718,
+          "actual_tas_mps": 78.91500881095295,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 49.47139284241594,
+          "lane_error_m": -26.728607157584065,
+          "lane_track_error_deg": 1.0254089428888165,
+          "centerline_distance_m": 49.47139284252552,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 1,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": null,
+        "return_completed_at": 150.0,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 80.6648888888889,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 80.6648888888889,
+            "execution_target_mps": 80.6648888888889,
+            "minimum_execution_target_mps": 24.38958671360718,
+            "overridden_dispatches": 202,
+            "dispatches": 606,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": -89.9999999999881,
+                "radius_m": 130.08153672644752,
+                "tangent_m": 130.0815367264205,
+                "speed_limit_mps": 24.38958671360718,
+                "ideal_deviation_m": 38.099999999999994,
+                "active": false,
+                "released": true,
+                "braking_started_s": 39.5,
+                "released_s": 90.0,
+                "trigger_distance_m": 1444.0753221224425,
+                "trigger_actual_distance_m": 1443.6231652908907,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 24.389623435065506,
+            "actual_tas_max_mps": 80.66500881095295
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 44
+        },
+        {
+          "time_s": 95.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 2,
+      "invalid_proposal_checked": true,
+      "target_completion_observed_at": 90.0,
+      "return_requested_at": 95.0,
+      "return_completed_at": 150.0,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "speed",
+      "seed": 970003,
+      "summary": {
+        "seed": 970003,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.04847222222222222,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9204.959899623644,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 37.76448978494304,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 3,
+        "policy_decisions": 3,
+        "return_sum": 0.9352,
+        "sim_seconds": 174.5,
+        "physics_steps": 698,
+        "decision_steps": 35,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 174.5,
+            "path_length_m": 9204.959899623644,
+            "max_centerline_distance_m": 37.76448978494304,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 3,
+            "changed_instructions": 3,
+            "return_sum": 0.9352,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 174.5,
+            "terminal_state": [
+              51.958309766468105,
+              4.067569395091447,
+              106.68,
+              80.66498226127314
+            ],
+            "endpoint_distance_m": 3.5911116115808923,
+            "terminal_geometry": {
+              "fraction": 0.8219246314307372,
+              "cross_track_m": -3.6561705031714493e-09,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 80.6648888888889,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 3,
+                "accepted_actions": 3,
+                "rejected_actions": 0,
+                "speed_commands": 3,
+                "altitude_commands": 0,
+                "lane_commands": 0,
+                "route_rebuilds": 0,
+                "altitude_captures": 0,
+                "lane_captures": 0,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 698,
+                "physics_steps": 698,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 37.76448978494304
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": -0.0022449996003356086,
+              "lane_error_m": -0.0022449996003356086,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 698,
+        "physics_sha256": "925ac52c4e249aa2e06e0b9da11309d845b189a2a1ff923a760601dd48f847df",
+        "transitions": 35,
+        "feedback_rows": 35,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 3,
+        "requested_actual_speed_different_rows": 8,
+        "max_abs_acceleration_mps2": 3.5000000000000284,
+        "events": [],
+        "minimum_selected_speed": {
+          "F001": 24.389586713603496
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 7,
+          "target_speed_mps": 40.33244444444445,
+          "execution_speed_target_mps": 24.389586713603496,
+          "actual_tas_mps": 24.38961530501352,
+          "target_alt_m": 106.68,
+          "actual_alt_m": 106.68,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 0.0,
+          "actual_cross_track_m": -0.0935431198449414,
+          "lane_error_m": -0.0935431198449414,
+          "lane_track_error_deg": 0.024353940039361532,
+          "centerline_distance_m": 0.09354311984494859,
+          "lane_active": false,
+          "altitude_active": false,
+          "nominal_waypoint_index": 1,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": null,
+        "return_completed_at": 141.25,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 80.6648888888889,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 80.6648888888889,
+            "execution_target_mps": 80.6648888888889,
+            "minimum_execution_target_mps": 24.389586713603496,
+            "overridden_dispatches": 67,
+            "dispatches": 702,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": 90.00000000000244,
+                "radius_m": 130.08153672640825,
+                "tangent_m": 130.0815367264138,
+                "speed_limit_mps": 24.389586713603496,
+                "ideal_deviation_m": 38.1,
+                "active": false,
+                "released": true,
+                "braking_started_s": 95.25,
+                "released_s": 112.0,
+                "trigger_distance_m": 366.83485142789436,
+                "trigger_actual_distance_m": 358.96881504501187,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 24.38961530501352,
+            "actual_tas_max_mps": 84.6982312358187
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 7
+        },
+        {
+          "time_s": 120.0,
+          "action": 52
+        },
+        {
+          "time_s": 140.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 3,
+      "invalid_proposal_checked": false,
+      "target_completion_observed_at": 115.0,
+      "return_requested_at": 140.0,
+      "return_completed_at": 141.25,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "lane_altitude",
+      "seed": 970004,
+      "summary": {
+        "seed": 970004,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.03951388888888889,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9068.823758335011,
+        "outside_corridor_aircraft_seconds": 41.5,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 112.67372394222717,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 4,
+        "policy_decisions": 2,
+        "return_sum": 0.8768,
+        "sim_seconds": 142.25,
+        "physics_steps": 569,
+        "decision_steps": 29,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 142.25,
+            "path_length_m": 9068.823758335011,
+            "max_centerline_distance_m": 112.67372394222717,
+            "outside_corridor_seconds": 41.5,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 2,
+            "changed_instructions": 4,
+            "return_sum": 0.8768,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 142.25,
+            "terminal_state": [
+              51.95820079900442,
+              4.0675774333118015,
+              106.68,
+              80.66498226127314
+            ],
+            "endpoint_distance_m": 15.717356264878072,
+            "terminal_geometry": {
+              "fraction": 0.22061068522249194,
+              "cross_track_m": 4.896748870741598e-07,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 80.6648888888889,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 2,
+                "accepted_actions": 2,
+                "rejected_actions": 0,
+                "speed_commands": 0,
+                "altitude_commands": 2,
+                "lane_commands": 2,
+                "route_rebuilds": 2,
+                "altitude_captures": 2,
+                "lane_captures": 2,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 569,
+                "physics_steps": 569,
+                "outside_corridor_seconds": 41.5,
+                "max_centerline_distance_m": 112.67372394222717
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": -0.5637888023187707,
+              "lane_error_m": -0.5637888023187707,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 569,
+        "physics_sha256": "b944774d00da7e6cb9093819387bcd581e2958f78bb6ae70feb3dcd22224fdf2",
+        "transitions": 29,
+        "feedback_rows": 29,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 9,
+        "requested_actual_speed_different_rows": 12,
+        "max_abs_acceleration_mps2": 3.5,
+        "events": [
+          {
+            "id": "F001",
+            "time_s": 5.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": -76.0940473403845,
+            "track_error_deg": 0.7898006851035291,
+            "altitude_error_m": -30.384749999999997,
+            "vs_mps": 0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 15.5,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": -61.13974646813881,
+            "track_error_deg": 1.0409976060038844,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 107.5,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": 1.986424130319108,
+            "track_error_deg": -0.04084044982687374,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 115.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": 77.4550922768304,
+            "track_error_deg": -0.8528693475253419,
+            "altitude_error_m": 30.384749999999997,
+            "vs_mps": -0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 125.5,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": 47.91481336788406,
+            "track_error_deg": -2.058082195984298,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 141.5,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": 1.6063477123563794,
+            "track_error_deg": -2.0575631761390696,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          }
+        ],
+        "minimum_selected_speed": {
+          "F001": 24.389586713603496
+        },
+        "feedback_outside_seconds": 41.5,
+        "all_physical_outside_seconds": 41.5,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 80.6648888888889,
+          "execution_speed_target_mps": 24.389586713603496,
+          "actual_tas_mps": 77.16500881095295,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 51.322367257217834,
+          "lane_error_m": -24.87763274278217,
+          "lane_track_error_deg": 1.0638319093073392,
+          "centerline_distance_m": 51.32236725733564,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 1,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 80.6648888888889,
+          "execution_speed_target_mps": 24.389586713603496,
+          "actual_tas_mps": 24.38962343506288,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 162.39311193005966,
+          "lane_error_m": 86.19311193005966,
+          "lane_track_error_deg": -70.14905317942174,
+          "centerline_distance_m": 82.49861474566438,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 2,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 1.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "return_completed_at": 141.5,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 80.6648888888889,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 80.6648888888889,
+            "execution_target_mps": 80.6648888888889,
+            "minimum_execution_target_mps": 24.389586713603496,
+            "overridden_dispatches": 171,
+            "dispatches": 570,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": 90.00000000000244,
+                "radius_m": 130.08153672640825,
+                "tangent_m": 130.0815367264138,
+                "speed_limit_mps": 24.389586713603496,
+                "ideal_deviation_m": 38.1,
+                "active": false,
+                "released": true,
+                "braking_started_s": 39.0,
+                "released_s": 81.75,
+                "trigger_distance_m": 1493.577955835151,
+                "trigger_actual_distance_m": 1483.9581024905585,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 24.38962343506288,
+            "actual_tas_max_mps": 80.66500881095295
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 44
+        },
+        {
+          "time_s": 115.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 2,
+      "invalid_proposal_checked": true,
+      "target_completion_observed_at": 110.0,
+      "return_requested_at": 115.0,
+      "return_completed_at": 141.5,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "speed",
+      "seed": 970005,
+      "summary": {
+        "seed": 970005,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.13534722222222223,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9244.713039783628,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 12.254047695365653,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 3,
+        "policy_decisions": 3,
+        "return_sum": 0.8343999999999998,
+        "sim_seconds": 487.25,
+        "physics_steps": 1949,
+        "decision_steps": 98,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 487.25,
+            "path_length_m": 9244.713039783628,
+            "max_centerline_distance_m": 12.254047695365653,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 3,
+            "changed_instructions": 3,
+            "return_sum": 0.8343999999999998,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 487.25,
+            "terminal_state": [
+              52.04164554065308,
+              4.067695263824983,
+              106.68,
+              28.39736660773235
+            ],
+            "endpoint_distance_m": 2.9281927839610975,
+            "terminal_geometry": {
+              "fraction": 0.5875402358051502,
+              "cross_track_m": 1.870831484247299e-09,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 28.397333333333336,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 3,
+                "accepted_actions": 3,
+                "rejected_actions": 0,
+                "speed_commands": 3,
+                "altitude_commands": 0,
+                "lane_commands": 0,
+                "route_rebuilds": 0,
+                "altitude_captures": 0,
+                "lane_captures": 0,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 1949,
+                "physics_steps": 1949,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 12.254047695365653
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": -0.00044151020374454624,
+              "lane_error_m": -0.00044151020374454624,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 1949,
+        "physics_sha256": "257ab08bf4ea5b334c3df5ec45637ead623e7d218d65d4a2312170aadebfbd6e",
+        "transitions": 98,
+        "feedback_rows": 98,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 0,
+        "requested_actual_speed_different_rows": 0,
+        "max_abs_acceleration_mps2": 3.500000000000007,
+        "events": [],
+        "minimum_selected_speed": {
+          "F001": 14.198666666666668
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": null,
+        "first_outside_feedback": null,
+        "return_completed_at": 350.5,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 28.397333333333336,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 28.397333333333336,
+            "execution_target_mps": 28.397333333333336,
+            "minimum_execution_target_mps": 14.198666666666668,
+            "overridden_dispatches": 0,
+            "dispatches": 1953,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": -89.9999999999881,
+                "radius_m": 130.08153672644752,
+                "tangent_m": 130.0815367264205,
+                "speed_limit_mps": 24.38958671360718,
+                "ideal_deviation_m": 38.099999999999994,
+                "active": false,
+                "released": true,
+                "braking_started_s": null,
+                "released_s": 327.5,
+                "trigger_distance_m": null,
+                "trigger_actual_distance_m": null,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 14.1986833256229,
+            "actual_tas_max_mps": 29.817234931888247
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 7
+        },
+        {
+          "time_s": 330.0,
+          "action": 52
+        },
+        {
+          "time_s": 350.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 3,
+      "invalid_proposal_checked": false,
+      "target_completion_observed_at": 325.0,
+      "return_requested_at": 350.0,
+      "return_completed_at": 350.5,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "lane_altitude",
+      "seed": 970006,
+      "summary": {
+        "seed": 970006,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.09215277777777778,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9355.701973802888,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 75.36616933416809,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 4,
+        "policy_decisions": 2,
+        "return_sum": 0.8096000000000001,
+        "sim_seconds": 331.75,
+        "physics_steps": 1327,
+        "decision_steps": 67,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 331.75,
+            "path_length_m": 9355.701973802888,
+            "max_centerline_distance_m": 75.36616933416809,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 2,
+            "changed_instructions": 4,
+            "return_sum": 0.8096000000000001,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 331.75,
+            "terminal_state": [
+              52.041623359107156,
+              4.067695128106465,
+              106.68,
+              28.39736660773235
+            ],
+            "endpoint_distance_m": 0.4617695791824975,
+            "terminal_geometry": {
+              "fraction": 0.9349559999045209,
+              "cross_track_m": -9.41327455122942e-09,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 28.397333333333336,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 2,
+                "accepted_actions": 2,
+                "rejected_actions": 0,
+                "speed_commands": 0,
+                "altitude_commands": 2,
+                "lane_commands": 2,
+                "route_rebuilds": 2,
+                "altitude_captures": 2,
+                "lane_captures": 2,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 1327,
+                "physics_steps": 1327,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 75.36616933416809
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": -0.0074362011028628,
+              "lane_error_m": -0.0074362011028628,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 1327,
+        "physics_sha256": "4443b4b7d12bc9e8a4fb3ef1a34929b2376df2b2325fd4d5d41213ab0daedf13",
+        "transitions": 67,
+        "feedback_rows": 67,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 3,
+        "requested_actual_speed_different_rows": 3,
+        "max_abs_acceleration_mps2": 3.5,
+        "events": [
+          {
+            "id": "F001",
+            "time_s": 5.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": -75.98148750699464,
+            "track_error_deg": 2.2815356469670007,
+            "altitude_error_m": -30.384749999999997,
+            "vs_mps": 0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 16.25,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": -67.55333914280249,
+            "track_error_deg": 0.8871874183431032,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 169.75,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": -1.097280490865586,
+            "track_error_deg": 4.966938966785733,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 175.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": 75.08443826952683,
+            "track_error_deg": -2.2959868555370804,
+            "altitude_error_m": 30.384749999999997,
+            "vs_mps": -0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 186.25,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": 66.4780700945459,
+            "track_error_deg": -0.9211831296163382,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 327.5,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": 1.9360564616391924,
+            "track_error_deg": -0.9218832899697418,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          }
+        ],
+        "minimum_selected_speed": {
+          "F001": 24.38958671360718
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 28.397333333333336,
+          "execution_speed_target_mps": 24.38958671360718,
+          "actual_tas_mps": 24.389623435065506,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 73.38198955450423,
+          "lane_error_m": -2.818010445495773,
+          "lane_track_error_deg": 0.9342033382347097,
+          "centerline_distance_m": 73.38198955474496,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 1,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": null,
+        "return_completed_at": 327.5,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 28.397333333333336,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 28.397333333333336,
+            "execution_target_mps": 28.397333333333336,
+            "minimum_execution_target_mps": 24.38958671360718,
+            "overridden_dispatches": 65,
+            "dispatches": 1328,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": -89.9999999999881,
+                "radius_m": 130.08153672644752,
+                "tangent_m": 130.0815367264205,
+                "speed_limit_mps": 24.38958671360718,
+                "ideal_deviation_m": 38.099999999999994,
+                "active": false,
+                "released": true,
+                "braking_started_s": 157.25,
+                "released_s": 173.5,
+                "trigger_distance_m": 184.44436508467496,
+                "trigger_actual_distance_m": 180.26326394687325,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 24.389623435065506,
+            "actual_tas_max_mps": 28.397376069395786
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 44
+        },
+        {
+          "time_s": 175.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 2,
+      "invalid_proposal_checked": true,
+      "target_completion_observed_at": 170.0,
+      "return_requested_at": 175.0,
+      "return_completed_at": 327.5,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "speed",
+      "seed": 970007,
+      "summary": {
+        "seed": 970007,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.13534722222222223,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9244.713029309398,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 12.241859973824022,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 3,
+        "policy_decisions": 3,
+        "return_sum": 0.8343999999999998,
+        "sim_seconds": 487.25,
+        "physics_steps": 1949,
+        "decision_steps": 98,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 487.25,
+            "path_length_m": 9244.713029309398,
+            "max_centerline_distance_m": 12.241859973824022,
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 3,
+            "changed_instructions": 3,
+            "return_sum": 0.8343999999999998,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 487.25,
+            "terminal_state": [
+              51.95831573203601,
+              4.067569364861548,
+              106.68,
+              28.39736660773235
+            ],
+            "endpoint_distance_m": 2.927772269970957,
+            "terminal_geometry": {
+              "fraction": 0.5875994686282753,
+              "cross_track_m": -2.6211651342752834e-09,
+              "altitude_m": 106.68,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 28.397333333333336,
+              "target_alt_m": 106.68,
+              "target_lane_m": 0.0
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 3,
+                "accepted_actions": 3,
+                "rejected_actions": 0,
+                "speed_commands": 3,
+                "altitude_commands": 0,
+                "lane_commands": 0,
+                "route_rebuilds": 0,
+                "altitude_captures": 0,
+                "lane_captures": 0,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 1949,
+                "physics_steps": 1949,
+                "outside_corridor_seconds": 0.0,
+                "max_centerline_distance_m": 12.241859973824022
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": 0.0004409386895335166,
+              "lane_error_m": 0.0004409386895335166,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 1949,
+        "physics_sha256": "b4272b8162edf4966b5b441e2b0e11ee14d33cbd48513b2c91f5d44c585bc13a",
+        "transitions": 98,
+        "feedback_rows": 98,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 0,
+        "requested_actual_speed_different_rows": 0,
+        "max_abs_acceleration_mps2": 3.500000000000007,
+        "events": [],
+        "minimum_selected_speed": {
+          "F001": 14.198666666666668
+        },
+        "feedback_outside_seconds": 0.0,
+        "all_physical_outside_seconds": 0.0,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": null,
+        "first_outside_feedback": null,
+        "return_completed_at": 350.5,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 28.397333333333336,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 28.397333333333336,
+            "execution_target_mps": 28.397333333333336,
+            "minimum_execution_target_mps": 14.198666666666668,
+            "overridden_dispatches": 0,
+            "dispatches": 1953,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": 90.00000000000244,
+                "radius_m": 130.08153672640825,
+                "tangent_m": 130.0815367264138,
+                "speed_limit_mps": 24.389586713603496,
+                "ideal_deviation_m": 38.1,
+                "active": false,
+                "released": true,
+                "braking_started_s": null,
+                "released_s": 327.5,
+                "trigger_distance_m": null,
+                "trigger_actual_distance_m": null,
+                "activation_late": false
+              }
+            ],
+            "actual_tas_min_mps": 14.1986833256229,
+            "actual_tas_max_mps": 29.817234931888247
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 7
+        },
+        {
+          "time_s": 330.0,
+          "action": 52
+        },
+        {
+          "time_s": 350.0,
+          "action": 37
+        }
+      ],
+      "script_stage": 3,
+      "invalid_proposal_checked": false,
+      "target_completion_observed_at": 325.0,
+      "return_requested_at": 350.0,
+      "return_completed_at": 350.5,
+      "script_sequence_complete": true,
+      "incomplete_sequence_reason": null
+    },
+    {
+      "mode": "lane_altitude",
+      "seed": 970008,
+      "summary": {
+        "seed": 970008,
+        "planned": 1,
+        "completed": 1,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 0.08854166666666667,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          },
+          "nmac": {
+            "unordered_pair_seconds": 0.0,
+            "directed_pair_seconds": 0.0,
+            "event_count": 0,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 0,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 0.0,
+            "directed_seconds_per_flight_hour": 0.0
+          }
+        },
+        "path_length_m": 9018.599494734886,
+        "outside_corridor_aircraft_seconds": 163.5,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 133.4896276235081,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 2,
+        "policy_decisions": 1,
+        "return_sum": 0.6472000000000002,
+        "sim_seconds": 318.75,
+        "physics_steps": 1275,
+        "decision_steps": 64,
+        "max_active": 1,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0,
+            "status": "arrived",
+            "actual_entry_s": 0.0,
+            "flight_seconds": 318.75,
+            "path_length_m": 9018.599494734886,
+            "max_centerline_distance_m": 133.4896276235081,
+            "outside_corridor_seconds": 163.5,
+            "outside_altitude_seconds": 0.0,
+            "admission_lowc_pairs": 0,
+            "admission_nmac_pairs": 0,
+            "policy_decisions": 1,
+            "changed_instructions": 2,
+            "return_sum": 0.6472000000000002,
+            "final_leg_activated": true,
+            "outside_exit_crossings": 0,
+            "terminal_time_s": 318.75,
+            "terminal_state": [
+              51.958337594186006,
+              4.066456388865035,
+              137.16,
+              28.397376069395786
+            ],
+            "endpoint_distance_m": 0.567639289615972,
+            "terminal_geometry": {
+              "fraction": 0.9200434169762213,
+              "cross_track_m": 76.20000000516671,
+              "altitude_m": 137.16,
+              "within_width": true,
+              "within_height": true
+            },
+            "accepted_targets": {
+              "target_speed_mps": 28.397333333333336,
+              "target_alt_m": 137.16,
+              "target_lane_m": 76.2
+            },
+            "action_execution": {
+              "command_counts": {
+                "proposals": 1,
+                "accepted_actions": 1,
+                "rejected_actions": 0,
+                "speed_commands": 0,
+                "altitude_commands": 1,
+                "lane_commands": 1,
+                "route_rebuilds": 1,
+                "altitude_captures": 1,
+                "lane_captures": 1,
+                "capture_beyond_leg_end_commands": 0,
+                "speed_refreshes": 1275,
+                "physics_steps": 1275,
+                "outside_corridor_seconds": 163.5,
+                "max_centerline_distance_m": 133.4896276235081
+              },
+              "lane_active": false,
+              "altitude_active": false,
+              "capture_beyond_leg_end": false,
+              "actual_cross_track_m": 76.19525937563249,
+              "lane_error_m": -0.004740624367514101,
+              "nominal_waypoint_index": 2
+            }
+          }
+        ]
+      },
+      "audit": {
+        "physics_samples": 1275,
+        "physics_sha256": "1b9df55b552298c47e562681dad8ff7f00a0128985ecb13da8fefa22ef92db5b",
+        "transitions": 64,
+        "feedback_rows": 64,
+        "terminal_feedback_rows": 1,
+        "limited_feedback_rows": 2,
+        "requested_actual_speed_different_rows": 2,
+        "max_abs_acceleration_mps2": 3.5,
+        "events": [
+          {
+            "id": "F001",
+            "time_s": 5.25,
+            "lane_active": true,
+            "altitude_active": true,
+            "lane_error_m": -75.98148750699464,
+            "track_error_deg": 2.2815356469670007,
+            "altitude_error_m": -30.384749999999997,
+            "vs_mps": 0.381
+          },
+          {
+            "id": "F001",
+            "time_s": 16.25,
+            "lane_active": true,
+            "altitude_active": false,
+            "lane_error_m": -67.399542864237,
+            "track_error_deg": 0.9198552944794187,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          },
+          {
+            "id": "F001",
+            "time_s": 310.5,
+            "lane_active": false,
+            "altitude_active": false,
+            "lane_error_m": 1.9519101597216775,
+            "track_error_deg": -0.47892595591360987,
+            "altitude_error_m": 0.0,
+            "vs_mps": 0.0
+          }
+        ],
+        "minimum_selected_speed": {
+          "F001": 24.389586713603496
+        },
+        "feedback_outside_seconds": 163.5,
+        "all_physical_outside_seconds": 163.5,
+        "uncontrolled_prefix_counters": {
+          "F001": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          }
+        },
+        "first_limited_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 28.397333333333336,
+          "execution_speed_target_mps": 24.389586713603496,
+          "actual_tas_mps": 27.522376069395786,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 229.48562530726912,
+          "lane_error_m": 153.28562530726913,
+          "lane_track_error_deg": -84.37483925867669,
+          "centerline_distance_m": 74.46255265604617,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 2,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 0.0,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "first_outside_feedback": {
+          "proposed_action_index": null,
+          "accepted_action_index": 44,
+          "target_speed_mps": 28.397333333333336,
+          "execution_speed_target_mps": 24.389586713603496,
+          "actual_tas_mps": 24.38962343506288,
+          "target_alt_m": 137.16,
+          "actual_alt_m": 137.16,
+          "actual_vs_mps": 0.0,
+          "target_lane_m": 76.2,
+          "actual_cross_track_m": 130.33763509510752,
+          "lane_error_m": 54.13763509510751,
+          "lane_track_error_deg": -31.08808254681844,
+          "centerline_distance_m": 130.34134027918017,
+          "lane_active": true,
+          "altitude_active": false,
+          "nominal_waypoint_index": 2,
+          "speed_limited": true,
+          "interval": {
+            "outside_corridor_seconds": 4.75,
+            "outside_altitude_seconds": 0.0,
+            "lane_captures": 0,
+            "altitude_captures": 0
+          },
+          "status": "active",
+          "policy_input": false,
+          "boundary_reward_included": false
+        },
+        "return_completed_at": null,
+        "all_checks_passed": true
+      },
+      "route_execution_audit": {
+        "mode": "shared_corner_speed",
+        "scope": "NR and policy requested speeds; nominal corner geometry only; no traffic awareness or action-containment guarantee",
+        "settings": {
+          "mode": "shared_corner_speed",
+          "width_fraction": 0.5,
+          "tangent_leg_fraction": 0.45,
+          "release_track_tolerance_deg": 1.0,
+          "prediction_reserve_m": 1.0
+        },
+        "flights": {
+          "F001": {
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "nominal_speed_mps": 28.397333333333336,
+            "bank_rad": 0.4363323129985824,
+            "requested_speed_mps": 28.397333333333336,
+            "execution_target_mps": 28.397333333333336,
+            "minimum_execution_target_mps": 24.389586713603496,
+            "overridden_dispatches": 33,
+            "dispatches": 1276,
+            "corners": [
+              {
+                "index": 1,
+                "turn_deg": 90.00000000000244,
+                "radius_m": 130.08153672640825,
+                "tangent_m": 130.0815367264138,
+                "speed_limit_mps": 24.389586713603496,
+                "ideal_deviation_m": 38.1,
+                "active": false,
+                "released": true,
+                "braking_started_s": 154.75,
+                "released_s": 163.0,
+                "trigger_distance_m": 184.44436508471912,
+                "trigger_actual_distance_m": 247.38072679706065,
+                "activation_late": true
+              }
+            ],
+            "actual_tas_min_mps": 24.38962343506288,
+            "actual_tas_max_mps": 28.397376069395786
+          }
+        }
+      },
+      "script_dispatches": [
+        {
+          "time_s": 5.0,
+          "action": 44
+        }
+      ],
+      "script_stage": 1,
+      "invalid_proposal_checked": true,
+      "target_completion_observed_at": 315.0,
+      "return_requested_at": null,
+      "return_completed_at": null,
+      "script_sequence_complete": false,
+      "incomplete_sequence_reason": "target_not_completed_before_terminal"
+    }
+  ],
+  "all_checks_passed": true,
+  "validation_complete": true,
+  "scope": "Shared navigation integration and feedback verification; fixed scripts are not trained policies or containment guarantees.",
+  "config": {
+    "schema": "bluesky.paper-like.environment.v1",
+    "scenario_config": "configs/nr_pilot.json",
+    "action_config": "configs/paper_actions_shared_navigation.json",
+    "observation_config": "configs/paper_observation.json",
+    "types_config": "configs/uav_types.json",
+    "decision_seconds": 5.0,
+    "device": "cpu",
+    "reconstruction_choices": [
+      "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+      "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+      "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+      "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+      "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+      "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+      "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+      "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training.",
+      "Explicit ordinary-flyby current-state reconstruction: immediately before each native reached call, refresh only ordinary flyby turndist using current actual TAS, native bankdef, current waypoint bearing and next_qdr. Cached turnspd and selected target speed do not enter this formula. Reject flyturn and its transition modes; native reached alone determines waypoint passage. This follows the audited old author-fork formula, not a confirmed 2026 setup or a safety filter.",
+      "Retain Table3 speeds, native bank25, corridor dimensions, actions, observations, rewards and execution terminal policies. Corridor containment remains unresolved; existing whole-tick terminal exposure remains unchanged. The adapter is installed only for one environment step and restored before reset or caller-side sampling. Cumulative per-episode navigation_audit is available separately from the unchanged episode summary schema.",
+      "Shared NR/policy corner-speed dispatcher is installed before admissions on every reset. Nominal-route geometry supplies the same cap for all target actions; neither traffic nor a full avoidance trajectory is certified. CAP and offset-route corner containment remain limitations, not hidden feasibility rejections.",
+      "Requested discrete speed, altitude and lane remain policy-owned absolute targets. Continuous execution speed is the minimum of the requested speed and active nominal corner caps, including caps below the policy minimum. A speed change cannot revive a completed past corner. Turn completion restores the current requested speed, never an old nominal request.",
+      "Execution feedback in info distinguishes requested/selected/actual speed, physical tracking, component completion and full-interval boundary exposure including terminal ticks. It is diagnostic only: the paper-like own7/intruder10 features and reward formula have not gained boundary feedback or a boundary penalty. Locks record command completion, not current safety. step(None) preserves previous targets.",
+      "No forced lane return, reference inset, fixed holding time, certified action filter or training change is supplied by this navigation integration. Existing action masks retain only component locks and the declared final-leg backward-capture guard."
+    ],
+    "terminal_policy": "finite_exit",
+    "fail_on_native_route_exhaustion": true,
+    "ordinary_flyby_guidance": "current_state_refresh",
+    "shared_navigation": {
+      "mode": "shared_corner_speed",
+      "width_fraction": 0.5,
+      "tangent_leg_fraction": 0.45,
+      "release_track_tolerance_deg": 1.0,
+      "prediction_reserve_m": 1.0
+    },
+    "execution_feedback": true
+  },
+  "input_sha256": {
+    "configs/paper_environment_shared_navigation.json": "4f6a7980e7cd42038448cfeb2bfbe24582f7232f42cac31f25347f1910258c31",
+    "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+    "configs/paper_actions_shared_navigation.json": "d036229d538347d0412d9c31ea74434ce8c8e2babb8abefd3173b1f10a15f213",
+    "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+    "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+  },
+  "source_sha256": {
+    "shared_navigation_probe.py": "6850f5ce241aebd9ffc9ecfeec0d9d12db2306da6085b8c9707e79361fc9dc59",
+    "nominal_turn_speed.py": "250102dbde40c559c5eb8ac66dd2478b9fa9be7cfc3af994abe6037f54273395",
+    "paper_environment.py": "bf67054d2720aeabfcb52e27f0b3043cbe9cd085d63ee63d2b0f813400363400",
+    "paper_actions.py": "f3318793a827cd5e27b9deb15eaf8496460ebf4c25fde2aae0dbbec63c04ff96",
+    "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+    "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+    "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+    "navigation_refresh.py": "c7cf67ab4f99a308f1feca11041fbbb0b1d8e04d62abdc342f94f288112d0fd1",
+    "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064",
+    "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+    "nr_containment_probe.py": "abb5de61d71ff643a7e3e033f226432f0f7402872506e480c0e644c961f2e70c",
+    "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40"
+  },
+  "fixtures": [
+    {
+      "mode": "speed",
+      "scenario": {
+        "seed": 970001,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "lane_altitude",
+      "scenario": {
+        "seed": 970002,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "speed",
+      "scenario": {
+        "seed": 970003,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "lane_altitude",
+      "scenario": {
+        "seed": 970004,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "speed",
+      "scenario": {
+        "seed": 970005,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "lane_altitude",
+      "scenario": {
+        "seed": 970006,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "speed",
+      "scenario": {
+        "seed": 970007,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "mode": "lane_altitude",
+      "scenario": {
+        "seed": 970008,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ]
+      }
+    }
+  ],
+  "script_coverage": {
+    "requested": 8,
+    "executed": 8,
+    "target_dispatched": 8,
+    "return_requested": 7,
+    "return_completed": 7
+  },
+  "wall_seconds": 10.935189784038812
+}

@@ -874,3 +874,27 @@ root将仅本轮构造性路线的出口放到末两参考点的沿程中间，�
 21:50最终review返回无阻断：独立汇总确认正式1080到达/0越界、678完成横移/42拒绝到达、含初测37执行1110架2467492步，8个lab job全部succeeded；17份备份与原对应文件的大小/SHA全部相同。review明确没有再次单独hash八个大gzip，相关字节身份已由root复制及隔离归约前后校验；没有把review重复陈述算为新原生证据。当前planner/probe也与左右两run实际源SHA精确一致，31个明确文件已暂存，staged空白检查通过，不再追加无必要实验。
 
 21:52提交收尾：31个明确文件提交`725adfcd85e30868868da75e3ba967542e29c848`，按已有授权push成功；本地/远端SHA精确一致、工作区干净，无本轮自动审批拒绝。现在只同步NOW/任务的推送收尾记录，另作小文档提交；最终仅root调用既有完成通知，不据服务接受声称设备已显示。
+
+### 2026-09-05 22:26 UTC：新授权仅完成共享导航和语义核对
+
+用户要求先完成此前计划1、2，不启动3的小训练。已检索LESSONS的高速fly-by提前切换、完整末步、CAP与锁区别、目标/实际TAS误差，读当前NOW/PLAN/相关核心。NOW此前把在线认证续行列为前置项，现按用户新分工改正；保留所有固定认证脚本证据，不移入baseline。CPU14/单线程/nice15/idleIO，单lab，无GPU或他人进程操作。
+
+原生fresh Astra/xhigh交接均包含问题、读写范围、来源、输出、停止条件，无嵌套。execution_semantics_audit只读动作/观测/奖励与验证矩阵，<=12min；shared_turn_speed独占nominal_turn_speed.py及对应tests，<=15min只静态编写，无负载/清理。root拥有环境/action dispatcher连接、配置、反馈、driver、所有lab和文档。指定线程元数据实际核验：execution_semantics_audit线程01a073ac-4c3c-7e83-85e0-9a67a2de2b10/turn01a073ac-4c5f-7b00-bb99-2a3a443138b7，shared_turn_speed线程01a073ad-2540-76f1-a34b-6fd937836223/turn01a073ad-2564-75f0-b4b3-716b14f6f930，均gpt-6-astra/xhigh。
+
+22:38实现/先验复核：共享dispatcher在reset入场前安装，保留原60目标/机动锁/显式返回与原始终止。新增info逐决策执行反馈，分别记录请求/下发/实际TAS、目标/误差/锁、完成次数和本区间宽高越界；它不进入既有7/10输入或奖励。source identity包含nominal_turn_speed.py，另建shared配置而非迁移850。独立review发现并修正共享变速后旧弯重激活、偏移出弯对准错误、CAP方位误作原弯，以及实N_j反向180度触发ValueError的分支；后者回退名义转角并明确计数，不认证后向轨迹。
+
+独立review还要求driver精确人口/参考seed绑定、出生至首观察前缀+反馈等于完整宽高/完成计数、有限脚本未返回单列，并区分到达与动作完成。均已实现；三个反例fixture覆盖丢失终止delta/出生前缀和缺参考人口，物理target完成与决策切换准备分别记录。脚本指令之间使用step(None)，验证目标持续；非法batch拒绝前后检查物理时间/动作状态不变。
+
+五批初始system通过11动作/18观测奖励/16限速/1入场/3反馈测试；之后实N_j分支补两限速回归，最终18限速+3反馈重测通过。全部唯一测试51项，运行详情随报告manifest归档。一条environment-tests启动参数误写重复low-altitude/.venv路径，被launcher预检拒绝，未启动任何负载；改为正确既有runtime后通过，未放宽检查。
+
+原seed53001双臂pilot19.246401s内部/19.628525s监督，2×30全到达零越界，共118280样本；共享NR科学摘要与原已验证NR精确，两臂逐步物理字段哈希一致。该seed无实际限速干预，不单凭它断言限速集成已验证。第一批8个镜像Amzn/Eh216速度或横移+升高脚本10.935190s内部，8到达、7返回完成；两侧lane过弯例横向越界41.5/163.5s全部在info完整记账，0高度。它们是预声明脚本结果，不是模型失败率。最后一例未返回先作未完成项保留；后续按最终逐步时刻核准其脚本等待原因（见下），不计为返回成功。最终源码已修正180度分支并加强标签/断言，正跑全12配对；旧pilot/初始脚本结果保留，不冒称在最终driver下产生。
+
+22:42–22:45正式验证完成：[20260905T223842Z-shared-navigation-original12-paired-0cad67d9](../runs/20260905T223842Z-shared-navigation-original12-paired-0cad67d9/status.json)198.667354s内部/199.156932s监督，原12每臂360到达/0宽高越界/792741飞机物理步。共享NR各case科学摘要对原NR限速精确；同case None/37臂逐步审计物理字段哈希精确。每臂41限速飞机、190限速反馈、264请求/实际差>.001m/s反馈、39660总反馈/360终止；显式37有39660policy_decisions，NR0，目标变化0，return_sum均−3026.6577632518565。FH55.0514583333、path3329784.80093567、LoWC36010.75pair-s、NMAC8924；不是学习收益。
+
+[20260905T224234Z-shared-navigation-switch-final-80fbaa82](../runs/20260905T224234Z-shared-navigation-switch-final-80fbaa82/status.json)最终8脚本11.178967s内部/11.594551s监督，9070样本，8到达、7发回并实际完成返回。Amzn+90度970004越界41.5s/最大112.673724m，Eh216+90度970008越界163.5s/最大133.489628m，合计205s均与feedback精确；其余0、全部高度0。四横移脚本锁中非法batch拒绝前后时间/状态精确不变，所有合法脚本通过接口；不把bad timing、初始目标/保持、返回、到达或containment混为一项成功。两次8脚本每case物理哈希相同。
+
+22:44独立review纠正970008解释：实际target310.5s，315s有准备边界，脚本多等5s但318.75s退出，是固定等待导致未发返回，不是无机会或未解锁；970002 target_completed_at为null，不能称完整稳定目标保持后返回。保留原JSON/源码字节，在README解释，并仅修改driver分类helper/新增负夹具。[20260905T224448Z-shared-navigation-outcome-label-test-897162bf](../runs/20260905T224448Z-shared-navigation-outcome-label-test-897162bf/status.json)4反馈/分类测试通过；未再改物理执行或重跑物理获取更好结果。合计52唯一测试、11成功lab，全部负载22:44:48.319555结束。
+
+最终只读Astra复核确认实际全12摘要/哈希/限速数量和8脚本结果，无执行阻断，报告需保留以上两个解释；root已写[完整报告](../reports/shared-navigation-20260905/README.md)与[manifest](../reports/shared-navigation-20260905/manifest.json)。41份逐字节结果/日志/manifest/4旧源码文本共4328246B，所有正式执行模块SHA与工作区精确；driver只多最终分类helper，实际正式源码归档文本hash精确。原始全轨迹没有落盘，在线归约/哈希；整个labsource快照只在runs，不冒称全量异地备份。旧850/原场景未改；新训练配置只准备，未执行。
+
+反复交接实际模型核验：execution_semantics_audit第二/三turn01a073b2-c675-7640-9ed2-2385896b07a4、01a073b6-6fea-7343-b684-cfb663222466均Astra/xhigh；shared_turn_speed追加turn01a073b7-acdc-71f0-9fa5-819267525433同。审查只读、builder仅指定文件静态编辑，root唯一负载/通知。GitHub只读确认原crafff/low-altitude仍private/admin，同原研究分支；已授权提交push进入收尾，原10h不恢复。

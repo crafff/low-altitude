@@ -1,0 +1,45 @@
+Creating directory "/tmp/bluesky-paper-m_93tvnf/scenario"
+Creating directory "/tmp/bluesky-paper-m_93tvnf/plugins"
+Creating directory "/tmp/bluesky-paper-m_93tvnf/output"
+Creating directory "/tmp/bluesky-paper-m_93tvnf/cache"
+Copying default configfile to /tmp/bluesky-paper-m_93tvnf/settings.cfg
+Reading config from /tmp/bluesky-paper-m_93tvnf/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970001, "mode": "speed", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 7}, {"time_s": 120.0, "action": 52}, {"time_s": 140.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970002, "mode": "lane_altitude", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 44}, {"time_s": 95.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970003, "mode": "speed", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 7}, {"time_s": 120.0, "action": 52}, {"time_s": 140.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970004, "mode": "lane_altitude", "completed": 1, "outside_seconds": 41.5, "dispatches": [{"time_s": 5.0, "action": 44}, {"time_s": 115.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970005, "mode": "speed", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 7}, {"time_s": 330.0, "action": 52}, {"time_s": 350.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970006, "mode": "lane_altitude", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 44}, {"time_s": 175.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970007, "mode": "speed", "completed": 1, "outside_seconds": 0.0, "dispatches": [{"time_s": 5.0, "action": 7}, {"time_s": 330.0, "action": 52}, {"time_s": 350.0, "action": 37}]}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-m_93tvnf/cache/navdata.p
+{"seed": 970008, "mode": "lane_altitude", "completed": 1, "outside_seconds": 163.5, "dispatches": [{"time_s": 5.0, "action": 44}]}

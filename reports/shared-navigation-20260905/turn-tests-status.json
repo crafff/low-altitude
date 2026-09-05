@@ -1,0 +1,11 @@
+{
+  "id": "20260905T223243Z-shared-navigation-turn-tests-4d127f3b",
+  "stage": "system",
+  "state": "succeeded",
+  "started_at": "2026-09-05T22:32:43.616290+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T22:32:43.888769+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

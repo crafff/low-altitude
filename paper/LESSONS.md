@@ -51,3 +51,6 @@
 
 | 固定原12场景中各侧21/31架Amzn被首段完整横移模板拒绝，其余329架全接受；拒绝后仍360/360到达且0越界 | 将动作完成、保守拒绝、任务到达分别计数。拒绝当前模板不能推导所有轨迹都不可行，也不能将被拒绝的动作计为成功 | [固定原场景全记录](../reports/fixed-route-20260905/README.md) |
 | 轨迹归约若只遍历已有plan/trace，整架无冲突飞机缺失可逃过检查；直道的首段等于最终段也会使错误进度筛选漏查回中 | 与原case/flight ID集合及声明计划完整绑定，再逐物理步检查保持、回中和首次真实退出。系统负夹具不当物理证明 | [两项回归与完整1110架次归约](../reports/fixed-route-20260905/README.md)；test_whole_missing_flight_cannot_escape_zero_conflict_audit / test_straight_leg_return_checks_actual_center_even_when_final_leg_starts_at_tick1 |
+
+| 共享限速若在requested<=cap时跳过已过弯维护，后续加速会把旧弯当新弯；偏移lane按中心端点对准也可能不释放 | 请求速度与弯道进度分别维护，按所请求lane检查出弯；CAP方位不冒充名义弯角，反向180度显式处理/记录 | [共享执行代码/18回归/12配对与8脚本](../reports/shared-navigation-20260905/README.md)；NR对照保持精确 |
+| info记录越界不表示网络收到越界特征或奖励；动作锁释放也不表示实际请求速度/位置同时稳定 | 同列请求、执行、实际状态及哪些字段真正进入策略/奖励；到达、返回完成、完整目标保持分别报告 | [共享执行语义/原文核对与原生反馈](../reports/shared-navigation-20260905/README.md)；970002/970008负结果保留 |
