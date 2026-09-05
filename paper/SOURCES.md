@@ -13,6 +13,8 @@
 
 ## 系统一手依据
 
+- [BlueSky官方仓库](https://github.com/TUDelft-CNS-ATM/bluesky)与[PyPI 1.1.1](https://pypi.org/project/bluesky-simulator/1.1.1/)：2026-09-05核实发布元数据并安装CPython3.11 Linux wheel。API以已安装1.1.1的`bluesky/__init__.py`、`core/{base,entity,simtime}.py`、`traffic/{traffic,route,autopilot}.py`、`traffic/performance/perfbase.py`为准，上游master可能不同。已验证detached headless步进与原生路线；没有据此指定原文的BlueSky版本或OpenAP模型。1.1.1强制依赖OpenAP是软件包事实，论文未指定它。
+- [`zmq==0.0.0`官方源码分发](https://files.pythonhosted.org/packages/6e/78/833b2808793c1619835edb1a4e17a023d5d625f4f97ff25ffff986d1f472/zmq-0.0.0.tar.gz)：2026-09-05内存读取归档和setup.py，确认仅依赖pyzmq的元包；哈希见任务001。允许本次特定构建，不代表泛化信任任意源码安装。
 - [OpenAI Codex配置](https://learn.chatgpt.com/docs/config-file/config-reference#configtoml)：2026-09-05重新读取官方配置参考，核对默认子agent模型/effort、角色config_file及每技能禁用设置；现有键有对应依据，无需增加配置层。Astra选择来自用户要求，不根据速度或成本自动降级。
 - [Bubblewrap](https://github.com/containers/bubblewrap)：已读取，明确它是沙箱构造工具而非现成安全策略；本项目自己定义只读输入、可写输出、私有进程/临时目录与无网络边界。本机0.6.1启动和嵌套构造验证通过。
 - [uv项目管理](https://docs.astral.sh/uv/guides/projects/)与[Python版本](https://docs.astral.sh/uv/concepts/python-versions/)：2026-09-05读取官方文档，并以本机uv 0.8.22的help核对命令选项；采用项目独立的托管Python、.venv、pyproject和uv.lock。具体命令见ENVIRONMENT，实际隔离验证见任务001。

@@ -1,0 +1,18 @@
+{
+  "schema": "bluesky.diagnostic.v1",
+  "seed": 20260905,
+  "bluesky_version": "1.1.1",
+  "origin_lat_lon_deg": [52.0, 4.0],
+  "dt_seconds": 0.25,
+  "horizon_seconds": 240.0,
+  "initial_tas_mps": 25.0,
+  "altitude_ft": 350.0,
+  "half_route_m": 1500.0,
+  "arrival_radius_m": 25.0,
+  "lowc_horizontal_ft": 1630.0,
+  "nmac_horizontal_ft": 500.0,
+  "vertical_tolerance_ft": 100.0,
+  "vertical_control_offset_ft": 200.0,
+  "performance": "DiagnosticPerformance inherits native PerfBase unchanged: diagnostic kinematics, no aircraft envelope clipping",
+  "reconstruction_choices": "No learned control. B744 is only an identifier under DiagnosticPerformance. Not the paper's 12 UAV types. Fixed seed rotates deliberately crossing diagnostic routes, not a training or evaluation population. Arrival uses endpoint radius. Exposure uses left-endpoint sampling and spherical great-circle distance."
+}

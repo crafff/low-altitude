@@ -10,10 +10,15 @@ Python版本由 [.python-version](../.python-version) 固定，依赖声明在 [
 export UV_CACHE_DIR="$PWD/.cache/uv"
 export UV_PYTHON_INSTALL_DIR="$PWD/environments/python"
 uv python install --no-bin
-uv sync --locked --managed-python --no-build
+uv sync --locked --managed-python \
+  --no-build-package bluesky-simulator --no-build-package numpy \
+  --no-build-package scipy --no-build-package pandas \
+  --no-build-package pyzmq --no-build-package matplotlib
 ```
 
 `.venv/`保存项目虚拟环境，`environments/python/`保存本项目的uv托管解释器，`.cache/uv/`保存下载缓存；这些目录均不提交Git。`--no-bin`避免向用户全局bin安装可执行入口。系统Python可以继续启动仅依赖标准库的lab监督器，科研负载使用`.venv/bin/python`。
+
+当前锁文件固定BlueSky 1.1.1。其依赖的`zmq==0.0.0`只有源码分发，完全禁止构建的`--no-build`会在新环境失败。已检查官方966字节源码包：只是依赖`pyzmq`的setuptools元包，无包代码；本次仅它发生构建，其余安装使用wheel。上述命令禁止主要科学库源码构建；若将来锁文件变化出现新的构建需求，先核对新来源。源码地址、哈希和实际安装记录见[任务001](../tasks/001-baseline.md)。
 
 依赖确定后修改pyproject并执行`uv lock`，再`uv sync --locked`；核对锁文件变更后随代码提交。先用轮子包安装；需要源码构建时单独调查依赖，不直接运行旧项目安装脚本。不要在lab运行期间修改解释器或依赖目录。
 

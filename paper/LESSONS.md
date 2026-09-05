@@ -18,5 +18,8 @@
 | 旧宿主的GPU可用记录不能代表新的解释器与沙箱 | 在将要训练的同一解释器/沙箱检查CUDA，再讨论驱动 | 任务001待办；旧GPU审计仅历史参考 |
 | PATH中找不到python3.11，不代表uv没有管理该解释器；默认uv缓存还可能无写权限 | 检查uv及其解释器清单，为项目指定可写缓存/托管解释器位置，再在真实沙箱验证项目venv | [uv环境接入](../tasks/001-baseline.md)；本机uv清单已有3.11.13，上轮仅查PATH不足 |
 | 文献模块有重合不自动否决组合创新 | 比较具体问题、假设和机制，借鉴强基线并测试新增部分必要性 | 用户确认路线；PLAN/SOURCES |
+| BlueSky1.1.1从默认性能模型直接切到PERF OFF后步进产生RecursionError；预调用PerfBase()也未得到所需实例 | 基类构造会按当前generator分派并返回proxy。诊断用具名PerfBase子类保留原生动力学，再断言实际实例；不修改vendor | [失败与修复记录](../tasks/001-baseline.md)；两次成功native smoke覆盖create/step/reset/delete |
+| BlueSky自定义cfg只写enabled_plugins会缺失navdata_path并初始化失败 | 从锁定版本的default.cfg继承必需路径，再覆盖本轮选项，所有生成配置放在沙箱临时目录 | [配置失败](../runs/20260905T030204Z-bluesky-nr-smoke-9c8c3aba/log.txt)与任务001最终成功运行 |
+| 源码检查：BlueSky1.1.1的DEST带有目的地高度/VNAV语义，普通航点则可明确保持平飞 | 平飞诊断采用普通经纬度航点、关闭VNAV并验证实际高度；不能把该机制直接判为旧模型共同下降根因 | installed traffic/route.py；[单机与交叉实测](../runs/20260905T030644Z-bluesky-nr-final-b9a03656/artifacts/result.json)高度误差为0 |
 
 不要把尚未运行的测试或待核对解释写成已证实经验。新bug只补最小相关回归，避免将每次失败升级成新审批层。
