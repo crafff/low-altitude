@@ -1,6 +1,6 @@
 # 当前状态
 
-更新：2026-09-05 20:39 UTC。分支 `research/trc-baseline-system-20260905`。
+更新：2026-09-05 20:43 UTC。分支 `research/trc-baseline-system-20260905`。
 
 ## 当前任务与本轮结果
 
@@ -36,6 +36,6 @@ BlueSky AP全程执行，ActionController修改速度/高度/航点目标；完�
 
 uv管理Python3.11.13、BlueSky1.1.1、torch2.9.1+cpu；[环境](../docs/ENVIRONMENT.md) · [系统/通知](../docs/SYSTEM.md)。CUDA先前可用性不代表baseline有效。
 
-上一轮代码/报告及14,487,000B原始数据已随`d3e5c78`私有push，收尾`fe2c445`本地/远端一致。本轮12份原始数据12,717,652B已逐字节备份，manifest保留源run/字节/SHA，准备随当前提交私有备份。前期NR数据及850模型也已备份；原始runs、本地PDF和恢复档未全部异地备份，不称全量备份。最终交付前主线程使用既有完成通知入口。
+本轮证明/代码/12份原始数据12,717,652B已随`bfae791`私有push，20:42本地/远端SHA精确一致、工作区干净；manifest保留源run/字节/SHA。本段收尾记录另随文档提交。上一轮`d3e5c78`/`fe2c445`及前期NR数据/850模型也已私有备份；原始runs、本地PDF和恢复档未全部异地备份，不称全量备份。最终交付前主线程使用既有完成通知入口。
 
 [REPRODUCTION](REPRODUCTION.md) · [LESSONS](LESSONS.md) · [SOURCES](SOURCES.md) · [DECISIONS](DECISIONS.md)。详细历史留在任务，旧审批链不启用。
