@@ -35,6 +35,7 @@
 
 | JSON整数经纬度进入BlueSky原生create会形成整数数组，在原地浮点经度归一化时失败 | 构造接口明确转换float，用真实整数JSON夹具覆盖dtype与原位操作；失败前零轨迹不计实验 | [50例首失败、4回归和重跑](../reports/route-response-20260905/README.md) |
 | 恒速时无差异的导航缓存，在策略减速后可能仍沿起始速度提前转弯 | 用同触发状态加减速对照并核对当前TAS/解析半径/实际航点切换，不能把恒速零差异推广到策略执行 | [50例原生响应与旧fork来源](../reports/route-response-20260905/README.md) |
+| 按目标半径加刹车距离才减速，可能已晚于高速状态下的原生fly-by切换 | 触发应覆盖当前及下一步可能加速后的提前量；低速跨航点激活保持至出弯，再释放。保持原始暴露和执行范围，不据NR成功推策略安全 | [NR配对与物理公式](../reports/nr-containment-20260905/README.md)；test_trigger_accounts_for_native_passage_before_deceleration / test_predictive_acceleration_catches_case_two_travel_ticks_miss |
 | 有限出口已在本步穿越，完整末步点仍可能被有限折线距离计为越界 | 同时报原始整步统计和出口插值解释；若改任务截止口径需一致处理暴露/时间/奖励，不能只删除整步 | [半速外侧镜像逐行检查](../reports/route-response-20260905/README.md) |
 | Adam首步方向受到已有动量影响，静态梯度范数/夹角不足以推断实际损失变化 | 必要时旁路观察真实参数位移并复现整个原update；不据单batch critic损失上升判优化器bug | [实际首步与77步精确对照](../reports/ppo-gradient-100-20260905/README.md) |
 

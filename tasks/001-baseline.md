@@ -708,3 +708,32 @@ lane probe先前5fixture在[20260905T142256Z-lane-completion-tests-d45afac7](../
 15:03方案记录提交`836d4c8fb8b6c16dad078de5cef980a0596ed6b5`已push，rev-parse/ls-remote精确同SHA，工作区当时干净。只读共享非阻塞flock确认无lab独占负载持有者，立即释放探测锁；三个原生子agent均已完成，不中断/关闭他人实验。15:07:25结束前只读主机审计仍PID3059945/3062529、显存9893/9771MiB，RTX4090 used20618/free3430MiB/99%；load2.46/2.25/2.29、MemAvailable61.080GiB、项目盘空闲143.155GiB。无GPU计算或他人进程信号/调整；该快照不证明外部吞吐绝对无变化。所有科研负载最晚14:40:26结束，收尾只读研究方案已完成；本授权到15:15:13，不自动继续新实验。完成通知仅在实际截止后由主线程发送。
 
 2026-09-05 15:15 UTC本块结束标记：本10h科研与交付完成，原任务001仍doing，因为有效baseline尚未获得。数据/模型提交8e6e7cc、方案836d4c8、资源收尾467bfd55c7e82733535d783431e5a12e881d9a9e均私有push并核对远端；没有活动lab负载或未结束子任务。下一步只保留F020配对机制诊断方案，不自动实施。主线程在实际15:15:13窗口到期后经已确认ntfy渠道发送完成通知，发送状态由通知工具本地去重记录保存。
+
+2026-09-05 16:41 UTC用户追问航道中间节点，只读核对原文p7、paper_scenarios.generate_scenario、环境reset/ActionController._route及已保存`reports/policy-modes-refresh-850-20260905/scenarios.json`：原始路线0–3中间航点、总5NM、等长分段、各转角±90度以内，点实际注册到BlueSky；均匀抽样分布仍是明确重建选择。对保存JSON作标准库只读计数：12开发场景共48航道，0/1/2/3中间点分别11/12/14/11条。seed53004三条C01/C02/C03分别2/0/3中间点，F020属于C02，故该例CAP后下一点即远端终点，不代表生成器遗漏弯折航道。CAP为避让临时点，后续原名义航点按偏移路线保留。无新模拟、测试或模型加载。
+
+
+### 2026-09-05 17:39 UTC：用户新授权解决无模型越界
+
+范围NR执行定位/修正/小批验证；原10h已结束，不续PPO、不打开held-out，继续CPU14/1线程/nice15/idleIO/单lab。只读检索LESSONS中原Amzn半径、速度缓存、终止整步和Proxy教训，以及现报告/源码。保持Table3全部包络、bank25、航道500ft宽度、名义几何/入场/原始指标；候选自动弯前减速明确作为新执行重建，不伪称原文已披露。
+
+原生Astra/xhigh、fresh bounded context新交接：nr_execution_design只读学者（问题最小物理合理NR修正；范围核心/BlueSky/原报告；输出半径/刹车/时序公式与兼容限制；<=15min，无修改/负载/嵌套）；nr_replay_probe builder（独占src/nr_containment_probe.py、对应配置和可选聚焦测试；问题原12saved scenarios无模型精确重放与逐机/段归因；输出有界CLI和检查，<=20min静态，无实验/清理/嵌套，须保留他人修改）。root独占新nominal_turn_speed.py及其配置/测试、集成/文档和所有launcher运行。两交接完整scope/source/output/stop已传，实际线程模型待元数据可用后核验。
+
+只读源码关键点：原生reached先于本步速度更新，简单按目标半径+刹车距离减速可能晚于高速fly-by提前切换；制动触发需覆盖当前速度转弯提前量。ActionController._speed每物理步刷新CAS并关闭VNAVSPD，不能仅设置航点速度期待自动生效。候选独立NR-only子类保留原core/850身份，改变实际执行TAS目标而不改请求、真实位置或原生动力学；全部改变单列audit，未实测前不称已修复。
+
+17:46–17:49进展：新增独立NR-only `NominalTurnEnvironment`，原共享环境/850源码不改。理想中心圆弧D=R(1−cos(θ/2))、T=Rtan(θ/2)，预声明分配0.5半宽、0.45相邻短段；当前及下一步可能加速的fly-by提前量与制动距离共同决定触发，原生按3.5m/s²及bank25执行。航点切换后保留低速，越过出弯切点且与后续目标方位对齐才释放。自动速度可低于策略最小离散档，明确是新重建选择，非作者2026设置或普遍安全保证。
+
+[速度执行7项测试](../runs/20260905T174653Z-nr-turn-speed-tests-fb5e1d55/log.txt)及[被动审计7项测试](../runs/20260905T174711Z-nr-containment-tests-8e537551/log.txt)均由root经launcher通过；包括加速触发、跨航点保持/出弯释放、跨机/重置隔离、原始暴露归并/回调恢复/有界输出。只读独立nr_execution_review未发现阻断有限原生验证的缺陷，提示检查已激活但未释放限速，尚不能据fixture称原生修复成功。17:49仅核对三个指定线程自身session_meta/turn_context，nr_execution_design（01a072a2-6a1f-7e52-b529-f6483cb4cc20）、nr_replay_probe（01a072a3-cf24-7351-b88d-a0b94cdcc667）、nr_execution_review（01a072ab-26b2-75a3-bda2-565b638d31ee）各实际首turn均gpt-6-astra/xhigh，无认证读取或嵌套代理。
+
+[原12case被动精确重放](../runs/20260905T174745Z-nr-reference-audit-37f08792/status.json)17:49:32正常结束，内部106.480645s/监督106.894981s；全部逐case科学摘要及aggregate与保存NR精确，回调/输入/样本归并检查通过。360/360到达、16架217.5aircraft-s横向越界、0高度，最大偏离412.215902m。360架覆盖全部12类型，31架Amzn中16架越界，其他329架在这批NR样本未越界；不能推为所有场景/策略下其他机型均安全。首次事后只读结果路径误写output而非artifacts，纠正后读取，无运行失败或数据改动。
+
+17:53启动同12case候选配对，唯一lab `20260905T175338Z-nr-corner-speed-audit-dcf2ecd9`，外480s/64MiB/2048MiB、内450s，CPU14单线程。17:54再次交nr_replay_probe新独占`src/nr_turn_validation.py`及可选对应测试：全部12类型镜像90度中心弯、12类型直道原/新精确对照、Amzn最短论文段连续反向90度弯；输出物理实测速率/限速释放/原始containment及到达，<=12min仅静态编写，root运行。不得改前probe/core/config，保留他人修改，不做模拟/测试/清理/通知/嵌套。
+
+17:55:39候选配对正常结束，内部120.071151s/监督120.454074s，792741个aircraft样本：360/360到达，0横向/高度越界、0超时/耗尽，最大距原中心折线38.670890m。41架被限速（20Amzn/15Cranfield/6Eh216），52次限速全部释放、0晚于名义航点切换才激活；全部360末态执行目标恢复巡航。FH55.051458333（+0.26624%、526.25aircraft-s），NMAC8924pair-s/162.102881每FH、LoWC36010.75/654.128902，均较原NR略升；不是避碰收益。原始暴露/退出整步不删减，全部场景/输入/回调/分层归并检查通过。[两结果逐字节备份](../reports/nr-containment-20260905/manifest.json)共9937192B，SHA核对，报告保留差异和NR-only复现边界。
+
+17:56交nr_execution_review最终只读源码/两实际结果/14测试/manifest复核，<=10min，不做负载/修改/模型/信号/通知/嵌套，固定50验证另交builder不重复。17:59返回无阻断：逐项独立重算上述指标，原科学核心及共享输入一致，原NR科学摘要精确，52限速全部释放，319未覆盖飞机物理终态/航时/路径/暴露精确。NMAC+0.58261%、LoWC+0.86253%；微小跨层浮点重组差7e−15解释为加法顺序，原case聚合精确。提醒0晚激活标志不独立证明任意初态能在passage前达到cap，无连续/泛化/策略安全或作者身份结论。18:01只读两指定线程第二turn_context，builder与reviewer实际仍gpt-6-astra/xhigh；native read_thread未暴露模型字段，最终以匹配session元数据核验。
+
+18:01固定验证静态检查发现巡航TAS往返CAS存在既有约9.34e−5m/s偏差（原Amzn参考80.664982261对请求80.664888889），向builder指出其1e−6巡航容差会产生已知假失败；改为明确独立1e−3巡航换算容差，Table3最大速度/加速度界不放宽。尚未运行固定native例，不是试验后调阈值。原生eps经安装源码核对为数组，采样按eps[0]读取。
+
+18:02builder正式交付仅新driver/3helper tests，AST/空白检查，无负载。root唯一launcher [20260905T180219Z-nr-turn-validation-tests-acb3c913](../runs/20260905T180219Z-nr-turn-validation-tests-acb3c913/log.txt)3测试0.001s/监督0.120122s通过；随后[50原生固定验证](../runs/20260905T180229Z-nr-turn-native-validation-8d02777e/status.json)18:03:42.236正常完成，内部72.268830s/监督72.584296s、111168物理样本、38预声明fixture/50episode。24镜像90度中心弯覆盖全12类，最大距原折线36.991644m；12直道原/新共24次全科学摘要精确/新0覆盖；2 Amzn交替连续90度最短2315m段最大36.982423m。全50到达/0越界/物理Table3速度和加减速、bank25/高度/巡航恢复/回调/输入检查通过，最大实测绝对加减速度3.5m/s²，所需限速均激活并释放。直道最大到有限折线距离16.472943m是保留的出口后整步纵向距离，不称横向误差。
+
+固定result/fixtures已逐字节复制加入[NR报告](../reports/nr-containment-20260905/README.md)manifest，4数据文件共10462657B。root只读核对两12case和固定50源快照中的环境/动作/性能/导航核心一致，完整代码未被本次NR改动；当前3模块/3测试静态与17fixture均通过，零模型/torch/GPU训练，无他人进程操作。独立review覆盖前述12case配对，固定50由root执行检查，不扩大review声明。18:04doctor入口/链接无issues/local_missing，diff空白检查通过；本次无失败lab负载，所有实验已结束。NOW缩为当前结果和稳定报告入口，详细历史保留本task；下一步统一策略执行语义，不自动续训。准备私有提交备份与主线程通知。

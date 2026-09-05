@@ -1,0 +1,1724 @@
+{
+  "schema": "bluesky.nr-turn-fixtures.v1",
+  "fixtures": [
+    {
+      "id": "corner-Amzn-+1",
+      "family": "corner",
+      "aircraft_type": "Amzn",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940001,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Amzn--1",
+      "family": "corner",
+      "aircraft_type": "Amzn",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940002,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Cranfield-+1",
+      "family": "corner",
+      "aircraft_type": "Cranfield",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940003,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Cranfield--1",
+      "family": "corner",
+      "aircraft_type": "Cranfield",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940004,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-CranfieldV2-+1",
+      "family": "corner",
+      "aircraft_type": "CranfieldV2",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940005,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-CranfieldV2--1",
+      "family": "corner",
+      "aircraft_type": "CranfieldV2",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940006,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M100-+1",
+      "family": "corner",
+      "aircraft_type": "M100",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940007,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M100--1",
+      "family": "corner",
+      "aircraft_type": "M100",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940008,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M200-+1",
+      "family": "corner",
+      "aircraft_type": "M200",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940009,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M200--1",
+      "family": "corner",
+      "aircraft_type": "M200",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940010,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M600-+1",
+      "family": "corner",
+      "aircraft_type": "M600",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940011,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-M600--1",
+      "family": "corner",
+      "aircraft_type": "M600",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940012,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Phan4-+1",
+      "family": "corner",
+      "aircraft_type": "Phan4",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940013,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Phan4--1",
+      "family": "corner",
+      "aircraft_type": "Phan4",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940014,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Mavic-+1",
+      "family": "corner",
+      "aircraft_type": "Mavic",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940015,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Mavic--1",
+      "family": "corner",
+      "aircraft_type": "Mavic",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940016,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Eh216-+1",
+      "family": "corner",
+      "aircraft_type": "Eh216",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940017,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Eh216--1",
+      "family": "corner",
+      "aircraft_type": "Eh216",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940018,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Horsefly-+1",
+      "family": "corner",
+      "aircraft_type": "Horsefly",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940019,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Horsefly--1",
+      "family": "corner",
+      "aircraft_type": "Horsefly",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940020,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Mnet-+1",
+      "family": "corner",
+      "aircraft_type": "Mnet",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940021,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Mnet--1",
+      "family": "corner",
+      "aircraft_type": "Mnet",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940022,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Tecnalia-+1",
+      "family": "corner",
+      "aircraft_type": "Tecnalia",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940023,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                51.958342062109224,
+                4.06756941104635
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "corner-Tecnalia--1",
+      "family": "corner",
+      "aircraft_type": "Tecnalia",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0
+      ],
+      "leg_length_m": 4630.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940024,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99998063446672,
+                4.067632262231712
+              ],
+              [
+                52.04161920679071,
+                4.067695230450738
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Amzn",
+      "family": "straight",
+      "aircraft_type": "Amzn",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940025,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Cranfield",
+      "family": "straight",
+      "aircraft_type": "Cranfield",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940026,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-CranfieldV2",
+      "family": "straight",
+      "aircraft_type": "CranfieldV2",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940027,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-M100",
+      "family": "straight",
+      "aircraft_type": "M100",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940028,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-M200",
+      "family": "straight",
+      "aircraft_type": "M200",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940029,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-M600",
+      "family": "straight",
+      "aircraft_type": "M600",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940030,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Phan4",
+      "family": "straight",
+      "aircraft_type": "Phan4",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940031,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Mavic",
+      "family": "straight",
+      "aircraft_type": "Mavic",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940032,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Eh216",
+      "family": "straight",
+      "aircraft_type": "Eh216",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940033,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Horsefly",
+      "family": "straight",
+      "aircraft_type": "Horsefly",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940034,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Mnet",
+      "family": "straight",
+      "aircraft_type": "Mnet",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940035,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "straight-Tecnalia",
+      "family": "straight",
+      "aircraft_type": "Tecnalia",
+      "mirror": 0,
+      "signed_turns_deg": [],
+      "leg_length_m": 9260.0,
+      "execution_modes": [
+        "default",
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940036,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99992253792737,
+                4.135264407430014
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "successive-Amzn-+1",
+      "family": "successive",
+      "aircraft_type": "Amzn",
+      "mirror": 1,
+      "signed_turns_deg": [
+        90.0,
+        -90.0,
+        90.0
+      ],
+      "leg_length_m": 2315.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940037,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99999515861573,
+                4.033816138430467
+              ],
+              [
+                51.97917586568933,
+                4.033800418320567
+              ],
+              [
+                51.9791613496653,
+                4.067600824267856
+              ],
+              [
+                51.95834206347981,
+                4.06756941773952
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    },
+    {
+      "id": "successive-Amzn--1",
+      "family": "successive",
+      "aircraft_type": "Amzn",
+      "mirror": -1,
+      "signed_turns_deg": [
+        -90.0,
+        90.0,
+        -90.0
+      ],
+      "leg_length_m": 2315.0,
+      "execution_modes": [
+        "candidate"
+      ],
+      "scenario": {
+        "seed": 940038,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0,
+                4.0
+              ],
+              [
+                51.99999515861573,
+                4.033816138430467
+              ],
+              [
+                52.02081445154004,
+                4.033831873169589
+              ],
+              [
+                52.02079991925719,
+                4.067663733918835
+              ],
+              [
+                52.04161920541243,
+                4.067695237152208
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          }
+        ],
+        "reconstruction_choices": [
+          "Declared single-aircraft centre-route native regression; F001 and C01 reused after every reset."
+        ]
+      }
+    }
+  ],
+  "unique_fixtures": 38,
+  "expected_native_episodes": 50,
+  "route_definition": "5 NM total spherical length; single corners have two equal legs, successive opposing corners four equal shortest paper legs.",
+  "input_sha256": {
+    "configs/paper_environment_nr_turn_speed.json": "5f01a38bc82279f69eb2e3703620dc31e0d0927a32d5d0e6fe38ca2ba9f12850",
+    "configs/paper_environment_execution_refresh.json": "129b0e69647eac575726152406463690e2a851d08c8bd87153c811ef692c9bab",
+    "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+    "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+    "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+    "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+  }
+}

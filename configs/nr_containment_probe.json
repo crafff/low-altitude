@@ -1,0 +1,11 @@
+{
+  "schema": "bluesky.nr-containment-probe.v1",
+  "device": "cpu",
+  "environment_config": "configs/paper_environment_execution_refresh.json",
+  "scenarios_path": "reports/policy-modes-refresh-850-20260905/scenarios.json",
+  "reference_path": "reports/policy-modes-refresh-850-20260905/reused_nr.json",
+  "expected_seeds": [53001, 53002, 53003, 53004, 53005, 53006, 53007, 53008, 53009, 53010, 53011, 53012],
+  "wall_seconds": 450,
+  "maximum_aircraft_physics_samples": 2000000,
+  "maximum_json_bytes": 16777216
+}

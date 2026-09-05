@@ -1,0 +1,30 @@
+{
+  "schema": "nr-containment-backup.v1",
+  "scope": "Saved development NR diagnostics; original scientific core preserved",
+  "files": [
+    {
+      "path": "reference.json",
+      "source": "runs/20260905T174745Z-nr-reference-audit-37f08792/artifacts/result.json",
+      "bytes": 4796473,
+      "sha256": "50918f0131793abb7baf198d98430c1c70c4dede1d1107c9b32458c3c5a78300"
+    },
+    {
+      "path": "corner-speed.json",
+      "source": "runs/20260905T175338Z-nr-corner-speed-audit-dcf2ecd9/artifacts/result.json",
+      "bytes": 5140719,
+      "sha256": "168452aeb631bf83a495de3f2dfad59bfb402e75a76d7e9a6903afc573f9083a"
+    },
+    {
+      "path": "native-validation.json",
+      "source": "runs/20260905T180229Z-nr-turn-native-validation-8d02777e/artifacts/result.json",
+      "bytes": 484892,
+      "sha256": "e6aa54e2daf1ed3346dc212688b5fbe7d2ebaad098ceb3b8a68056ba061ce984"
+    },
+    {
+      "path": "native-fixtures.json",
+      "source": "runs/20260905T180229Z-nr-turn-native-validation-8d02777e/artifacts/fixtures.json",
+      "bytes": 40573,
+      "sha256": "da93c9b111aa59513764b9c673d759343820c0116cf0ff1333697674ac0a29c3"
+    }
+  ]
+}
