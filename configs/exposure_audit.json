@@ -1,0 +1,37 @@
+{
+  "schema": "bluesky.exposure-audit.v1",
+  "scope": "NR metric-definition development audit; not author-denominator identification or baseline validation",
+  "environment_config": "configs/paper_environment_execution.json",
+  "reference_input": "checkpoints/execution-pilot-20260905/development.jsonl",
+  "reference_line": 1,
+  "potential_radius_ft": 6000.0,
+  "physics_dt_seconds": 0.25,
+  "decision_seconds": 5.0,
+  "development_cases": [
+    {"seed": 53001, "corridor_count": 3},
+    {"seed": 53002, "corridor_count": 4},
+    {"seed": 53003, "corridor_count": 5},
+    {"seed": 53004, "corridor_count": 3},
+    {"seed": 53005, "corridor_count": 4},
+    {"seed": 53006, "corridor_count": 5},
+    {"seed": 53007, "corridor_count": 3},
+    {"seed": 53008, "corridor_count": 4},
+    {"seed": 53009, "corridor_count": 5},
+    {"seed": 53010, "corridor_count": 3},
+    {"seed": 53011, "corridor_count": 4},
+    {"seed": 53012, "corridor_count": 5}
+  ],
+  "launcher_budget": {"seconds": 180, "disk_mib": 128, "memory_mib": 4096, "cpu_threads": 1},
+  "reconstruction_choices": [
+    "Use paper p.11 horizontal observation radius 6000 ft, inclusive at the radius, with the existing spherical distance_m. Do not substitute the 6080 ft Fig.4 label or filter potential encounters by altitude.",
+    "All physical exposure is integrated from complete interval-start truth immediately before the original bs.sim.step, after admissions. Call original step exactly once and use its actual dt. No decisions, trajectories, accepted targets, guidance or simulator arrays are changed.",
+    "Potential, LoWC and NMAC retain unordered pair-seconds and directed values exactly twice those numerators. LoWC/NMAC use original risk_flags and must exactly match the native environment tracker. Continuous sampled pair episodes are counted separately from duration.",
+    "Retain aircraft_seconds=sum(active aircraft*dt), all airspace_seconds=sum(dt), and occupied_airspace_seconds=sum(dt when any aircraft is active). Empty intervals count in the complete airspace denominator. Report both aircraft-hour and complete-airspace-hour rates; occupied-airspace-hour rates are separately labelled auxiliary diagnostics.",
+    "LoWC/potential and NMAC/potential are ratios of exposure durations, not independent-event probabilities. Directed potential seconds per aircraft-hour can exceed 3600 with multiple simultaneous neighbors.",
+    "Record every actual env.observations construction, including reset, terminal previews before deletion, and step-return construction. Separately count returned reset/decision frames and terminal payload entries. Empty final frames count as returned frames. These counts are neither policy inference nor safety exposure; actual NR policy inference calls are zero.",
+    "Wrap only the two instance call facades temporarily and restore their exact original instance namespace entries in finally. Do not request any additional observations for this audit.",
+    "Compare every original NR summary field exactly against the first reference line except wall_seconds and process_peak_rss_mib. Audit-only counters remain outside the original NR summary. Preserve failed flights, mismatches and exception diagnostics.",
+    "Aggregate the complete fixed twelve-case development set and its existing four five-corridor cases by summing numerators and denominators before division. Do not average case-level rates or select new seeds.",
+    "The paper p.17 describes cumulative experience across agents, while p.11 leaves normalization implementation unresolved. Numerical proximity under a changed denominator does not establish the author's denominator. This diagnostic does not resolve that ambiguity or claim the current NR matches the published traffic distribution."
+  ]
+}

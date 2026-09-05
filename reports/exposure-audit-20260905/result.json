@@ -1,0 +1,4801 @@
+{
+  "schema": "bluesky.exposure-audit.v1",
+  "scope": "NR metric-definition development audit; not author-denominator identification or baseline validation",
+  "config": {
+    "schema": "bluesky.exposure-audit.v1",
+    "scope": "NR metric-definition development audit; not author-denominator identification or baseline validation",
+    "environment_config": "configs/paper_environment_execution.json",
+    "reference_input": "checkpoints/execution-pilot-20260905/development.jsonl",
+    "reference_line": 1,
+    "potential_radius_ft": 6000.0,
+    "physics_dt_seconds": 0.25,
+    "decision_seconds": 5.0,
+    "development_cases": [
+      {
+        "seed": 53001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53012,
+        "corridor_count": 5
+      }
+    ],
+    "launcher_budget": {
+      "seconds": 180,
+      "disk_mib": 128,
+      "memory_mib": 4096,
+      "cpu_threads": 1
+    },
+    "reconstruction_choices": [
+      "Use paper p.11 horizontal observation radius 6000 ft, inclusive at the radius, with the existing spherical distance_m. Do not substitute the 6080 ft Fig.4 label or filter potential encounters by altitude.",
+      "All physical exposure is integrated from complete interval-start truth immediately before the original bs.sim.step, after admissions. Call original step exactly once and use its actual dt. No decisions, trajectories, accepted targets, guidance or simulator arrays are changed.",
+      "Potential, LoWC and NMAC retain unordered pair-seconds and directed values exactly twice those numerators. LoWC/NMAC use original risk_flags and must exactly match the native environment tracker. Continuous sampled pair episodes are counted separately from duration.",
+      "Retain aircraft_seconds=sum(active aircraft*dt), all airspace_seconds=sum(dt), and occupied_airspace_seconds=sum(dt when any aircraft is active). Empty intervals count in the complete airspace denominator. Report both aircraft-hour and complete-airspace-hour rates; occupied-airspace-hour rates are separately labelled auxiliary diagnostics.",
+      "LoWC/potential and NMAC/potential are ratios of exposure durations, not independent-event probabilities. Directed potential seconds per aircraft-hour can exceed 3600 with multiple simultaneous neighbors.",
+      "Record every actual env.observations construction, including reset, terminal previews before deletion, and step-return construction. Separately count returned reset/decision frames and terminal payload entries. Empty final frames count as returned frames. These counts are neither policy inference nor safety exposure; actual NR policy inference calls are zero.",
+      "Wrap only the two instance call facades temporarily and restore their exact original instance namespace entries in finally. Do not request any additional observations for this audit.",
+      "Compare every original NR summary field exactly against the first reference line except wall_seconds and process_peak_rss_mib. Audit-only counters remain outside the original NR summary. Preserve failed flights, mismatches and exception diagnostics.",
+      "Aggregate the complete fixed twelve-case development set and its existing four five-corridor cases by summing numerators and denominators before division. Do not average case-level rates or select new seeds.",
+      "The paper p.17 describes cumulative experience across agents, while p.11 leaves normalization implementation unresolved. Numerical proximity under a changed denominator does not establish the author's denominator. This diagnostic does not resolve that ambiguity or claim the current NR matches the published traffic distribution."
+    ]
+  },
+  "environment_config": {
+    "schema": "bluesky.paper-like.environment.v1",
+    "scenario_config": "configs/nr_pilot.json",
+    "action_config": "configs/paper_actions_execution.json",
+    "observation_config": "configs/paper_observation.json",
+    "types_config": "configs/uav_types.json",
+    "decision_seconds": 5.0,
+    "device": "cpu",
+    "reconstruction_choices": [
+      "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+      "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+      "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+      "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+      "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+      "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+      "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+      "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training."
+    ],
+    "terminal_policy": "finite_exit",
+    "fail_on_native_route_exhaustion": true
+  },
+  "effective_parts": {
+    "scenario": {
+      "schema": "bluesky.paper-like.nr-pilot.v1",
+      "bluesky_version": "1.1.1",
+      "stage": "dev",
+      "scenario_count": 8,
+      "seeds": [
+        51001,
+        51002,
+        51003,
+        51004,
+        51005,
+        51006,
+        51007,
+        51008
+      ],
+      "origin_lat_lon_deg": [
+        52.0,
+        4.0
+      ],
+      "origin_square_side_nm": 2.0,
+      "earth_radius_m": 6371000.0,
+      "route_length_nm": 5.0,
+      "corridor_counts": [
+        3,
+        4,
+        5
+      ],
+      "corridor_count_distribution": "uniform_choice",
+      "aircraft_per_scenario": 30,
+      "allocation_method": "balanced_corridor_order",
+      "origin_distribution": "uniform_square_rejection",
+      "minimum_origin_spacing_ft": 1630.0,
+      "max_origin_sampling_attempts": 10000,
+      "intermediate_waypoint_count_range": [
+        0,
+        3
+      ],
+      "waypoint_count_distribution": "uniform_integer",
+      "initial_bearing_deg_range": [
+        0.0,
+        360.0
+      ],
+      "initial_bearing_distribution": "uniform",
+      "signed_turn_deg_range": [
+        -90.0,
+        90.0
+      ],
+      "signed_turn_distribution": "uniform",
+      "first_entry_seconds": 0.0,
+      "entry_interval_seconds_range": [
+        60.0,
+        90.0
+      ],
+      "entry_interval_distribution": "uniform",
+      "type_count": 12,
+      "type_distribution": "uniform_choice",
+      "dt_seconds": 0.25,
+      "per_flight_timeout_seconds": 1200.0,
+      "arrival_radius_m": 25.0,
+      "altitude_ft": 350.0,
+      "lowc_horizontal_ft": 1630.0,
+      "nmac_horizontal_ft": 500.0,
+      "vertical_tolerance_ft": 100.0,
+      "corridor_width_ft": 500.0,
+      "corridor_height_ft": 200.0,
+      "store_full_trajectories": false,
+      "reconstruction_choices": [
+        "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+        "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+        "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+        "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+        "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+        "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+        "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+        "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+        "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+        "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+        "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+        "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed."
+      ]
+    },
+    "action": {
+      "schema": "bluesky.paper-actions.v1",
+      "source": "Fremond et al. 2026, PDF pp.14-15, Eqs.16-18; paper/REPRODUCTION.md",
+      "speed_ratios": [
+        0.5,
+        0.8,
+        1.0,
+        1.05
+      ],
+      "altitude_fractions": [
+        -0.5,
+        -0.25,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "lane_fractions": [
+        -0.5,
+        0.0,
+        0.5
+      ],
+      "nominal_altitude_ft": 350.0,
+      "corridor_height_ft": 200.0,
+      "corridor_width_ft": 500.0,
+      "capture_angle_deg": 45.0,
+      "offset_join": "miter",
+      "altitude_capture_tolerance_m": 0.5,
+      "lane_capture_tolerance_m": 2.0,
+      "lane_capture_track_tolerance_deg": 5.0,
+      "reconstruction_choices": [
+        "Action indices use C-order unravel_index over (4,5,3); nominal (2,2,1) is index37. Eq18's repeated positive sign is interpreted as left/center/right: negative/zero/positive offset, following the prose.",
+        "While altitude or lane capture is active, that dimension's mask permits only its previously accepted index. Speed remains selectable. A masked joint proposal is rejected in full, preserving accepted targets; the caller must sample and compute log-probabilities using the same mask.",
+        "Speed instructions are absolute fractions of the initial nominal TAS. TAS is converted to CAS at the current altitude after every physics step for the next step. Native acceleration and the supplied PaperPerformance caps still apply; no speed or bank governor is added.",
+        "Native ALT receives the absolute target and the signed type-specific maximum climb/descent rate. Capture clears at altitude error <=0.5m; native altitude acquisition continues to the target. No vertical state teleportation is performed.",
+        "Nominal geometry uses a fixed local equirectangular frame anchored at the route origin with Earth radius6371000m. Positive lane is right of current nominal course. Initial route registration preserves exact supplied latitude/longitude and native fly-by behavior.",
+        "Shifted interior vertices use miter intersections of parallel adjacent nominal legs; endpoints shift perpendicular to their first/last leg. This deterministic join geometry is not specified by the paper and does not guarantee corridor containment.",
+        "Lane changes build a 45degree capture chord from the current physical position toward the absolute offset of the current nominal leg, followed by all remaining shifted nominal vertices. An artificial waypoint maps to no nominal progress. Native real-waypoint activation advances nominal progress monotonically, preserving fly-by semantics.",
+        "If the 45degree chord extends beyond the next shifted corner, its location and the next nominal vertex are both retained; capture_beyond_leg_end is reported. This may cause backtracking or capture failure. No hidden corner-feasibility mask or skipped mission waypoint is introduced.",
+        "A lane lock clears only while a real waypoint is active, the aircraft lies longitudinally on that finite shifted leg, lateral error <=2m and actual track error <=5degrees. It may capture a subsequent parallel leg after a corner. A completed lock does not reactivate solely because native tracking later deviates; actual errors remain observable.",
+        "Repeated accepted target indices do not rebuild the route or count as new physical commands. Registration builds the initial nominal route without counting an action. Native speed maintenance refreshes are counted separately from policy speed commands.",
+        "previous_waypoint and next_waypoint refer to the original nominal route. destination_waypoint uses the currently accepted offset endpoint; final_nominal_active requires the real final waypoint to be active, not an artificial capture point. The parent owns arrival radius, timeout and terminal accounting.",
+        "Width exposure uses each post-step distance to the complete nominal polyline multiplied by elapsed simulator time, matching NR's sampling convention. The caller must invoke update after every physics step; observed deviations are diagnostics, not guarantees.",
+        "Execution reconstruction variant, not disclosed author code. Altitude completion additionally requires actual absolute vertical speed <=0.05m/s, to avoid releasing a reversal while native vertical acquisition has residual motion.",
+        "On the final nominal leg only, mask a changed lane if its literal 45degree capture point lies beyond the shifted endpoint along that leg. Keep the accepted lane and every otherwise valid speed/altitude combination. This prevents constructing a backwards final route; it does not predict collision risk, constrain all turning trajectories, or guarantee containment."
+      ],
+      "altitude_completion_requires_settled_vs": true,
+      "altitude_capture_vs_tolerance_mps": 0.05,
+      "guard_final_leg_capture": true
+    },
+    "observation": {
+      "schema": "bluesky.paper-like.observation-reward.v1",
+      "earth_radius_m": 6371000.0,
+      "observation_radius_ft": 6000.0,
+      "waypoint_distance_scale_m": 9260.0,
+      "speed_reference_kt": 196.0,
+      "nominal_altitude_ft": 350.0,
+      "corridor_height_ft": 200.0,
+      "corridor_width_ft": 500.0,
+      "lowc_horizontal_ft": 1630.0,
+      "nmac_horizontal_ft": 500.0,
+      "vertical_tolerance_ft": 100.0,
+      "cpa_time_scale_seconds": 1200.0,
+      "cpa_relative_speed_epsilon_mps": 1e-06,
+      "efficiency_speed_weight": 0.3,
+      "efficiency_altitude_weight": 0.35,
+      "efficiency_lane_weight": 0.35,
+      "efficiency_reward_scale": 0.008,
+      "arrival_reward": 1.0,
+      "sources": [
+        "paper/REPRODUCTION.md",
+        "resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf: physical pp.11-16, Table 2, Eqs.14-15 and 19-22"
+      ],
+      "reconstruction_choices": [
+        "Table 2 feature meanings and order are preserved. Exact normalization bounds and angle conventions were not disclosed. Use p.13 [0,1], not the conflicting perturbation-section [0,9]; clip each scalar and count clips by feature before float32 conversion.",
+        "All positions and waypoints are lat/lon degrees; lengths, accepted targets and actual speeds use metres and metres per second. Ground speed and actual compass track, not target velocity, determine CPA. In the no-wind baseline the adapter maps accepted TAS commands to targeted ground speed.",
+        "Ownship previous/next waypoint distances are great-circle lengths on a 6371000 m sphere, divided by the nominal full-route length 9260 m. The adapter supplies the latest/next waypoint or route origin/destination, including its declared temporary-route handling.",
+        "Ownship accepted target speed is divided by the global 196 kt maximum. Target altitude is normalized from the 250 ft floor over the full 200 ft height. Right-positive accepted target lane is divided by the full 500 ft width then shifted by 0.5. The adapter supplies the two actual transition-lock flags.",
+        "Neighbors include every other aircraft at horizontal great-circle separation <=6000 ft, without a vertical filter or padding. Ownship and intruder IDs are sorted lexicographically; an empty encounter tensor has shape (0,10). The policy adapter, not this module, implements the paper's zero relative-vector convention.",
+        "Relative track and nominal-course angles use signed intruder minus ownship compass angles, wrapped to [-180,180) and divided by 360 then shifted by 0.5. Positive is clockwise/right; an exact half-turn takes -180. Same-corridor nominal cross-angle is forced to zero (normalized 0.5), even when aircraft occupy different route legs.",
+        "Relative accepted speed/altitude/lane targets use intruder minus ownship, divided by twice 196 kt, twice 200 ft or twice 500 ft respectively, then shifted by 0.5. Current actual altitude difference separately sets Eq.21 LoWC/NMAC thresholds, each normalized by 6000 ft.",
+        "CPA uses a common local east/north plane: relative position is great-circle range times the initial-bearing unit vector at ownship; velocities come from current ground speeds and tracks. For relative speed <=1e-6 m/s use t=0. Otherwise t=max(0,-r dot v/|v|^2). CPA distance uses that unbounded future time; only the normalized time feature clips at 1200 s. This local flat constant-velocity approximation is not a curved-flight forecast.",
+        "Safety uses the Eq.20 mean over all horizontally observed intruders, including zero-penalty neighbors; no neighbors gives zero. At or above 100 ft actual vertical separation both Eq.21 thresholds and the pair penalty are explicitly zero, including coincident horizontal positions.",
+        "Eq.22 compares accepted command targets exactly with stored nominal speed, configured 350 ft nominal altitude and zero lane. Nonnominal targets cost at each decision even if repeated, locked or completed; measured tracking error and rejected requests do not replace accepted targets. Accepted nominal commands should retain their canonical numerical values.",
+        "Reward total is safety +0.008*efficiency +1 for valid arrival. The environment is responsible for granting the arrival flag once, before its declared timeout; timeout or other deletion alone earns no arrival reward. Reward sampling and integration over physical steps belong to the environment adapter."
+      ]
+    }
+  },
+  "aircraft_types": {
+    "Amzn": {
+      "maximum_tas_mps": 100.83111111111111,
+      "nominal_tas_mps": 80.6648888888889,
+      "climb_mps": 8.0,
+      "descent_mps": 8.0,
+      "acceleration_mps2": 3.5
+    },
+    "Cranfield": {
+      "maximum_tas_mps": 43.72777777777778,
+      "nominal_tas_mps": 34.98222222222223,
+      "climb_mps": 3.0,
+      "descent_mps": 3.0,
+      "acceleration_mps2": 3.5
+    },
+    "CranfieldV2": {
+      "maximum_tas_mps": 20.063333333333336,
+      "nominal_tas_mps": 16.050666666666668,
+      "climb_mps": 3.0,
+      "descent_mps": 3.0,
+      "acceleration_mps2": 3.5
+    },
+    "M100": {
+      "maximum_tas_mps": 22.121111111111112,
+      "nominal_tas_mps": 17.69688888888889,
+      "climb_mps": 5.0,
+      "descent_mps": 4.0,
+      "acceleration_mps2": 3.5
+    },
+    "M200": {
+      "maximum_tas_mps": 23.150000000000002,
+      "nominal_tas_mps": 18.520000000000003,
+      "climb_mps": 5.0,
+      "descent_mps": 3.0,
+      "acceleration_mps2": 3.5
+    },
+    "M600": {
+      "maximum_tas_mps": 18.005555555555556,
+      "nominal_tas_mps": 14.404444444444445,
+      "climb_mps": 5.0,
+      "descent_mps": 5.0,
+      "acceleration_mps2": 3.5
+    },
+    "Phan4": {
+      "maximum_tas_mps": 20.063333333333336,
+      "nominal_tas_mps": 16.050666666666668,
+      "climb_mps": 6.0,
+      "descent_mps": 4.0,
+      "acceleration_mps2": 3.5
+    },
+    "Mavic": {
+      "maximum_tas_mps": 18.005555555555556,
+      "nominal_tas_mps": 14.404444444444445,
+      "climb_mps": 5.0,
+      "descent_mps": 3.0,
+      "acceleration_mps2": 3.5
+    },
+    "Eh216": {
+      "maximum_tas_mps": 35.49666666666667,
+      "nominal_tas_mps": 28.397333333333336,
+      "climb_mps": 11.0,
+      "descent_mps": 11.0,
+      "acceleration_mps2": 3.5
+    },
+    "Horsefly": {
+      "maximum_tas_mps": 22.121111111111112,
+      "nominal_tas_mps": 17.69688888888889,
+      "climb_mps": 8.0,
+      "descent_mps": 8.0,
+      "acceleration_mps2": 3.5
+    },
+    "Mnet": {
+      "maximum_tas_mps": 10.803333333333335,
+      "nominal_tas_mps": 8.642666666666669,
+      "climb_mps": 5.0,
+      "descent_mps": 5.0,
+      "acceleration_mps2": 3.5
+    },
+    "Tecnalia": {
+      "maximum_tas_mps": 10.803333333333335,
+      "nominal_tas_mps": 8.642666666666669,
+      "climb_mps": 3.0,
+      "descent_mps": 3.0,
+      "acceleration_mps2": 3.5
+    }
+  },
+  "reference": {
+    "path": "checkpoints/execution-pilot-20260905/development.jsonl",
+    "line": 1,
+    "file_sha256": "710fe74b70119275afca3e4ea41005ad4411cfb6d0cc5213e58ae1d8c28e9845",
+    "line_sha256": "fff52d4180464e1fa410c0749b66e9e2ad30b62a97aa7f484cd69805d4749c3a",
+    "phase": "initial_untrained"
+  },
+  "source_identity": {
+    "python": "3.11.13",
+    "bluesky": "1.1.1",
+    "source_sha256": {
+      "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+      "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+      "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+      "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+      "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+      "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+      "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+      "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+      "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+    },
+    "native_source_sha256": {
+      "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+      "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+      "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+      "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+    },
+    "config_sha256": {
+      "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+      "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+      "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+      "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+      "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+      "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+    }
+  },
+  "cases": [
+    {
+      "seed": 53001,
+      "corridor_count": 3,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Eh216": 4,
+        "Phan4": 5,
+        "Cranfield": 5,
+        "M200": 7,
+        "Amzn": 2,
+        "Tecnalia": 1,
+        "Mnet": 2,
+        "Mavic": 2,
+        "Horsefly": 2
+      },
+      "nr": {
+        "seed": 53001,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.106944444444444,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 3611.5,
+            "directed_pair_seconds": 7223.0,
+            "event_count": 46,
+            "events_ended_at_aircraft_exit": 6,
+            "same_corridor_event_count": 37,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 879.3642204937437,
+            "directed_seconds_per_flight_hour": 1758.7284409874874
+          },
+          "nmac": {
+            "unordered_pair_seconds": 904.25,
+            "directed_pair_seconds": 1808.5,
+            "event_count": 35,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 33,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 220.1758539059858,
+            "directed_seconds_per_flight_hour": 440.3517078119716
+          }
+        },
+        "path_length_m": 277743.75732632057,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 25.364810211003896,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -289.78063756820404,
+        "sim_seconds": 1362.75,
+        "physics_steps": 5451,
+        "decision_steps": 273,
+        "max_active": 19,
+        "wall_seconds": 5.410782308783382,
+        "process_peak_rss_mib": 325.07421875,
+        "clipping_counts": {
+          "own.distance_previous_waypoint": 20,
+          "intruders.cpa_time": 200
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 14785.0,
+          "airspace_seconds": 1362.75,
+          "occupied_airspace_seconds": 1362.75,
+          "physics_steps": 5451,
+          "potential_pair_seconds": 16563.5,
+          "potential_event_count": 85,
+          "lowc_pair_seconds": 3611.5,
+          "lowc_event_count": 46,
+          "nmac_pair_seconds": 904.25,
+          "nmac_event_count": 35
+        },
+        "hours": {
+          "aircraft": 4.106944444444444,
+          "airspace": 0.37854166666666667,
+          "occupied_airspace": 0.37854166666666667
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 16563.5,
+            "directed_pair_seconds": 33127.0,
+            "continuous_unordered_event_count": 85,
+            "unordered_seconds_per_aircraft_hour": 4033.0470071017926,
+            "directed_seconds_per_aircraft_hour": 8066.094014203585,
+            "unordered_seconds_per_airspace_hour": 43756.08145294441,
+            "directed_seconds_per_airspace_hour": 87512.16290588882,
+            "unordered_seconds_per_occupied_airspace_hour": 43756.08145294441,
+            "directed_seconds_per_occupied_airspace_hour": 87512.16290588882
+          },
+          "lowc": {
+            "unordered_pair_seconds": 3611.5,
+            "directed_pair_seconds": 7223.0,
+            "continuous_unordered_event_count": 46,
+            "unordered_seconds_per_aircraft_hour": 879.3642204937437,
+            "directed_seconds_per_aircraft_hour": 1758.7284409874874,
+            "unordered_seconds_per_airspace_hour": 9540.561364887177,
+            "directed_seconds_per_airspace_hour": 19081.122729774354,
+            "unordered_seconds_per_occupied_airspace_hour": 9540.561364887177,
+            "directed_seconds_per_occupied_airspace_hour": 19081.122729774354
+          },
+          "nmac": {
+            "unordered_pair_seconds": 904.25,
+            "directed_pair_seconds": 1808.5,
+            "continuous_unordered_event_count": 35,
+            "unordered_seconds_per_aircraft_hour": 220.1758539059858,
+            "directed_seconds_per_aircraft_hour": 440.3517078119716,
+            "unordered_seconds_per_airspace_hour": 2388.772702256467,
+            "directed_seconds_per_airspace_hour": 4777.545404512934,
+            "unordered_seconds_per_occupied_airspace_hour": 2388.772702256467,
+            "directed_seconds_per_occupied_airspace_hour": 4777.545404512934
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.2180396655296284,
+          "nmac_over_potential": 0.0545929302381743
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 4,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 273,
+              "ownship_entries": 2955,
+              "intruder_entries": 6608,
+              "nonempty_frames": 272
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 342,
+              "intruder_entries": 716,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 304,
+            "ownship_entries": 3300,
+            "intruder_entries": 7328,
+            "nonempty_frames": 303
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 4,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 273,
+              "ownship_entries": 2955,
+              "intruder_entries": 6608,
+              "nonempty_frames": 272
+            }
+          },
+          "total": {
+            "frames": 274,
+            "ownship_entries": 2958,
+            "intruder_entries": 6612,
+            "nonempty_frames": 273
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 273,
+          "nonempty_payloads": 29,
+          "ownship_entries": 30,
+          "intruder_entries": 21
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5451,
+        "native_step_calls": 5451,
+        "observation_wrapper_calls": 304,
+        "original_observation_calls": 304,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53002,
+      "corridor_count": 4,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "M200": 1,
+        "Mnet": 4,
+        "CranfieldV2": 2,
+        "M100": 3,
+        "Cranfield": 3,
+        "Eh216": 4,
+        "M600": 2,
+        "Horsefly": 3,
+        "Amzn": 3,
+        "Phan4": 1,
+        "Mavic": 1,
+        "Tecnalia": 3
+      },
+      "nr": {
+        "seed": 53002,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.7872916666666665,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 4345.0,
+            "directed_pair_seconds": 8690.0,
+            "event_count": 65,
+            "events_ended_at_aircraft_exit": 4,
+            "same_corridor_event_count": 40,
+            "events_started_at_admission": 3,
+            "unordered_seconds_per_flight_hour": 907.6112972714218,
+            "directed_seconds_per_flight_hour": 1815.2225945428436
+          },
+          "nmac": {
+            "unordered_pair_seconds": 1107.25,
+            "directed_pair_seconds": 2214.5,
+            "event_count": 53,
+            "events_ended_at_aircraft_exit": 1,
+            "same_corridor_event_count": 36,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 231.28943818268854,
+            "directed_seconds_per_flight_hour": 462.5788763653771
+          }
+        },
+        "path_length_m": 277673.7623081146,
+        "outside_corridor_aircraft_seconds": 0.5,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 79.96846774118765,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -266.34721437592657,
+        "sim_seconds": 1571.0,
+        "physics_steps": 6284,
+        "decision_steps": 315,
+        "max_active": 26,
+        "wall_seconds": 6.801693294197321,
+        "process_peak_rss_mib": 328.359375,
+        "clipping_counts": {
+          "own.distance_previous_waypoint": 8
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 17234.25,
+          "airspace_seconds": 1571.0,
+          "occupied_airspace_seconds": 1571.0,
+          "physics_steps": 6284,
+          "potential_pair_seconds": 24022.75,
+          "potential_event_count": 115,
+          "lowc_pair_seconds": 4345.0,
+          "lowc_event_count": 65,
+          "nmac_pair_seconds": 1107.25,
+          "nmac_event_count": 53
+        },
+        "hours": {
+          "aircraft": 4.7872916666666665,
+          "airspace": 0.4363888888888889,
+          "occupied_airspace": 0.4363888888888889
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 24022.75,
+            "directed_pair_seconds": 48045.5,
+            "continuous_unordered_event_count": 115,
+            "unordered_seconds_per_aircraft_hour": 5018.025153400931,
+            "directed_seconds_per_aircraft_hour": 10036.050306801862,
+            "unordered_seconds_per_airspace_hour": 55048.94971355824,
+            "directed_seconds_per_airspace_hour": 110097.89942711648,
+            "unordered_seconds_per_occupied_airspace_hour": 55048.94971355824,
+            "directed_seconds_per_occupied_airspace_hour": 110097.89942711648
+          },
+          "lowc": {
+            "unordered_pair_seconds": 4345.0,
+            "directed_pair_seconds": 8690.0,
+            "continuous_unordered_event_count": 65,
+            "unordered_seconds_per_aircraft_hour": 907.6112972714218,
+            "directed_seconds_per_aircraft_hour": 1815.2225945428436,
+            "unordered_seconds_per_airspace_hour": 9956.71546785487,
+            "directed_seconds_per_airspace_hour": 19913.43093570974,
+            "unordered_seconds_per_occupied_airspace_hour": 9956.71546785487,
+            "directed_seconds_per_occupied_airspace_hour": 19913.43093570974
+          },
+          "nmac": {
+            "unordered_pair_seconds": 1107.25,
+            "directed_pair_seconds": 2214.5,
+            "continuous_unordered_event_count": 53,
+            "unordered_seconds_per_aircraft_hour": 231.28943818268854,
+            "directed_seconds_per_aircraft_hour": 462.5788763653771,
+            "unordered_seconds_per_airspace_hour": 2537.301082113304,
+            "directed_seconds_per_airspace_hour": 5074.602164226608,
+            "unordered_seconds_per_occupied_airspace_hour": 2537.301082113304,
+            "directed_seconds_per_occupied_airspace_hour": 5074.602164226608
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.18087021677368328,
+          "nmac_over_potential": 0.04609172555182067
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 4,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 315,
+              "ownship_entries": 3445,
+              "intruder_entries": 9616,
+              "nonempty_frames": 314
+            },
+            "terminal_preview": {
+              "frames": 29,
+              "ownship_entries": 422,
+              "intruder_entries": 1198,
+              "nonempty_frames": 29
+            }
+          },
+          "total": {
+            "frames": 345,
+            "ownship_entries": 3871,
+            "intruder_entries": 10818,
+            "nonempty_frames": 344
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 4,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 315,
+              "ownship_entries": 3445,
+              "intruder_entries": 9616,
+              "nonempty_frames": 314
+            }
+          },
+          "total": {
+            "frames": 316,
+            "ownship_entries": 3449,
+            "intruder_entries": 9620,
+            "nonempty_frames": 315
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 315,
+          "nonempty_payloads": 28,
+          "ownship_entries": 30,
+          "intruder_entries": 34
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 6284,
+        "native_step_calls": 6284,
+        "observation_wrapper_calls": 345,
+        "original_observation_calls": 345,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53003,
+      "corridor_count": 5,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "M100": 2,
+        "Mavic": 4,
+        "CranfieldV2": 4,
+        "M600": 3,
+        "Cranfield": 1,
+        "Amzn": 5,
+        "Eh216": 1,
+        "Tecnalia": 3,
+        "Horsefly": 2,
+        "M200": 3,
+        "Mnet": 2
+      },
+      "nr": {
+        "seed": 53003,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.692430555555555,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2169.75,
+            "directed_pair_seconds": 4339.5,
+            "event_count": 43,
+            "events_ended_at_aircraft_exit": 5,
+            "same_corridor_event_count": 22,
+            "events_started_at_admission": 7,
+            "unordered_seconds_per_flight_hour": 462.3936304035755,
+            "directed_seconds_per_flight_hour": 924.787260807151
+          },
+          "nmac": {
+            "unordered_pair_seconds": 516.5,
+            "directed_pair_seconds": 1033.0,
+            "event_count": 24,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 20,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 110.07088839886934,
+            "directed_seconds_per_flight_hour": 220.1417767977387
+          }
+        },
+        "path_length_m": 276110.45425453305,
+        "outside_corridor_aircraft_seconds": 93.5,
+        "outside_corridor_flights": 4,
+        "max_centerline_distance_m": 431.80949957262845,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -239.50021300342888,
+        "sim_seconds": 1462.0,
+        "physics_steps": 5848,
+        "decision_steps": 293,
+        "max_active": 26,
+        "wall_seconds": 6.865135122090578,
+        "process_peak_rss_mib": 328.6953125,
+        "clipping_counts": {
+          "own.distance_previous_waypoint": 6
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 16892.75,
+          "airspace_seconds": 1462.0,
+          "occupied_airspace_seconds": 1462.0,
+          "physics_steps": 5848,
+          "potential_pair_seconds": 14431.0,
+          "potential_event_count": 144,
+          "lowc_pair_seconds": 2169.75,
+          "lowc_event_count": 43,
+          "nmac_pair_seconds": 516.5,
+          "nmac_event_count": 24
+        },
+        "hours": {
+          "aircraft": 4.692430555555555,
+          "airspace": 0.4061111111111111,
+          "occupied_airspace": 0.4061111111111111
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 14431.0,
+            "directed_pair_seconds": 28862.0,
+            "continuous_unordered_event_count": 144,
+            "unordered_seconds_per_aircraft_hour": 3075.378490772669,
+            "directed_seconds_per_aircraft_hour": 6150.756981545338,
+            "unordered_seconds_per_airspace_hour": 35534.61012311902,
+            "directed_seconds_per_airspace_hour": 71069.22024623804,
+            "unordered_seconds_per_occupied_airspace_hour": 35534.61012311902,
+            "directed_seconds_per_occupied_airspace_hour": 71069.22024623804
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2169.75,
+            "directed_pair_seconds": 4339.5,
+            "continuous_unordered_event_count": 43,
+            "unordered_seconds_per_aircraft_hour": 462.3936304035755,
+            "directed_seconds_per_aircraft_hour": 924.787260807151,
+            "unordered_seconds_per_airspace_hour": 5342.749658002736,
+            "directed_seconds_per_airspace_hour": 10685.499316005473,
+            "unordered_seconds_per_occupied_airspace_hour": 5342.749658002736,
+            "directed_seconds_per_occupied_airspace_hour": 10685.499316005473
+          },
+          "nmac": {
+            "unordered_pair_seconds": 516.5,
+            "directed_pair_seconds": 1033.0,
+            "continuous_unordered_event_count": 24,
+            "unordered_seconds_per_aircraft_hour": 110.07088839886934,
+            "directed_seconds_per_aircraft_hour": 220.1417767977387,
+            "unordered_seconds_per_airspace_hour": 1271.8194254445966,
+            "directed_seconds_per_airspace_hour": 2543.6388508891932,
+            "unordered_seconds_per_occupied_airspace_hour": 1271.8194254445966,
+            "directed_seconds_per_occupied_airspace_hour": 2543.6388508891932
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.1503534058623796,
+          "nmac_over_potential": 0.03579100547432611
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 16,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 293,
+              "ownship_entries": 3375,
+              "intruder_entries": 5762,
+              "nonempty_frames": 292
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 425,
+              "intruder_entries": 690,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 324,
+            "ownship_entries": 3805,
+            "intruder_entries": 6468,
+            "nonempty_frames": 323
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 16,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 293,
+              "ownship_entries": 3375,
+              "intruder_entries": 5762,
+              "nonempty_frames": 292
+            }
+          },
+          "total": {
+            "frames": 294,
+            "ownship_entries": 3380,
+            "intruder_entries": 5778,
+            "nonempty_frames": 293
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 293,
+          "nonempty_payloads": 27,
+          "ownship_entries": 30,
+          "intruder_entries": 21
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5848,
+        "native_step_calls": 5848,
+        "observation_wrapper_calls": 324,
+        "original_observation_calls": 324,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53004,
+      "corridor_count": 3,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "CranfieldV2": 3,
+        "Cranfield": 3,
+        "M200": 4,
+        "Tecnalia": 2,
+        "Horsefly": 2,
+        "Eh216": 1,
+        "Phan4": 4,
+        "M100": 2,
+        "Mnet": 1,
+        "Mavic": 4,
+        "Amzn": 2,
+        "M600": 2
+      },
+      "nr": {
+        "seed": 53004,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.586388888888889,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 3182.75,
+            "directed_pair_seconds": 6365.5,
+            "event_count": 51,
+            "events_ended_at_aircraft_exit": 8,
+            "same_corridor_event_count": 34,
+            "events_started_at_admission": 8,
+            "unordered_seconds_per_flight_hour": 693.9555447883229,
+            "directed_seconds_per_flight_hour": 1387.9110895766457
+          },
+          "nmac": {
+            "unordered_pair_seconds": 816.25,
+            "directed_pair_seconds": 1632.5,
+            "event_count": 28,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 28,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 177.97226091696444,
+            "directed_seconds_per_flight_hour": 355.9445218339289
+          }
+        },
+        "path_length_m": 276305.480436599,
+        "outside_corridor_aircraft_seconds": 52.75,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 411.776647112176,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -273.92164053995043,
+        "sim_seconds": 1437.75,
+        "physics_steps": 5751,
+        "decision_steps": 288,
+        "max_active": 21,
+        "wall_seconds": 6.706031033303589,
+        "process_peak_rss_mib": 328.6953125,
+        "clipping_counts": {
+          "own.distance_next_waypoint": 1,
+          "own.distance_previous_waypoint": 10
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 16511.0,
+          "airspace_seconds": 1437.75,
+          "occupied_airspace_seconds": 1437.75,
+          "physics_steps": 5751,
+          "potential_pair_seconds": 17842.5,
+          "potential_event_count": 116,
+          "lowc_pair_seconds": 3182.75,
+          "lowc_event_count": 51,
+          "nmac_pair_seconds": 816.25,
+          "nmac_event_count": 28
+        },
+        "hours": {
+          "aircraft": 4.586388888888889,
+          "airspace": 0.399375,
+          "occupied_airspace": 0.399375
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 17842.5,
+            "directed_pair_seconds": 35685.0,
+            "continuous_unordered_event_count": 116,
+            "unordered_seconds_per_aircraft_hour": 3890.31554721095,
+            "directed_seconds_per_aircraft_hour": 7780.6310944219,
+            "unordered_seconds_per_airspace_hour": 44676.056338028175,
+            "directed_seconds_per_airspace_hour": 89352.11267605635,
+            "unordered_seconds_per_occupied_airspace_hour": 44676.056338028175,
+            "directed_seconds_per_occupied_airspace_hour": 89352.11267605635
+          },
+          "lowc": {
+            "unordered_pair_seconds": 3182.75,
+            "directed_pair_seconds": 6365.5,
+            "continuous_unordered_event_count": 51,
+            "unordered_seconds_per_aircraft_hour": 693.9555447883229,
+            "directed_seconds_per_aircraft_hour": 1387.9110895766457,
+            "unordered_seconds_per_airspace_hour": 7969.327073552426,
+            "directed_seconds_per_airspace_hour": 15938.654147104851,
+            "unordered_seconds_per_occupied_airspace_hour": 7969.327073552426,
+            "directed_seconds_per_occupied_airspace_hour": 15938.654147104851
+          },
+          "nmac": {
+            "unordered_pair_seconds": 816.25,
+            "directed_pair_seconds": 1632.5,
+            "continuous_unordered_event_count": 28,
+            "unordered_seconds_per_aircraft_hour": 177.97226091696444,
+            "directed_seconds_per_aircraft_hour": 355.9445218339289,
+            "unordered_seconds_per_airspace_hour": 2043.8184663536776,
+            "directed_seconds_per_airspace_hour": 4087.6369327073553,
+            "unordered_seconds_per_occupied_airspace_hour": 2043.8184663536776,
+            "directed_seconds_per_occupied_airspace_hour": 4087.6369327073553
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.1783802718228948,
+          "nmac_over_potential": 0.04574751296062771
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 288,
+              "ownship_entries": 3300,
+              "intruder_entries": 7146,
+              "nonempty_frames": 287
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 392,
+              "intruder_entries": 870,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 319,
+            "ownship_entries": 3695,
+            "intruder_entries": 8018,
+            "nonempty_frames": 318
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 288,
+              "ownship_entries": 3300,
+              "intruder_entries": 7146,
+              "nonempty_frames": 287
+            }
+          },
+          "total": {
+            "frames": 289,
+            "ownship_entries": 3303,
+            "intruder_entries": 7148,
+            "nonempty_frames": 288
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 288,
+          "nonempty_payloads": 27,
+          "ownship_entries": 30,
+          "intruder_entries": 43
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5751,
+        "native_step_calls": 5751,
+        "observation_wrapper_calls": 319,
+        "original_observation_calls": 319,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53005,
+      "corridor_count": 4,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Mavic": 7,
+        "Cranfield": 1,
+        "CranfieldV2": 4,
+        "M600": 4,
+        "Phan4": 2,
+        "M200": 3,
+        "Horsefly": 2,
+        "M100": 3,
+        "Eh216": 1,
+        "Tecnalia": 1,
+        "Amzn": 1,
+        "Mnet": 1
+      },
+      "nr": {
+        "seed": 53005,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.853541666666667,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2231.5,
+            "directed_pair_seconds": 4463.0,
+            "event_count": 20,
+            "events_ended_at_aircraft_exit": 4,
+            "same_corridor_event_count": 16,
+            "events_started_at_admission": 2,
+            "unordered_seconds_per_flight_hour": 459.76735201957337,
+            "directed_seconds_per_flight_hour": 919.5347040391467
+          },
+          "nmac": {
+            "unordered_pair_seconds": 556.75,
+            "directed_pair_seconds": 1113.5,
+            "event_count": 13,
+            "events_ended_at_aircraft_exit": 1,
+            "same_corridor_event_count": 13,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 114.71004850409923,
+            "directed_seconds_per_flight_hour": 229.42009700819847
+          }
+        },
+        "path_length_m": 277095.7432313876,
+        "outside_corridor_aircraft_seconds": 12.25,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 301.8694984935424,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -200.11074419834796,
+        "sim_seconds": 1533.25,
+        "physics_steps": 6133,
+        "decision_steps": 307,
+        "max_active": 27,
+        "wall_seconds": 7.7856789799407125,
+        "process_peak_rss_mib": 328.765625,
+        "clipping_counts": {
+          "intruders.cpa_time": 388
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 17472.75,
+          "airspace_seconds": 1533.25,
+          "occupied_airspace_seconds": 1533.25,
+          "physics_steps": 6133,
+          "potential_pair_seconds": 18006.25,
+          "potential_event_count": 76,
+          "lowc_pair_seconds": 2231.5,
+          "lowc_event_count": 20,
+          "nmac_pair_seconds": 556.75,
+          "nmac_event_count": 13
+        },
+        "hours": {
+          "aircraft": 4.853541666666667,
+          "airspace": 0.4259027777777778,
+          "occupied_airspace": 0.4259027777777778
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 18006.25,
+            "directed_pair_seconds": 36012.5,
+            "continuous_unordered_event_count": 76,
+            "unordered_seconds_per_aircraft_hour": 3709.9197321543547,
+            "directed_seconds_per_aircraft_hour": 7419.8394643087095,
+            "unordered_seconds_per_airspace_hour": 42277.84118702103,
+            "directed_seconds_per_airspace_hour": 84555.68237404207,
+            "unordered_seconds_per_occupied_airspace_hour": 42277.84118702103,
+            "directed_seconds_per_occupied_airspace_hour": 84555.68237404207
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2231.5,
+            "directed_pair_seconds": 4463.0,
+            "continuous_unordered_event_count": 20,
+            "unordered_seconds_per_aircraft_hour": 459.76735201957337,
+            "directed_seconds_per_aircraft_hour": 919.5347040391467,
+            "unordered_seconds_per_airspace_hour": 5239.45866623186,
+            "directed_seconds_per_airspace_hour": 10478.91733246372,
+            "unordered_seconds_per_occupied_airspace_hour": 5239.45866623186,
+            "directed_seconds_per_occupied_airspace_hour": 10478.91733246372
+          },
+          "nmac": {
+            "unordered_pair_seconds": 556.75,
+            "directed_pair_seconds": 1113.5,
+            "continuous_unordered_event_count": 13,
+            "unordered_seconds_per_aircraft_hour": 114.71004850409923,
+            "directed_seconds_per_aircraft_hour": 229.42009700819847,
+            "unordered_seconds_per_airspace_hour": 1307.2232186531876,
+            "directed_seconds_per_airspace_hour": 2614.446437306375,
+            "unordered_seconds_per_occupied_airspace_hour": 1307.2232186531876,
+            "directed_seconds_per_occupied_airspace_hour": 2614.446437306375
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.12392919125303714,
+          "nmac_over_potential": 0.030919819507115583
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 307,
+              "ownship_entries": 3493,
+              "intruder_entries": 7206,
+              "nonempty_frames": 306
+            },
+            "terminal_preview": {
+              "frames": 29,
+              "ownship_entries": 415,
+              "intruder_entries": 820,
+              "nonempty_frames": 29
+            }
+          },
+          "total": {
+            "frames": 337,
+            "ownship_entries": 3912,
+            "intruder_entries": 8028,
+            "nonempty_frames": 336
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 307,
+              "ownship_entries": 3493,
+              "intruder_entries": 7206,
+              "nonempty_frames": 306
+            }
+          },
+          "total": {
+            "frames": 308,
+            "ownship_entries": 3497,
+            "intruder_entries": 7208,
+            "nonempty_frames": 307
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 307,
+          "nonempty_payloads": 25,
+          "ownship_entries": 30,
+          "intruder_entries": 21
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 6133,
+        "native_step_calls": 6133,
+        "observation_wrapper_calls": 337,
+        "original_observation_calls": 337,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53006,
+      "corridor_count": 5,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "M200": 1,
+        "Eh216": 3,
+        "Horsefly": 4,
+        "Cranfield": 6,
+        "Mnet": 3,
+        "Mavic": 4,
+        "M100": 3,
+        "Phan4": 2,
+        "Tecnalia": 2,
+        "CranfieldV2": 2
+      },
+      "nr": {
+        "seed": 53006,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.708541666666667,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2310.25,
+            "directed_pair_seconds": 4620.5,
+            "event_count": 40,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 21,
+            "events_started_at_admission": 2,
+            "unordered_seconds_per_flight_hour": 490.65085615680715,
+            "directed_seconds_per_flight_hour": 981.3017123136143
+          },
+          "nmac": {
+            "unordered_pair_seconds": 525.25,
+            "directed_pair_seconds": 1050.5,
+            "event_count": 26,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 21,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 111.55258616875359,
+            "directed_seconds_per_flight_hour": 223.10517233750718
+          }
+        },
+        "path_length_m": 277386.2279979631,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 73.77728398721646,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -121.90865791743107,
+        "sim_seconds": 1381.25,
+        "physics_steps": 5525,
+        "decision_steps": 277,
+        "max_active": 27,
+        "wall_seconds": 7.048321935813874,
+        "process_peak_rss_mib": 328.765625,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 16950.75,
+          "airspace_seconds": 1381.25,
+          "occupied_airspace_seconds": 1381.25,
+          "physics_steps": 5525,
+          "potential_pair_seconds": 24409.25,
+          "potential_event_count": 154,
+          "lowc_pair_seconds": 2310.25,
+          "lowc_event_count": 40,
+          "nmac_pair_seconds": 525.25,
+          "nmac_event_count": 26
+        },
+        "hours": {
+          "aircraft": 4.708541666666667,
+          "airspace": 0.3836805555555556,
+          "occupied_airspace": 0.3836805555555556
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 24409.25,
+            "directed_pair_seconds": 48818.5,
+            "continuous_unordered_event_count": 154,
+            "unordered_seconds_per_aircraft_hour": 5184.036104597141,
+            "directed_seconds_per_aircraft_hour": 10368.072209194283,
+            "unordered_seconds_per_airspace_hour": 63618.67873303167,
+            "directed_seconds_per_airspace_hour": 127237.35746606335,
+            "unordered_seconds_per_occupied_airspace_hour": 63618.67873303167,
+            "directed_seconds_per_occupied_airspace_hour": 127237.35746606335
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2310.25,
+            "directed_pair_seconds": 4620.5,
+            "continuous_unordered_event_count": 40,
+            "unordered_seconds_per_aircraft_hour": 490.65085615680715,
+            "directed_seconds_per_aircraft_hour": 981.3017123136143,
+            "unordered_seconds_per_airspace_hour": 6021.285067873303,
+            "directed_seconds_per_airspace_hour": 12042.570135746606,
+            "unordered_seconds_per_occupied_airspace_hour": 6021.285067873303,
+            "directed_seconds_per_occupied_airspace_hour": 12042.570135746606
+          },
+          "nmac": {
+            "unordered_pair_seconds": 525.25,
+            "directed_pair_seconds": 1050.5,
+            "continuous_unordered_event_count": 26,
+            "unordered_seconds_per_aircraft_hour": 111.55258616875359,
+            "directed_seconds_per_aircraft_hour": 223.10517233750718,
+            "unordered_seconds_per_airspace_hour": 1368.9773755656108,
+            "directed_seconds_per_airspace_hour": 2737.9547511312217,
+            "unordered_seconds_per_occupied_airspace_hour": 1368.9773755656108,
+            "directed_seconds_per_occupied_airspace_hour": 2737.9547511312217
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.09464649671743294,
+          "nmac_over_potential": 0.02151848172311726
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 8,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 277,
+              "ownship_entries": 3388,
+              "intruder_entries": 9772,
+              "nonempty_frames": 276
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 443,
+              "intruder_entries": 1198,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 308,
+            "ownship_entries": 3836,
+            "intruder_entries": 10978,
+            "nonempty_frames": 307
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 8,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 277,
+              "ownship_entries": 3388,
+              "intruder_entries": 9772,
+              "nonempty_frames": 276
+            }
+          },
+          "total": {
+            "frames": 278,
+            "ownship_entries": 3393,
+            "intruder_entries": 9780,
+            "nonempty_frames": 277
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 277,
+          "nonempty_payloads": 29,
+          "ownship_entries": 30,
+          "intruder_entries": 19
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5525,
+        "native_step_calls": 5525,
+        "observation_wrapper_calls": 308,
+        "original_observation_calls": 308,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53007,
+      "corridor_count": 3,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Mnet": 1,
+        "Phan4": 3,
+        "Mavic": 3,
+        "M600": 5,
+        "Tecnalia": 1,
+        "Eh216": 2,
+        "M200": 2,
+        "Amzn": 5,
+        "Horsefly": 2,
+        "CranfieldV2": 2,
+        "Cranfield": 3,
+        "M100": 1
+      },
+      "nr": {
+        "seed": 53007,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.089375,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 3439.25,
+            "directed_pair_seconds": 6878.5,
+            "event_count": 65,
+            "events_ended_at_aircraft_exit": 13,
+            "same_corridor_event_count": 55,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 841.0209384074583,
+            "directed_seconds_per_flight_hour": 1682.0418768149166
+          },
+          "nmac": {
+            "unordered_pair_seconds": 900.25,
+            "directed_pair_seconds": 1800.5,
+            "event_count": 52,
+            "events_ended_at_aircraft_exit": 5,
+            "same_corridor_event_count": 47,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 220.14366498548065,
+            "directed_seconds_per_flight_hour": 440.2873299709613
+          }
+        },
+        "path_length_m": 275714.88167746866,
+        "outside_corridor_aircraft_seconds": 73.5,
+        "outside_corridor_flights": 5,
+        "max_centerline_distance_m": 332.7465117254543,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -302.47887792729443,
+        "sim_seconds": 1345.0,
+        "physics_steps": 5380,
+        "decision_steps": 269,
+        "max_active": 22,
+        "wall_seconds": 6.191141234710813,
+        "process_peak_rss_mib": 328.765625,
+        "clipping_counts": {},
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 14721.75,
+          "airspace_seconds": 1345.0,
+          "occupied_airspace_seconds": 1345.0,
+          "physics_steps": 5380,
+          "potential_pair_seconds": 15661.5,
+          "potential_event_count": 123,
+          "lowc_pair_seconds": 3439.25,
+          "lowc_event_count": 65,
+          "nmac_pair_seconds": 900.25,
+          "nmac_event_count": 52
+        },
+        "hours": {
+          "aircraft": 4.089375,
+          "airspace": 0.3736111111111111,
+          "occupied_airspace": 0.3736111111111111
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 15661.5,
+            "directed_pair_seconds": 31323.0,
+            "continuous_unordered_event_count": 123,
+            "unordered_seconds_per_aircraft_hour": 3829.802842732691,
+            "directed_seconds_per_aircraft_hour": 7659.605685465382,
+            "unordered_seconds_per_airspace_hour": 41919.25650557621,
+            "directed_seconds_per_airspace_hour": 83838.51301115242,
+            "unordered_seconds_per_occupied_airspace_hour": 41919.25650557621,
+            "directed_seconds_per_occupied_airspace_hour": 83838.51301115242
+          },
+          "lowc": {
+            "unordered_pair_seconds": 3439.25,
+            "directed_pair_seconds": 6878.5,
+            "continuous_unordered_event_count": 65,
+            "unordered_seconds_per_aircraft_hour": 841.0209384074583,
+            "directed_seconds_per_aircraft_hour": 1682.0418768149166,
+            "unordered_seconds_per_airspace_hour": 9205.42750929368,
+            "directed_seconds_per_airspace_hour": 18410.85501858736,
+            "unordered_seconds_per_occupied_airspace_hour": 9205.42750929368,
+            "directed_seconds_per_occupied_airspace_hour": 18410.85501858736
+          },
+          "nmac": {
+            "unordered_pair_seconds": 900.25,
+            "directed_pair_seconds": 1800.5,
+            "continuous_unordered_event_count": 52,
+            "unordered_seconds_per_aircraft_hour": 220.14366498548065,
+            "directed_seconds_per_aircraft_hour": 440.2873299709613,
+            "unordered_seconds_per_airspace_hour": 2409.5910780669146,
+            "directed_seconds_per_airspace_hour": 4819.182156133829,
+            "unordered_seconds_per_occupied_airspace_hour": 2409.5910780669146,
+            "directed_seconds_per_occupied_airspace_hour": 4819.182156133829
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.21959901669699583,
+          "nmac_over_potential": 0.05748172269578265
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 6,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 269,
+              "ownship_entries": 2947,
+              "intruder_entries": 6272,
+              "nonempty_frames": 268
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 410,
+              "intruder_entries": 760,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 300,
+            "ownship_entries": 3360,
+            "intruder_entries": 7038,
+            "nonempty_frames": 299
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 6,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 269,
+              "ownship_entries": 2947,
+              "intruder_entries": 6272,
+              "nonempty_frames": 268
+            }
+          },
+          "total": {
+            "frames": 270,
+            "ownship_entries": 2950,
+            "intruder_entries": 6278,
+            "nonempty_frames": 269
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 269,
+          "nonempty_payloads": 29,
+          "ownship_entries": 30,
+          "intruder_entries": 27
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5380,
+        "native_step_calls": 5380,
+        "observation_wrapper_calls": 300,
+        "original_observation_calls": 300,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53008,
+      "corridor_count": 4,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "M600": 1,
+        "Mnet": 2,
+        "Tecnalia": 3,
+        "M200": 3,
+        "Horsefly": 4,
+        "Amzn": 2,
+        "M100": 4,
+        "Eh216": 3,
+        "Mavic": 4,
+        "CranfieldV2": 2,
+        "Cranfield": 1,
+        "Phan4": 1
+      },
+      "nr": {
+        "seed": 53008,
+        "planned": 30,
+        "completed": 29,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.846875,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 3548.0,
+            "directed_pair_seconds": 7096.0,
+            "event_count": 34,
+            "events_ended_at_aircraft_exit": 6,
+            "same_corridor_event_count": 34,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 732.0180528691167,
+            "directed_seconds_per_flight_hour": 1464.0361057382333
+          },
+          "nmac": {
+            "unordered_pair_seconds": 1055.75,
+            "directed_pair_seconds": 2111.5,
+            "event_count": 30,
+            "events_ended_at_aircraft_exit": 1,
+            "same_corridor_event_count": 30,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 217.82076079948422,
+            "directed_seconds_per_flight_hour": 435.64152159896844
+          }
+        },
+        "path_length_m": 277500.49877417804,
+        "outside_corridor_aircraft_seconds": 61.0,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 599.313991626042,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -421.0649801829061,
+        "sim_seconds": 1419.75,
+        "physics_steps": 5679,
+        "decision_steps": 284,
+        "max_active": 26,
+        "wall_seconds": 7.127359125297517,
+        "process_peak_rss_mib": 328.765625,
+        "clipping_counts": {
+          "own.distance_next_waypoint": 2,
+          "own.distance_previous_waypoint": 7
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 17448.75,
+          "airspace_seconds": 1419.75,
+          "occupied_airspace_seconds": 1419.75,
+          "physics_steps": 5679,
+          "potential_pair_seconds": 17957.25,
+          "potential_event_count": 133,
+          "lowc_pair_seconds": 3548.0,
+          "lowc_event_count": 34,
+          "nmac_pair_seconds": 1055.75,
+          "nmac_event_count": 30
+        },
+        "hours": {
+          "aircraft": 4.846875,
+          "airspace": 0.394375,
+          "occupied_airspace": 0.394375
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 17957.25,
+            "directed_pair_seconds": 35914.5,
+            "continuous_unordered_event_count": 133,
+            "unordered_seconds_per_aircraft_hour": 3704.9129593810444,
+            "directed_seconds_per_aircraft_hour": 7409.825918762089,
+            "unordered_seconds_per_airspace_hour": 45533.43898573693,
+            "directed_seconds_per_airspace_hour": 91066.87797147386,
+            "unordered_seconds_per_occupied_airspace_hour": 45533.43898573693,
+            "directed_seconds_per_occupied_airspace_hour": 91066.87797147386
+          },
+          "lowc": {
+            "unordered_pair_seconds": 3548.0,
+            "directed_pair_seconds": 7096.0,
+            "continuous_unordered_event_count": 34,
+            "unordered_seconds_per_aircraft_hour": 732.0180528691167,
+            "directed_seconds_per_aircraft_hour": 1464.0361057382333,
+            "unordered_seconds_per_airspace_hour": 8996.513470681459,
+            "directed_seconds_per_airspace_hour": 17993.026941362918,
+            "unordered_seconds_per_occupied_airspace_hour": 8996.513470681459,
+            "directed_seconds_per_occupied_airspace_hour": 17993.026941362918
+          },
+          "nmac": {
+            "unordered_pair_seconds": 1055.75,
+            "directed_pair_seconds": 2111.5,
+            "continuous_unordered_event_count": 30,
+            "unordered_seconds_per_aircraft_hour": 217.82076079948422,
+            "directed_seconds_per_aircraft_hour": 435.64152159896844,
+            "unordered_seconds_per_airspace_hour": 2677.020602218701,
+            "directed_seconds_per_airspace_hour": 5354.041204437402,
+            "unordered_seconds_per_occupied_airspace_hour": 2677.020602218701,
+            "directed_seconds_per_occupied_airspace_hour": 5354.041204437402
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.19758036447674338,
+          "nmac_over_potential": 0.058792409750936254
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 10,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 284,
+              "ownship_entries": 3489,
+              "intruder_entries": 7192,
+              "nonempty_frames": 283
+            },
+            "terminal_preview": {
+              "frames": 29,
+              "ownship_entries": 429,
+              "intruder_entries": 820,
+              "nonempty_frames": 29
+            }
+          },
+          "total": {
+            "frames": 314,
+            "ownship_entries": 3922,
+            "intruder_entries": 8022,
+            "nonempty_frames": 313
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 10,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 284,
+              "ownship_entries": 3489,
+              "intruder_entries": 7192,
+              "nonempty_frames": 283
+            }
+          },
+          "total": {
+            "frames": 285,
+            "ownship_entries": 3493,
+            "intruder_entries": 7202,
+            "nonempty_frames": 284
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 284,
+          "nonempty_payloads": 28,
+          "ownship_entries": 30,
+          "intruder_entries": 24
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5679,
+        "native_step_calls": 5679,
+        "observation_wrapper_calls": 314,
+        "original_observation_calls": 314,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53009,
+      "corridor_count": 5,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Cranfield": 4,
+        "Mavic": 2,
+        "M600": 4,
+        "Eh216": 4,
+        "CranfieldV2": 2,
+        "Horsefly": 3,
+        "Mnet": 6,
+        "M200": 1,
+        "Amzn": 3,
+        "M100": 1
+      },
+      "nr": {
+        "seed": 53009,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.647569444444445,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2408.75,
+            "directed_pair_seconds": 4817.5,
+            "event_count": 35,
+            "events_ended_at_aircraft_exit": 3,
+            "same_corridor_event_count": 30,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 518.2816585730295,
+            "directed_seconds_per_flight_hour": 1036.563317146059
+          },
+          "nmac": {
+            "unordered_pair_seconds": 656.5,
+            "directed_pair_seconds": 1313.0,
+            "event_count": 30,
+            "events_ended_at_aircraft_exit": 1,
+            "same_corridor_event_count": 30,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 141.2566305565932,
+            "directed_seconds_per_flight_hour": 282.5132611131864
+          }
+        },
+        "path_length_m": 277297.2332491298,
+        "outside_corridor_aircraft_seconds": 13.5,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 336.1635400643122,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -218.382824668228,
+        "sim_seconds": 1446.25,
+        "physics_steps": 5785,
+        "decision_steps": 290,
+        "max_active": 26,
+        "wall_seconds": 6.520444259978831,
+        "process_peak_rss_mib": 329.515625,
+        "clipping_counts": {
+          "own.distance_next_waypoint": 2,
+          "own.distance_previous_waypoint": 12
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 16731.25,
+          "airspace_seconds": 1446.25,
+          "occupied_airspace_seconds": 1446.25,
+          "physics_steps": 5785,
+          "potential_pair_seconds": 19431.0,
+          "potential_event_count": 129,
+          "lowc_pair_seconds": 2408.75,
+          "lowc_event_count": 35,
+          "nmac_pair_seconds": 656.5,
+          "nmac_event_count": 30
+        },
+        "hours": {
+          "aircraft": 4.647569444444445,
+          "airspace": 0.4017361111111111,
+          "occupied_airspace": 0.4017361111111111
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 19431.0,
+            "directed_pair_seconds": 38862.0,
+            "continuous_unordered_event_count": 129,
+            "unordered_seconds_per_aircraft_hour": 4180.895031751961,
+            "directed_seconds_per_aircraft_hour": 8361.790063503922,
+            "unordered_seconds_per_airspace_hour": 48367.571305099395,
+            "directed_seconds_per_airspace_hour": 96735.14261019879,
+            "unordered_seconds_per_occupied_airspace_hour": 48367.571305099395,
+            "directed_seconds_per_occupied_airspace_hour": 96735.14261019879
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2408.75,
+            "directed_pair_seconds": 4817.5,
+            "continuous_unordered_event_count": 35,
+            "unordered_seconds_per_aircraft_hour": 518.2816585730295,
+            "directed_seconds_per_aircraft_hour": 1036.563317146059,
+            "unordered_seconds_per_airspace_hour": 5995.851339671564,
+            "directed_seconds_per_airspace_hour": 11991.702679343129,
+            "unordered_seconds_per_occupied_airspace_hour": 5995.851339671564,
+            "directed_seconds_per_occupied_airspace_hour": 11991.702679343129
+          },
+          "nmac": {
+            "unordered_pair_seconds": 656.5,
+            "directed_pair_seconds": 1313.0,
+            "continuous_unordered_event_count": 30,
+            "unordered_seconds_per_aircraft_hour": 141.2566305565932,
+            "directed_seconds_per_aircraft_hour": 282.5132611131864,
+            "unordered_seconds_per_airspace_hour": 1634.1573033707864,
+            "directed_seconds_per_airspace_hour": 3268.314606741573,
+            "unordered_seconds_per_occupied_airspace_hour": 1634.1573033707864,
+            "directed_seconds_per_occupied_airspace_hour": 3268.314606741573
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.12396428387628017,
+          "nmac_over_potential": 0.03378621789923318
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 10,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 290,
+              "ownship_entries": 3343,
+              "intruder_entries": 7762,
+              "nonempty_frames": 289
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 440,
+              "intruder_entries": 1042,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 321,
+            "ownship_entries": 3788,
+            "intruder_entries": 8814,
+            "nonempty_frames": 320
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 10,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 290,
+              "ownship_entries": 3343,
+              "intruder_entries": 7762,
+              "nonempty_frames": 289
+            }
+          },
+          "total": {
+            "frames": 291,
+            "ownship_entries": 3348,
+            "intruder_entries": 7772,
+            "nonempty_frames": 290
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 290,
+          "nonempty_payloads": 28,
+          "ownship_entries": 30,
+          "intruder_entries": 11
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5785,
+        "native_step_calls": 5785,
+        "observation_wrapper_calls": 321,
+        "original_observation_calls": 321,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53010,
+      "corridor_count": 3,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Amzn": 4,
+        "Cranfield": 4,
+        "Phan4": 3,
+        "M100": 2,
+        "Horsefly": 4,
+        "Eh216": 3,
+        "M200": 4,
+        "CranfieldV2": 2,
+        "Tecnalia": 1,
+        "M600": 2,
+        "Mavic": 1
+      },
+      "nr": {
+        "seed": 53010,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 3.749791666666667,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2280.25,
+            "directed_pair_seconds": 4560.5,
+            "event_count": 38,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 26,
+            "events_started_at_admission": 3,
+            "unordered_seconds_per_flight_hour": 608.1004500250014,
+            "directed_seconds_per_flight_hour": 1216.2009000500027
+          },
+          "nmac": {
+            "unordered_pair_seconds": 550.75,
+            "directed_pair_seconds": 1101.5,
+            "event_count": 27,
+            "events_ended_at_aircraft_exit": 0,
+            "same_corridor_event_count": 24,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 146.87482637924327,
+            "directed_seconds_per_flight_hour": 293.74965275848655
+          }
+        },
+        "path_length_m": 276880.5695457674,
+        "outside_corridor_aircraft_seconds": 16.25,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 412.21590150716526,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -202.02090546541578,
+        "sim_seconds": 1373.5,
+        "physics_steps": 5494,
+        "decision_steps": 275,
+        "max_active": 19,
+        "wall_seconds": 5.499357508029789,
+        "process_peak_rss_mib": 329.515625,
+        "clipping_counts": {
+          "own.distance_next_waypoint": 3,
+          "own.distance_previous_waypoint": 10,
+          "intruders.cpa_time": 80
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 13499.25,
+          "airspace_seconds": 1373.5,
+          "occupied_airspace_seconds": 1373.5,
+          "physics_steps": 5494,
+          "potential_pair_seconds": 14787.75,
+          "potential_event_count": 100,
+          "lowc_pair_seconds": 2280.25,
+          "lowc_event_count": 38,
+          "nmac_pair_seconds": 550.75,
+          "nmac_event_count": 27
+        },
+        "hours": {
+          "aircraft": 3.749791666666667,
+          "airspace": 0.3815277777777778,
+          "occupied_airspace": 0.3815277777777778
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 14787.75,
+            "directed_pair_seconds": 29575.5,
+            "continuous_unordered_event_count": 100,
+            "unordered_seconds_per_aircraft_hour": 3943.6190899494413,
+            "directed_seconds_per_aircraft_hour": 7887.238179898883,
+            "unordered_seconds_per_airspace_hour": 38759.30105569712,
+            "directed_seconds_per_airspace_hour": 77518.60211139424,
+            "unordered_seconds_per_occupied_airspace_hour": 38759.30105569712,
+            "directed_seconds_per_occupied_airspace_hour": 77518.60211139424
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2280.25,
+            "directed_pair_seconds": 4560.5,
+            "continuous_unordered_event_count": 38,
+            "unordered_seconds_per_aircraft_hour": 608.1004500250014,
+            "directed_seconds_per_aircraft_hour": 1216.2009000500027,
+            "unordered_seconds_per_airspace_hour": 5976.6290498725875,
+            "directed_seconds_per_airspace_hour": 11953.258099745175,
+            "unordered_seconds_per_occupied_airspace_hour": 5976.6290498725875,
+            "directed_seconds_per_occupied_airspace_hour": 11953.258099745175
+          },
+          "nmac": {
+            "unordered_pair_seconds": 550.75,
+            "directed_pair_seconds": 1101.5,
+            "continuous_unordered_event_count": 27,
+            "unordered_seconds_per_aircraft_hour": 146.87482637924327,
+            "directed_seconds_per_aircraft_hour": 293.74965275848655,
+            "unordered_seconds_per_airspace_hour": 1443.538405533309,
+            "directed_seconds_per_airspace_hour": 2887.076811066618,
+            "unordered_seconds_per_occupied_airspace_hour": 1443.538405533309,
+            "directed_seconds_per_occupied_airspace_hour": 2887.076811066618
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.15419857652448818,
+          "nmac_over_potential": 0.03724366451961928
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 275,
+              "ownship_entries": 2694,
+              "intruder_entries": 5910,
+              "nonempty_frames": 274
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 342,
+              "intruder_entries": 730,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 306,
+            "ownship_entries": 3039,
+            "intruder_entries": 6642,
+            "nonempty_frames": 305
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 3,
+              "intruder_entries": 2,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 275,
+              "ownship_entries": 2694,
+              "intruder_entries": 5910,
+              "nonempty_frames": 274
+            }
+          },
+          "total": {
+            "frames": 276,
+            "ownship_entries": 2697,
+            "intruder_entries": 5912,
+            "nonempty_frames": 275
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 275,
+          "nonempty_payloads": 25,
+          "ownship_entries": 30,
+          "intruder_entries": 23
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5494,
+        "native_step_calls": 5494,
+        "observation_wrapper_calls": 306,
+        "original_observation_calls": 306,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53011,
+      "corridor_count": 4,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Cranfield": 5,
+        "Amzn": 2,
+        "Horsefly": 2,
+        "M100": 1,
+        "Tecnalia": 4,
+        "Phan4": 2,
+        "Mavic": 2,
+        "Mnet": 4,
+        "Eh216": 1,
+        "M600": 4,
+        "CranfieldV2": 2,
+        "M200": 1
+      },
+      "nr": {
+        "seed": 53011,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 5.186319444444444,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 4073.5,
+            "directed_pair_seconds": 8147.0,
+            "event_count": 79,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 23,
+            "events_started_at_admission": 10,
+            "unordered_seconds_per_flight_hour": 785.4317582314584,
+            "directed_seconds_per_flight_hour": 1570.8635164629168
+          },
+          "nmac": {
+            "unordered_pair_seconds": 799.25,
+            "directed_pair_seconds": 1598.5,
+            "event_count": 29,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 23,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 154.10736044347442,
+            "directed_seconds_per_flight_hour": 308.21472088694884
+          }
+        },
+        "path_length_m": 277488.6567159905,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "max_centerline_distance_m": 65.49924362859794,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -235.76141280483998,
+        "sim_seconds": 1486.5,
+        "physics_steps": 5946,
+        "decision_steps": 298,
+        "max_active": 25,
+        "wall_seconds": 7.500542622059584,
+        "process_peak_rss_mib": 329.765625,
+        "clipping_counts": {
+          "own.distance_previous_waypoint": 8
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 18670.75,
+          "airspace_seconds": 1486.5,
+          "occupied_airspace_seconds": 1486.5,
+          "physics_steps": 5946,
+          "potential_pair_seconds": 31336.25,
+          "potential_event_count": 214,
+          "lowc_pair_seconds": 4073.5,
+          "lowc_event_count": 79,
+          "nmac_pair_seconds": 799.25,
+          "nmac_event_count": 29
+        },
+        "hours": {
+          "aircraft": 5.186319444444444,
+          "airspace": 0.41291666666666665,
+          "occupied_airspace": 0.41291666666666665
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 31336.25,
+            "directed_pair_seconds": 62672.5,
+            "continuous_unordered_event_count": 214,
+            "unordered_seconds_per_aircraft_hour": 6042.097933934096,
+            "directed_seconds_per_aircraft_hour": 12084.195867868191,
+            "unordered_seconds_per_airspace_hour": 75890.01009081736,
+            "directed_seconds_per_airspace_hour": 151780.02018163473,
+            "unordered_seconds_per_occupied_airspace_hour": 75890.01009081736,
+            "directed_seconds_per_occupied_airspace_hour": 151780.02018163473
+          },
+          "lowc": {
+            "unordered_pair_seconds": 4073.5,
+            "directed_pair_seconds": 8147.0,
+            "continuous_unordered_event_count": 79,
+            "unordered_seconds_per_aircraft_hour": 785.4317582314584,
+            "directed_seconds_per_aircraft_hour": 1570.8635164629168,
+            "unordered_seconds_per_airspace_hour": 9865.18668012109,
+            "directed_seconds_per_airspace_hour": 19730.37336024218,
+            "unordered_seconds_per_occupied_airspace_hour": 9865.18668012109,
+            "directed_seconds_per_occupied_airspace_hour": 19730.37336024218
+          },
+          "nmac": {
+            "unordered_pair_seconds": 799.25,
+            "directed_pair_seconds": 1598.5,
+            "continuous_unordered_event_count": 29,
+            "unordered_seconds_per_aircraft_hour": 154.10736044347442,
+            "directed_seconds_per_aircraft_hour": 308.21472088694884,
+            "unordered_seconds_per_airspace_hour": 1935.6205852674068,
+            "directed_seconds_per_airspace_hour": 3871.2411705348136,
+            "unordered_seconds_per_occupied_airspace_hour": 1935.6205852674068,
+            "directed_seconds_per_occupied_airspace_hour": 3871.2411705348136
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.1299932187163429,
+          "nmac_over_potential": 0.02550560453149308
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 6,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 298,
+              "ownship_entries": 3732,
+              "intruder_entries": 12530,
+              "nonempty_frames": 297
+            },
+            "terminal_preview": {
+              "frames": 30,
+              "ownship_entries": 396,
+              "intruder_entries": 1220,
+              "nonempty_frames": 30
+            }
+          },
+          "total": {
+            "frames": 329,
+            "ownship_entries": 4132,
+            "intruder_entries": 13756,
+            "nonempty_frames": 328
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 4,
+              "intruder_entries": 6,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 298,
+              "ownship_entries": 3732,
+              "intruder_entries": 12530,
+              "nonempty_frames": 297
+            }
+          },
+          "total": {
+            "frames": 299,
+            "ownship_entries": 3736,
+            "intruder_entries": 12536,
+            "nonempty_frames": 298
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 298,
+          "nonempty_payloads": 27,
+          "ownship_entries": 30,
+          "intruder_entries": 25
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5946,
+        "native_step_calls": 5946,
+        "observation_wrapper_calls": 329,
+        "original_observation_calls": 329,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    },
+    {
+      "seed": 53012,
+      "corridor_count": 5,
+      "status": "completed",
+      "source_identity": {
+        "python": "3.11.13",
+        "bluesky": "1.1.1",
+        "source_sha256": {
+          "exposure_audit.py": "2e5dd4cfba94bbcd4934f8d806964c37d243a06b935793f238d51d2c4db42f04",
+          "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+          "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+          "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+          "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+          "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+          "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+          "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+          "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+        },
+        "native_source_sha256": {
+          "simulation/simulation.py": "09811632305e27b1ec8a10f53302afd2baba666516abc6d0ecdfcab03fe20fa4",
+          "traffic/traffic.py": "b5616e3876f5a3ae0f8d2eb301c9860d9790138ca713004d162f5c927d668a7d",
+          "traffic/autopilot.py": "9d97d755f8cb8e531d4077e4a504e481a4dbc6fba525e91c2e9c58ada66a63c1",
+          "traffic/activewpdata.py": "01209074cb5dd890a44bfbbb8242e51cab6cb74906de401fee51eb5b7b08edd5"
+        },
+        "config_sha256": {
+          "configs/exposure_audit.json": "e2b9d1117ad739b16c33b0e51d4bd4b3800e0b59068294be1bc6d34bfbb5fa3e",
+          "configs/paper_environment_execution.json": "4287e941f98fff50c94268ed62c13cb43a2a3ecdf238fbf66c890106bb1e8cc2",
+          "configs/nr_pilot.json": "a3c737b6600f77eacf62d82d790708c842a240095a57a2a69716bdfcd4585346",
+          "configs/paper_actions_execution.json": "aafbc4f9722d88b41fe07ad3011916c760de3e0ff8ca89977abbc697bca092ce",
+          "configs/paper_observation.json": "3eaf626da8f178f5536940d8ff3cb921544411ccd5a14944994c231021c489af",
+          "configs/uav_types.json": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc"
+        }
+      },
+      "physics_dt_seconds": 0.25,
+      "decision_seconds": 5.0,
+      "potential_radius_ft": 6000.0,
+      "aircraft_type_counts": {
+        "Eh216": 3,
+        "Amzn": 2,
+        "M100": 3,
+        "CranfieldV2": 3,
+        "Cranfield": 5,
+        "Mnet": 3,
+        "Tecnalia": 3,
+        "Mavic": 1,
+        "Phan4": 2,
+        "Horsefly": 3,
+        "M200": 1,
+        "M600": 1
+      },
+      "nr": {
+        "seed": 53012,
+        "planned": 30,
+        "completed": 30,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "terminal_policy": "finite_exit",
+        "flight_hours": 4.653263888888889,
+        "risk": {
+          "lowc": {
+            "unordered_pair_seconds": 2004.25,
+            "directed_pair_seconds": 4008.5,
+            "event_count": 20,
+            "events_ended_at_aircraft_exit": 4,
+            "same_corridor_event_count": 15,
+            "events_started_at_admission": 1,
+            "unordered_seconds_per_flight_hour": 430.7191785932813,
+            "directed_seconds_per_flight_hour": 861.4383571865626
+          },
+          "nmac": {
+            "unordered_pair_seconds": 449.75,
+            "directed_pair_seconds": 899.5,
+            "event_count": 15,
+            "events_ended_at_aircraft_exit": 2,
+            "same_corridor_event_count": 13,
+            "events_started_at_admission": 0,
+            "unordered_seconds_per_flight_hour": 96.65258853552615,
+            "directed_seconds_per_flight_hour": 193.3051770710523
+          }
+        },
+        "path_length_m": 277094.82526605437,
+        "outside_corridor_aircraft_seconds": 39.0,
+        "outside_corridor_flights": 1,
+        "max_centerline_distance_m": 232.73228094574645,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -232.17704435073975,
+        "sim_seconds": 1446.0,
+        "physics_steps": 5784,
+        "decision_steps": 290,
+        "max_active": 24,
+        "wall_seconds": 6.682035460136831,
+        "process_peak_rss_mib": 329.765625,
+        "clipping_counts": {
+          "own.distance_next_waypoint": 2,
+          "own.distance_previous_waypoint": 6
+        },
+        "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+        "completed_population": true,
+        "policy": "nr",
+        "action_seed": null,
+        "action_histogram": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reference_comparison": {
+        "exact_scientific_match": true,
+        "excluded_fields": [
+          "wall_seconds",
+          "process_peak_rss_mib"
+        ],
+        "compared_fields": [
+          "action_histogram",
+          "action_seed",
+          "changed_instructions",
+          "clipping_count_scope",
+          "clipping_counts",
+          "completed",
+          "completed_population",
+          "decision_steps",
+          "failed_route_exhausted",
+          "failed_timeout",
+          "flight_hours",
+          "max_active",
+          "max_centerline_distance_m",
+          "outside_altitude_aircraft_seconds",
+          "outside_corridor_aircraft_seconds",
+          "outside_corridor_flights",
+          "outside_exit_crossings",
+          "path_length_m",
+          "physics_steps",
+          "planned",
+          "policy",
+          "policy_decisions",
+          "return_sum",
+          "risk",
+          "seed",
+          "sim_seconds",
+          "terminal_policy"
+        ],
+        "differences": []
+      },
+      "checks": {
+        "aircraft_seconds_equal_env_flight_seconds": true,
+        "aircraft_seconds_equal_flight_record_sum": true,
+        "airspace_seconds_equal_env_sim_seconds": true,
+        "occupied_time_within_complete_airspace_time": true,
+        "physics_step_counts_match": true,
+        "native_step_called_once_per_wrapper": true,
+        "original_observations_called_once_per_wrapper": true,
+        "returned_frames_equal_steps_plus_reset": true,
+        "constructed_reset_and_step_returns_match": true,
+        "zero_nr_policy_inference_and_actions": true,
+        "exposure_layers_nested": true,
+        "exact_reference_nr": true,
+        "wrappers_restored": true,
+        "lowc_raw_and_events_match_environment": true,
+        "nmac_raw_and_events_match_environment": true,
+        "all_directed_exposures_equal_twice_unordered": true
+      },
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 16751.75,
+          "airspace_seconds": 1446.0,
+          "occupied_airspace_seconds": 1446.0,
+          "physics_steps": 5784,
+          "potential_pair_seconds": 15912.75,
+          "potential_event_count": 127,
+          "lowc_pair_seconds": 2004.25,
+          "lowc_event_count": 20,
+          "nmac_pair_seconds": 449.75,
+          "nmac_event_count": 15
+        },
+        "hours": {
+          "aircraft": 4.653263888888889,
+          "airspace": 0.40166666666666667,
+          "occupied_airspace": 0.40166666666666667
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 15912.75,
+            "directed_pair_seconds": 31825.5,
+            "continuous_unordered_event_count": 127,
+            "unordered_seconds_per_aircraft_hour": 3419.6964496246665,
+            "directed_seconds_per_aircraft_hour": 6839.392899249333,
+            "unordered_seconds_per_airspace_hour": 39616.80497925311,
+            "directed_seconds_per_airspace_hour": 79233.60995850622,
+            "unordered_seconds_per_occupied_airspace_hour": 39616.80497925311,
+            "directed_seconds_per_occupied_airspace_hour": 79233.60995850622
+          },
+          "lowc": {
+            "unordered_pair_seconds": 2004.25,
+            "directed_pair_seconds": 4008.5,
+            "continuous_unordered_event_count": 20,
+            "unordered_seconds_per_aircraft_hour": 430.7191785932813,
+            "directed_seconds_per_aircraft_hour": 861.4383571865626,
+            "unordered_seconds_per_airspace_hour": 4989.834024896266,
+            "directed_seconds_per_airspace_hour": 9979.668049792532,
+            "unordered_seconds_per_occupied_airspace_hour": 4989.834024896266,
+            "directed_seconds_per_occupied_airspace_hour": 9979.668049792532
+          },
+          "nmac": {
+            "unordered_pair_seconds": 449.75,
+            "directed_pair_seconds": 899.5,
+            "continuous_unordered_event_count": 15,
+            "unordered_seconds_per_aircraft_hour": 96.65258853552615,
+            "directed_seconds_per_aircraft_hour": 193.3051770710523,
+            "unordered_seconds_per_airspace_hour": 1119.7095435684648,
+            "directed_seconds_per_airspace_hour": 2239.4190871369296,
+            "unordered_seconds_per_occupied_airspace_hour": 1119.7095435684648,
+            "directed_seconds_per_occupied_airspace_hour": 2239.4190871369296
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.12595245950574224,
+          "nmac_over_potential": 0.028263499395139117
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "observation_counts": {
+        "actual_policy_inference_calls": 0,
+        "constructed": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 8,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 290,
+              "ownship_entries": 3348,
+              "intruder_entries": 6348,
+              "nonempty_frames": 289
+            },
+            "terminal_preview": {
+              "frames": 29,
+              "ownship_entries": 408,
+              "intruder_entries": 824,
+              "nonempty_frames": 29
+            }
+          },
+          "total": {
+            "frames": 320,
+            "ownship_entries": 3761,
+            "intruder_entries": 7180,
+            "nonempty_frames": 319
+          }
+        },
+        "returned_decision_frames": {
+          "by_scope": {
+            "reset": {
+              "frames": 1,
+              "ownship_entries": 5,
+              "intruder_entries": 8,
+              "nonempty_frames": 1
+            },
+            "step_return": {
+              "frames": 290,
+              "ownship_entries": 3348,
+              "intruder_entries": 6348,
+              "nonempty_frames": 289
+            }
+          },
+          "total": {
+            "frames": 291,
+            "ownship_entries": 3353,
+            "intruder_entries": 6356,
+            "nonempty_frames": 290
+          }
+        },
+        "returned_terminal_payload": {
+          "step_payloads": 290,
+          "nonempty_payloads": 27,
+          "ownship_entries": 30,
+          "intruder_entries": 17
+        },
+        "scope": "Construction counts include full terminal previews before deletion. Returned frames include reset and the final empty frame. Terminal payloads are separate subsets. None of these counts measures inference or safety exposure."
+      },
+      "instrumentation": {
+        "step_wrapper_calls": 5784,
+        "native_step_calls": 5784,
+        "observation_wrapper_calls": 320,
+        "original_observation_calls": 320,
+        "restored": true,
+        "wrapper_entries_survived": true,
+        "original_instance_namespace_restored": true
+      },
+      "all_checks_passed": true
+    }
+  ],
+  "all_checks_passed": true,
+  "aggregates": {
+    "all_twelve": {
+      "seeds": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012
+      ],
+      "complete": true,
+      "all_reference_matches": true,
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 197670.0,
+          "airspace_seconds": 17265.0,
+          "lowc_event_count": 536,
+          "lowc_pair_seconds": 35604.75,
+          "nmac_event_count": 362,
+          "nmac_pair_seconds": 8838.5,
+          "occupied_airspace_seconds": 17265.0,
+          "physics_steps": 69060,
+          "potential_event_count": 1516,
+          "potential_pair_seconds": 230361.75
+        },
+        "hours": {
+          "aircraft": 54.90833333333333,
+          "airspace": 4.795833333333333,
+          "occupied_airspace": 4.795833333333333
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 230361.75,
+            "directed_pair_seconds": 460723.5,
+            "continuous_unordered_event_count": 1516,
+            "unordered_seconds_per_aircraft_hour": 4195.387767491274,
+            "directed_seconds_per_aircraft_hour": 8390.775534982547,
+            "unordered_seconds_per_airspace_hour": 48033.72719374457,
+            "directed_seconds_per_airspace_hour": 96067.45438748914,
+            "unordered_seconds_per_occupied_airspace_hour": 48033.72719374457,
+            "directed_seconds_per_occupied_airspace_hour": 96067.45438748914
+          },
+          "lowc": {
+            "unordered_pair_seconds": 35604.75,
+            "directed_pair_seconds": 71209.5,
+            "continuous_unordered_event_count": 536,
+            "unordered_seconds_per_aircraft_hour": 648.4398239490059,
+            "directed_seconds_per_aircraft_hour": 1296.8796478980119,
+            "unordered_seconds_per_airspace_hour": 7424.100781928758,
+            "directed_seconds_per_airspace_hour": 14848.201563857516,
+            "unordered_seconds_per_occupied_airspace_hour": 7424.100781928758,
+            "directed_seconds_per_occupied_airspace_hour": 14848.201563857516
+          },
+          "nmac": {
+            "unordered_pair_seconds": 8838.5,
+            "directed_pair_seconds": 17677.0,
+            "continuous_unordered_event_count": 362,
+            "unordered_seconds_per_aircraft_hour": 160.96828046744574,
+            "directed_seconds_per_aircraft_hour": 321.9365609348915,
+            "unordered_seconds_per_airspace_hour": 1842.9539530842744,
+            "directed_seconds_per_airspace_hour": 3685.907906168549,
+            "unordered_seconds_per_occupied_airspace_hour": 1842.9539530842744,
+            "directed_seconds_per_occupied_airspace_hour": 3685.907906168549
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.15456016461066127,
+          "nmac_over_potential": 0.03836791481224639
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "scope": "All declared cases required; partial failures are retained individually and never pooled as complete exposure.",
+      "native_population_totals": {
+        "planned": 360,
+        "completed": 359,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 1,
+        "outside_exit_crossings": 0,
+        "path_length_m": 3324292.090783506,
+        "outside_corridor_aircraft_seconds": 362.25,
+        "outside_corridor_flights": 16,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3003.455153002713,
+        "max_centerline_distance_m": 599.313991626042
+      },
+      "observation_counts": {
+        "constructed": {
+          "frames": 3827,
+          "ownship_entries": 44421,
+          "intruder_entries": 103090,
+          "nonempty_frames": 3815
+        },
+        "returned_decision_frames": {
+          "frames": 3471,
+          "ownship_entries": 39557,
+          "intruder_entries": 92202,
+          "nonempty_frames": 3459
+        },
+        "actual_policy_inference_calls": 0
+      }
+    },
+    "existing_five_corridor_four": {
+      "seeds": [
+        53003,
+        53006,
+        53009,
+        53012
+      ],
+      "complete": true,
+      "all_reference_matches": true,
+      "metrics": {
+        "raw": {
+          "aircraft_seconds": 67326.5,
+          "airspace_seconds": 5735.5,
+          "lowc_event_count": 138,
+          "lowc_pair_seconds": 8893.0,
+          "nmac_event_count": 95,
+          "nmac_pair_seconds": 2148.0,
+          "occupied_airspace_seconds": 5735.5,
+          "physics_steps": 22942,
+          "potential_event_count": 554,
+          "potential_pair_seconds": 74184.0
+        },
+        "hours": {
+          "aircraft": 18.701805555555556,
+          "airspace": 1.5931944444444444,
+          "occupied_airspace": 1.5931944444444444
+        },
+        "exposure": {
+          "potential": {
+            "unordered_pair_seconds": 74184.0,
+            "directed_pair_seconds": 148368.0,
+            "continuous_unordered_event_count": 554,
+            "unordered_seconds_per_aircraft_hour": 3966.675826012046,
+            "directed_seconds_per_aircraft_hour": 7933.351652024092,
+            "unordered_seconds_per_airspace_hour": 46563.05465957632,
+            "directed_seconds_per_airspace_hour": 93126.10931915265,
+            "unordered_seconds_per_occupied_airspace_hour": 46563.05465957632,
+            "directed_seconds_per_occupied_airspace_hour": 93126.10931915265
+          },
+          "lowc": {
+            "unordered_pair_seconds": 8893.0,
+            "directed_pair_seconds": 17786.0,
+            "continuous_unordered_event_count": 138,
+            "unordered_seconds_per_aircraft_hour": 475.51558450238764,
+            "directed_seconds_per_aircraft_hour": 951.0311690047753,
+            "unordered_seconds_per_airspace_hour": 5581.867317583472,
+            "directed_seconds_per_airspace_hour": 11163.734635166944,
+            "unordered_seconds_per_occupied_airspace_hour": 5581.867317583472,
+            "directed_seconds_per_occupied_airspace_hour": 11163.734635166944
+          },
+          "nmac": {
+            "unordered_pair_seconds": 2148.0,
+            "directed_pair_seconds": 4296.0,
+            "continuous_unordered_event_count": 95,
+            "unordered_seconds_per_aircraft_hour": 114.85522045554129,
+            "directed_seconds_per_aircraft_hour": 229.71044091108257,
+            "unordered_seconds_per_airspace_hour": 1348.2346787551216,
+            "directed_seconds_per_airspace_hour": 2696.4693575102433,
+            "unordered_seconds_per_occupied_airspace_hour": 1348.2346787551216,
+            "directed_seconds_per_occupied_airspace_hour": 2696.4693575102433
+          }
+        },
+        "exposure_ratios": {
+          "lowc_over_potential": 0.11987760163916747,
+          "nmac_over_potential": 0.028955030734390166
+        },
+        "ratio_scope": "Ratios of sampled pair-duration exposure; not independent-event probabilities."
+      },
+      "scope": "All declared cases required; partial failures are retained individually and never pooled as complete exposure.",
+      "native_population_totals": {
+        "planned": 120,
+        "completed": 120,
+        "failed_timeout": 0,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "path_length_m": 1107888.7407676803,
+        "outside_corridor_aircraft_seconds": 146.0,
+        "outside_corridor_flights": 6,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -811.9687399398277,
+        "max_centerline_distance_m": 431.80949957262845
+      },
+      "observation_counts": {
+        "constructed": {
+          "frames": 1273,
+          "ownship_entries": 15190,
+          "intruder_entries": 33440,
+          "nonempty_frames": 1269
+        },
+        "returned_decision_frames": {
+          "frames": 1154,
+          "ownship_entries": 13474,
+          "intruder_entries": 29686,
+          "nonempty_frames": 1150
+        },
+        "actual_policy_inference_calls": 0
+      }
+    }
+  }
+}

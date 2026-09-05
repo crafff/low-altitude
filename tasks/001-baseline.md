@@ -386,3 +386,26 @@ route_fidelity追加15min只读特刊核验：读PLAN/SOURCES与出版社/客座
 本10h仍进行中，截止15:15:13 UTC、14:45收尾不变；继续CPU14/单线程/nice15/idle IO，不向共享GPU提交任务，不干预其他人的进程。
 
 07:50 [首张学习曲线](../reports/execution-learning-20260905/README.md)已通过lab实际渲染（3.28s）并目视核对，保留0/15/25/50轮原始未平滑开发汇总；重复15轮aggregate精确一致后合并一次，没有伪造65轮评价。当前形态显示完成率/越界无稳定改善，低于NR的冲突暴露在第0轮就存在，不能当训练增益。
+
+07:53 本批提交7e38f8f74a854d04938109aebe4c6d5e4cabd7c9已push且远端SHA核对一致，65轮模型得到私有GitHub独立副本。新源码/文档diff检查通过；Matplotlib原始SVG含其生成的行末空白，保留原图以匹配产物hash，不称全文件零空白警告。随后以原科学源码/配置启动65→100段（900s内、960s外），CPU资源边界不变。route_trace追加只读新训练日志/0–50开发动作与失败统计调查，≤15min，不重复全面GAE审查；仅建议有辨识力的下一诊断，不因曲线噪声直接调参。
+
+07:56 route_trace只读新日志调查返回：0/15/25/50轮每case超时数均不变，总53；完成变化全部对应导航耗尽68/63/59/73。开发平均请求速度比例0.8400/0.8419/0.8402/0.8413，训练65轮四速度动作占比23.89/25.43/26.15/24.53%。Mnet/Tecnalia名义8.6427m/s，5NM名义约1071s，均匀四档均值.8375对应约1279s，超过1200s；按直线平均至少.8929才能完成。这是低速超时机制假说，现JSONL不含逐机类型，不能把53个全部指为这两类。
+
+65轮258667样本/4077minibatch，动作计数/逐轮访问数一致，回报误差约7e-12。条件熵2.075–2.167与跨状态动作直方图熵4.061不同，不能用前者除log60认定塌缩；当前缺valid_count。minibatch更新前KL约2.0e-6–2.26e-5、clip fraction0，不等于更新后全批KL。25→50完成少14但总回报改善135.61，原奖励无直接越界/失败惩罚，可能存在提前结束负奖励的激励，但尚未证实策略利用失败。
+
+追加route_trace仅写policy_diagnostic.py/对应配置/聚焦测试：对明确checkpoint及同轮reference的原12开发例只重放sample，单次真实forward hook记录合法动作数、条件熵/归一熵、分量概率、类型、逐机奖励三项与最终失败；严格原源码身份、原种子与完整sample摘要逐项一致，模型前后不变，NR仅引用原记录。≤30min静态实现，controller待当前训练结束串行运行≤240s，不改变当前训练。另observation_reward_spec只读补其余传感器/非合作机制参数与缺项，≤20min，不重复已完成位置/通信审计，不接近邻创新或实验。
+
+08:02 observation_reward_spec只读其余机制返回，已将具体页码、字段裁剪顺序、完整邻机行排列不改变attention、NC角色/风险分母及CAT-GA参数缺项写入REPRODUCTION。没有新增实现/实验；源事实与候选选择分开，下一步优先完成名义学习与当前诊断，复杂NC不抢先替换有效baseline目标。
+
+
+### 08:03起：总100轮完成及进一步瓶颈诊断
+
+[65→100续训](../runs/20260905T075230Z-execution-ppo-resume-100-7df1b66d/artifacts/result.json)正常完成35轮，CLI648.985s/job650.817s，episode_target_reached，总100、best仍25；全程持续轮询、CPU14低优先级。恢复65轮评价237/360、75轮239/360、100轮236/360，均53超时；100轮71导航耗尽、340横向越界、0高度越界，NMAC56.1609/LoWC366.5960无向pair-s/flight-hour，总回报−2000.4135。完成/越界仍不可信，风险减少不能独立作为baseline有效；本次正常退出也不证明之前外层143的来源。
+
+100轮小恢复副本[execution-100](../checkpoints/execution-100-20260905/README.md)含latest/best、完整小开发/训练/result与hash，约1.77MB，正在私有远端备份。保持ea37154科学源码身份，下一目标150，内1200/外1260s、25轮评价和5轮原子保存不变；不打开held-out或提前做延迟结论。
+
+[exposure-audit-tests](../runs/20260905T080411Z-exposure-audit-tests-5232b1b4/log.txt)12项通过；root完成所交三文件窄静态review后，启动180s native原12例NR审计，不与训练并行。builder未执行负载。约07:53资源只读load2.78/2.48/2.52、MemAvailable60.85GiB、磁盘144.18GiB；本块当时39个run目录逻辑合计0.611GiB（含source/artifacts，依赖另计），仍在10GiB软目标内，不因此扩张共享CPU/GPU使用。
+
+08:06 [exposure-audit-nr](../runs/20260905T080439Z-exposure-audit-nr-8d220f91/artifacts/result.json)88.46s正常完成，12例全部检查通过，LoWC/NMAC原分子、事件数及每例全部科学NR摘要精确复现；只有runtime/RSS排除。6000ft潜在230361.75无向pair-s、1516连续事件；LoWC35604.75/536，NMAC8838.5/362。累计197670 aircraft-s、17265 airspace-s，二者小时口径及有向乘2明确。全12 LoWC/potential15.456%、NMAC/potential3.837%，原有4个5走廊例11.988%/2.896%；与论文34.42%/9.32%差异不能用共同时间分母或共同pair因子抹平，不据较近的两项airspace小时数宣称辨认作者分母。
+
+构造观测3827帧、44421 ownship/103090 intruder entries，返回reset/decision3471帧、39557/92202 entries，NR实际推断0。终止预览构造、原生暴露、政策输入三个数量不可互换。小完整报告及命令另存[exposure审计](../reports/exposure-audit-20260905/README.md)，逐步CSV留原run。route_fidelity追加只读新结果/原pp11/17–18，≤10min，核对potential精确定义与共同缩放不能解释的差异，不调参/实验/联系作者。

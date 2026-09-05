@@ -1,6 +1,6 @@
 # 位置误差与通信中断的最小重建规范
 
-2026-09-05原文核对；源码入口计划为独立observation_perturbation感知层，尚未接入训练、无抗扰效果结论。主线仍先取得有效名义baseline。来源为[2026原PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) pp.6、8–10、19、24，以及[2024原文](../resources/literature/local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf) pp.5–6和已存[公开配置](../resources/literature/author-configs-icrat2024/manifest.json)。一般范围见REPRODUCTION，此页只记录可实现的选择。
+2026-09-05原文核对；独立[observation_perturbation感知层](../src/observation_perturbation.py)及[原生诊断driver](../src/perturbation_probe.py)已实现验证，尚未接入训练、无抗扰效果结论。主线仍先取得有效名义baseline。来源为[2026原PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) pp.6、8–10、19、24，以及[2024原文](../resources/literature/local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf) pp.5–6和已存[公开配置](../resources/literature/author-configs-icrat2024/manifest.json)。一般范围见REPRODUCTION，此页记录明确的实现选择。
 
 ## 原文事实与歧义
 
@@ -15,7 +15,7 @@
 - 每5s按稳定flight ID采样一次none/position/communication分类，概率之和≤1。关闭一种机制不放大另一种；两个概率为零不消费随机数。感知、场景与策略随机流独立，可保存恢复。同一时刻重复编码复用同一快照，禁止重采样。
 - 位置采用东/北两轴独立N(0,sigma²)，所有观察者共用该飞机位移；不截断±9m，不由噪声位置差分生成速度噪声。9.63/4.59m是每轴标准差，二维半径9m内的概率约35.4%/85.4%，不能称二维65%/95%精度。
 - 通信先触发、再形成可见集合：until=max(old_until,t+D)，available=(t>=until)。恢复使用当前新状态，不补发历史动作。连续黑屏可因多事件重叠超过15s；p=1可持续不可见。
-- 诊断driver拟将不可见ownship从policy批次移除、继续执行末次接受的目标。这是“solver不可见”的明确重建解释，不是作者已确认实现。缺失决策不是终止；进入扰动PPO之前必须另行定义跨间隔奖励和折扣，不能伪造正常5s actor样本。
+- 诊断driver将不可见ownship从policy批次移除、继续执行末次接受的目标。这是“solver不可见”的明确重建解释，不是作者已确认实现。缺失决策不是终止；进入扰动PPO之前必须另行定义跨间隔奖励和折扣，不能伪造正常5s actor样本。
 - 模块返回完整sensed states、可见ID、事件与until；实际BlueSky运动、到达/退出、奖励、风险、flight-hours均独立用真值。离散快照层只记录事件与可见性计数，不虚构实际aircraft-seconds，后者由物理步进按存活飞机与持续区间积分。
 
 ## 频率不能与持续占用混用
@@ -25,3 +25,5 @@
 须分别报告eligible aircraft-decisions、发起/重触发次数、连续中断段、不可见aircraft-seconds和真实flight-hours。按上述规则，p=.003的通信触发为期望2.16/h，但长期不可见比例约0.599%，不是0.3%。边界出生/退出和有限实验长度仍需实测计数。
 
 最小校验包括：零扰动原观测/轨迹完全一致，sigma0退化；同一位移在所有观察者一致且真值/垂直阈值不变；同刻缓存和输入排序；5/10/15到期/重叠/reset；JSON状态恢复重复同一序列；通信不可见飞机仍计物理风险。接口校验不证明抗扰策略或真实通信可靠性。
+
+07:34主线程的[15项纯层测试](../runs/20260905T073355Z-observation-perturbation-tests-8c19ee06/log.txt)和[5例native诊断](../runs/20260905T073432Z-perturbation-native-probe-b8a3c19f/artifacts/result.json)通过：零扰动编码、掩码、动作、物理轨迹及科学汇总与plain完全一致；100%通信中断0次推理、46次逐机保持决策，226.5真实不可用aircraft-s与物理暴露一致，保留LoWC39.75/NMAC12.25 pair-s。此为同一未训练模型的接口检查；不证明噪声下性能、经验发生率或抗扰训练收益。

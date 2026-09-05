@@ -1,0 +1,29 @@
+{
+  "source_run": "runs/20260905T075230Z-execution-ppo-resume-100-7df1b66d",
+  "compatible_scientific_source_commit": "ea37154366ecc9bba058de35a1ae1e338b9e8380",
+  "source_supervisor_commit": "7e38f8f74a854d04938109aebe4c6d5e4cabd7c9",
+  "completed_episodes": 100,
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "files": {
+    "latest.pt": {
+      "bytes": 1012233,
+      "sha256": "45f9e3a66519f99b0c93fe040b65c87f9e41191cd14a273013f40744407f552c"
+    },
+    "best.pt": {
+      "bytes": 506262,
+      "sha256": "cd851bd54ad00a0666ab1fa776ba7ec934e511b83f6a6eb37cb48cf223e193f5"
+    },
+    "result.json": {
+      "bytes": 38663,
+      "sha256": "63e2b2fe69cd30a7009f11f30d0510f82e3469b456654d874d88531e4daf8913"
+    },
+    "development.jsonl": {
+      "bytes": 125605,
+      "sha256": "553ed9877e3feab0bb90d16fd07521c1d4382d7414d9f773ffa5d5a4dd8a5ff4"
+    },
+    "training.jsonl": {
+      "bytes": 83194,
+      "sha256": "dfffef641359f1655937910fc1b323a5a5f9dc488ea2dd8f75b15b6a2aaa919c"
+    }
+  }
+}
