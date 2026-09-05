@@ -504,3 +504,15 @@ route_fidelity只读原p6§3.4/Algorithm1确认训练采样；p17§6.1frozenpoli
 10:21追加shared_ppo仅新navigation_refresh_probe.py/config/必要纯测试，问题为新集成是否精确等于原default与已审计external refresh；来源原0训练参考、50例结果及当前adapter；交付原12 NR/sample、4fixed响应、30机NR/sample集成/外部对照，真实native计数/出生删除/reset/恢复与原物理rows，≤20min静态，controller≤420s串行执行。原始4refresh物理行已定向复制reports/route-response-20260905/refresh_four_physics.csv及manifest，2382行/1754325B，来源SHA保留。route_trace独立只读6变更文件/测试/BlueSky调用链，≤15min，返回无阻断原生验证问题；native零人口跳过不要求wrapper数等于全部物理步数。无实验/修改。10:26实际turn_context核对shared_ppo第10turn、route_trace第13均gpt-6-astra/xhigh。
 
 [0–400图](../reports/execution-learning-20260905/README.md)19评价点及23来源记录，重复15/100/150/250 aggregate精确合并一次；实际[最新渲染](../runs/20260905T100952Z-execution-learning-figure-400-a22a1834/status.json)3.291s，三产物逐字节复制、PNG目视通过。NOW/DECISIONS/REPRODUCTION/PERTURBATIONS/LESSONS同步本批证据。主10h截止仍15:15:13 UTC，CPU14/单线程/低优先级、不向共享GPU提交任务或干预其他人，未提前发送完成通知。
+
+10:29本批已提交并push `cc482f0350933382f493c2b9a515b17846b664ef`，ls-remote精确同SHA，含400恢复点与已验证诊断；新navigation core/config/test暂未入此提交，保留旧源码可恢复版本。doctor无问题；生成SVG原样尾空白与CSV标准CRLF明确处理，其余diff检查通过。10:30获准主机只读nvidia-smi仍见3059945/3062529显存9891/9771MiB，GPU98%、剩3432MiB；本项目无GPU计算/外部进程干预。load约2.24/2.23/2.32、MemAvailable61.26GiB、磁盘143.48GiB。
+
+### 10:33–10:39 UTC：刷新原生验证通过并从头训练
+
+[比较器3回归](../runs/20260905T103310Z-navigation-refresh-probe-tests-aee50278/log.txt)通过；controller窄读driver后运行[原生集成](../runs/20260905T103332Z-navigation-refresh-native-09ae0b8a/artifacts/result.json)，内部204.281s/监督205.973s正常完成，8项总检查全部通过。默认关闭原12例NR/sample的percase及aggregate全部精确复现（只排wall/RSS），无wrapper；开启四固定响应完整summary/phase/milestone及2382物理CSV行全部精确等于既有external刷新，仅arm标签显式不同。
+
+30架次seed53001 NR/sample分别原生5451/5965 calls，与外部wrapper计数/调用流hash/完整物理流hash和每机摘要精确相同；人口大小分别1–19/1–20、各56次ID变化，reset初始计数0，方法和callback恢复。四单机native/wrapper761/775/430/412 calls，公开step contexts39/39/22/21均完整退出。模型无变化/梯度，无checkpoint加载/优化器/训练。NR30/30且0width；未训练sample22/30、3超时5耗尽、21width/4410.25 aircraft-s，仍不是有效基线。完整小结果另存[刷新验证报告](../reports/navigation-refresh-20260905/README.md)。
+
+接着启动refresh-ppo-100：新配置current_state_refresh、从seed61001初始化和原training610000流起，100轮目标/内1800s/外1860s、256MiB输出/4096MiB每进程地址空间，CPU14单线程nice15/idle IO、每25全12开发评价/每5原子保存。严格新源码/配置，不恢复旧400模型，其余Table3/执行动作/观测/奖励/终止口径不变。10h截止和14:45收尾不变。
+
+追加shared_ppo仅拥有checkpoint_policy_modes.py/原测试/新refresh100配置：问题为复用四模式诊断于新训练轮次，交付保留v1旧400、显式v2轮次派生固定四模式、generic reference参数、严格源码/配置/同轮参考、原0sample精确对照；≤20min静态，禁止运行实验/测试/GPU/信号/清理/通知/嵌套。追加observation_reward_spec只读原p6/Algorithm1/训练预算与当前循环，问题为250k episodes单位和更新节奏的可比性，交付有页码事实/歧义与有限预算解释，≤15min，不重审reward、不改参、不执行负载。两任务与controller串行原生训练独立。

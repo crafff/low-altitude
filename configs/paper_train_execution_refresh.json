@@ -1,0 +1,86 @@
+{
+  "schema": "bluesky.paper-like.train-dev.v1",
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "environment_config": "configs/paper_environment_execution_refresh.json",
+  "ppo_config": "configs/paper_ppo.json",
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "torch_num_interop_threads": 1,
+  "training_seed": 61001,
+  "training_scenario_seed_start": 610000,
+  "sampling_seed": 710001,
+  "shuffle_seed": 710002,
+  "episodes": 300,
+  "wall_seconds": 600,
+  "deadline_grace_seconds": 15,
+  "initial_episode_seconds": 15,
+  "timing_safety_factor": 1.5,
+  "evaluate_every": 25,
+  "checkpoint_every": 5,
+  "dev_policy": "sample",
+  "dev_action_seed_base": 810000,
+  "report_argmax": false,
+  "selection_min_completed_fraction": 0.95,
+  "development_cases": [
+    {
+      "seed": 53001,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53002,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53003,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53004,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53005,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53006,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53007,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53008,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53009,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53010,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53011,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53012,
+      "corridor_count": 5
+    }
+  ],
+  "reconstruction_choices": [
+    "This execution-semantics learning diagnostic uses explicitly revised execution semantics. It is not literal paper behavior, an effective baseline, or a safety guarantee. Corridor containment remains unresolved; development selection is not held-out evidence and does not authorize delay experiments.",
+    "This fresh reconstruction lineage explicitly selects paper_environment_execution_refresh.json and current_state_refresh ordinary-flyby guidance. Preserve initialization 61001, training scenario stream 610000 onward, sampling/shuffle streams and the original 12 development cases. This is a guidance-formula correction, not a confirmed author 2026 implementation or an effective baseline. Resolved configurations and navigation_refresh.py scientific identity remain strict; old native-cached checkpoints are incompatible and must not be migrated or relabeled.",
+    "One native environment is reset for fresh training seeds training_scenario_seed_start + completed_episodes. No pre-birth transitions are fabricated. Arrival, deadline failure and any explicitly configured route-exhaustion failure terminate that aircraft with zero bootstrap; failed-route exposure remains reported and cannot be interpreted as a safety improvement.",
+    "Initialization, Python and NumPy use training_seed; training action sampling and PPO shuffling use separate saved CPU torch.Generator streams. Evaluation samples use dev_action_seed_base + case seed, reset identically for each policy checkpoint.",
+    "Preserve all 12 original development cases cycling 3/4/5 corridors. NR and sampled policy share each exact generated scenario. NR is cached once per geometry per job. Optional argmax is reported separately and never selects the checkpoint.",
+    "Aggregate rates divide summed unordered pair-seconds by summed flight-hours, retaining failed-flight exposure. Among models with completed/planned >=0.95, lower NMAC seconds per flight-hour wins, then lower LoWC. Before eligibility, higher completed fraction wins, then NMAC and LoWC. Exact ties keep the earlier checkpoint.",
+    "Run initial evaluation before updating, periodic evaluation every 25 completed episodes and final evaluation of the latest model when time allows. Any --eval-limit prefix is explicitly a smaller development diagnostic and remains part of strict checkpoint compatibility.",
+    "The initial target is 300 completed episodes with a 600-second inner budget; --episodes is the total target including resume. The controller bounds each job against the active research-block deadline and leaves startup/exit margin in the outer launcher.",
+    "Before starting another episode, reserve measured evaluation time and save grace. Check the inner cutoff between decisions. An interrupted episode is discarded, its pre-episode RNG states restored, and its scenario seed remains next; it is not updated or reported completed.",
+    "Atomic latest.pt is written initially, every 5 completed episodes and on orderly exit. best.pt follows the predeclared development selection; latest.pt embeds the selected best checkpoint. Scope, exact effective configurations and software/source versions must match on resume; checkpoints from literal execution are not relabeled or silently migrated."
+  ]
+}

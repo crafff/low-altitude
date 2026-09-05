@@ -11,6 +11,7 @@ import time
 
 from bluesky_diagnostic import FT, distance_m, initialise, risk_flags
 from nr_pilot import ConflictEvents, centerline_distance_m
+from navigation_refresh import navigation_audit, ordinary_flyby_guidance, validate_guidance
 from paper_actions import ActionController
 from paper_observation import AircraftState, OWN_FEATURES, INTRUDER_FEATURES, observe, reward_components
 from paper_performance import install_performance, load_types
@@ -22,6 +23,7 @@ def load_environment_config(path):
     cfg = json.loads(Path(path).read_text())
     if cfg['device'] != 'cpu':
         raise ValueError('This research block is explicitly CPU-only')
+    validate_guidance(cfg.get('ordinary_flyby_guidance', 'native_cached'))
     return cfg, {name: json.loads(Path(cfg[f'{name}_config']).read_text())
                  for name in ('scenario', 'action', 'observation')}
 
@@ -39,6 +41,8 @@ class PaperEnvironment:
         self.types = load_types(cfg['types_config'])
         self.dt = self.scenario_cfg['dt_seconds']
         self.decision_dt = cfg['decision_seconds']
+        self.ordinary_flyby_guidance = validate_guidance(cfg.get('ordinary_flyby_guidance', 'native_cached'))
+        self.navigation_audit = navigation_audit(self.ordinary_flyby_guidance)
         self.terminal_policy = cfg.get('terminal_policy', 'sampled_endpoint')
         if self.terminal_policy not in ('sampled_endpoint', 'swept_endpoint', 'finite_exit'):
             raise ValueError('Unknown explicitly selected terminal policy')
@@ -61,6 +65,9 @@ class PaperEnvironment:
         from bluesky.core.entity import getproxied
         from bluesky.traffic.asas import ConflictDetection, ConflictResolution
 
+        if self.navigation_audit['context_active']:
+            raise RuntimeError('Cannot reset inside a navigation refresh step')
+        self.navigation_audit = navigation_audit(self.ordinary_flyby_guidance)
         bs = self.bs
         bs.sim.reset()
         self.performance.select()
@@ -151,6 +158,18 @@ class PaperEnvironment:
         return result
 
     def step(self, proposed_actions):
+        if self.done:
+            raise RuntimeError('reset is required after scenario termination')
+        if self.ordinary_flyby_guidance == 'native_cached':
+            return self._step(proposed_actions)
+        from bluesky.tools.aero import g0
+        # Exactly one public transition owns the hook. Reset, action selection
+        # and caller-side sampling never retain it; every return/error restores.
+        with ordinary_flyby_guidance(self.bs, self.ordinary_flyby_guidance,
+                                    self.navigation_audit, gravity_mps2=float(g0)):
+            return self._step(proposed_actions)
+
+    def _step(self, proposed_actions):
         if self.done:
             raise RuntimeError('reset is required after scenario termination')
         controlled = set(self.bs.traf.id)

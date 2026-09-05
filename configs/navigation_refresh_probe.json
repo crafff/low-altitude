@@ -1,0 +1,25 @@
+{
+  "schema": "bluesky.navigation-refresh-probe.v1",
+  "scope": "Native guidance reconstruction validation; development only; containment unresolved",
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "wall_seconds": 400,
+  "maximum_csv_bytes": 33554432,
+  "training_config": "configs/paper_train_execution.json",
+  "refresh_environment_config": "configs/paper_environment_execution_refresh.json",
+  "route_study_config": "configs/route_observation_probe.json",
+  "route_reference_sha256": "9888a97b4fe144e2a00d82f1ef76b1bce3fe6f03099cb7dbd37c0760d38effc1",
+  "physics_reference_sha256": "48d3b99965bcb22418465c732f525a66fc0c6085b4041de1490c7c1d4e008cb3",
+  "route_case_ids": [
+    "refresh-amzn-north-s0-l1",
+    "refresh-amzn-north-s0-l2",
+    "refresh-amzn-north-s2-l1",
+    "refresh-amzn-north-s3-l1"
+  ],
+  "reconstruction_choices": [
+    "Run all twelve original development cases with native cached guidance, original initialization seed61001, and sampled-policy seeds810000+case seed. Compare complete per-case and aggregate scientific summaries with the explicit episode0 reference; exclude only wall_seconds and process_peak_rss_mib.",
+    "Reuse route_observation_probe.run_case with its native arm and the integrated-on environment to avoid double wrapping. Preserve four original refresh case IDs and seed960001 model initialization. Compare scientific summary, complete saved trace packets and every parsed physical CSV row, excluding only runtime fields and the intentional arm label.",
+    "For seed53001/three corridors, compare integrated-on and externally refreshed native-off environment under NR and the same initialized sampled policy. The external wrapper is installed after reset. Independently count native reached calls and hash all post-physics states before deletion; retain full flight summaries, variable population counts and restoration audits.",
+    "No checkpoint loading, optimizer, PPO update, model promotion, terminal-exposure correction or safety claim. This validates a declared guidance reconstruction before training; development evidence does not establish an effective baseline."
+  ]
+}
