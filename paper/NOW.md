@@ -1,6 +1,6 @@
 # 当前状态
 
-更新：2026-09-05 14:59 UTC。分支 `research/trc-baseline-system-20260905`。
+更新：2026-09-05 15:08 UTC。分支 `research/trc-baseline-system-20260905`。
 
 ## 当前任务与结论
 
@@ -38,11 +38,11 @@
 
 [导航刷新](../reports/navigation-refresh-20260905/README.md)19core+3比较测试及原生集成通过：默认off精确复现，on普通fly-by随当前TAS/航迹更新；四固定响应和完整30机对外部已审计实现精确。该验证不等于baseline有效。[50固定响应](../reports/route-response-20260905/README.md)和[理想90度几何](../reports/turn-geometry-20260905/README.md)保留动力学/有限出口限制，不声称所有策略不可行或连续安全。[旧400](../checkpoints/execution-400-20260905/README.md)及其负结果独立保留，不迁移到新refresh谱系。
 
-本块全部科研负载使用**CPU14、单线程、nice15、idle IO、一个lab job**，不向GPU提交计算、不发信号/调整其他人的两个进程。14:41只读快照仍见PID3059945/3062529、显存9893/9771MiB、GPU99%；快照不证明外部吞吐绝对零影响。Python3.11.13/BlueSky1.1.1/torch2.9.1+cpu由uv独立管理；CUDA先前小核函数通过仅是可用性证据。[环境](../docs/ENVIRONMENT.md)与[系统](../docs/SYSTEM.md)。所有测试/实验/绘图走lab/Bubblewrap固定只读快照，无裸负载或legacy运行。旧143中断原因/发送者仍未知，未据后续成功反推。
+本块全部科研负载使用**CPU14、单线程、nice15、idle IO、一个lab job**，不向GPU提交计算、不发信号/调整其他人的两个进程。15:07结束前只读快照仍见PID3059945/3062529、显存9893/9771MiB、GPU99%；快照不证明外部吞吐绝对零影响。Python3.11.13/BlueSky1.1.1/torch2.9.1+cpu由uv独立管理；CUDA先前小核函数通过仅是可用性证据。[环境](../docs/ENVIRONMENT.md)与[系统](../docs/SYSTEM.md)。所有测试/实验/绘图走lab/Bubblewrap固定只读快照，无裸负载或legacy运行。旧143中断原因/发送者仍未知，未据后续成功反推。
 
 本批850恢复点/诊断/图表已通过最终独立只读复核：原始来源、两sample精确重放、预算、CSV统计和图像均核对，doctor/manifest/staging检查通过。已随`8e6e7cc921e34768b5d7ca9db5055217c5d1e892`私有push并核对远端同SHA。此前远端已核对f1cfb8574ea5c48956a5da4977ffb9d209a1de6b（300及审计/图）、535cad4科学核心。原始runs、本地PDF及历史恢复归档没有完整独立备份，不能称整个项目全量异地备份。
 
-到实际10h结束后主线程沿已确认渠道运行`python3 -B tools/notify.py --complete`，子agent不通知；结束前更新本页和任务、核对私有远端SHA。
+科研负载已于14:40:26全部结束，后续独立只读方案核对已完成；当前启动器锁空闲，三个子agent均已完成。到实际15:15:13授权窗口结束后，主线程沿已确认渠道运行`python3 -B tools/notify.py --complete`，子agent不通知；没有自动续训或下一块授权。
 
 ## 按需入口
 
