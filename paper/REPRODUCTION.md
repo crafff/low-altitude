@@ -91,3 +91,13 @@ Table4以events/flight-hour报告：专门定位扰动6.48、其他专门扰动2
 [共享PPO配置](../configs/paper_ppo.json)为单query64维当前邻居attention、两个128维Tanh共享层、60输出单head、Adam与标准PPO；架构宽度、初始化/归一化、梯度裁剪等均是重建选择。[训练配置](../configs/paper_train_dev.json)预声明610000起训练场景与53001–53012开发场景（3/4/5走廊循环）、CPU独立随机流、sample主要评价、完整逐机GAE与原子保存恢复。开发集不用于最终论文测试。诊断best按完成率门槛和安全率排序，仍可能是尚未达标的最佳，名字不代表有效baseline。
 
 首个两轮pilot只使用预声明开发集前两例。native训练和反向更新实际完成，但初始/两轮后sample完成分别42/60、40/60，NR60/60；策略严重偏航，最大约75km。这是保留的执行/学习负结果，不能据较低风险率宣称改善；原文250k训练规模尚未尝试。准确来源与恢复路径见任务001最新记录。
+
+## 前序公开资料与导航实现差异（2026-09-05新增来源）
+
+2024 [ICRAT原文](../resources/literature/local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf) p.8参考文献27直接链接[作者数据仓库](https://github.com/RodolpheFmd/ICRAT2024/tree/26ed1a0d128944643017e7ba5e9511dfc273a9bd)。p.5明确高度和横向机动分别等待同类动作完成，支持当前分量锁解释；仍未给几何可行性mask、bank或航线出口算法。p.4及公开CSV明确两个FC层5120/7680、ReLU，仅是2024来源，不能认作2026已披露。2024正文3档高度/5走廊/150m宽，CSV却有5档高度/3走廊/750ft及7/8维ownship多版本，学习率也不同；保存的小配置及固定源SHA见[来源清单](../resources/literature/author-configs-icrat2024/manifest.json)，不以这些表静默覆盖2026规范。会议PPT18页的文本也未补充导航细节；只检查XML文字，未据未渲染图形做结论。
+
+作者公开[BlueSky fork](https://github.com/RodolpheFmd/bluesky/tree/849d76fd44880f8d17a69aefa0bd37208f2b2fbb)默认master与上游同SHA相同，2024年；其[patch-1](https://github.com/RodolpheFmd/bluesky/commit/2bba625488e70b983256a11d6df8c31ebd290a0c)只为OpenAP rotor新增7种eVTOL参数，无私有导航patch证据。该源码旋翼加减速统一3.5m/s²，核心turn仍由AP的25°默认bank决定；perf.bank数组中的35°不进入该核心转向。重要差异是其Amzn原参数vmax44m/s，与2026Table3的196kt不符；EH216也是27m/s、±5m/s，与2026的69kt、±11m/s不符，Cranfield/CranfieldV2/Tecnalia缺失。故fork不是完整Table3实现，不能用它替代当前显式论文包络；可另做单项速度/导航版本敏感性。
+
+[DASC2022旧部署代码](https://github.com/RodolpheFmd/DASC22_application/tree/8a613d34e01f8e4d631065ed4fbaa15e9db3e35d)公开的是4+4维观测、GRU与累积SPD控制，README明确没有训练算法；到达半径0.05NM+5s×CAS、无最终航点检查。它不包含2026的横移/高度动作、attention/CPA/锁，不能移植其提前删除逻辑并称原文复现。[作者通用PPO](https://github.com/RodolpheFmd/Modelling-PyTorch-DRL/blob/d51db989df932d962e66dfe7ff76db2cc950370a/ppo.py)采用标准负clipped surrogate/负entropy优化方向，可辅助解释排版歧义；它是连续Gaussian控制与独立actor/critic，也不是本论文实现。[Research-Data](https://github.com/RodolpheFmd/Research-Data/tree/c9625e277855d6087faf1190a4a72b1659977fda)所含DASC2022子树与独立仓库内容相同，不能当独立复现证据；ICRAT2024子树无所需Python导航代码。
+
+[作者CBF/MVP示例](https://github.com/RodolpheFmd/Conflict-Detection-Resolution-methods/tree/a7c330aab37a0ae44512ce7b1c2b085498ffe974)是独立二维点质量/路径参数示例，无BlueSky/PPO/执行延迟；存在绕过部分约束的分支，不能由CBF命名推出保证。此组件重合不否定我们的延迟问题路线，但后续比较须明确其动力学、延迟假设和不可行处理。本轮未运行这些作者程序、下载大数据/权重或联系作者。

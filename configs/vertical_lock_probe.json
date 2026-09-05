@@ -1,0 +1,35 @@
+{
+  "schema": "bluesky.vertical-lock-probe.v1",
+  "environment_config": "configs/paper_environment.json",
+  "bluesky_version": "1.1.1",
+  "seed": 61601,
+  "origin_lat_lon_deg": [0.0, 0.0],
+  "earth_radius_m": 6371000.0,
+  "route_length_m": 9260.0,
+  "bearing_deg": 90.0,
+  "first_action": 43,
+  "alternating_actions": [43, 31],
+  "settled_vs_tolerance_mps": 0.05,
+  "altitude_exposure_epsilon_m": 0.000001,
+  "cases": [
+    {"id": "mnet_literal", "aircraft_type": "Mnet", "requires_settled_vs": false},
+    {"id": "mnet_settled", "aircraft_type": "Mnet", "requires_settled_vs": true},
+    {"id": "m100_literal", "aircraft_type": "M100", "requires_settled_vs": false},
+    {"id": "m100_settled", "aircraft_type": "M100", "requires_settled_vs": true},
+    {"id": "cranfield_literal", "aircraft_type": "Cranfield", "requires_settled_vs": false},
+    {"id": "cranfield_settled", "aircraft_type": "Cranfield", "requires_settled_vs": true},
+    {"id": "amzn_literal", "aircraft_type": "Amzn", "requires_settled_vs": false},
+    {"id": "amzn_settled", "aircraft_type": "Amzn", "requires_settled_vs": true}
+  ],
+  "reconstruction_choices": [
+    "Eight predeclared deterministic single-aircraft diagnostics use one common 5 NM straight eastbound equatorial route, initial altitude350ft, native type-specific nominal speed and center lane. The seed is provenance only; no scenario/type/action RNG draws occur.",
+    "The existing environment's5s decision period and0.25s physics interval are retained. Propose43 at t=0; while altitude_active remains true repeat its accepted action; at the first decision boundary observing an unlocked altitude, alternate31/43. This tests actual policy timing, not an additional immediate-physics-tick command stream.",
+    "Literal and settled cases override only altitude_completion_requires_settled_vs and altitude_capture_vs_tolerance_mps in the base action configuration. The former is false/true respectively; the latter is0.05m/s in both. The common altitude error tolerance remains0.5m. All effective environment/action/scenario/observation settings are saved per case.",
+    "Actions31 and43 preserve nominal speed and center lane while selecting250ft and450ft absolute altitude. Native selected vertical speed uses the current PaperPerformance type envelope. No VS, altitude, acceleration, capture state, bank, route, timeout or terminal policy is overwritten by the probe.",
+    "physics.csv contains the initial state and every post-physics state after ActionController.update but before environment terminal handling. Native VS, AP.vs, AP-or-ASAS.vs, selected VS/altitude, swaltsel, accepted targets and lock flags remain distinct columns.",
+    "A read-only wrapper around ActionController.apply records immediately before/after command acceptance and calls the original method exactly once. Repeated joint actions and actual changed altitude instructions are counted separately; native dynamics are not replaced.",
+    "Lock-release events retain the previous/current physics rows and residual VS. Command events retain the delay from that release to the next decision boundary, so residual VS at release is not confused with residual VS when reversal actually executes.",
+    "Above-ceiling/below-floor peaks use physical altitude relative to450ft/250ft. Sampled exposure uses post-step violations beyond1e-6m times dt, matching environment altitude-exposure tolerance. Peaks and exposure are diagnostic observations, not safety guarantees.",
+    "Arrival, timeout, route exhaustion, command counts and trace consistency are reported separately from altitude violations. A settled-case improvement or absence of overshoot is not assumed in advance; paired deltas describe only these constructed development cases."
+  ]
+}

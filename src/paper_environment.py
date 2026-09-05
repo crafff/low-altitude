@@ -15,6 +15,7 @@ from paper_actions import ActionController
 from paper_observation import AircraftState, OWN_FEATURES, INTRUDER_FEATURES, observe, reward_components
 from paper_performance import install_performance, load_types
 from paper_scenarios import generate_scenario
+from route_completion import segment_nearest_endpoint, finite_exit_crossing
 
 
 def load_environment_config(path):
@@ -38,6 +39,11 @@ class PaperEnvironment:
         self.types = load_types(cfg['types_config'])
         self.dt = self.scenario_cfg['dt_seconds']
         self.decision_dt = cfg['decision_seconds']
+        self.terminal_policy = cfg.get('terminal_policy', 'sampled_endpoint')
+        if self.terminal_policy not in ('sampled_endpoint', 'swept_endpoint', 'finite_exit'):
+            raise ValueError('Unknown explicitly selected terminal policy')
+        if not isinstance(cfg.get('fail_on_native_route_exhaustion', False), bool):
+            raise ValueError('Route exhaustion handling must be boolean')
         if self.dt <= 0 or not math.isclose(self.decision_dt / self.dt, round(self.decision_dt / self.dt)):
             raise ValueError('Decision interval must contain whole physics ticks')
         for key in ('lowc_horizontal_ft', 'nmac_horizontal_ft', 'vertical_tolerance_ft',
@@ -74,7 +80,8 @@ class PaperEnvironment:
                         flight_seconds=0., path_length_m=0., max_centerline_distance_m=0.,
                         outside_corridor_seconds=0., outside_altitude_seconds=0.,
                         admission_lowc_pairs=0, admission_nmac_pairs=0,
-                        policy_decisions=0, changed_instructions=0, return_sum=0.) for f in self.flights}
+                        policy_decisions=0, changed_instructions=0, return_sum=0.,
+                        final_leg_activated=False, outside_exit_crossings=0) for f in self.flights}
         self.actions = ActionController(bs, self.types, self.action_cfg)
         self.tracker = ConflictEvents(self.scenario_cfg)
         self.next_flight = self.physics_steps = self.decision_steps = self.max_active = 0
@@ -110,6 +117,9 @@ class PaperEnvironment:
             self.actions.register(acid, flight, route)
             record = self.records[acid]
             record.update(status='active', actual_entry_s=float(bs.sim.simt))
+            # Registration may activate the final leg immediately on a two-point
+            # route. Preserve this progress before a first action inserts CAP.
+            record['final_leg_activated'] = self.actions.state_fields(acid)['final_nominal_active']
             for other in before.values():
                 lo, nm = risk_flags(distance_m(route[0], other), altitude-other[2], self.scenario_cfg)
                 record['admission_lowc_pairs'] += int(lo)
@@ -192,12 +202,36 @@ class PaperEnvironment:
                 record['outside_altitude_seconds'] += dt * (abs(state[2]-self.scenario_cfg['altitude_ft']*FT) > self.scenario_cfg['corridor_height_ft']*FT/2 + 1e-6)
                 fields = self.actions.state_fields(acid)
                 remaining = distance_m(state, fields['destination_waypoint'])
+                record['final_leg_activated'] |= fields['final_nominal_active']
+                arrival_detail = None
                 arrived = fields['final_nominal_active'] and remaining <= self.scenario_cfg['arrival_radius_m']
+                if self.terminal_policy != 'sampled_endpoint':
+                    geometry = self.actions._aircraft[acid].geometry
+                    start_xy, end_xy = geometry.to_xy(before[acid]), geometry.to_xy(state)
+                    if self.terminal_policy == 'swept_endpoint':
+                        nearest, fraction = segment_nearest_endpoint(start_xy, end_xy,
+                            geometry.to_xy(fields['destination_waypoint']))
+                        arrived = fields['final_nominal_active'] and nearest <= self.scenario_cfg['arrival_radius_m']
+                        arrival_detail = {'closest_distance_m':nearest, 'fraction':fraction}
+                    else:
+                        middle = self.scenario_cfg['altitude_ft']*FT
+                        half_height = self.scenario_cfg['corridor_height_ft']*FT/2
+                        arrival_detail = finite_exit_crossing((*start_xy, before[acid][2]),
+                            (*end_xy, state[2]), geometry.xy[-1], geometry.unit[-1],
+                            self.scenario_cfg['corridor_width_ft']*FT/2,
+                            middle-half_height, middle+half_height)
+                        arrived = bool(record['final_leg_activated'] and arrival_detail
+                            and arrival_detail['within_width'] and arrival_detail['within_height'])
+                        if record['final_leg_activated'] and arrival_detail and not arrived:
+                            record['outside_exit_crossings'] += 1
+                exhausted = (self.cfg.get('fail_on_native_route_exhaustion', False)
+                    and not bool(self.bs.traf.swlnav[self.bs.traf.id2idx(acid)]))
                 timeout = t1-record['actual_entry_s'] >= self.scenario_cfg['per_flight_timeout_seconds']-1e-8
-                if arrived or timeout:
-                    reason = 'arrived' if arrived else 'flight_timeout'
+                if arrived or timeout or exhausted:
+                    reason = 'arrived' if arrived else ('route_exhausted_without_arrival' if exhausted else 'flight_timeout')
                     record.update(status=reason, terminal_time_s=t1, terminal_state=state,
-                                  endpoint_distance_m=remaining, accepted_targets={k:fields[k] for k in (
+                                  endpoint_distance_m=remaining, terminal_geometry=arrival_detail,
+                                  accepted_targets={k:fields[k] for k in (
                                       'target_speed_mps', 'target_alt_m', 'target_lane_m')})
                     terminal.append((acid, reason))
             if terminal:
@@ -247,7 +281,11 @@ class PaperEnvironment:
             values['unordered_seconds_per_flight_hour'] = values['unordered_pair_seconds']/hours if hours else None
             values['directed_seconds_per_flight_hour'] = values['directed_pair_seconds']/hours if hours else None
         result = {'seed':self.scenario['seed'], 'planned':len(self.flights), 'completed':counts['arrived'],
-            'failed_timeout':counts['flight_timeout'], 'flight_hours':hours, 'risk':risks,
+            'failed_timeout':counts['flight_timeout'],
+            'failed_route_exhausted':counts['route_exhausted_without_arrival'],
+            'outside_exit_crossings':sum(r['outside_exit_crossings'] for r in self.records.values()),
+            'terminal_policy':self.terminal_policy,
+            'flight_hours':hours, 'risk':risks,
             'path_length_m':sum(r['path_length_m'] for r in self.records.values()),
             'outside_corridor_aircraft_seconds':sum(r['outside_corridor_seconds'] for r in self.records.values()),
             'outside_corridor_flights':sum(r['outside_corridor_seconds']>0 for r in self.records.values()),
@@ -262,7 +300,7 @@ class PaperEnvironment:
             'process_peak_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024,
             'clipping_counts':dict(self.clipping_counts),
             'clipping_count_scope':'All constructed observation snapshots, including terminal previews; not a policy-input rate.',
-            'completed_population':sum(counts[k] for k in ('arrived','flight_timeout'))==len(self.flights)}
+            'completed_population':sum(counts[k] for k in ('arrived','flight_timeout','route_exhausted_without_arrival'))==len(self.flights)}
         if include_flights:
             result['flights'] = list(self.records.values())
         return result

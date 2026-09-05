@@ -6,7 +6,7 @@
 
 [原文 PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) · [原文逐项核对](REPRODUCTION.md)
 
-目标期刊是 **Transportation Research Part C: Emerging Technologies（TR-C）**，目标特刊为 [Intelligent and Safe Operations of Low-Altitude Aerial Transportation Systems](https://www.sciencedirect.com/special-issue/333589/intelligent-and-safe-operations-of-low-altitude-aerial-transportation-systems)。2026-09-05通过[Elsevier期刊页](https://shop.elsevier.com/journals/transportation-research-part-c-emerging-technologies/0968-090X)确认期刊名称及安全、效率、实时运行等范围；特刊正文和作者指南仍访问失败，截止日期、当前征稿状态和具体投稿要求尚未核实。目标明确不等于已确认特刊仍开放；核实后再排投稿日期。
+目标期刊是 **Transportation Research Part C: Emerging Technologies（TR-C）**，目标特刊为 [Intelligent and Safe Operations of Low-Altitude Aerial Transportation Systems](https://www.sciencedirect.com/special-issue/333589/intelligent-and-safe-operations-of-low-altitude-aerial-transportation-systems)。2026-09-05读取经[KU Leuven教师入口](https://feb.kuleuven.be/public/u0004371/)链接确认的[联合客座编辑Roel Leus现行主页](https://sites.google.com/view/roel-leus)，该页仍邀请新增投稿并列出 **2026-12-30** 截止日期；ScienceDirect官方征稿列表的搜索索引也给出同日，详情见SOURCES。该日期可作暂定投稿目标，截止时区未披露。特刊正文与作者指南仍403，投稿系统实时选项、完整CFP和具体格式/材料要求尚未核实；从标题判断主题相关，不等于已逐项符合征稿要求。
 
 ## 实验顺序
 

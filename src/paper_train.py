@@ -22,7 +22,16 @@ from shared_ppo import SharedActorCritic, collate, compute_gae, update
 
 
 SCOPE = "literal-environment learning diagnostic; corridor containment unresolved"
+EXECUTION_SCOPE = "execution-semantics learning diagnostic; corridor containment unresolved"
 CHECKPOINT_SCHEMA = "bluesky.paper-like.training-checkpoint.v1"
+
+
+def validated_scope(cfg):
+    """Accept only the two declared diagnostic scopes, without efficacy claims."""
+    scope = cfg.get("scope")
+    if not isinstance(scope, str) or scope not in (SCOPE, EXECUTION_SCOPE):
+        raise ValueError("scope must be an explicitly supported learning diagnostic")
+    return scope
 
 
 class CollectionCutoff(RuntimeError):
@@ -151,11 +160,16 @@ def make_checkpoint(model, optimizer, *, completed_episodes, next_seed_index,
                     sampling_generator, shuffle_generator, configs, versions,
                     evaluation=None, best_checkpoint=None):
     """Snapshot tensors rather than retaining references changed by future steps."""
+    scope = validated_scope(configs["training"])
+    if evaluation is not None and evaluation.get("scope") != scope:
+        raise ValueError("checkpoint evaluation scope differs from training scope")
     if completed_episodes < 0 or next_seed_index != completed_episodes:
         raise ValueError("one fresh scenario seed is required per completed episode")
     if best_checkpoint is not None and best_checkpoint.get("best_checkpoint") is not None:
         raise ValueError("best checkpoint nesting must be at most one level")
-    return copy.deepcopy({"schema": CHECKPOINT_SCHEMA, "scope": SCOPE,
+    if best_checkpoint is not None:
+        _validate_checkpoint(best_checkpoint, configs, versions)
+    return copy.deepcopy({"schema": CHECKPOINT_SCHEMA, "scope": scope,
         "model": model.state_dict(), "optimizer": optimizer.state_dict(),
         "completed_episodes": completed_episodes, "next_seed_index": next_seed_index,
         "rng": capture_rng(sampling_generator, shuffle_generator),
@@ -181,12 +195,18 @@ def save_checkpoint(path, payload):
 
 
 def _validate_checkpoint(payload, configs, versions):
-    if payload.get("schema") != CHECKPOINT_SCHEMA or payload.get("scope") != SCOPE:
+    scope = validated_scope(configs["training"])
+    if payload.get("schema") != CHECKPOINT_SCHEMA:
         raise ValueError("unsupported training checkpoint")
+    if payload.get("scope") != scope:
+        raise ValueError("checkpoint scope differs from configured training scope")
     if payload["configs"] != configs:
         raise ValueError("checkpoint configurations/development cases are incompatible")
     if payload["versions"] != versions:
         raise ValueError("checkpoint software/source versions are incompatible")
+    evaluation = payload.get("evaluation")
+    if evaluation is not None and evaluation.get("scope") != scope:
+        raise ValueError("checkpoint evaluation scope differs from training scope")
     episodes, index = payload["completed_episodes"], payload["next_seed_index"]
     if isinstance(episodes, bool) or not isinstance(episodes, int) or episodes < 0 or index != episodes:
         raise ValueError("invalid completed episode/next seed counters")
@@ -224,6 +244,8 @@ def aggregate_summaries(summaries):
                 "outside_corridor_flights", "outside_altitude_aircraft_seconds", "changed_instructions",
                 "policy_decisions", "return_sum")
     result = {key: sum(row[key] for row in summaries) for key in additive}
+    for key in ('failed_route_exhausted', 'outside_exit_crossings'):
+        result[key] = sum(row.get(key, 0) for row in summaries)
     result.update(planned=planned, flight_hours=hours, completed_fraction=result["completed"]/planned,
                   max_centerline_distance_m=max(row["max_centerline_distance_m"] for row in summaries))
     result["risk"] = {}
@@ -265,6 +287,7 @@ def _evaluate_case(env, model, scenario, policy, action_seed, deadline):
 
 def evaluate_development(env, model, cases, scenarios, cfg, nr_cache, *, deadline=None):
     """Evaluate one frozen model on every selected case using separate RNG streams."""
+    scope = validated_scope(cfg)
     if not cases or len(cases) != len(scenarios):
         raise ValueError("each declared development case needs its exact scenario")
     previous_mode = model.training
@@ -286,7 +309,7 @@ def evaluate_development(env, model, cases, scenarios, cfg, nr_cache, *, deadlin
     aggregates = {policy: aggregate_summaries([row[policy] for row in results])
                   for policy in ["nr", *policies]}
     key = selection_key(aggregates["sample"], cfg["selection_min_completed_fraction"])
-    return {"scope": SCOPE, "evaluation_scope": "development selection, not held-out evidence",
+    return {"scope": scope, "evaluation_scope": "development selection, not held-out evidence",
             "cases": results, "aggregate": aggregates, "selection_key": list(key),
             "primary_policy": "sample", "case_count": len(cases)}
 
@@ -313,7 +336,7 @@ def _versions():
     directory = Path(__file__).resolve().parent
     names = ("paper_train.py", "shared_ppo.py", "paper_environment.py", "paper_actions.py",
              "paper_observation.py", "paper_scenarios.py", "paper_performance.py",
-             "nr_pilot.py", "bluesky_diagnostic.py")
+             "nr_pilot.py", "bluesky_diagnostic.py", "route_completion.py")
     return {"python": platform.python_version(), "torch": str(torch.__version__),
             "numpy": str(np.__version__), "bluesky": importlib.metadata.version("bluesky-simulator"),
             "source_sha256": {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in names}}
@@ -328,8 +351,9 @@ def _append_json(path, value):
 def _validate_train_config(cfg, episodes, wall_seconds, eval_limit):
     if cfg["device"] != "cpu" or cfg["torch_num_threads"] != 1 or cfg["torch_num_interop_threads"] != 1:
         raise ValueError("this training block requires one CPU thread")
-    if cfg["scope"] != SCOPE or cfg["dev_policy"] != "sample":
-        raise ValueError("scope and sampled primary development policy must be explicit")
+    validated_scope(cfg)
+    if cfg["dev_policy"] != "sample":
+        raise ValueError("sampled primary development policy must be explicit")
     for key in ("training_seed", "training_scenario_seed_start", "sampling_seed", "shuffle_seed", "dev_action_seed_base"):
         if isinstance(cfg[key], bool) or not isinstance(cfg[key], int) or cfg[key] < 0:
             raise ValueError(f"{key} must be a nonnegative integer")
@@ -372,6 +396,7 @@ def main(argv=None):
     episodes = cfg["episodes"] if args.episodes is None else args.episodes
     wall_seconds = cfg["wall_seconds"] if args.wall_seconds is None else args.wall_seconds
     _validate_train_config(cfg, episodes, wall_seconds, args.eval_limit)
+    scope = cfg["scope"]
     output = Path(os.environ["LAB_RUN_DIR"])
     if not output.is_dir():
         raise ValueError("LAB_RUN_DIR must be the launcher's existing writable output directory")
@@ -446,13 +471,13 @@ def main(argv=None):
         for duration in durations:
             budget.observe(duration)
         last_evaluation = result
-        evaluations.append({key: result[key] for key in ("completed_episodes", "phase", "aggregate", "selection_key", "wall_seconds")})
+        evaluations.append({key: result[key] for key in ("scope", "completed_episodes", "phase", "aggregate", "selection_key", "wall_seconds")})
         _append_json(output/"development.jsonl", result)
         if best_checkpoint is None or tuple(result["selection_key"]) < tuple(best_checkpoint["evaluation"]["selection_key"]):
             best_checkpoint = checkpoint(include_best=False)
             save_checkpoint(output/"best.pt", best_checkpoint)
         save_checkpoint(output/"latest.pt", checkpoint())
-        print(json.dumps({"event": "development", "completed_episodes": completed,
+        print(json.dumps({"scope": scope, "event": "development", "completed_episodes": completed,
                           "phase": phase, "selection_key": result["selection_key"],
                           "sample": result["aggregate"]["sample"], "nr": result["aggregate"]["nr"]}, allow_nan=False), flush=True)
         return True
@@ -485,11 +510,11 @@ def main(argv=None):
         last_evaluation = None  # The previous evaluation cannot describe updated weights.
         duration = time.perf_counter()-episode_started
         budget.observe(duration)
-        row = {"scope": SCOPE, "completed_episode": completed, "scenario_seed": seed,
+        row = {"scope": scope, "completed_episode": completed, "scenario_seed": seed,
                "environment": summary, "ppo": updates, "wall_seconds": duration,
                "elapsed_seconds": time.perf_counter()-started}
         _append_json(output/"training.jsonl", row)
-        print(json.dumps({"event": "training", "completed_episode": completed, "seed": seed,
+        print(json.dumps({"scope": scope, "event": "training", "completed_episode": completed, "seed": seed,
                           "completed": summary["completed"], "planned": summary["planned"],
                           "return_sum": summary["return_sum"], "ppo": updates,
                           "wall_seconds": duration}, allow_nan=False), flush=True)
@@ -502,7 +527,7 @@ def main(argv=None):
     if initial_evaluated and not final_evaluated:
         final_evaluated = evaluate("final")
     save_checkpoint(output/"latest.pt", checkpoint())
-    result = {"scope": SCOPE, "configs": configs, "versions": versions,
+    result = {"scope": scope, "configs": configs, "versions": versions,
               "initial_completed_episodes": initial_completed, "completed_episodes": completed,
               "episodes_completed_this_job": completed-initial_completed, "next_seed_index": next_index,
               "target_completed_episodes": episodes, "stop_reason": stop_reason,

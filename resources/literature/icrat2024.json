@@ -1,0 +1,21 @@
+{
+  "schema": "local-paper.v1",
+  "title": "Urban Corridor-Based Tactical Conflict Resolution with Flight Plan Adherence and Uncertainty Resilience using a Multi-Agent Reinforcement Learning Solver",
+  "local_file": "local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf",
+  "sha256": "6e06179d0d05369e174b4c738c8b4119d42055b89bbee316a5fd8181bcf5cff4",
+  "bytes": 3452577,
+  "pages": 8,
+  "provenance": "Public ICRAT2024 official technical papers page links this Google Drive PDF; downloaded 2026-09-05 and first-page title/authors checked.",
+  "official_index": "https://www.icrat.org/previous-conferences/11th-international-conference/papers/",
+  "pdf_source": "https://drive.google.com/file/d/1x6-mxfZeodHbFTfkGyyOQcgzIF_sZ6W4/view",
+  "author_dataset_repository": "https://github.com/RodolpheFmd/ICRAT2024",
+  "repository_commit": "26ed1a0d128944643017e7ba5e9511dfc273a9bd",
+  "local_only": true,
+  "presentation": {
+    "local_file": "local/fremond-icrat2024-presentation.pptx",
+    "source": "https://drive.google.com/file/d/1Pegc9ahq6tnipWYcMVcZp2BRgmQllp0X/view",
+    "bytes": 9437671,
+    "sha256": "8a70f7898538890c995ac613ad7d22e5d54cf0d28aa52941d82434724befe668",
+    "text_inspection": "18 slide XML text runs inspected; no bank or endpoint implementation found; no slide visual rendering performed."
+  }
+}

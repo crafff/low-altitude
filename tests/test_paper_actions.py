@@ -173,6 +173,37 @@ class ActionTests(unittest.TestCase):
         self.assertGreater(fields['lane_error_m'], 20.)
         self.assertGreater(fields['command_counts']['outside_corridor_seconds'], 0.)
 
+    def test_settled_vertical_variant_keeps_lock_at_target_with_residual_climb(self):
+        self.controller.cfg['altitude_completion_requires_settled_vs'] = True
+        self.bs.traf.vs = np.array([5.])
+        self.controller.apply({'A': action(altitude=4)})
+        self.bs.traf.alt[0] = 450*.3048
+        self.advance_observation()
+        self.assertTrue(self.controller.state_fields('A')['altitude_active'])
+        self.assertFalse(self.controller.action_mask('A')[action(altitude=0)])
+        self.bs.traf.vs[0] = 0.
+        self.advance_observation()
+        self.assertFalse(self.controller.state_fields('A')['altitude_active'])
+        self.assertTrue(self.controller.action_mask('A')[action(altitude=0)])
+
+    def test_final_capture_guard_prevents_backwards_endpoint_route_without_locking_speed(self):
+        self.controller.cfg['guard_final_leg_capture'] = True
+        self.route.iactwp = 1  # Activate the real final nominal leg.
+        end = RouteGeometry(self.points).xy[-1]
+        self.put_xy(end[0], end[1]-25., track=0.)
+        self.advance_observation()
+        mask = self.controller.action_mask('A')
+        self.assertEqual(mask.sum(), 20)
+        self.assertTrue(all(mask[action(speed=s)] for s in range(4)))
+        self.assertFalse(mask[action(lane=0)])
+        self.assertFalse(mask[action(lane=2)])
+        before = self.controller.state_fields('A')['native_route_plan']
+        self.assertFalse(self.controller.apply({'A': action(lane=2)})['A']['accepted'])
+        self.assertEqual(self.controller.state_fields('A')['native_route_plan'], before)
+        self.put_xy(end[0], end[1]-200., track=0.)
+        self.advance_observation()
+        self.assertEqual(self.controller.action_mask('A').sum(), 60)
+
     def test_observation_statistics_are_idempotent_and_returned_values_are_copies(self):
         self.put_xy(1000., -100.)
         self.advance_observation()

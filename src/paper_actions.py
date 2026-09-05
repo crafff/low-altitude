@@ -53,6 +53,12 @@ def validate_config(cfg):
                  'lane_capture_track_tolerance_deg'):
         if isinstance(cfg[name], bool) or not math.isfinite(cfg[name]) or cfg[name] <= 0:
             raise ValueError(f'Invalid {name}')
+    if not isinstance(cfg.get('altitude_completion_requires_settled_vs', False), bool):
+        raise ValueError('Settled vertical speed completion must be boolean')
+    if cfg.get('altitude_capture_vs_tolerance_mps', .05) <= 0:
+        raise ValueError('Vertical speed completion tolerance must be positive')
+    if not isinstance(cfg.get('guard_final_leg_capture', False), bool):
+        raise ValueError('Final-leg capture guard must be boolean')
 
 
 class RouteGeometry:
@@ -236,7 +242,10 @@ class ActionController:
             if nominal is not None:
                 record.next_index = max(record.next_index, nominal)
             geom = self._geometry_state(acid, record)
-            if record.altitude_active and abs(float(self.bs.traf.alt[i])-record.target_alt) <= self.cfg['altitude_capture_tolerance_m']:
+            vertical_settled = (not self.cfg.get('altitude_completion_requires_settled_vs', False)
+                or abs(float(self.bs.traf.vs[i])) <= self.cfg.get('altitude_capture_vs_tolerance_mps', .05))
+            if (record.altitude_active and vertical_settled
+                    and abs(float(self.bs.traf.alt[i])-record.target_alt) <= self.cfg['altitude_capture_tolerance_m']):
                 record.altitude_active = False
                 record.stats['altitude_captures'] += 1
             if (record.lane_active and geom['on_parallel_segment']
@@ -265,6 +274,18 @@ class ActionController:
             mask &= _COMPONENTS[:, 1] == record.accepted[1]
         if record.lane_active:
             mask &= _COMPONENTS[:, 2] == record.accepted[2]
+        if self.cfg.get('guard_final_leg_capture', False) and record.next_index == len(record.geometry.xy)-1:
+            # Explicit terminal-operation variant: a new capture may not create
+            # a backwards final route. This does not assess collision safety or
+            # guarantee that the native finite-turn motion fits the corridor.
+            i = self._index(acid)
+            position = (float(self.bs.traf.lat[i]), float(self.bs.traf.lon[i]))
+            for lane in range(3):
+                if lane != record.accepted[2]:
+                    target = self.cfg['lane_fractions'][lane]*self.cfg['corridor_width_ft']*FT
+                    _, _, beyond = record.geometry.capture(position, record.next_index, target)
+                    if beyond:
+                        mask &= _COMPONENTS[:, 2] != lane
         return mask
 
     def apply(self, actions):

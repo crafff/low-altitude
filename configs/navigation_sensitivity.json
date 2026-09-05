@@ -1,0 +1,34 @@
+{
+  "schema": "bluesky.navigation-sensitivity.v1",
+  "study_config": "configs/route_action_study.json",
+  "baseline_types_config": "configs/uav_types.json",
+  "public_amzn_types_config": "configs/uav_types_openap_amzn.json",
+  "expected_bluesky_version": "1.1.1",
+  "variant_timeout_seconds": 180.0,
+  "variants": ["baseline", "amzn_public_44mps", "refresh_flyby_turn_distance"],
+  "public_sources": {
+    "navigation": {
+      "url": "https://raw.githubusercontent.com/RodolpheFmd/bluesky/849d76fd44880f8d17a69aefa0bd37208f2b2fbb/bluesky/traffic/activewpdata.py",
+      "commit": "849d76fd44880f8d17a69aefa0bd37208f2b2fbb",
+      "sha256": "9ca577959b262790418b940bb5c08fb2b2381d985ae3c206a16062811fec9493",
+      "lines": "reached 83-89; calcturn 117-143",
+      "read_only_audit": "Old reached recalculates before each decision. Its ordinary-flyby radius uses TAS squared divided by g0*max(0.01,tan(bank)); distance uses the wrapped current-to-next-bearing half-angle. No implemented 4-radius cap appears in the audited formula."
+    },
+    "amzn_speed": {
+      "url": "https://raw.githubusercontent.com/RodolpheFmd/bluesky/2bba625488e70b983256a11d6df8c31ebd290a0c/bluesky/resources/performance/OpenAP/rotor/aircraft.json",
+      "commit": "2bba625488e70b983256a11d6df8c31ebd290a0c",
+      "sha256": "0edd138b96de386d51c02b04b45c4bc758467b8a04e666fe9bbc30dda32b6d01",
+      "read_only_audit": "Amzn.envelop has v_max=44, vs_min=-8 and vs_max=8 in SI units. Other public rotor values are not substituted."
+    }
+  },
+  "reconstruction_choices": [
+    "Baseline uses the current shared environment, type table and reached implementation without a wrapper. amzn_public_44mps changes only the Amzn maximum/derived nominal TAS. refresh_flyby_turn_distance retains Table 3 speeds and changes only the ordinary-flyby turndist cache immediately before the current native reached call. There is no combined variant.",
+    "The refresh formula is a local NumPy reimplementation informed by fixed public 2024 source, not execution or import of author code and not a claim to reconstruct all old navigation or the 2026 author's implementation.",
+    "For ordinary flyby, use current actual TAS and current qdr, replace next_qdr<-900 with current qdr, and use current ap.bankdef. The old formula's tan(bank) lower bound 0.01 is retained; its unimplemented comment about a four-radius cap is not turned into a new cap.",
+    "Current 1.1.1 Route.direct stores computed positive turnspd even for ordinary flyby. It is therefore not interpreted as an explicit speed instruction here. Actual flyturn, turn-from-last-waypoint or turn-to-next-waypoint modes are unsupported and raise before modifying the cache or calling reached.",
+    "The wrapper changes only turndist for ordinary flyby entries, then calls the original reached exactly once and returns its result unchanged. Native flyover zeroing, close-waypoint rules, waypoint progression, turn radius/bank/heading/positions, action locks and terminal handling remain current behavior.",
+    "BlueSky exposes ActiveWaypoint through a callable-caching Proxy. The context temporarily replaces reached in the actual call facade's instance namespace, restores precisely its previous member in finally, and records wrapper/native call counts and restoration identity.",
+    "Each variant runs in a fresh sequential Python child inside the same launcher because PaperPerformance intentionally rejects replacing its type table in-process. No project/vendor source is modified; no author source is fetched during a workload. The supervisor and each owned child timeout bound execution.",
+    "Every selected variant uses the same selected cases from the seven-case study and reuses run_case, including streaming physics CSV and all failed outcomes. Additional refresh CSV and sensitivity metadata preserve current/old turn distances, initial and actual speeds, configuration hashes and native source identity. These are development sensitivity diagnostics only."
+  ]
+}

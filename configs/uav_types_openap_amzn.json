@@ -1,0 +1,32 @@
+{
+  "source": "Single-parameter sensitivity: Amzn v_max=44 m/s in the public 2024 fork rotor table; all other values retain configs/uav_types.json and 2026 Table 3.",
+  "nominal_speed_fraction": 0.8,
+  "acceleration_mps2": 3.5,
+  "public_source": {
+    "url": "https://raw.githubusercontent.com/RodolpheFmd/bluesky/2bba625488e70b983256a11d6df8c31ebd290a0c/bluesky/resources/performance/OpenAP/rotor/aircraft.json",
+    "commit": "2bba625488e70b983256a11d6df8c31ebd290a0c",
+    "sha256": "0edd138b96de386d51c02b04b45c4bc758467b8a04e666fe9bbc30dda32b6d01",
+    "source_field": "Amzn.envelop.v_max",
+    "source_value_mps": 44.0
+  },
+  "reconstruction_choices": [
+    "Only Amzn maximum TAS changes, from 196 kt to 44 m/s (44*3600/1852 kt). Its existing 0.8 nominal fraction consequently gives 35.2 m/s.",
+    "The knot-valued field preserves the existing performance loader interface. The sensitivity runner checks the resulting SI values and equality of the other eleven type records.",
+    "Amzn climb/descent remain 8 m/s. All types retain the existing 3.5 m/s2 acceleration, zero minimum TAS and current native bank/vertical dynamics.",
+    "This deliberately mixed table isolates one public-source parameter discrepancy. It is neither the full 2024 OpenAP model nor an identified 2026 author implementation."
+  ],
+  "types": {
+    "Amzn": {"maximum_speed_kt": 85.52915766738661, "climb_mps": 8, "descent_mps": 8},
+    "Cranfield": {"maximum_speed_kt": 85, "climb_mps": 3, "descent_mps": 3},
+    "CranfieldV2": {"maximum_speed_kt": 39, "climb_mps": 3, "descent_mps": 3},
+    "M100": {"maximum_speed_kt": 43, "climb_mps": 5, "descent_mps": 4},
+    "M200": {"maximum_speed_kt": 45, "climb_mps": 5, "descent_mps": 3},
+    "M600": {"maximum_speed_kt": 35, "climb_mps": 5, "descent_mps": 5},
+    "Phan4": {"maximum_speed_kt": 39, "climb_mps": 6, "descent_mps": 4},
+    "Mavic": {"maximum_speed_kt": 35, "climb_mps": 5, "descent_mps": 3},
+    "Eh216": {"maximum_speed_kt": 69, "climb_mps": 11, "descent_mps": 11},
+    "Horsefly": {"maximum_speed_kt": 43, "climb_mps": 8, "descent_mps": 8},
+    "Mnet": {"maximum_speed_kt": 21, "climb_mps": 5, "descent_mps": 5},
+    "Tecnalia": {"maximum_speed_kt": 21, "climb_mps": 3, "descent_mps": 3}
+  }
+}

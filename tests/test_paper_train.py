@@ -12,7 +12,8 @@ import numpy as np
 import torch
 from torch import nn
 
-from paper_train import (CollectionCutoff, aggregate_summaries, capture_rng, collect_episode, evaluate_development,
+from paper_train import (SCOPE, EXECUTION_SCOPE, CollectionCutoff, _validate_train_config,
+                         aggregate_summaries, capture_rng, collect_episode, evaluate_development,
                          load_checkpoint, make_checkpoint, restore_rng, save_checkpoint,
                          selection_key)
 from shared_ppo import SharedActorCritic, collate, update
@@ -156,7 +157,8 @@ class CheckpointTests(unittest.TestCase):
         np.random.seed(13)
         random.seed(14)
         self.cfg = config()
-        self.configs = {"ppo": self.cfg, "scenario_seed_start": 101, "development_cases": [53001]}
+        self.configs = {"training": {"scope": SCOPE}, "ppo": self.cfg,
+                        "scenario_seed_start": 101, "development_cases": [53001]}
         self.versions = {"torch": str(torch.__version__), "environment": "fake-v1"}
 
     def components(self):
@@ -191,6 +193,7 @@ class CheckpointTests(unittest.TestCase):
                 configs=self.configs, versions=self.versions)
             self.assertEqual(loaded["completed_episodes"], 1)
             self.assertEqual(loaded["next_seed_index"], 1)
+            self.assertEqual(loaded["scope"], SCOPE)
             actual_rows, _, actual_stats = self.episode(resumed, resumed_optimizer, resumed_sampling, resumed_shuffle, 102)
             self.assertEqual([r["action"] for r in actual_rows], [r["action"] for r in expected_rows])
             self.assertEqual(actual_stats, expected_stats)
@@ -225,6 +228,57 @@ class CheckpointTests(unittest.TestCase):
                         shuffle_generator=shuffle, configs=self.configs, versions=self.versions)
                 self.assertTrue(all(torch.equal(before[key], value) for key, value in model.state_dict().items()))
 
+    def test_execution_scope_round_trip_rejects_mixed_checkpoint_and_evaluation_scopes(self):
+        model, optimizer, sampling, shuffle = self.components()
+        configs = copy.deepcopy(self.configs)
+        configs["training"]["scope"] = EXECUTION_SCOPE
+        arguments = dict(completed_episodes=0, next_seed_index=0,
+                         sampling_generator=sampling, shuffle_generator=shuffle,
+                         configs=configs, versions=self.versions)
+        best = make_checkpoint(model, optimizer, **arguments, evaluation={"scope": EXECUTION_SCOPE})
+        payload = make_checkpoint(model, optimizer, **arguments,
+                                  evaluation={"scope": EXECUTION_SCOPE}, best_checkpoint=best)
+        with self.assertRaisesRegex(ValueError, "evaluation scope"):
+            make_checkpoint(model, optimizer, **arguments, evaluation={"scope": SCOPE})
+        with tempfile.TemporaryDirectory(prefix="paper-train-scope-") as directory:
+            path = Path(directory)/"latest.pt"
+            save_checkpoint(path, payload)
+            loaded = load_checkpoint(path, model, optimizer, sampling_generator=sampling,
+                shuffle_generator=shuffle, configs=configs, versions=self.versions)
+            self.assertEqual(loaded["scope"], EXECUTION_SCOPE)
+            self.assertEqual(loaded["evaluation"]["scope"], EXECUTION_SCOPE)
+            self.assertEqual(loaded["best_checkpoint"]["scope"], EXECUTION_SCOPE)
+            before = {key: value.clone() for key, value in model.state_dict().items()}
+            rng_before = capture_rng(sampling, shuffle)
+            for mismatch in ("top_level", "evaluation", "best", "configuration"):
+                bad = copy.deepcopy(payload)
+                if mismatch == "top_level":
+                    bad["scope"] = SCOPE
+                elif mismatch == "evaluation":
+                    bad["evaluation"]["scope"] = SCOPE
+                elif mismatch == "best":
+                    bad["best_checkpoint"]["scope"] = SCOPE
+                else:
+                    bad["configs"]["training"]["scope"] = SCOPE
+                save_checkpoint(path, bad)
+                with self.subTest(mismatch=mismatch), self.assertRaises(ValueError):
+                    load_checkpoint(path, model, optimizer, sampling_generator=sampling,
+                        shuffle_generator=shuffle, configs=configs, versions=self.versions)
+                self.assertTrue(all(torch.equal(before[key], value) for key, value in model.state_dict().items()))
+                self.assertTrue(torch.equal(rng_before["sampling"], sampling.get_state()))
+                self.assertTrue(torch.equal(rng_before["shuffle"], shuffle.get_state()))
+
+
+class ScopeConfigTests(unittest.TestCase):
+    def test_only_the_two_declared_diagnostic_scopes_are_accepted(self):
+        directory = Path(__file__).resolve().parents[1]/"configs"
+        for name in ("paper_train_dev.json", "paper_train_execution.json"):
+            cfg = json.loads((directory/name).read_text())
+            _validate_train_config(cfg, cfg["episodes"], cfg["wall_seconds"], None)
+        for invalid in ("effective baseline", "execution-semantics", "", None):
+            with self.subTest(scope=invalid), self.assertRaisesRegex(ValueError, "scope"):
+                _validate_train_config(dict(cfg, scope=invalid), cfg["episodes"], cfg["wall_seconds"], None)
+
 
 class SelectionTests(unittest.TestCase):
     def test_paired_evaluation_caches_nr_and_repeats_fixed_policy_rng_on_exact_scenarios(self):
@@ -244,13 +298,14 @@ class SelectionTests(unittest.TestCase):
                 return super().step(actions)
         cases = [{"seed": 53001, "corridor_count": 3}, {"seed": 53002, "corridor_count": 4}]
         scenarios = [{"seed": case["seed"], "geometry": [case["corridor_count"]]} for case in cases]
-        cfg = {"report_argmax": False, "dev_action_seed_base": 810000,
+        cfg = {"scope": SCOPE, "report_argmax": False, "dev_action_seed_base": 810000,
                "selection_min_completed_fraction": .95}
         env, model, cache = EvaluationEnvironment(), MarkerPolicy(), {}
         before = torch.random.get_rng_state().clone()
         first = evaluate_development(env, model, cases, scenarios, cfg, cache)
         second = evaluate_development(env, model, cases, scenarios, cfg, cache)
         self.assertEqual(first, second)
+        self.assertEqual(first["scope"], SCOPE)
         self.assertEqual(len(cache), 2)
         self.assertEqual(len(env.reset_scenarios), 6)  # Two NR, four policy resets.
         self.assertEqual(env.reset_scenarios, [scenarios[0], scenarios[0], scenarios[1],
@@ -258,6 +313,11 @@ class SelectionTests(unittest.TestCase):
         self.assertTrue(torch.equal(before, torch.random.get_rng_state()))
         self.assertTrue(model.training)
         self.assertIsNone(model.bias.grad)
+
+        execution_cfg = dict(cfg, scope=EXECUTION_SCOPE)
+        execution = evaluate_development(EvaluationEnvironment(), model, cases, scenarios, execution_cfg, {})
+        self.assertEqual(execution["scope"], EXECUTION_SCOPE)
+        self.assertEqual(execution["aggregate"], first["aggregate"])
 
     def test_aggregate_uses_total_flight_hours_and_retains_failed_population(self):
         aggregate = aggregate_summaries([summary(hours=1., nmac=10.), summary(hours=3., nmac=10.)])

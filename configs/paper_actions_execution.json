@@ -1,0 +1,49 @@
+{
+  "schema": "bluesky.paper-actions.v1",
+  "source": "Fremond et al. 2026, PDF pp.14-15, Eqs.16-18; paper/REPRODUCTION.md",
+  "speed_ratios": [
+    0.5,
+    0.8,
+    1.0,
+    1.05
+  ],
+  "altitude_fractions": [
+    -0.5,
+    -0.25,
+    0.0,
+    0.25,
+    0.5
+  ],
+  "lane_fractions": [
+    -0.5,
+    0.0,
+    0.5
+  ],
+  "nominal_altitude_ft": 350.0,
+  "corridor_height_ft": 200.0,
+  "corridor_width_ft": 500.0,
+  "capture_angle_deg": 45.0,
+  "offset_join": "miter",
+  "altitude_capture_tolerance_m": 0.5,
+  "lane_capture_tolerance_m": 2.0,
+  "lane_capture_track_tolerance_deg": 5.0,
+  "reconstruction_choices": [
+    "Action indices use C-order unravel_index over (4,5,3); nominal (2,2,1) is index37. Eq18's repeated positive sign is interpreted as left/center/right: negative/zero/positive offset, following the prose.",
+    "While altitude or lane capture is active, that dimension's mask permits only its previously accepted index. Speed remains selectable. A masked joint proposal is rejected in full, preserving accepted targets; the caller must sample and compute log-probabilities using the same mask.",
+    "Speed instructions are absolute fractions of the initial nominal TAS. TAS is converted to CAS at the current altitude after every physics step for the next step. Native acceleration and the supplied PaperPerformance caps still apply; no speed or bank governor is added.",
+    "Native ALT receives the absolute target and the signed type-specific maximum climb/descent rate. Capture clears at altitude error <=0.5m; native altitude acquisition continues to the target. No vertical state teleportation is performed.",
+    "Nominal geometry uses a fixed local equirectangular frame anchored at the route origin with Earth radius6371000m. Positive lane is right of current nominal course. Initial route registration preserves exact supplied latitude/longitude and native fly-by behavior.",
+    "Shifted interior vertices use miter intersections of parallel adjacent nominal legs; endpoints shift perpendicular to their first/last leg. This deterministic join geometry is not specified by the paper and does not guarantee corridor containment.",
+    "Lane changes build a 45degree capture chord from the current physical position toward the absolute offset of the current nominal leg, followed by all remaining shifted nominal vertices. An artificial waypoint maps to no nominal progress. Native real-waypoint activation advances nominal progress monotonically, preserving fly-by semantics.",
+    "If the 45degree chord extends beyond the next shifted corner, its location and the next nominal vertex are both retained; capture_beyond_leg_end is reported. This may cause backtracking or capture failure. No hidden corner-feasibility mask or skipped mission waypoint is introduced.",
+    "A lane lock clears only while a real waypoint is active, the aircraft lies longitudinally on that finite shifted leg, lateral error <=2m and actual track error <=5degrees. It may capture a subsequent parallel leg after a corner. A completed lock does not reactivate solely because native tracking later deviates; actual errors remain observable.",
+    "Repeated accepted target indices do not rebuild the route or count as new physical commands. Registration builds the initial nominal route without counting an action. Native speed maintenance refreshes are counted separately from policy speed commands.",
+    "previous_waypoint and next_waypoint refer to the original nominal route. destination_waypoint uses the currently accepted offset endpoint; final_nominal_active requires the real final waypoint to be active, not an artificial capture point. The parent owns arrival radius, timeout and terminal accounting.",
+    "Width exposure uses each post-step distance to the complete nominal polyline multiplied by elapsed simulator time, matching NR's sampling convention. The caller must invoke update after every physics step; observed deviations are diagnostics, not guarantees.",
+    "Execution reconstruction variant, not disclosed author code. Altitude completion additionally requires actual absolute vertical speed <=0.05m/s, to avoid releasing a reversal while native vertical acquisition has residual motion.",
+    "On the final nominal leg only, mask a changed lane if its literal 45degree capture point lies beyond the shifted endpoint along that leg. Keep the accepted lane and every otherwise valid speed/altitude combination. This prevents constructing a backwards final route; it does not predict collision risk, constrain all turning trajectories, or guarantee containment."
+  ],
+  "altitude_completion_requires_settled_vs": true,
+  "altitude_capture_vs_tolerance_mps": 0.05,
+  "guard_final_leg_capture": true
+}

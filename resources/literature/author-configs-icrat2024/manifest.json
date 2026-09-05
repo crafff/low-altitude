@@ -1,0 +1,28 @@
+{
+  "repository": "https://github.com/RodolpheFmd/ICRAT2024",
+  "commit": "26ed1a0d128944643017e7ba5e9511dfc273a9bd",
+  "retrieved_utc": "2026-09-05",
+  "scope": "Small public configuration records for source audit; not imported into project runtime",
+  "files": {
+    "training_configuration.csv": {
+      "source_url": "https://raw.githubusercontent.com/RodolpheFmd/ICRAT2024/26ed1a0d128944643017e7ba5e9511dfc273a9bd/Training%20data/training_configuration.csv",
+      "bytes": 6427,
+      "sha256": "8904632c31211da357bb64a689d01907a2932149da932d931b28f714b1cea9c9"
+    },
+    "nominal_I_parameters.csv": {
+      "source_url": "https://raw.githubusercontent.com/RodolpheFmd/ICRAT2024/26ed1a0d128944643017e7ba5e9511dfc273a9bd/Evaluation%20phase/Nominal%20model/I_parameters.csv",
+      "bytes": 8394,
+      "sha256": "d90c9ee180e0f7ac11b86ab4beaaf0eab5baad3056cc48d2f6ecc0c423713656"
+    },
+    "nominal_VIII.1_parameters.csv": {
+      "source_url": "https://raw.githubusercontent.com/RodolpheFmd/ICRAT2024/26ed1a0d128944643017e7ba5e9511dfc273a9bd/Evaluation%20phase/Nominal%20model/VIII.1.parameters.csv",
+      "bytes": 1447,
+      "sha256": "29ef39e3797ce2545b425e25d4f2153f710b7843e843d1c3c39232216f3d4573"
+    },
+    "uncertainties_VIII.2_parameters.csv": {
+      "source_url": "https://raw.githubusercontent.com/RodolpheFmd/ICRAT2024/26ed1a0d128944643017e7ba5e9511dfc273a9bd/Evaluation%20phase/Models%20trained%20with%20uncertainties/VIII.2.parameters.csv",
+      "bytes": 1429,
+      "sha256": "8696b3c5832b89cc7dadd85d3178650fc1ab6b9bff3855adbf1a46fe87cd7d3b"
+    }
+  }
+}

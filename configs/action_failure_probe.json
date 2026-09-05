@@ -1,0 +1,1049 @@
+{
+  "schema": "bluesky.action-failure-probe.v1",
+  "stage": "dev",
+  "bluesky_version": "1.1.1",
+  "seed": 51001,
+  "policy": "random",
+  "random_seed_offset": 700000,
+  "tracked_aircraft": [
+    "F007",
+    "F021"
+  ],
+  "expected_types": {
+    "F007": "Cranfield",
+    "F021": "M200"
+  },
+  "numeric_absolute_tolerance": 1e-06,
+  "numeric_relative_tolerance": 1e-12,
+  "environment": {
+    "schema": "bluesky.paper-like.environment.v1",
+    "scenario_config": "configs/nr_pilot.json",
+    "action_config": "configs/paper_actions.json",
+    "observation_config": "configs/paper_observation.json",
+    "types_config": "configs/uav_types.json",
+    "decision_seconds": 5.0,
+    "device": "cpu",
+    "reconstruction_choices": [
+      "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+      "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+      "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+      "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+      "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee."
+    ]
+  },
+  "effective_parts": {
+    "scenario": {
+      "schema": "bluesky.paper-like.nr-pilot.v1",
+      "bluesky_version": "1.1.1",
+      "stage": "dev",
+      "scenario_count": 8,
+      "seeds": [
+        51001,
+        51002,
+        51003,
+        51004,
+        51005,
+        51006,
+        51007,
+        51008
+      ],
+      "origin_lat_lon_deg": [
+        52.0,
+        4.0
+      ],
+      "origin_square_side_nm": 2.0,
+      "earth_radius_m": 6371000.0,
+      "route_length_nm": 5.0,
+      "corridor_counts": [
+        3,
+        4,
+        5
+      ],
+      "corridor_count_distribution": "uniform_choice",
+      "aircraft_per_scenario": 30,
+      "allocation_method": "balanced_corridor_order",
+      "origin_distribution": "uniform_square_rejection",
+      "minimum_origin_spacing_ft": 1630.0,
+      "max_origin_sampling_attempts": 10000,
+      "intermediate_waypoint_count_range": [
+        0,
+        3
+      ],
+      "waypoint_count_distribution": "uniform_integer",
+      "initial_bearing_deg_range": [
+        0.0,
+        360.0
+      ],
+      "initial_bearing_distribution": "uniform",
+      "signed_turn_deg_range": [
+        -90.0,
+        90.0
+      ],
+      "signed_turn_distribution": "uniform",
+      "first_entry_seconds": 0.0,
+      "entry_interval_seconds_range": [
+        60.0,
+        90.0
+      ],
+      "entry_interval_distribution": "uniform",
+      "type_count": 12,
+      "type_distribution": "uniform_choice",
+      "dt_seconds": 0.25,
+      "per_flight_timeout_seconds": 1200.0,
+      "arrival_radius_m": 25.0,
+      "altitude_ft": 350.0,
+      "lowc_horizontal_ft": 1630.0,
+      "nmac_horizontal_ft": 500.0,
+      "vertical_tolerance_ft": 100.0,
+      "corridor_width_ft": 500.0,
+      "corridor_height_ft": 200.0,
+      "store_full_trajectories": false,
+      "reconstruction_choices": [
+        "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+        "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+        "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+        "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+        "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+        "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+        "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+        "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+        "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+        "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+        "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+        "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed."
+      ]
+    },
+    "action": {
+      "schema": "bluesky.paper-actions.v1",
+      "source": "Fremond et al. 2026, PDF pp.14-15, Eqs.16-18; paper/REPRODUCTION.md",
+      "speed_ratios": [
+        0.5,
+        0.8,
+        1.0,
+        1.05
+      ],
+      "altitude_fractions": [
+        -0.5,
+        -0.25,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "lane_fractions": [
+        -0.5,
+        0.0,
+        0.5
+      ],
+      "nominal_altitude_ft": 350.0,
+      "corridor_height_ft": 200.0,
+      "corridor_width_ft": 500.0,
+      "capture_angle_deg": 45.0,
+      "offset_join": "miter",
+      "altitude_capture_tolerance_m": 0.5,
+      "lane_capture_tolerance_m": 2.0,
+      "lane_capture_track_tolerance_deg": 5.0,
+      "reconstruction_choices": [
+        "Action indices use C-order unravel_index over (4,5,3); nominal (2,2,1) is index37. Eq18's repeated positive sign is interpreted as left/center/right: negative/zero/positive offset, following the prose.",
+        "While altitude or lane capture is active, that dimension's mask permits only its previously accepted index. Speed remains selectable. A masked joint proposal is rejected in full, preserving accepted targets; the caller must sample and compute log-probabilities using the same mask.",
+        "Speed instructions are absolute fractions of the initial nominal TAS. TAS is converted to CAS at the current altitude after every physics step for the next step. Native acceleration and the supplied PaperPerformance caps still apply; no speed or bank governor is added.",
+        "Native ALT receives the absolute target and the signed type-specific maximum climb/descent rate. Capture clears at altitude error <=0.5m; native altitude acquisition continues to the target. No vertical state teleportation is performed.",
+        "Nominal geometry uses a fixed local equirectangular frame anchored at the route origin with Earth radius6371000m. Positive lane is right of current nominal course. Initial route registration preserves exact supplied latitude/longitude and native fly-by behavior.",
+        "Shifted interior vertices use miter intersections of parallel adjacent nominal legs; endpoints shift perpendicular to their first/last leg. This deterministic join geometry is not specified by the paper and does not guarantee corridor containment.",
+        "Lane changes build a 45degree capture chord from the current physical position toward the absolute offset of the current nominal leg, followed by all remaining shifted nominal vertices. An artificial waypoint maps to no nominal progress. Native real-waypoint activation advances nominal progress monotonically, preserving fly-by semantics.",
+        "If the 45degree chord extends beyond the next shifted corner, its location and the next nominal vertex are both retained; capture_beyond_leg_end is reported. This may cause backtracking or capture failure. No hidden corner-feasibility mask or skipped mission waypoint is introduced.",
+        "A lane lock clears only while a real waypoint is active, the aircraft lies longitudinally on that finite shifted leg, lateral error <=2m and actual track error <=5degrees. It may capture a subsequent parallel leg after a corner. A completed lock does not reactivate solely because native tracking later deviates; actual errors remain observable.",
+        "Repeated accepted target indices do not rebuild the route or count as new physical commands. Registration builds the initial nominal route without counting an action. Native speed maintenance refreshes are counted separately from policy speed commands.",
+        "previous_waypoint and next_waypoint refer to the original nominal route. destination_waypoint uses the currently accepted offset endpoint; final_nominal_active requires the real final waypoint to be active, not an artificial capture point. The parent owns arrival radius, timeout and terminal accounting.",
+        "Width exposure uses each post-step distance to the complete nominal polyline multiplied by elapsed simulator time, matching NR's sampling convention. The caller must invoke update after every physics step; observed deviations are diagnostics, not guarantees."
+      ]
+    },
+    "observation": {
+      "schema": "bluesky.paper-like.observation-reward.v1",
+      "earth_radius_m": 6371000.0,
+      "observation_radius_ft": 6000.0,
+      "waypoint_distance_scale_m": 9260.0,
+      "speed_reference_kt": 196.0,
+      "nominal_altitude_ft": 350.0,
+      "corridor_height_ft": 200.0,
+      "corridor_width_ft": 500.0,
+      "lowc_horizontal_ft": 1630.0,
+      "nmac_horizontal_ft": 500.0,
+      "vertical_tolerance_ft": 100.0,
+      "cpa_time_scale_seconds": 1200.0,
+      "cpa_relative_speed_epsilon_mps": 1e-06,
+      "efficiency_speed_weight": 0.3,
+      "efficiency_altitude_weight": 0.35,
+      "efficiency_lane_weight": 0.35,
+      "efficiency_reward_scale": 0.008,
+      "arrival_reward": 1.0,
+      "sources": [
+        "paper/REPRODUCTION.md",
+        "resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf: physical pp.11-16, Table 2, Eqs.14-15 and 19-22"
+      ],
+      "reconstruction_choices": [
+        "Table 2 feature meanings and order are preserved. Exact normalization bounds and angle conventions were not disclosed. Use p.13 [0,1], not the conflicting perturbation-section [0,9]; clip each scalar and count clips by feature before float32 conversion.",
+        "All positions and waypoints are lat/lon degrees; lengths, accepted targets and actual speeds use metres and metres per second. Ground speed and actual compass track, not target velocity, determine CPA. In the no-wind baseline the adapter maps accepted TAS commands to targeted ground speed.",
+        "Ownship previous/next waypoint distances are great-circle lengths on a 6371000 m sphere, divided by the nominal full-route length 9260 m. The adapter supplies the latest/next waypoint or route origin/destination, including its declared temporary-route handling.",
+        "Ownship accepted target speed is divided by the global 196 kt maximum. Target altitude is normalized from the 250 ft floor over the full 200 ft height. Right-positive accepted target lane is divided by the full 500 ft width then shifted by 0.5. The adapter supplies the two actual transition-lock flags.",
+        "Neighbors include every other aircraft at horizontal great-circle separation <=6000 ft, without a vertical filter or padding. Ownship and intruder IDs are sorted lexicographically; an empty encounter tensor has shape (0,10). The policy adapter, not this module, implements the paper's zero relative-vector convention.",
+        "Relative track and nominal-course angles use signed intruder minus ownship compass angles, wrapped to [-180,180) and divided by 360 then shifted by 0.5. Positive is clockwise/right; an exact half-turn takes -180. Same-corridor nominal cross-angle is forced to zero (normalized 0.5), even when aircraft occupy different route legs.",
+        "Relative accepted speed/altitude/lane targets use intruder minus ownship, divided by twice 196 kt, twice 200 ft or twice 500 ft respectively, then shifted by 0.5. Current actual altitude difference separately sets Eq.21 LoWC/NMAC thresholds, each normalized by 6000 ft.",
+        "CPA uses a common local east/north plane: relative position is great-circle range times the initial-bearing unit vector at ownship; velocities come from current ground speeds and tracks. For relative speed <=1e-6 m/s use t=0. Otherwise t=max(0,-r dot v/|v|^2). CPA distance uses that unbounded future time; only the normalized time feature clips at 1200 s. This local flat constant-velocity approximation is not a curved-flight forecast.",
+        "Safety uses the Eq.20 mean over all horizontally observed intruders, including zero-penalty neighbors; no neighbors gives zero. At or above 100 ft actual vertical separation both Eq.21 thresholds and the pair penalty are explicitly zero, including coincident horizontal positions.",
+        "Eq.22 compares accepted command targets exactly with stored nominal speed, configured 350 ft nominal altitude and zero lane. Nonnominal targets cost at each decision even if repeated, locked or completed; measured tracking error and rejected requests do not replace accepted targets. Accepted nominal commands should retain their canonical numerical values.",
+        "Reward total is safety +0.008*efficiency +1 for valid arrival. The environment is responsible for granting the arrival flag once, before its declared timeout; timeout or other deletion alone earns no arrival reward. Reward sampling and integration over physical steps belong to the environment adapter."
+      ]
+    }
+  },
+  "scenario": {
+    "seed": 51001,
+    "corridors": [
+      {
+        "id": "C01",
+        "waypoints_lat_lon_deg": [
+          [
+            52.003158389563296,
+            3.9927180008550067
+          ],
+          [
+            51.97377049023575,
+            3.944817877274005
+          ],
+          [
+            51.93220847879824,
+            3.948913502594422
+          ]
+        ]
+      },
+      {
+        "id": "C02",
+        "waypoints_lat_lon_deg": [
+          [
+            51.99143013020332,
+            4.005936723333605
+          ],
+          [
+            52.008675548492725,
+            4.041268299015684
+          ],
+          [
+            52.00936991524717,
+            4.086351466995467
+          ],
+          [
+            52.024657603853996,
+            4.124000206187475
+          ]
+        ]
+      },
+      {
+        "id": "C03",
+        "waypoints_lat_lon_deg": [
+          [
+            51.99923544687963,
+            3.986439450327424
+          ],
+          [
+            51.974267738159924,
+            4.1154433535725445
+          ]
+        ]
+      },
+      {
+        "id": "C04",
+        "waypoints_lat_lon_deg": [
+          [
+            51.98996131384162,
+            3.9971839563505682
+          ],
+          [
+            52.00477318203551,
+            3.9590530746096704
+          ],
+          [
+            52.017815935829425,
+            3.9192417361034586
+          ],
+          [
+            52.045358266357745,
+            3.9248689305340463
+          ]
+        ]
+      }
+    ],
+    "flights": [
+      {
+        "id": "F001",
+        "type": "Mnet",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 0.0
+      },
+      {
+        "id": "F009",
+        "type": "CranfieldV2",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 0.0
+      },
+      {
+        "id": "F017",
+        "type": "CranfieldV2",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 0.0
+      },
+      {
+        "id": "F024",
+        "type": "Phan4",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 0.0
+      },
+      {
+        "id": "F018",
+        "type": "M100",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 65.42575413667991
+      },
+      {
+        "id": "F002",
+        "type": "M200",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 70.93354487204606
+      },
+      {
+        "id": "F010",
+        "type": "Horsefly",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 71.36413672050398
+      },
+      {
+        "id": "F025",
+        "type": "Tecnalia",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 87.44203439599627
+      },
+      {
+        "id": "F019",
+        "type": "Phan4",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 138.14784818285358
+      },
+      {
+        "id": "F011",
+        "type": "M600",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 146.22326740956822
+      },
+      {
+        "id": "F003",
+        "type": "CranfieldV2",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 150.3121956877172
+      },
+      {
+        "id": "F026",
+        "type": "M100",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 176.97740650779838
+      },
+      {
+        "id": "F020",
+        "type": "Tecnalia",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 205.97098132467949
+      },
+      {
+        "id": "F012",
+        "type": "M600",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 223.80547386621788
+      },
+      {
+        "id": "F004",
+        "type": "Mnet",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 224.20137799995283
+      },
+      {
+        "id": "F027",
+        "type": "Mnet",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 239.60042753352113
+      },
+      {
+        "id": "F021",
+        "type": "M200",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 283.9067419092365
+      },
+      {
+        "id": "F013",
+        "type": "Horsefly",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 286.3651095908418
+      },
+      {
+        "id": "F005",
+        "type": "Eh216",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 306.4122151036125
+      },
+      {
+        "id": "F028",
+        "type": "Cranfield",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 316.79123311517844
+      },
+      {
+        "id": "F022",
+        "type": "Mnet",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 359.17960483164796
+      },
+      {
+        "id": "F014",
+        "type": "Horsefly",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 366.0751312670377
+      },
+      {
+        "id": "F006",
+        "type": "Tecnalia",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 381.0319809030635
+      },
+      {
+        "id": "F029",
+        "type": "M600",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 390.25991069976794
+      },
+      {
+        "id": "F015",
+        "type": "Eh216",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 428.5080474612763
+      },
+      {
+        "id": "F007",
+        "type": "Cranfield",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 441.43927526879406
+      },
+      {
+        "id": "F023",
+        "type": "M600",
+        "corridor_id": "C03",
+        "scheduled_entry_s": 444.17361254549223
+      },
+      {
+        "id": "F030",
+        "type": "Amzn",
+        "corridor_id": "C04",
+        "scheduled_entry_s": 451.31654730964743
+      },
+      {
+        "id": "F016",
+        "type": "Horsefly",
+        "corridor_id": "C02",
+        "scheduled_entry_s": 499.97136378789054
+      },
+      {
+        "id": "F008",
+        "type": "Cranfield",
+        "corridor_id": "C01",
+        "scheduled_entry_s": 517.1418850444163
+      }
+    ],
+    "reconstruction_choices": [
+      "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+      "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+      "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+      "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+      "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+      "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+      "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+      "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+      "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+      "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+      "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+      "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+      "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+    ]
+  },
+  "source": {
+    "runs/20260905T054206Z-paper-env-population-be961306/artifacts/result.json": "49e2964e579736ddc502101eb30242b457487655bfffe9f6e17037880ec8c884",
+    "runs/20260905T054206Z-paper-env-population-be961306/artifacts/51001-random/result.json": "5fe8845a25f5473669f0d8bde5318b7e3eae7b44fdca7ba1c74fe70e66f9799d",
+    "runs/20260905T054206Z-paper-env-population-be961306/artifacts/51001-random/scenario.json": "478bb46d56641125cd0364e644f3e6bdeacea35283864c4dc7f577fa2d1685f3"
+  },
+  "types_sha256": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc",
+  "expected_population": {
+    "seed": 51001,
+    "planned": 30,
+    "completed": 21,
+    "failed_timeout": 9,
+    "flight_hours": 6.491041666666667,
+    "risk": {
+      "lowc": {
+        "unordered_pair_seconds": 2419.75,
+        "directed_pair_seconds": 4839.5,
+        "event_count": 248,
+        "events_ended_at_aircraft_exit": 4,
+        "same_corridor_event_count": 180,
+        "events_started_at_admission": 3,
+        "unordered_seconds_per_flight_hour": 372.7830022145906,
+        "directed_seconds_per_flight_hour": 745.5660044291812
+      },
+      "nmac": {
+        "unordered_pair_seconds": 470.75,
+        "directed_pair_seconds": 941.5,
+        "event_count": 51,
+        "events_ended_at_aircraft_exit": 2,
+        "same_corridor_event_count": 48,
+        "events_started_at_admission": 0,
+        "unordered_seconds_per_flight_hour": 72.52302853291395,
+        "directed_seconds_per_flight_hour": 145.0460570658279
+      }
+    },
+    "path_length_m": 312202.3954307472,
+    "outside_corridor_aircraft_seconds": 9294.25,
+    "outside_corridor_flights": 27,
+    "max_centerline_distance_m": 20234.451490900956,
+    "outside_altitude_aircraft_seconds": 1052.25,
+    "changed_instructions": 5579,
+    "policy_decisions": 4673,
+    "return_sum": -200.15649872743344,
+    "sim_seconds": 1641.5,
+    "physics_steps": 6566,
+    "decision_steps": 329,
+    "max_active": 30,
+    "completed_population": true,
+    "policy": "random",
+    "scenario_kind": "population",
+    "fixed_action": null
+  },
+  "expected_tracked_flights": {
+    "F021": {
+      "id": "F021",
+      "type": "M200",
+      "corridor_id": "C03",
+      "scheduled_entry_s": 283.9067419092365,
+      "status": "flight_timeout",
+      "actual_entry_s": 284.0,
+      "flight_seconds": 1200.0,
+      "path_length_m": 18182.613871565423,
+      "max_centerline_distance_m": 4206.147708619982,
+      "outside_corridor_seconds": 1132.5,
+      "outside_altitude_seconds": 34.75,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 273,
+      "return_sum": -3.6496439730329118,
+      "terminal_time_s": 1484.0,
+      "terminal_state": [
+        51.958909333019655,
+        3.9899399552473103,
+        106.68,
+        9.260010867255454
+      ],
+      "endpoint_distance_m": 8729.861089037813,
+      "accepted_targets": {
+        "target_speed_mps": 9.260000000000002,
+        "target_alt_m": 106.68,
+        "target_lane_m": 76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 182,
+          "altitude_commands": 88,
+          "lane_commands": 3,
+          "route_rebuilds": 3,
+          "altitude_captures": 88,
+          "lane_captures": 2,
+          "capture_beyond_leg_end_commands": 1,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 1132.5,
+          "max_centerline_distance_m": 4206.147708619982
+        },
+        "lane_active": true,
+        "altitude_active": false,
+        "capture_beyond_leg_end": true,
+        "actual_cross_track_m": 4205.807485501653,
+        "lane_error_m": 4129.607485501653,
+        "nominal_waypoint_index": 1
+      }
+    },
+    "F007": {
+      "id": "F007",
+      "type": "Cranfield",
+      "corridor_id": "C01",
+      "scheduled_entry_s": 441.43927526879406,
+      "status": "flight_timeout",
+      "actual_entry_s": 441.5,
+      "flight_seconds": 1200.0,
+      "path_length_m": 34387.263291968135,
+      "max_centerline_distance_m": 20234.451490900956,
+      "outside_corridor_seconds": 866.75,
+      "outside_altitude_seconds": 0.0,
+      "admission_lowc_pairs": 1,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 262,
+      "return_sum": -4.2992660232571875,
+      "terminal_time_s": 1641.5,
+      "terminal_state": [
+        52.01402255485115,
+        4.287856043367177,
+        108.8925,
+        36.7313769090324
+      ],
+      "endpoint_distance_m": 24936.06968180836,
+      "accepted_targets": {
+        "target_speed_mps": 36.73133333333334,
+        "target_alt_m": 137.16,
+        "target_lane_m": 0.0
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 186,
+          "altitude_commands": 74,
+          "lane_commands": 2,
+          "route_rebuilds": 2,
+          "altitude_captures": 73,
+          "lane_captures": 1,
+          "capture_beyond_leg_end_commands": 1,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 866.75,
+          "max_centerline_distance_m": 20234.451490900956
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": true,
+        "actual_cross_track_m": -23710.13334457289,
+        "lane_error_m": -23710.13334457289,
+        "nominal_waypoint_index": 2
+      }
+    }
+  },
+  "expected_timeout_ids": [
+    "F001",
+    "F004",
+    "F006",
+    "F007",
+    "F020",
+    "F021",
+    "F022",
+    "F025",
+    "F027"
+  ],
+  "other_low_speed_timeout_records": [
+    {
+      "id": "F001",
+      "type": "Mnet",
+      "corridor_id": "C01",
+      "scheduled_entry_s": 0.0,
+      "status": "flight_timeout",
+      "actual_entry_s": 0.0,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8543.315790020384,
+      "max_centerline_distance_m": 83.02401981542523,
+      "outside_corridor_seconds": 529.25,
+      "outside_altitude_seconds": 52.5,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 297,
+      "return_sum": -7.6785457823080625,
+      "terminal_time_s": 1200.0,
+      "terminal_state": [
+        51.94299980988066,
+        3.9467032014967205,
+        123.60975,
+        8.642678529719934
+      ],
+      "endpoint_distance_m": 1206.9100455109883,
+      "accepted_targets": {
+        "target_speed_mps": 8.642666666666669,
+        "target_alt_m": 91.44,
+        "target_lane_m": 76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 183,
+          "altitude_commands": 104,
+          "lane_commands": 10,
+          "route_rebuilds": 10,
+          "altitude_captures": 103,
+          "lane_captures": 9,
+          "capture_beyond_leg_end_commands": 0,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 529.25,
+          "max_centerline_distance_m": 83.02401981542523
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": false,
+        "actual_cross_track_m": 78.36510587629293,
+        "lane_error_m": 2.1651058762929267,
+        "nominal_waypoint_index": 2
+      }
+    },
+    {
+      "id": "F025",
+      "type": "Tecnalia",
+      "corridor_id": "C04",
+      "scheduled_entry_s": 87.44203439599627,
+      "status": "flight_timeout",
+      "actual_entry_s": 87.5,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8954.116506801687,
+      "max_centerline_distance_m": 102.52143842043618,
+      "outside_corridor_seconds": 510.5,
+      "outside_altitude_seconds": 0.0,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 290,
+      "return_sum": -7.02068578063216,
+      "terminal_time_s": 1287.5,
+      "terminal_state": [
+        52.03348234029462,
+        3.9212016539454537,
+        116.4675,
+        8.64267780659155
+      ],
+      "endpoint_distance_m": 1341.5591156918545,
+      "accepted_targets": {
+        "target_speed_mps": 8.642666666666669,
+        "target_alt_m": 76.2,
+        "target_lane_m": -76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 188,
+          "altitude_commands": 82,
+          "lane_commands": 20,
+          "route_rebuilds": 20,
+          "altitude_captures": 81,
+          "lane_captures": 19,
+          "capture_beyond_leg_end_commands": 2,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 510.5,
+          "max_centerline_distance_m": 102.52143842043618
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": true,
+        "actual_cross_track_m": -84.30430338017031,
+        "lane_error_m": -8.104303380170307,
+        "nominal_waypoint_index": 3
+      }
+    },
+    {
+      "id": "F020",
+      "type": "Tecnalia",
+      "corridor_id": "C03",
+      "scheduled_entry_s": 205.97098132467949,
+      "status": "flight_timeout",
+      "actual_entry_s": 206.0,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8882.05497017834,
+      "max_centerline_distance_m": 79.58854695324206,
+      "outside_corridor_seconds": 933.0,
+      "outside_altitude_seconds": 0.0,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 269,
+      "return_sum": -9.620419293758932,
+      "terminal_time_s": 1406.0,
+      "terminal_state": [
+        51.97611738372576,
+        4.105777072906398,
+        90.9675,
+        7.821337839674565
+      ],
+      "endpoint_distance_m": 693.3136252386145,
+      "accepted_targets": {
+        "target_speed_mps": 8.642666666666669,
+        "target_alt_m": 76.2,
+        "target_lane_m": 0.0
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 188,
+          "altitude_commands": 74,
+          "lane_commands": 7,
+          "route_rebuilds": 7,
+          "altitude_captures": 73,
+          "lane_captures": 6,
+          "capture_beyond_leg_end_commands": 0,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 933.0,
+          "max_centerline_distance_m": 79.58854695324206
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": false,
+        "actual_cross_track_m": 2.247599290941146,
+        "lane_error_m": 2.247599290941146,
+        "nominal_waypoint_index": 1
+      }
+    },
+    {
+      "id": "F004",
+      "type": "Mnet",
+      "corridor_id": "C01",
+      "scheduled_entry_s": 224.20137799995283,
+      "status": "flight_timeout",
+      "actual_entry_s": 224.25,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8852.193657753312,
+      "max_centerline_distance_m": 80.25552472479832,
+      "outside_corridor_seconds": 45.25,
+      "outside_altitude_seconds": 62.0,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 310,
+      "return_sum": -3.124335286940094,
+      "terminal_time_s": 1424.25,
+      "terminal_state": [
+        51.94419277549411,
+        3.9488002302087337,
+        127.35975,
+        8.642678884612947
+      ],
+      "endpoint_distance_m": 1330.6287897232821,
+      "accepted_targets": {
+        "target_speed_mps": 8.642666666666669,
+        "target_alt_m": 76.2,
+        "target_lane_m": -76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 184,
+          "altitude_commands": 105,
+          "lane_commands": 21,
+          "route_rebuilds": 21,
+          "altitude_captures": 104,
+          "lane_captures": 20,
+          "capture_beyond_leg_end_commands": 1,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 45.25,
+          "max_centerline_distance_m": 80.25552472479832
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": false,
+        "actual_cross_track_m": -72.953137027216,
+        "lane_error_m": 3.246862972784001,
+        "nominal_waypoint_index": 2
+      }
+    },
+    {
+      "id": "F027",
+      "type": "Mnet",
+      "corridor_id": "C04",
+      "scheduled_entry_s": 239.60042753352113,
+      "status": "flight_timeout",
+      "actual_entry_s": 239.75,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8756.296194274308,
+      "max_centerline_distance_m": 78.99751881007602,
+      "outside_corridor_seconds": 173.75,
+      "outside_altitude_seconds": 83.0,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 306,
+      "return_sum": -4.04058762628864,
+      "terminal_time_s": 1439.75,
+      "terminal_state": [
+        52.032418861320494,
+        3.9228713479409354,
+        103.74025,
+        4.321338207295236
+      ],
+      "endpoint_distance_m": 1444.9437533682299,
+      "accepted_targets": {
+        "target_speed_mps": 4.321333333333334,
+        "target_alt_m": 121.92,
+        "target_lane_m": 76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 176,
+          "altitude_commands": 107,
+          "lane_commands": 23,
+          "route_rebuilds": 23,
+          "altitude_captures": 106,
+          "lane_captures": 22,
+          "capture_beyond_leg_end_commands": 1,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 173.75,
+          "max_centerline_distance_m": 78.99751881007602
+        },
+        "lane_active": true,
+        "altitude_active": true,
+        "capture_beyond_leg_end": false,
+        "actual_cross_track_m": 43.89330515066333,
+        "lane_error_m": -32.30669484933667,
+        "nominal_waypoint_index": 3
+      }
+    },
+    {
+      "id": "F022",
+      "type": "Mnet",
+      "corridor_id": "C03",
+      "scheduled_entry_s": 359.17960483164796,
+      "status": "flight_timeout",
+      "actual_entry_s": 359.25,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8586.23912479179,
+      "max_centerline_distance_m": 79.88003724758376,
+      "outside_corridor_seconds": 125.25,
+      "outside_altitude_seconds": 59.75,
+      "admission_lowc_pairs": 1,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 288,
+      "return_sum": -4.978329596289476,
+      "terminal_time_s": 1559.25,
+      "terminal_state": [
+        51.97593586376907,
+        4.103594480160563,
+        76.2,
+        9.074807623715767
+      ],
+      "endpoint_distance_m": 829.9280278232987,
+      "accepted_targets": {
+        "target_speed_mps": 9.074800000000003,
+        "target_alt_m": 76.2,
+        "target_lane_m": 76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 183,
+          "altitude_commands": 100,
+          "lane_commands": 5,
+          "route_rebuilds": 5,
+          "altitude_captures": 100,
+          "lane_captures": 4,
+          "capture_beyond_leg_end_commands": 0,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 125.25,
+          "max_centerline_distance_m": 79.88003724758376
+        },
+        "lane_active": true,
+        "altitude_active": false,
+        "capture_beyond_leg_end": false,
+        "actual_cross_track_m": 66.31217382064943,
+        "lane_error_m": -9.887826179350569,
+        "nominal_waypoint_index": 1
+      }
+    },
+    {
+      "id": "F006",
+      "type": "Tecnalia",
+      "corridor_id": "C01",
+      "scheduled_entry_s": 381.0319809030635,
+      "status": "flight_timeout",
+      "actual_entry_s": 381.25,
+      "flight_seconds": 1200.0,
+      "path_length_m": 8771.385802246912,
+      "max_centerline_distance_m": 78.7477024605396,
+      "outside_corridor_seconds": 13.0,
+      "outside_altitude_seconds": 0.0,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "policy_decisions": 240,
+      "changed_instructions": 273,
+      "return_sum": -3.3039704694131378,
+      "terminal_time_s": 1581.25,
+      "terminal_state": [
+        51.93862681763847,
+        3.949353659931511,
+        76.2,
+        8.642673927460903
+      ],
+      "endpoint_distance_m": 710.5630366245849,
+      "accepted_targets": {
+        "target_speed_mps": 8.642666666666669,
+        "target_alt_m": 76.2,
+        "target_lane_m": -76.2
+      },
+      "action_execution": {
+        "command_counts": {
+          "proposals": 240,
+          "accepted_actions": 240,
+          "rejected_actions": 0,
+          "speed_commands": 192,
+          "altitude_commands": 75,
+          "lane_commands": 6,
+          "route_rebuilds": 6,
+          "altitude_captures": 75,
+          "lane_captures": 5,
+          "capture_beyond_leg_end_commands": 1,
+          "speed_refreshes": 4800,
+          "physics_steps": 4800,
+          "outside_corridor_seconds": 13.0,
+          "max_centerline_distance_m": 78.7477024605396
+        },
+        "lane_active": true,
+        "altitude_active": false,
+        "capture_beyond_leg_end": true,
+        "actual_cross_track_m": -73.2911017774821,
+        "lane_error_m": 2.908898222517905,
+        "nominal_waypoint_index": 2
+      }
+    }
+  ],
+  "reconstruction_choices": [
+    "Replay the complete original saved 30-flight seed51001 population, not two isolated flights. Embed original geometry, schedules, types, and effective environment parts; source paths are provenance only and are not read by the workload.",
+    "Use the existing paper_rollout.choose_actions implementation with policy=random and a dedicated random.Random(seed+700000). Its sorted aircraft-ID traversal and ascending valid-action-index lists determine draw order; the tracer makes no RNG calls.",
+    "Use PaperEnvironment and its ActionController unchanged. Only the random episode is replayed in a fresh process; physical and action-count metric comparisons must pass before this trace is treated as reproduction of the saved outcome.",
+    "The callback records F007 and F021 after every0.25s physics/action update and before the environment computes arrival/timeout and deletes traffic. Initial admission is metadata; the first measured row is admission+0.25s. Record all terminal rows.",
+    "Every accepted action for the two traced aircraft is logged with its original decision time and first post-physics observation time. Proposal-change events and full route plans are emitted only when changed. Native guidance/lock changes retain adjacent sampled rows.",
+    "Offset endpoint minima are reported both across all accepted endpoint versions and since the current route plan began; nominal endpoint minima use one fixed endpoint. The current-route minimum resets on route-plan changes. These are sampled minima, not swept-segment distances.",
+    "Current target heading/native waypoint coordinates are the native guidance state used around the recorded step. Accepted altitude/TAS/lane targets remain separate from actual motion and native command arrays. Negative native sentinel values are retained.",
+    "Arrival/timeout diagnostic booleans duplicate the existing environment guard without changing it. The 25m endpoint and real-final-waypoint requirements must both hold; native LNAV deactivation is separately recorded.",
+    "The other seven Mnet/Tecnalia low-speed timeouts are preserved separately and are not classified as endpoint/LNAV failures by this two-aircraft trace. Full population failure and exposure accounting remains in the environment summary.",
+    "No bank, speed governor, route repair, synthetic waypoint capture, or terminal correction is introduced. A mismatch is a failed reproduction check with artifacts retained, not permission to change the saved reference.",
+    "A read-only wrapper around the existing bs.sim.step records the exact pre-physics state after any action route rebuild, invokes the original native step exactly once, and is restored afterward. Post-physics rows still use the original environment callback.",
+    "active_wp_nominal_mapping comes from the actual native waypoint name and route_plan mapping; None denotes artificial capture, independently of monotone nominal_waypoint_index. AP.idxreached and the native traffic index are retained.",
+    "The pre-step reached-condition columns reconstruct native close-and-away, passed-leg-without-distance-gate, and turn-distance predicates from read-only native states. AP.idxreached and pre/post LNAV provide the corresponding native observations.",
+    "Adjacent-segment endpoint distance is a local equirectangular chord projection using the currently accepted endpoint. It is a diagnostic approximation, not an exact native swept path. The missed-disk flag additionally requires an unchanged endpoint and a real final waypoint active on both sides; all underlying distances are retained."
+  ]
+}

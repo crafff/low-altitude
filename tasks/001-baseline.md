@@ -292,3 +292,65 @@ latest.pt 664620字节（内嵌第0轮best）、best.pt 198201字节；固定副
 [literal-ppo-resume](../runs/20260905T061702Z-literal-ppo-resume-78630a7b/artifacts/result.json)从两轮checkpoint续到总3轮；[continuous-three](../runs/20260905T061901Z-literal-ppo-continuous-three-fc6bdb9a/artifacts/result.json)从头连续3轮。两者均正常完成，分别约59.62/74.64s job，未同时运行。[独立checkpoint比较](../runs/20260905T062109Z-literal-native-resume-compare-fe7da12f/artifacts/result.json)实际weights-only加载两份产物，model、Adam、全部RNG、计数器、配置/源码身份、最佳checkpoint及科学开发评价逐项完全一致；仅排除评价phase及实际墙钟/RSS。比较脚本src/checkpoint_compare.py随源码保存。该证据覆盖真实BlueSky跨进程reset/续训，仍不证明策略有效。
 
 准备将小型恢复点checkpoints/literal-pilot-20260905（2轮latest、0轮best、3轮resumed及配置/指标/比较证据）随当前已授权私有GitHub分支提交；原始runs不加入Git，重复continuous-three.pt不加入Git。06:16主机load约2.39、MemAvailable61.42GiB、磁盘可用145.08GiB；未向GPU提交计算或操作其他实验进程。
+
+### 06:23–06:29 UTC：7单机路线结果与远端恢复点
+
+[route-action-seven](../runs/20260905T062257Z-route-action-seven-725d5871/artifacts/result.json)实际7例全完成、无超时，11.45s job；这并不意味着走廊可行。两等长腿共5NM、赤道东向后北向90°左转，完整每0.25s原生轨迹保留。
+
+| Case | 最大偏离m | 越界aircraft-s | 到达s |
+| --- | ---: | ---: | ---: |
+| Mavic中心 | 12.265 | 0 | 640 |
+| Mavic内侧 | 88.473 | 311.25 | 631.75 |
+| Mavic外侧 | 88.840 | 324.25 | 652.75 |
+| Amzn中心 | 406.142 | 15.75 | 107.25 |
+| Amzn内侧 | 474.220 | 23.75 | 105.5 |
+| Amzn外侧 | 348.829 | 12 | 108.5 |
+| Amzn原生转弯中才内移（t45s） | 406.142 | 15.75 | 107.25 |
+
+所有发出横移动作的case最终锁完成；6/7发生不同程度越界。解析圆弧和原生轨迹一致支持有限turn envelope与边缘目标不可自动相容，不能只加训练来解释。为区分终点采样漏过与末端真实错过，主线程新增route_completion.py纯几何辅助，提供已声明25m端点邻域的段最近距离、以及候选有限出口截面交点（两种不同任务定义）；尚未接入环境或改变成功定义。[route-geometry-tests](../runs/20260905T062811Z-route-geometry-tests-76b091bd/log.txt)8项通过，覆盖精确5NM几何/内外符号及段漏采样、反向/远离出口与高度交点等；不构成执行修正的实测。
+
+**远端备份落实。** 提交82fd7cf0a65c280b0a97bfdb51304c180b08aaa5已push到crafff/low-altitude的既有私有分支research/trc-baseline-system-20260905，随后git ls-remote核对同一完整SHA。包括CPU恢复点latest/best/resumed-three（总1550417字节模型）及源码/配置/原始小型指标；不是全runs/PDF的备份。后续严格恢复须使用该源码版本，后续物理修正不会静默加载不兼容checkpoint。
+
+新增绘图交接paper_features（原线程Astra/xhigh）：只写route_study_plot.py，用上述7case精简坐标JSON生成标准matplotlib SVG/PNG/PDF，展示首段横移/转弯/偏离曲线与有限走廊边界；输入由controller从既存CSV逐样本准备，保存source SHA，不执行绘图或实验，约20min。
+
+### 06:29–06:38 UTC：末端故障证实与显式语义候选
+
+[action-failure-trace](../runs/20260905T062910Z-action-failure-trace-89478f96/artifacts/result.json)完整原30机random重放，各保存参考比较全通过（21到达/9超时、总4673次动作draw、最大20234.451491m），16.00s job。F007在t772.75s/age331.25s由close-and-away分支关闭LNAV，真实最终WP、距新端点68.2716m；F021在t910.75s/age626.75s由passed-leg分支关闭LNAV，距新端点38.3757m。两者均最后capture超出腿末端、lane锁尚未完成；两CSV均0个25m圆被相邻样本漏过的事件，故不是简单采样漏判。关闭后分别记录869.0/573.5s LNAV-off飞行，解释此前远飞尾段。其他7个慢机超时仍单列。
+
+主线程新增可选swept_endpoint/finite_exit及route_exhausted_without_arrival终止（原sampled_endpoint默认保留）、final-leg capture guard、altitude完成需VS<=.05候选，分别在独立配置保存；并在aggregate保留新增失败数。finite_exit使用固定名义出口有限宽高、跨步交点和最终腿进度，不将native passed或无限平面当成功。只读审查指出单腿出生时最终航点已激活必须在首动作插CAP前记账，已在register后latch；还需相关回归与实际变体诊断。[execution-semantics-tests](../runs/20260905T063731Z-execution-semantics-tests-1c323a20/log.txt)修正该进度记账前99项通过、8.219s；不将单测作为变体有效性证据。
+
+追加review交接learning_integration_review：只读上述helpers/env/actions/trainer聚合与3个环境配置，定位误成功/删除/未来信息/mask不一致，≤15min；已有首个进度记账问题回执，主线程落实。route_trace追加vertical_lock_probe实现交接（上次slot满未送达，后续重试成功）：只写独立probe/配置，8个5NM直线Mnet/M100/Cranfield/Amzn×两种完成条件、5s边界反复31/43、每.25s altitude/VS/lock/指令记录，≤20min，无实验/清理/嵌套；主线程独占运行。
+
+### 06:39–06:58 UTC：执行候选、原文来源与高度根因
+
+默认literal完整random重放在 [literal-refactor-replay](../runs/20260905T064232Z-literal-refactor-replay-426c8656/artifacts/result.json)仍通过全部原参考比较，16.06s job；新选项未改变默认物理结果。[路线图](../reports/route-execution-20260905/README.md)已生成并目视检查，输入保留全部原轨迹采样及SHA。
+
+终止候选先使用同一开发seed51001、各30机NR/random：[swept](../runs/20260905T064533Z-swept-terminal-population-d2937dfe/artifacts/result.json) random为21完成/7超时/2导航耗尽；[finite-exit](../runs/20260905T065436Z-finite-exit-population-fixed-3f46a720/artifacts/result.json)为17/7/6；[finite-exit加执行完成修正](../runs/20260905T065556Z-execution-population-5f21eaa9/artifacts/result.json)为19/7/4。三者NR均30/30；有限出口多保留末端约51.75累计aircraft-s（5.180764h对5.166389h）。有限宽高出口会拒绝接近端点但从走廊边界外退出的飞机，不应为提高完成率把它计成功。提前删除失败尾段改变风险分母与后续population/RNG，不能将这些同seed随机运行当完全相同逐机动作的因果对照。
+
+有限出口第一次运行 [ca493efe](../runs/20260905T064718Z-finite-exit-population-ca493efe/log.txt)在结果保存时因NumPy bool不可JSON序列化失败，保留负记录；几何返回统一转原生数值/bool并补实际NumPy回归。[单腿入场进度回归](../runs/20260905T065343Z-terminal-regression-30f9db2a/log.txt)1项、[终止几何含序列化](../runs/20260905T065350Z-terminal-numpy-regression-6368c391/log.txt)5项通过。
+
+[vertical-lock-eight](../runs/20260905T065518Z-vertical-lock-eight-fixed-a518ad01/artifacts/result.json)8例均完成，26.79s job。四机型literal/settled成对反复250/450ft，5s动作时序、原生垂直动力学保留。literal最大高于顶/低于底：Mnet0.321/4.404m、M1006.428/0.761m、Cranfield0/0、Amzn16.283/8.665m；对应settled四例均0越界、无残余VS反向指令。literal分别31/21/0/7次反向时仍有残余VS；Cranfield虽锁释放有3m/s残余，但到下个5s命令时已经稳定。这支持完成条件必须区分高度位置与垂直速度，不能只由锁释放瞬时VS推断实际反向风险。组合population也将高度越界从1063.25 aircraft-s变为0，但随机动作流同时改变，仅作一致性支持。首次probe [2043e497](../runs/20260905T065358Z-vertical-lock-eight-2043e497/log.txt)因原生az/swaltsel在首次physics前尚未创建而失败；主线程改为未定义时null，az列明确是原生命令而非实际有限差分加速度，不填伪零。
+
+来源回执：route_fidelity与observation_reward_spec完成2024论文/配置、BlueSky fork及另外4个作者仓库的只读调查；固定链接和具体限制写入SOURCES/REPRODUCTION。没有2026完整导航源码或权重证据。旧OpenAP Amzn最大44m/s与Table3 196kt不同；旧普通flyby reached每次更新当前TAS对应转弯距离，1.1.1在航点激活时缓存。原文参数不被替换，另建分离敏感性。
+
+新增交接paper_features：只写navigation_sensitivity.py、两配置及对应聚焦单测；问题为上述速度与flyby缓存各自影响；来源7例route_action_study和固定旧源SHA；输出baseline/仅Amzn44mps/仅刷新普通flyby三条独立轴，各串行新Python进程置于同一个outer lab（不嵌套agent），防止性能表单例串扰；≤25min静态实现、不实验。shared_ppo追加只写trainer/对应测试及execution训练配置，将两个明确scope贯穿产物且不放松resume身份；≤20min，不实验。observation_reward_spec追加只读2026 pp.8–11/17–25，对位置噪声与通信中断给出事实/歧义/最小规范和零扰动测试建议；≤20min，不修改/实验。各任务均保留他人文件、禁止嵌套委派。
+
+06:58左右只读thread metadata再核对：paper_features第4turn、route_trace第4、route_fidelity第6、observation_reward_spec第3、shared_ppo第3、learning_integration_review第3，最新实际model均gpt-6-astra/effort xhigh；线程ID见前文。主线程继续本10h，优先收敛执行选择后有界扩大训练，不向GPU提交任务，不提前通知完成。
+
+### 06:58–07:02 UTC：单轴敏感性与下一训练配置固定
+
+[navigation-sensitivity-tests](../runs/20260905T065846Z-navigation-sensitivity-tests-4c498ab1/log.txt)6项通过；[三变体各7例](../runs/20260905T065855Z-navigation-sensitivity-seven-c4774d42/artifacts/result.json)73.27s job全部正常终止。baseline重复此前7例；仅Amzn公开44m/s时Mavic三例完全相同，Amzn中心/内/外/late最大偏离76.028/150.028/76.198/76.028m，越界0/9.75/0/0 aircraft-s；仅普通flyby刷新时Table3 Amzn四例的这些指标未变，Mavic内/外最大89.140/89.909m。实际refresh wrapper/native调用逐例相同且>0、finally恢复均通过，运行中无flyturn模式。来源差异对速度重要，但不消除完整边缘执行问题；不把该旧速度当2026勘误或修改主类型表。
+
+[execution-swept人口](../runs/20260905T065658Z-execution-swept-population-1a632e1d/artifacts/result.json)random21完成/7慢机超时/2Cranfield导航耗尽，无高度越界、最大横向227.028m；guard仅防capture几何超过末端，不保证有限转弯能捕获。与finite_exit组合19/7/4相比，不因完成率稍高而选择较宽松任务定义。具体选择理由见DECISIONS，下一轮使用有限出口execution配置、全部12开发例、25轮/600s内预算；仍是有未解决横向约束的学习诊断。
+
+trainer第二scope传播与严格恢复兼容的 [scope-tests](../runs/20260905T070132Z-paper-train-scope-tests-820f61ab/log.txt)10项通过，2.99s job。shared_ppo仅静态实现三owned文件，controller执行测试，原literal测试保留。read-only reviewer追加navigation单轴与终止候选审查，≤15min，禁止实验/修改，正在返回。07:00普通资源诊断load约3.07、MemAvailable61.35GiB、磁盘可用144.64GiB；受限/proc看不到原两个PID，不据此推断外部训练已退出，CPU-only承诺不变。
+
+### 07:02起：25轮训练进行中及配套来源补齐
+
+主线程启动 [execution-ppo-25](../runs/20260905T070231Z-execution-ppo-25-834d0f28/status.json)，25轮目标、600s内预算/660s外监督、256MiB输出/4096MiB每进程地址上限；继续nice15/ionice3/CPU14。初始全12开发例实际169.28s：NR359/360（seed53008有1导航耗尽），sample239/360（68导航耗尽、53超时）；横向越界16/341架次，最大599.314/618.641m，均0高度越界。首个单seed NR30/30不能推广全开发集无失败。正在学习，不将初始结果当最终结论。
+
+独立reviewer返回：没有阻断当前小PPO诊断的实现问题，静态公式与实际hook/速度核对均通过；刷新无效仅限7个恒速case，不能排除策略加减速时旧缓存影响。保留同seed动作流与失败暴露解释边界，无需据swept完成率较高改选训练定义。无修改/测试。
+
+observation_reward_spec只读规范返回，事实/歧义与具体选择写入 [PERTURBATIONS](../paper/PERTURBATIONS.md)：二维噪声定义、p与events/h差异、blackout重叠与缺失ownship控制均不冒称作者代码。追加paper_features实现交接：仅observation_perturbation.py/配置/测试，纯独立感知层，零扰动不消费RNG、同刻cache、JSON恢复、事件/可见性分离；不改正在训练的源模块，不执行测试/实验/清理，≤30min，返回后controller验证。真实aircraft-s与缺失决策PPO尚不由离散接口伪造。
+
+route_fidelity追加15min只读特刊核验：读PLAN/SOURCES与出版社/客座编辑官方入口，不修改、不实验、不联系他人。返回大学官网明确链接的编辑现行主页仍征稿、截止2026-12-30；出版社征稿列表搜索索引一致，CFP正文/作者指南403。已更新PLAN/SOURCES/NOW，访问日期与deadline分开、投稿系统未核实。当前10h截止15:15:13 UTC不变。

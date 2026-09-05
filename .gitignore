@@ -14,5 +14,6 @@ models/
 *.pt
 *.ckpt
 *.pdf
+resources/literature/local/
 legacy/*
 !legacy/README.md

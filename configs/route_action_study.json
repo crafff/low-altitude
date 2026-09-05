@@ -1,0 +1,28 @@
+{
+  "schema": "bluesky.route-action-study.v1",
+  "environment_config": "configs/paper_environment.json",
+  "seed": 61501,
+  "origin_lat_lon_deg": [0.0, 0.0],
+  "earth_radius_m": 6371000.0,
+  "route_length_m": 9260.0,
+  "leg_bearings_deg": [90.0, 0.0],
+  "cases": [
+    {"id": "mavic_center", "aircraft_type": "Mavic", "action": 37, "trigger": "at_start"},
+    {"id": "mavic_inner", "aircraft_type": "Mavic", "action": 36, "trigger": "at_start"},
+    {"id": "mavic_outer", "aircraft_type": "Mavic", "action": 38, "trigger": "at_start"},
+    {"id": "amzn_center", "aircraft_type": "Amzn", "action": 37, "trigger": "at_start"},
+    {"id": "amzn_inner", "aircraft_type": "Amzn", "action": 36, "trigger": "at_start"},
+    {"id": "amzn_outer", "aircraft_type": "Amzn", "action": 38, "trigger": "at_start"},
+    {"id": "amzn_late_after_native_advance", "aircraft_type": "Amzn", "action": 36, "trigger": "late_after_native_advance"}
+  ],
+  "reconstruction_choices": [
+    "These are seven predeclared deterministic single-aircraft diagnostics, not sampled training/evaluation population scenarios. The seed is provenance metadata; no geometry or aircraft-type draw is made.",
+    "The nominal route starts at equatorial (0,0), proceeds 4630 m due east then 4630 m due north on a 6371000 m sphere. This diagnostic geometry gives exactly 5 NM and a 90 degree left turn without meridian-convergence ambiguity. The shifted-route miter geometry remains the existing ActionController implementation.",
+    "Positive lane is right of travel. Thus 36 selects the negative 250 ft inner edge, 37 the center, and 38 the positive 250 ft outer edge for this left turn. All three preserve nominal speed and 350 ft altitude. Type-specific nominal speed, bank, fly-by, capture and timeout behavior remain the shared environment's current settings.",
+    "Early cases propose their selected command at t=0 and repeat it at every 5 s decision boundary. The late_after_native_advance case repeats 37 until the first decision boundary after the native FMS has advanced nominal_waypoint_index to 2, then proposes and repeats 36. This examines changing lane during native turning, not action-execution delay.",
+    "The late trigger deliberately follows native waypoint progress, since a fast fly-by aircraft may never approach the original corner within 200 m. Record the actual corner distance, heading, cross-track, accepted targets and capture_beyond_leg_end at the triggering decision and subsequent physics samples. A trigger that never occurs remains a reported failed diagnostic condition.",
+    "The existing PaperEnvironment runs one aircraft and invokes the trace callback every 0.25 s after native motion and ActionController.update, before terminal deletion. The study does not mutate native route/physics/action state; it only calls reset, step and read-only state accessors.",
+    "Each case writes streaming physics.csv, scenario.json, decisions.json and result.json below LAB_RUN_DIR. CSV contains both the controller's stored route plan and the actual native waypoint table. Captures skipped before the first post-command sample can be identified only as never observed active, not as proof they were never briefly active between samples.",
+    "LoWC/NMAC are absent by construction because no other aircraft exists; these cases diagnose route and action execution, not conflict resolution effectiveness. Arrival, timeout, width exposure, lane-lock completion, route-plan changes and runtime failures remain distinct outcomes."
+  ]
+}

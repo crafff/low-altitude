@@ -1,0 +1,339 @@
+{
+  "schema": "route-study-plot-metadata.v1",
+  "created_utc": "2026-09-05T06:39:37.944743+00:00",
+  "source_run": "runs/20260905T062257Z-route-action-seven-725d5871",
+  "input_name": "reports/route-execution-20260905/figure-input.json",
+  "input_sha256": "08979f85e3789da520e8120d4c30e49fd2d4f583441eb5ff943b0d20caf9eb9e",
+  "matplotlib_version": "3.11.1",
+  "outputs": [
+    "route_execution.svg",
+    "route_execution.png",
+    "route_execution.pdf"
+  ],
+  "figure_size_inches": [
+    17.5,
+    10.0
+  ],
+  "png_dpi": 300,
+  "route_xy": [
+    [
+      0,
+      0
+    ],
+    [
+      4630,
+      0
+    ],
+    [
+      4630,
+      4630
+    ]
+  ],
+  "half_width_m": 76.2,
+  "bank_limit_deg": 25.0,
+  "sample_interval_s": 0.25,
+  "all_samples_retained": true,
+  "line_simplification": false,
+  "case_statistics": {
+    "mavic_center": {
+      "type": "Mavic",
+      "lane": "center",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 2561,
+      "last_sample_time_s": 640.0,
+      "global_peak": {
+        "t": 320.75,
+        "x_m": 4617.088653204037,
+        "y_m": 12.265028179121883,
+        "deviation_m": 12.2650281791216
+      },
+      "exceeded_tube": false,
+      "post_sample_outside_seconds": 0.0
+    },
+    "mavic_inner": {
+      "type": "Mavic",
+      "lane": "inner",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 2528,
+      "last_sample_time_s": 631.75,
+      "global_peak": {
+        "t": 317.75,
+        "x_m": 4540.44255801128,
+        "y_m": 88.47314377587655,
+        "deviation_m": 88.47314377587627
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 311.25
+    },
+    "mavic_outer": {
+      "type": "Mavic",
+      "lane": "outer",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 2612,
+      "last_sample_time_s": 652.75,
+      "global_peak": {
+        "t": 328.25,
+        "x_m": 4691.674776237676,
+        "y_m": -63.94350046290019,
+        "deviation_m": 88.84002068320872
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 324.25
+    },
+    "amzn_center": {
+      "type": "Amzn",
+      "lane": "center",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 430,
+      "last_sample_time_s": 107.25,
+      "global_peak": {
+        "t": 53.75,
+        "x_m": 4223.8578450184295,
+        "y_m": 417.9145692377253,
+        "deviation_m": 406.1421541081051
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 15.75
+    },
+    "amzn_inner": {
+      "type": "Amzn",
+      "lane": "inner",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 423,
+      "last_sample_time_s": 105.5,
+      "global_peak": {
+        "t": 53.0,
+        "x_m": 4155.779506044724,
+        "y_m": 487.5084361120989,
+        "deviation_m": 474.22049256725074
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 23.75
+    },
+    "amzn_outer": {
+      "type": "Amzn",
+      "lane": "outer",
+      "status": "arrived",
+      "command_t_s": 0.0,
+      "input_sample_count": 435,
+      "last_sample_time_s": 108.5,
+      "global_peak": {
+        "t": 54.25,
+        "x_m": 4270.400878490973,
+        "y_m": 348.8293882157383,
+        "deviation_m": 348.82938821573794
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 12.0
+    },
+    "amzn_late_after_native_advance": {
+      "type": "Amzn",
+      "lane": "late_inner",
+      "status": "arrived",
+      "command_t_s": 45.0,
+      "input_sample_count": 430,
+      "last_sample_time_s": 107.25,
+      "global_peak": {
+        "t": 53.75,
+        "x_m": 4223.8578450184295,
+        "y_m": 417.9145692377253,
+        "deviation_m": 406.1421541081051
+      },
+      "exceeded_tube": true,
+      "post_sample_outside_seconds": 15.75
+    }
+  },
+  "spatial_panels": [
+    {
+      "aircraft_type": "Mavic",
+      "kind": "start",
+      "origin_xy_m": [
+        0,
+        0
+      ],
+      "limits_relative_to_origin_m": [
+        -30.0,
+        330.0,
+        -110.0,
+        110.0
+      ],
+      "visible_peak_by_case": {
+        "mavic_center": {
+          "t": 20.25,
+          "x_m": 291.69034222855856,
+          "y_m": 1.7860882197619967e-14,
+          "deviation_m": 5.684341886080804e-14
+        },
+        "mavic_inner": {
+          "t": 9.25,
+          "x_m": 99.80192529825305,
+          "y_m": 78.90534697035201,
+          "deviation_m": 78.90534697035201
+        },
+        "mavic_outer": {
+          "t": 9.25,
+          "x_m": 99.80192529825304,
+          "y_m": -78.905346970352,
+          "deviation_m": 78.905346970352
+        }
+      }
+    },
+    {
+      "aircraft_type": "Mavic",
+      "kind": "corner",
+      "origin_xy_m": [
+        4630,
+        0
+      ],
+      "limits_relative_to_origin_m": [
+        -220.0,
+        160.0,
+        -130.0,
+        250.0
+      ],
+      "visible_peak_by_case": {
+        "mavic_center": {
+          "t": 320.75,
+          "x_m": 4617.088653204037,
+          "y_m": 12.265028179121883,
+          "deviation_m": 12.2650281791216
+        },
+        "mavic_inner": {
+          "t": 317.75,
+          "x_m": 4540.44255801128,
+          "y_m": 88.47314377587655,
+          "deviation_m": 88.47314377587627
+        },
+        "mavic_outer": {
+          "t": 328.25,
+          "x_m": 4691.674776237676,
+          "y_m": -63.94350046290019,
+          "deviation_m": 88.84002068320872
+        }
+      }
+    },
+    {
+      "aircraft_type": "Amzn",
+      "kind": "start",
+      "origin_xy_m": [
+        0,
+        0
+      ],
+      "limits_relative_to_origin_m": [
+        -30.0,
+        330.0,
+        -110.0,
+        110.0
+      ],
+      "visible_peak_by_case": {
+        "amzn_center": {
+          "t": 3.75,
+          "x_m": 302.49368347977423,
+          "y_m": 1.8522396061789897e-14,
+          "deviation_m": 5.684341886080804e-14
+        },
+        "amzn_inner": {
+          "t": 4.0,
+          "x_m": 322.61550552388445,
+          "y_m": 5.350242892350118,
+          "deviation_m": 5.350242892350098
+        },
+        "amzn_outer": {
+          "t": 4.0,
+          "x_m": 322.61821791027427,
+          "y_m": -5.185580170116541,
+          "deviation_m": 5.185580170116561
+        },
+        "amzn_late_after_native_advance": {
+          "t": 3.75,
+          "x_m": 302.49368347977423,
+          "y_m": 1.8522396061789897e-14,
+          "deviation_m": 5.684341886080804e-14
+        }
+      }
+    },
+    {
+      "aircraft_type": "Amzn",
+      "kind": "corner",
+      "origin_xy_m": [
+        4630,
+        0
+      ],
+      "limits_relative_to_origin_m": [
+        -1800.0,
+        300.0,
+        -300.0,
+        1800.0
+      ],
+      "visible_peak_by_case": {
+        "amzn_center": {
+          "t": 53.75,
+          "x_m": 4223.8578450184295,
+          "y_m": 417.9145692377253,
+          "deviation_m": 406.1421541081051
+        },
+        "amzn_inner": {
+          "t": 53.0,
+          "x_m": 4155.779506044724,
+          "y_m": 487.5084361120989,
+          "deviation_m": 474.22049256725074
+        },
+        "amzn_outer": {
+          "t": 54.25,
+          "x_m": 4270.400878490973,
+          "y_m": 348.8293882157383,
+          "deviation_m": 348.82938821573794
+        },
+        "amzn_late_after_native_advance": {
+          "t": 53.75,
+          "x_m": 4223.8578450184295,
+          "y_m": 417.9145692377253,
+          "deviation_m": 406.1421541081051
+        }
+      }
+    }
+  ],
+  "style_by_lane": {
+    "center": {
+      "color": "#2463A8",
+      "label": "Center (37)",
+      "linestyle": "-"
+    },
+    "inner": {
+      "color": "#D65D20",
+      "label": "Inner (36)",
+      "linestyle": "-"
+    },
+    "outer": {
+      "color": "#7950A4",
+      "label": "Outer (38)",
+      "linestyle": "-"
+    },
+    "late_inner": {
+      "color": "#138678",
+      "label": "Late inner (36)",
+      "linestyle": [
+        0,
+        [
+          5,
+          3
+        ]
+      ]
+    }
+  },
+  "tube_geometry": "Single finite L-polyline distance-tube polygon; round outer corner and endpoints, concave inner offset intersection.",
+  "tube_arc_segments": 96,
+  "maximum_arc_chord_sagitta_m": 0.010200291291390618,
+  "interpretation_limits": [
+    "Only constructed single-aircraft development trajectories are shown; these are not conflict-resolution or policy-effectiveness results.",
+    "Spatial panels show declared zoom windows; the time panels include complete supplied trajectories and global peaks.",
+    "deviation_m is the saved diagnostic distance to the full nominal polyline, not accepted-lane error.",
+    "Bank limit is supplied source metadata, not measured roll; trajectory samples do not alone establish the mechanism of a guidance failure.",
+    "The plotted tube is defined in the supplied local metre plane; source deviation used its documented local equirectangular calculation."
+  ]
+}
