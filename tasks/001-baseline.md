@@ -453,3 +453,54 @@ observation_reward_spec只读镜像可观察性回执：5NM首东4630m、后南/
 追加builder route_trace：仅写route_observation_probe.py/对应配置/聚焦测试，不改core训练源码/既有配置；2例Mavic中心+24例Amzn左右转×4速度×3lane，名义高度、先NR到首段中点的首个5s边界再重复固定合法请求，保存触发时真实own7/mask/固定未训练模型输出、capture/转弯phase、越界/终态/原生导航摘要。可另列24例Amzn仅普通flyby刷新轴，总50例；保留Table3速度/宽76.2/bank25/1200s。≤30min静态，无实验/清理/信号/GPU/通知/嵌套且保留他人工作；controller后续≤180s串行验证。有限动作响应表不是所有时变策略可解性证明。
 
 0–250学习图输入已从五份备份development.jsonl及各manifest重组，13个原开发评价点；重复15/100/150全sample和NR aggregate逐项相同才合并，所有源SHA/行号保留。65点评价来自后续恢复初评，原中断run仍无65评价；旧图覆盖范围不冒充最新。
+
+
+09:08提交6c9b40f8a8d4202633b34512f5b8c299a5a57ea3已推送私有分支且ls-remote同SHA，250恢复点、原生梯度报告及0–250图已备份；图生成job3.30s，PNG已目视核对，doctor无问题。diff检查排除原样保存的生成SVG（含绘图库尾空白），其余通过。随后[250→400](../runs/20260905T090835Z-execution-ppo-400-95effea7/status.json)于09:08:35开始，内2400/外2460s，当前唯一CPU14 launcher，不向GPU提交负载。
+
+梯度独立review仅算术/只读，未改或跑实验：两处g_actor·(g_actor+g_critic)均正，普通梯度下降下合成方向仍降低actor局部目标，不能推广Adam。entropy/actor norm仅.0239%/.00350%，不支持高熵由熵项压倒actor。追加shared_ppo仅写独立probe/test，≤25min静态，在同一可丢弃原update测首个真实Adam参数位移/与actor和critic的投影及固定first64目标变化；保持整77步原update科学参考精确比较，不重复归一first64或改变主线。
+
+辅助机制交接paper_features：仅新encoded_sensor_faults.py/对应配置/测试，≤25min静态；基于已核原pp10–11与REPRODUCTION，实现归一化之后的确定性显式fault plan，缺失有限2、异常由调用者给有限越[0,1]值、至少2指定scalar的显式permutation。无事件率/异常分布猜测，无随机采样/训练/NC/GAE接入；保留shape/row ID/mask/真值且提前全量验证、零fault逐bit不变，记录计划项与实际数值变更数量。完整邻机行置换不能充作有害扰动。禁止实验/清理/信号/GPU/通知/嵌套且保留别人修改；controller待主训练间隙独占验证。这是论文机制接口补齐，不是抗扰训练结果。
+
+09:12只读相应会话turn_context实际元数据复核：route_trace第9turn gpt-6-astra/xhigh、shared_ppo第8turn gpt-6-astra/xhigh、paper_features第8turn gpt-6-astra/xhigh、learning_integration_review第9turn gpt-6-astra/xhigh。仅读取指定研究子线程的模型字段，不复制认证配置。
+
+
+### 09:26 UTC：400轮段中间值与独立诊断准备
+
+275轮sample240/360，53超时、67导航耗尽、342横向越界，NMAC73.114952/h；300轮244/360、53超时、63导航耗尽、345横向越界，NMAC69.751791/h。恢复250初评的整个sample/NR aggregate与保存参考精确相同，仍无有效baseline。此处不以100轮的高熵外推300轮策略分布。
+
+镜像50case实现/AST/JSON已交付，尚未执行3项fixture或native。controller核对配置/测试，独立reviewer只读核心未发现阻断；pre_turn_controls_exact跨native/refresh的24项仅作描述未进入总flag，后续若作同状态刷新效应解释须逐项确认。刷新从t=0启用；同arm左右turn输入/真实状态相等已有总检查。CAP不会推进名义阶段，真实下一航点2首次映射后锁存；最终任务状态由原环境记录，固定响应不能证明不存在可行时变策略。
+
+Adam step1新增仅probe/test已静态交付，controller与独立reviewer未见阻断：额外可丢弃原update只被动拷贝首步前后参数，完整77步metrics/final模型/Adam/shuffle须与未观察路径精确相同，再测固定64目标/KL；全rollout优势不在64上重归一。8项测试/native尚待单launcher间隙；首步投影不是critic因果贡献，64样本1步KL不可直接与4889样本77步KL推断累积率。
+
+encoded_sensor_faults三文件及16fixture完成，仅AST/JSON；controller只读API核对为先全量校验后独立deepcopy，异常在目标dtype中仍须有限且越[0,1]，显式scalar permutation读原clean snapshot，重叠计划拒绝，完整邻机行置换单列为attention集合不变。追加paper_features仅新encoded_sensor_probe.py/config，≤20min静态；原2-M100 crossing上plain/empty/disabled/missing/abnormal/falsified共6例同未训练模型，零/关闭与plain编码-动作-物理-科学摘要精确比较，缺失own速度2、异常−.5、own速度与高度交换显式方案。被动hook核对真正输入、有限合法logits和值，保留真值风险，模型/源输入/mask不改；不加入事件率猜测或训练。实际待controller≤90s。
+
+route_fidelity只读原p6§3.4/Algorithm1确认训练采样；p17§6.1frozenpolicy/MonteCarlo未规定test sample/argmax。现配置sample主指标/report_argmax=false，原_evaluate_case支持argmax，直接改配置resume应严格失败。追加route_trace仅新checkpoint_policy_modes.py/config/test，≤25min静态：对未来400副本做严格来源/配置核验，原12例sample实际重放与400科学参考精确比较，再独立argmax；另按原初始化seed/config构造0轮模型并复现已存0轮sample，随后argmax，共最多48例，NR仅引用精确同参考。总inner570/outer600s，0优化器/更新/保存/选优，不因argmax较好替换sample主指标。源论文的实际test选择仍未知，无法称argmax是作者要求或仅降低评价方差。
+
+09:29获准主机权限只读nvidia-smi：原PID3059945/3062529仍分别9891/9771MiB，RTX4090总用20616、余3432MiB、GPU99%。未发信号或调整外部进程，也未向GPU提交计算；快照不证明外部吞吐零变化。CPU load约3.29/3.38/3.21、MemAvailable约60.81GiB、磁盘143.65GiB；本项目仍CPU14/单线程/nice15/idle IO/单launcher。
+
+
+### 09:41–09:44 UTC：400轮恢复点与串行原生诊断
+
+[250→400](../runs/20260905T090835Z-execution-ppo-400-95effea7/artifacts/result.json)正常完成150轮和终末全12评价，CLI1983.854s/job1985.640s，09:41:40结束，总400、best仍25。350/375/400完成231/235/236，均53超时；400轮71导航耗尽、343横向越界、0高度越界，64.58flight-hours；LoWC23348.5/NMAC4300.75无向pair-s，对应361.543822/66.595695每flight-hour，return−2132.924009。无持续任务/containment改善，不冻结或开始延迟效果结论。[400小副本](../checkpoints/execution-400-20260905/README.md)5数据文件2219645字节，逐字节复制核对及SHA；仅本地，待本批私有push。
+
+[相关32测试](../runs/20260905T094320Z-current-diagnostic-tests-52e62e2a/log.txt)实际1.401s测试/2.991s job全通过：route3、Adam8、sensor16、mode5，未扩展到无关/legacy测试。controller静态review传感器6例driver未见阻断，零/关闭需要真实forward/编码/物理/科学摘要同plain，非零保留实际响应。独立reviewer四模式读源码无阻断：严格400来源配置、原0初始化顺序、真实48_evaluate_case调用、两个sample科学参考精确、NR只引用同记录；仍待原生证据。400初始化sample精确并不等于argmax是作者decoder或能替换主指标。
+
+### 09:44–10:26 UTC：诊断闭环与有依据的新训练路线
+
+**50例路线。** 首次[route-obs-fifty](../runs/20260905T094432Z-route-obs-fifty-3d08c02b/artifacts/result.json)13.894s全部在create之前失败，零有效轨迹。整数JSON origin使原生经度数组的原位浮点归一化报dtype错误；controller只修独立driver的构造坐标为float，补真实整数夹具。[4回归](../runs/20260905T094712Z-route-obs-coordinate-tests-edb3434d/log.txt)通过，随后[50例成功](../runs/20260905T094801Z-route-obs-fifty-float-25d5d741/artifacts/result.json)27.799s，50到达、无超时/耗尽，列明测量检查全通过，24个跨arm pre_turn_controls_exact全部True。含2Mavic名义镜像、24Amzn固定速度/lane/转向、24对应外部刷新；固定未训练模型只在触发时测输入/输出，不控制响应。原始48Amzn均有整步越界，Mavic均0、max12.265m；有限表不等于全部时变策略不可解。
+
+半速Amzn北转中心最大偏离native916.518m/109.25outside-s，refresh102.676m/2s；外侧873.834m/101.75s→76.487578m/.25s。route_fidelity只读源码确认1.1.1 direct/advance缓存turndist，而traffic按当前TAS转弯；旧fork固定SHA849d76fd44880f8d17a69aefa0bd37208f2b2fbb reached每次刷新。当前半速实际40.3325m/s、R355.727m，旧缓存1422.908m；native首真实航点advance44.25s、refresh70.75s。1.05倍中心刷新反而380.924→452.119m，不能泛化为普遍改善，不能据旧fork改变Table3。完整证据/公式/镜像表及4轨迹另存[route-response报告](../reports/route-response-20260905/README.md)。实际4面板[渲染](../runs/20260905T100410Z-route-response-plot-f6b00a4a/status.json)3.979s，PNG目视通过。
+
+**末步统计解释。** observation_reward_spec只读完整physics.csv：refresh北转s0l2与镜像南转s0l0各776行，前775均inside，只有最后一步末点outside。北转有效出口插值193.587162801s（193.50→193.75、fraction.3486512023），cross76.200000000791m在现1e−7容差内；末点沿出口前进6.567628m，侧偏仅多5.111mm，而有限折线距离76.487578包含纵向overrun。环境/action各计整个末步后才detect/delete，.25s不是出口前实测越界时长。保留原始值，不删整步，不推出连续安全或推广其他46例；若未来改截止需一致处理risk/time/reward/terminal state。该小末步现象无法解释400轮88173 aircraft-s越界。
+
+**真实Adam首步。** [adam-step-probe](../runs/20260905T094635Z-ppo-adam-step-probe-bf41552b/artifacts/gradient_probe.json)19.267s，旧静态诊断全部字段、episode101科学摘要/整个ppo update均精确复现；额外observer-copy整77步最终model/Adam/shuffle/metrics也与原update相同。首步shared位移norm .000689369，actor g·Δ shared−1.58874e−6、weightedcritic +.000384402；固定64 actor目标.02151170→.02150103、weightedvalue .77312833→.77356440。历史Adam动量可使当前batch损失上升，不能判优化器bug或critic因果妨碍。64样本单步KL7.4595e−9与4889样本77步KL3.60475e−5测量窗口不同。新结果和精确对照追加原[梯度报告](../reports/ppo-gradient-100-20260905/README.md)，无权重晋升。
+
+**传感器六例。** [encoded-sensor-native](../runs/20260905T094908Z-encoded-sensor-native-probe-784a2f6f/artifacts/result.json)10.420s全部通过，plain/empty/disabled编码、mask、动作、真实forward、sampling RNG、物理及科学摘要精确相同；非零显式missing/abnormal/falsified实际进入原策略，finite合法输出、source/truth/mask保持、模型0grad且hook恢复。各2/2到达，27forward；plain52逐机推理LoWC26.5/NMAC4，missing54推理32.5/0，abnormal52与falsified52的风险仍26.5/4。无事件率/训练/鲁棒性结论，详见[六例报告](../reports/encoded-sensors-20260905/README.md)及PERTURBATIONS。
+
+**400与0两种部署。** [checkpoint-policy-modes](../runs/20260905T095203Z-checkpoint-policy-modes-400-d0460c2d/artifacts/result.json)366.420s，48次真实原_evaluate_case；400严格源码/配置/版本、原0初始化61001，两个sample所有percase/aggregate科学字段（含动作hist）精确复现，排除仅wall/RSS；NR两参考精确一致后引用，0额外NR运行/optimizer/update/checkpoint/selection。0sample239/360、400sample236/360；0argmax235/360(43超时82耗尽347width)、400argmax298/360(1超时61耗尽338width)，全0height。NMAC/LoWC每flight-hour分别63.799/366.513、66.596/361.544、152.175/715.463、149.196/607.074。单轨迹argmax任务改善值得保留，但sample主指标不变，仍无可信baseline。原论文p6训练sample明确，p17测试decoder未定。小完整资料另存[四模式报告](../reports/policy-modes-400-20260905/README.md)。
+
+**新路线交接。** 暂停旧400→600；新证据支持将普通flyby当前状态刷新作为显式重建修正，验证后从原初始化新训。shared_ppo问题为当前TAS/qdr公式、step范围Proxy恢复与严格身份；仅写navigation_refresh.py、paper_environment.py、paper_train.py、两refresh configs、test_navigation_refresh.py，≤25min静态，保留他人修改且禁实验/GPU/信号/清理/通知/嵌套。交付默认off保持、on每步finally恢复/逐次人口数组、episode-local audit和8fixture，训练source hash新增adapter，旧checkpoint不迁移。[19相关测试](../runs/20260905T102203Z-navigation-refresh-core-tests-feb50c3b/log.txt)实际1.460s测试/2.992s job通过（8新+env+train）。
+
+10:21追加shared_ppo仅新navigation_refresh_probe.py/config/必要纯测试，问题为新集成是否精确等于原default与已审计external refresh；来源原0训练参考、50例结果及当前adapter；交付原12 NR/sample、4fixed响应、30机NR/sample集成/外部对照，真实native计数/出生删除/reset/恢复与原物理rows，≤20min静态，controller≤420s串行执行。原始4refresh物理行已定向复制reports/route-response-20260905/refresh_four_physics.csv及manifest，2382行/1754325B，来源SHA保留。route_trace独立只读6变更文件/测试/BlueSky调用链，≤15min，返回无阻断原生验证问题；native零人口跳过不要求wrapper数等于全部物理步数。无实验/修改。10:26实际turn_context核对shared_ppo第10turn、route_trace第13均gpt-6-astra/xhigh。
+
+[0–400图](../reports/execution-learning-20260905/README.md)19评价点及23来源记录，重复15/100/150/250 aggregate精确合并一次；实际[最新渲染](../runs/20260905T100952Z-execution-learning-figure-400-a22a1834/status.json)3.291s，三产物逐字节复制、PNG目视通过。NOW/DECISIONS/REPRODUCTION/PERTURBATIONS/LESSONS同步本批证据。主10h截止仍15:15:13 UTC，CPU14/单线程/低优先级、不向共享GPU提交任务或干预其他人，未提前发送完成通知。

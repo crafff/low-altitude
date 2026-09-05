@@ -1,0 +1,25 @@
+{
+  "source_run": "runs/20260905T095203Z-checkpoint-policy-modes-400-d0460c2d",
+  "files": {
+    "result.json": {
+      "bytes": 231958,
+      "sha256": "f6ba79846770667005309aef5ffc7add8b6f16cbb5cb4f407436f89e26d661db"
+    },
+    "effective_config.json": {
+      "bytes": 36177,
+      "sha256": "b3f1d472a25f2ce443db5fb7d58e015729fef04dc37fc0aa053e8c69b833914b"
+    },
+    "input.json": {
+      "bytes": 6455,
+      "sha256": "dcd912aa3b18eefea5d6194db93c812c4bfa60b723afc0369b1b1043b9314754"
+    },
+    "reused_nr.json": {
+      "bytes": 35931,
+      "sha256": "d1d700f477f8d35492e61f323253c7a2bff55d50aa1e71580125247aa900812c"
+    },
+    "scenarios.json": {
+      "bytes": 105833,
+      "sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "bluesky.checkpoint-policy-modes.v1",
+  "scope": "Independent development deployment-mode diagnostic at episode 400 and original initialization; no training, checkpoint promotion, or held-out efficacy claim.",
+  "training_config": "configs/paper_train_execution.json",
+  "checkpoint_completed_episodes": 400,
+  "initialization_seed": 61001,
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "torch_num_interop_threads": 1,
+  "wall_seconds": 570,
+  "primary_policy": "sample",
+  "modes": [
+    {
+      "id": "episode400_sample",
+      "model": "episode400",
+      "policy": "sample",
+      "completed_episodes": 400
+    },
+    {
+      "id": "episode400_argmax",
+      "model": "episode400",
+      "policy": "argmax",
+      "completed_episodes": 400
+    },
+    {
+      "id": "initial0_sample",
+      "model": "initial0",
+      "policy": "sample",
+      "completed_episodes": 0
+    },
+    {
+      "id": "initial0_argmax",
+      "model": "initial0",
+      "policy": "argmax",
+      "completed_episodes": 0
+    }
+  ],
+  "development_cases": [
+    {
+      "seed": 53001,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53002,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53003,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53004,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53005,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53006,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53007,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53008,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53009,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53010,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53011,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53012,
+      "corridor_count": 5
+    }
+  ],
+  "declared_input_pointers": {
+    "checkpoint": "checkpoints/execution-400-20260905/latest.pt",
+    "reference400": "checkpoints/execution-400-20260905/development.jsonl",
+    "reference0": "checkpoints/execution-pilot-20260905/development.jsonl"
+  },
+  "reconstruction_choices": [
+    "The controller supplies the completed episode-400 checkpoint and both full development references explicitly through lab --input and CLI arguments. No runs/checkpoint discovery, nearest-episode fallback or checkpoint deserialization occurs at module import.",
+    "Require the unchanged scientific source/software versions and exact resolved original training/environment/action/observation/type/PPO configurations through paper_train._validate_checkpoint. The supplied checkpoint and its embedded evaluation must both be episode 400.",
+    "Reconstruct episode 0 by the original main's random.seed, np.random.seed and torch.manual_seed with training_seed 61001, followed by the original SharedActorCritic constructor. No checkpoint is loaded into this model. Its sample evaluation must exactly reproduce the saved episode-0 reference.",
+    "Construct the episode-400 model as an independent deep copy of the initialized architecture and load the supplied model tensors strictly. The two models have separate parameter storage. Both use CPU eval/no_grad with requires_grad disabled, and their tensor identities must remain unchanged across all modes.",
+    "Execute all four modes in the declared order, with all 12 original scenarios per mode, for 48 actual native evaluations. Each call directly reuses paper_train._evaluate_case; each case recreates the same private action generator from dev_action_seed_base plus scenario seed. No observation/action facade is replaced and no additional action sampling occurs.",
+    "Sample remains the primary scientific deployment mode. Argmax uses the original select_actions path: one legal maximum-logit joint 60-class action, with the original first-index tie convention. It does not maximize the three component marginals separately and never participates in checkpoint selection or promotion.",
+    "The paper explicitly specifies sampling in training on p.6, while p.17 frozen-policy and Monte-Carlo text does not settle test-time sample versus argmax. This comparison is a separately labeled deployment diagnostic, not a silent correction of the mainline or an assertion of author implementation.",
+    "For both sample modes compare every actual per-case summary, action histogram and aggregate with its matching saved reference. Exclude only wall_seconds and process_peak_rss_mib; keep all scientific counts, exposures, outcomes, returns and action seeds exact.",
+    "Verify the episode-0 and episode-400 NR references agree per case and aggregate before quoting NR. Reuse those verified records with an explicit reused label and report zero NR native evaluations; never substitute reference output for an actual sample or argmax evaluation.",
+    "A passive forward hook counts real policy calls and aircraft rows and checks nonempty legal masks. It returns None, performs no extra forward or draw, and is removed in finally. Model identity, gradients, histogram/population accounting and input file identities are checked independently of policy quality.",
+    "Use a 570-second inner deadline checked between cases and by the original helper between decisions, inside the controller's planned 600-second/128-MiB/4096-MiB single-CPU lab job. Partial or unstarted cases remain explicitly incomplete; retain their errors and completed earlier results and exit nonzero.",
+    "Write only small JSON artifacts under LAB_RUN_DIR and native /tmp scratch. No optimizer construction, backward pass, update, checkpoint write, training collection, selection or promotion. All four actual mode results remain separate even if outcomes happen to match."
+  ]
+}

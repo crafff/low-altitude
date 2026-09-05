@@ -1,4 +1,4 @@
-# 位置误差与通信中断的最小重建规范
+# 观测扰动的最小重建规范
 
 2026-09-05原文核对；独立[observation_perturbation感知层](../src/observation_perturbation.py)及[原生诊断driver](../src/perturbation_probe.py)已实现验证，尚未接入训练、无抗扰效果结论。主线仍先取得有效名义baseline。来源为[2026原PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) pp.6、8–10、19、24，以及[2024原文](../resources/literature/local/fremond-et-al-2024-urban-corridor-tactical-conflict-resolution.pdf) pp.5–6和已存[公开配置](../resources/literature/author-configs-icrat2024/manifest.json)。一般范围见REPRODUCTION，此页记录明确的实现选择。
 
@@ -27,3 +27,9 @@
 最小校验包括：零扰动原观测/轨迹完全一致，sigma0退化；同一位移在所有观察者一致且真值/垂直阈值不变；同刻缓存和输入排序；5/10/15到期/重叠/reset；JSON状态恢复重复同一序列；通信不可见飞机仍计物理风险。接口校验不证明抗扰策略或真实通信可靠性。
 
 07:34主线程的[15项纯层测试](../runs/20260905T073355Z-observation-perturbation-tests-8c19ee06/log.txt)和[5例native诊断](../runs/20260905T073432Z-perturbation-native-probe-b8a3c19f/artifacts/result.json)通过：零扰动编码、掩码、动作、物理轨迹及科学汇总与plain完全一致；100%通信中断0次推理、46次逐机保持决策，226.5真实不可用aircraft-s与物理暴露一致，保留LoWC39.75/NMAC12.25 pair-s。此为同一未训练模型的接口检查；不证明噪声下性能、经验发生率或抗扰训练收益。
+
+## 归一化后的传感器字段缺陷
+
+09:49已验证独立[encoded_sensor_faults](../src/encoded_sensor_faults.py)及[六例原生报告](../reports/encoded-sensors-20260905/README.md)。接口接受明确scalar slots和确定性FaultPlan：缺失填有限2（当前[0,1]约定的重建选择）；异常由调用者给出目标dtype下仍有限且在[0,1]外的值；虚假信息对至少两个指定scalar作非恒等双射，统一从未修改的clean快照读取。全量验证后才复制写入，拒绝重复/重叠slot，保留shape、dtype、ID、mask和源输入。记录计划项、应用项、数值/bit改变数量；完整邻机行置换另标attention集合不变，不当有害扰动证据。
+
+16项fixture通过。实际6例同一未训练模型中plain、空计划、显式关闭逐bit保持编码/动作/采样RNG/物理及科学汇总；非零缺失own speed→2、异常→−.5、speed/alt交换均实际到达原策略forward，合法logits/value有限，原始真值保持独立、全部2/2到达。缺失例LoWC/NMAC32.5/0，其他例26.5/4 pair-s；这只是单一构造例的响应，不能解释为缺失有益或鲁棒性效果。未加入随机事件过程、发生率、训练、通信缺失决策GAE或非合作交通。

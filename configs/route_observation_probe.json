@@ -1,0 +1,489 @@
+{
+  "schema": "bluesky.route-observation-probe.v1",
+  "scope": "Mirrored-route input aliasing and fixed native response diagnostic; no policy learning, scoring change or claim that no feasible policy exists.",
+  "environment_config": "configs/paper_environment_execution.json",
+  "policy_config": "configs/paper_ppo.json",
+  "seed": 966001,
+  "model_seed": 960001,
+  "origin_lat_lon_deg": [
+    0,
+    0
+  ],
+  "earth_radius_m": 6371000,
+  "route_length_m": 9260,
+  "wall_seconds": 165,
+  "maximum_csv_bytes": 100663296,
+  "maximum_physics_rows": 150000,
+  "cases": [
+    {
+      "id": "native-mavic-north",
+      "arm": "native",
+      "aircraft_type": "Mavic",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "native-mavic-south",
+      "arm": "native",
+      "aircraft_type": "Mavic",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "native-amzn-north-s0-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 0,
+      "action": 6
+    },
+    {
+      "id": "native-amzn-north-s0-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 1,
+      "action": 7
+    },
+    {
+      "id": "native-amzn-north-s0-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 2,
+      "action": 8
+    },
+    {
+      "id": "native-amzn-north-s1-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 0,
+      "action": 21
+    },
+    {
+      "id": "native-amzn-north-s1-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 1,
+      "action": 22
+    },
+    {
+      "id": "native-amzn-north-s1-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 2,
+      "action": 23
+    },
+    {
+      "id": "native-amzn-north-s2-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 0,
+      "action": 36
+    },
+    {
+      "id": "native-amzn-north-s2-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "native-amzn-north-s2-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 2,
+      "action": 38
+    },
+    {
+      "id": "native-amzn-north-s3-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 0,
+      "action": 51
+    },
+    {
+      "id": "native-amzn-north-s3-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 1,
+      "action": 52
+    },
+    {
+      "id": "native-amzn-north-s3-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 2,
+      "action": 53
+    },
+    {
+      "id": "native-amzn-south-s0-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 0,
+      "action": 6
+    },
+    {
+      "id": "native-amzn-south-s0-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 1,
+      "action": 7
+    },
+    {
+      "id": "native-amzn-south-s0-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 2,
+      "action": 8
+    },
+    {
+      "id": "native-amzn-south-s1-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 0,
+      "action": 21
+    },
+    {
+      "id": "native-amzn-south-s1-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 1,
+      "action": 22
+    },
+    {
+      "id": "native-amzn-south-s1-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 2,
+      "action": 23
+    },
+    {
+      "id": "native-amzn-south-s2-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 0,
+      "action": 36
+    },
+    {
+      "id": "native-amzn-south-s2-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "native-amzn-south-s2-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 2,
+      "action": 38
+    },
+    {
+      "id": "native-amzn-south-s3-l0",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 0,
+      "action": 51
+    },
+    {
+      "id": "native-amzn-south-s3-l1",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 1,
+      "action": 52
+    },
+    {
+      "id": "native-amzn-south-s3-l2",
+      "arm": "native",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 2,
+      "action": 53
+    },
+    {
+      "id": "refresh-amzn-north-s0-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 0,
+      "action": 6
+    },
+    {
+      "id": "refresh-amzn-north-s0-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 1,
+      "action": 7
+    },
+    {
+      "id": "refresh-amzn-north-s0-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 0,
+      "lane_index": 2,
+      "action": 8
+    },
+    {
+      "id": "refresh-amzn-north-s1-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 0,
+      "action": 21
+    },
+    {
+      "id": "refresh-amzn-north-s1-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 1,
+      "action": 22
+    },
+    {
+      "id": "refresh-amzn-north-s1-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 1,
+      "lane_index": 2,
+      "action": 23
+    },
+    {
+      "id": "refresh-amzn-north-s2-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 0,
+      "action": 36
+    },
+    {
+      "id": "refresh-amzn-north-s2-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "refresh-amzn-north-s2-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 2,
+      "lane_index": 2,
+      "action": 38
+    },
+    {
+      "id": "refresh-amzn-north-s3-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 0,
+      "action": 51
+    },
+    {
+      "id": "refresh-amzn-north-s3-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 1,
+      "action": 52
+    },
+    {
+      "id": "refresh-amzn-north-s3-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "north",
+      "speed_index": 3,
+      "lane_index": 2,
+      "action": 53
+    },
+    {
+      "id": "refresh-amzn-south-s0-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 0,
+      "action": 6
+    },
+    {
+      "id": "refresh-amzn-south-s0-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 1,
+      "action": 7
+    },
+    {
+      "id": "refresh-amzn-south-s0-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 0,
+      "lane_index": 2,
+      "action": 8
+    },
+    {
+      "id": "refresh-amzn-south-s1-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 0,
+      "action": 21
+    },
+    {
+      "id": "refresh-amzn-south-s1-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 1,
+      "action": 22
+    },
+    {
+      "id": "refresh-amzn-south-s1-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 1,
+      "lane_index": 2,
+      "action": 23
+    },
+    {
+      "id": "refresh-amzn-south-s2-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 0,
+      "action": 36
+    },
+    {
+      "id": "refresh-amzn-south-s2-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 1,
+      "action": 37
+    },
+    {
+      "id": "refresh-amzn-south-s2-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 2,
+      "lane_index": 2,
+      "action": 38
+    },
+    {
+      "id": "refresh-amzn-south-s3-l0",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 0,
+      "action": 51
+    },
+    {
+      "id": "refresh-amzn-south-s3-l1",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 1,
+      "action": 52
+    },
+    {
+      "id": "refresh-amzn-south-s3-l2",
+      "arm": "refresh",
+      "aircraft_type": "Amzn",
+      "turn": "south",
+      "speed_index": 3,
+      "lane_index": 2,
+      "action": 53
+    }
+  ],
+  "sources": [
+    "paper/REPRODUCTION.md; Table 2, original PDF pp.7,13-17",
+    "src/route_action_study.py: constructed_scenario and native _sample",
+    "src/navigation_sensitivity.py: audited refresh_reached context",
+    "observation_reward_spec read-only mirror/own7 conclusion supplied by controller"
+  ],
+  "reconstruction_choices": [
+    "Every route has exact geodesic legs 4630 m east then 4630 m north or south, beginning at the equator. There is one aircraft admitted at t=0 and no intruder. Seed 966001 is provenance, not a traffic draw.",
+    "Coast with env.step(None), hence zero policy proposals, until the first global 5 s boundary whose true along-first-leg position reaches 2315 m. Require native active waypoint to map to nominal index 1, prior boundary short of the midpoint, no locks, all 60 actions legal, and still nominal accepted targets. The boundary can lie beyond the exact geometric midpoint; do not substitute the analytic [0.25,0.25,...] distances into native observations.",
+    "At the trigger evaluate one CPU 35325-parameter SharedActorCritic initialized once with seed 960001, retaining its weights across every case. Save actual own7/mask bytes, empty intruder input, masked logits and critic value. Never load a checkpoint, sample an action, construct an optimizer or train.",
+    "After the trigger repeat the predeclared absolute speed/lane action at 350 ft on every 5 s boundary. The two Mavic controls use nominal 37; Amzn covers both turns, all four speed ratios and all three lanes. A masked predeclared action becomes an explicit diagnostic error, never a substitute action.",
+    "Native arm: 26 cases. Separate ordinary-flyby refresh arm: 24 Amzn cases, no Mavic repetitions. --arms native explicitly selects the 26-case initial budget; omitted cases are listed. Default native,refresh executes all 50 predeclared cases.",
+    "The refresh arm directly reuses the audited refresh_reached context around this case's native physics. It changes ordinary-flyby turndist only, calls native reached once, rejects unsupported flyturn modes and restores the exact facade member in finally. All speeds remain Table 3; no 44 m/s substitution, bank governor or lane-feasibility invention.",
+    "Changing speed at the midpoint can make a cached turn-initiation distance differ from a radius computed with current TAS. Record current TAS, bank, cached turn distance/radius/turnspd and the refresh call audit; this possibility is not asserted to cause any observed failure.",
+    "Classify width exposure by the first actual native active-waypoint mapping to nominal index 2, not merely a monotonic next-index counter or an artificial CAP. Once seen, AFTER remains latched. Under the existing post-step convention, the entire physics interval ending on the first advance sample belongs to AFTER. Phase sums must reproduce the original environment exposure and flight time.",
+    "Store every 0.25 s post-physics/post-action-update sample before terminal deletion, including width, accepted targets, capture flags, heading, waypoint coordinates, native last-waypoint/LNAV/reached state and bank. BlueSky has no measured roll state here; equivalent bank is inferred from finite-difference heading rate, and the instantaneous radius is analytical, not a measured circle fit.",
+    "Route plans and capture/turn/waypoint/LNAV milestones are written as events only when they change. Final success/failure is solely the unchanged execution environment record; old point-target trace guard previews are not used as finite-exit success.",
+    "Compare north/south pre-turn control states, actual own7/masks and same-model logits exactly. Report separately the responses with mirrored lane indices and native-versus-refresh outcomes. Identical model inputs do not imply identical FMS future routes, nor prove that a shared centerline command cannot work.",
+    "Retain arrival, timeout, navigation exhaustion, capture failure, width violations and runtime errors. All-checks-passed refers to measurement/identity/accounting invariants, never corridor containment or coverage of all feasible policies. Write only LAB_RUN_DIR and native /tmp scratch; no cleanup or subprocess workloads."
+  ]
+}

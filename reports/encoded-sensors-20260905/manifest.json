@@ -1,0 +1,9 @@
+{
+  "source_run": "runs/20260905T094908Z-encoded-sensor-native-probe-784a2f6f",
+  "files": {
+    "result.json": {
+      "sha256": "3f905a058f9ec3293227a40711ed888a4ed00e6310629c80e0c70beac3aa3247",
+      "bytes": 70263
+    }
+  }
+}

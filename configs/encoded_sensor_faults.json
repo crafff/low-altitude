@@ -1,0 +1,27 @@
+{
+  "schema": "paper.encoded-sensor-faults.v1",
+  "scope": "Explicit encoded sensor-fault supporting interface; no perturbation-trained baseline or training integration",
+  "normalization_interval": [0.0, 1.0],
+  "missing_sentinel": 2.0,
+  "fault_kinds": ["missing", "abnormal", "falsified"],
+  "accepted_float_dtypes": ["float16", "float32", "float64"],
+  "default_plans": [],
+  "source_facts": [
+    "Paper pp.10-11 and the 08:02 review in paper/REPRODUCTION.md describe missing information as None before policy encoding, then a large finite abnormal value. The table's 2Nmax and text's 2max(N(o)) are not identical executable prescriptions.",
+    "Abnormal information must actually lie outside the normal encoding interval. The paper does not provide an executable distribution merely by writing epsilon in the real numbers.",
+    "Falsified information shuffles at least two elements. Selection axes, fields, counts and an executable selection distribution remain unspecified.",
+    "src/shared_ppo.py uses current-neighbor set attention without row ID features. Permuting complete intruder rows preserves its mathematical output, apart from floating reduction roundoff; a row shuffle is not evidence of harmful corruption."
+  ],
+  "reconstruction_choices": [
+    "Apply only after the existing normalization/clipping. Input features must be finite clean [0,1] arrays; no clipping follows corruption. Missing is fixed finite 2.0, explicitly choosing 2Nmax with Nmax=1, independent of the sample's maximum. This choice is not author-confirmed.",
+    "No event sampler, rate conversion, random value distribution, curriculum, noncooperative aircraft role, missing-ownship control, GAE or training integration exists here. Caller-supplied explicit plans are the only activation mechanism; an empty plan is closed and uses no RNG. enabled=False returns unchanged copies but still validates all plans.",
+    "Abnormal plans supply one finite out-of-range value per plan. It must remain finite and outside [0,1] after conversion to the existing dtype; underflow to signed zero, rounding to an interval boundary and overflow are rejected. Use separate disjoint plans for different abnormal values.",
+    "Slots identify own columns 0..6, or intruder rows 0..N-1 and columns 0..9. IDs remain in their original row order and traces bind each selected row to its original ID. Mask and metadata are deep-copied without modification; no aircraft disappears or terminates and no feature is added.",
+    "Falsification explicitly provides permutation[k] as the original source slot for destination slots[k]. Require at least two selected scalar slots and a nonidentity bijection. Fixed points within a larger permutation are allowed; exchanging equal values can produce zero numeric changes.",
+    "Duplicate slots and overlapping plans are rejected to avoid inventing composition precedence. Validate the complete plan collection before writing any output. All permutation reads use the original clean snapshot. Previously corrupted outputs are not accepted as clean inputs for another call.",
+    "Own and intruder arrays retain shape and share the same native float16, float32 or float64 dtype; the existing encoder uses float32. The common dtype makes scalar permutation an exact relocation without cross-dtype rounding. Source arrays, masks and truth are never written.",
+    "Traces report every planned scalar, its original and resulting value and IEEE bytes, optional permutation source, row IDs, applied status and actual numeric/bit changes. Counts separate planned from applied and actual changes. Signed-zero exchanges can change bits without changing numerical value.",
+    "Complete intruder-row permutations are explicitly labelled in each plan trace. That structural flag does not claim other permutations necessarily change a policy output or cause harm. No fault plan is claimed physically representative merely because its encoding is syntactically valid.",
+    "load_config validates this fixed contract; transform accepts typed explicit plans rather than sampling or loading plans from this metadata file. The controller owns future integration and updates paper documentation."
+  ]
+}

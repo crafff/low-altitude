@@ -116,7 +116,7 @@ def _prepare(samples, cfg):
     return observations, actions, old, advantage, targets, float(mean), float(std)
 
 
-def measure_gradients(model, prepared, indexes, cfg):
+def measure_gradients(model, prepared, indexes, cfg, *, gradient_capture=None):
     """Static loss geometry on a disposable copy; no optimizer step or hook."""
     observations, actions, old, advantage, targets, _, _ = prepared
     parameters = list(model.named_parameters())
@@ -145,6 +145,10 @@ def measure_gradients(model, prepared, indexes, cfg):
     summed = [sum(gradients[name][i] for name in terms) for i in range(len(weights))]
     for component_sum, direct in zip(summed, gradients["combined"]):
         torch.testing.assert_close(component_sum, direct, rtol=1e-4, atol=1e-6)
+    if gradient_capture is not None:
+        gradient_capture.update({name: {parameter_name: gradient.clone()
+                                       for (parameter_name, _), gradient in zip(parameters, values)}
+                                 for name, values in gradients.items()})
     def shared_vector(values):
         return torch.cat([values[i].reshape(-1).double() for i in shared_indexes])
     vectors = {name: shared_vector(values) for name, values in gradients.items()}
@@ -189,6 +193,102 @@ def _optimizer(model, cfg):
                             eps=cfg["adam_eps"], weight_decay=cfg["weight_decay"])
 
 
+def parameter_displacement(before, after, gradients, shared_names):
+    """Actual parameter motion and first-order loss changes, in float64.
+
+    Gradients are the original, unclipped loss gradients. A negative dot product
+    predicts a decrease of that minimized loss to first order; it is not a
+    counterfactual optimizer comparison or evidence of causal interference.
+    """
+    names = list(before)
+    if not names or set(after) != set(names) or not shared_names or not set(shared_names) <= set(names):
+        raise ValueError("displacement requires matching parameters and a nonempty shared subset")
+    if any(set(values) != set(names) for values in gradients.values()):
+        raise ValueError("component gradients must cover all parameters")
+    for name in names:
+        values = [before[name], after[name], *(component[name] for component in gradients.values())]
+        if any(value.device.type != "cpu" or value.shape != before[name].shape
+               or not bool(torch.isfinite(value).all()) for value in values):
+            raise ValueError("displacement tensors must have matching shapes and finite CPU entries")
+    # Convert each endpoint before subtracting to retain the actual float32
+    # parameter change without rounding the subtraction back to float32.
+    delta = {name: after[name].detach().double()-before[name].detach().double() for name in names}
+    report = {}
+    for partition, selected in (("shared", [name for name in names if name in shared_names]), ("all", names)):
+        motion = torch.cat([delta[name].reshape(-1) for name in selected])
+        projections = {component: float(torch.dot(torch.cat([values[name].detach().double().reshape(-1)
+                                                             for name in selected]), motion))
+                       for component, values in gradients.items()}
+        projections["actor_total"] = projections["policy_surrogate"]+projections["entropy_bonus"]
+        norm = float(torch.linalg.vector_norm(motion))
+        if not all(math.isfinite(value) for value in (norm, *projections.values())):
+            raise ValueError("displacement geometry exceeds finite precision")
+        report[partition] = {"parameter_count": motion.numel(), "delta_theta_norm": norm,
+                             "original_gradient_dot_delta_theta": projections}
+    return report
+
+
+def _update_with_first_step_capture(model, optimizer, samples, cfg, shuffle):
+    """Run the original full update with a temporary, passive step observer.
+
+    Only endpoint tensor copies occur inside the observer. It never evaluates
+    losses, alters gradients, skips a step, or draws from a random stream.
+    """
+    original_step = optimizer.step
+    had_instance_step = "step" in vars(optimizer)
+    previous_instance_step = vars(optimizer).get("step")
+    captured = {"step_count": 0}
+    def snapshot():
+        return {name: value.detach().clone() for name, value in model.state_dict().items()}
+    def observed_step(*args, **kwargs):
+        first = captured["step_count"] == 0
+        if first:
+            captured["before"] = snapshot()
+        result = original_step(*args, **kwargs)
+        if first:
+            captured["after"] = snapshot()
+        captured["step_count"] += 1
+        return result
+    optimizer.step = observed_step
+    try:
+        metrics = update(model, optimizer, samples, cfg, shuffle)
+    finally:
+        if had_instance_step:
+            optimizer.step = previous_instance_step
+        else:
+            del optimizer.step
+    if not captured["step_count"] or captured["step_count"] != metrics["minibatches"]:
+        raise AssertionError("first-step observer count differs from original update")
+    return metrics, captured
+
+
+def _fixed_minibatch_objectives(model, prepared, indexes, cfg):
+    """Re-evaluate original losses on fixed indices with full-rollout advantages.
+
+    This repeats the original update's loss arithmetic solely for measurement;
+    its before-step values are asserted against measure_gradients below.
+    """
+    observations, actions, old, advantage, targets, _, _ = prepared
+    with torch.no_grad():
+        logits, prediction = model(*(field[indexes] for field in observations))
+        distribution = Categorical(logits=logits)
+        ratio = (distribution.log_prob(actions[indexes])-old[indexes]).exp()
+        epsilon = cfg["clip_epsilon"]
+        policy = -torch.minimum(ratio*advantage[indexes],
+                                ratio.clamp(1.-epsilon, 1.+epsilon)*advantage[indexes]).mean()
+        value = (prediction-targets[indexes]).square().mean()
+        entropy = distribution.entropy().mean()
+        weighted_value, weighted_entropy = cfg["value_coefficient"]*value, -cfg["entropy_coefficient"]*entropy
+        total = policy+cfg["value_coefficient"]*value-cfg["entropy_coefficient"]*entropy
+        report = {"policy_loss": float(policy), "actor_surrogate_objective": float(-policy),
+                  "value_loss": float(value), "weighted_value_loss": float(weighted_value),
+                  "entropy": float(entropy), "weighted_entropy_loss": float(weighted_entropy),
+                  "actor_total_loss": float(policy+weighted_entropy), "loss": float(total)}
+        if not all(math.isfinite(value) for value in report.values()):
+            raise ValueError("first-step objective measurement must remain finite")
+        return report, torch.softmax(logits.double(), dim=-1)
+
+
 def diagnose_samples(model, optimizer, samples, cfg, shuffle, *, prediction_batch_size=256, deadline=None):
     """Measure then invoke the unchanged original update on a separate copy."""
     def boundary():
@@ -207,7 +307,8 @@ def diagnose_samples(model, optimizer, samples, cfg, shuffle, *, prediction_batc
     inspection_shuffle = torch.Generator(device="cpu")
     inspection_shuffle.set_state(shuffle.get_state())
     first_indexes = torch.randperm(len(samples), generator=inspection_shuffle)[:cfg["minibatch_size"]]
-    first = measure_gradients(copy.deepcopy(model), prepared, first_indexes, cfg)
+    first_gradients = {}
+    first = measure_gradients(copy.deepcopy(model), prepared, first_indexes, cfg, gradient_capture=first_gradients)
     boundary()
     updated = copy.deepcopy(model)
     updated_optimizer = _optimizer(updated, cfg)
@@ -234,10 +335,64 @@ def diagnose_samples(model, optimizer, samples, cfg, shuffle, *, prediction_batc
             if not math.isclose(first[key], metrics[key], rel_tol=2e-4, abs_tol=2e-6):
                 raise AssertionError(f"first-minibatch measurement disagrees with original update: {key}")
             exact_fields.append(key)
+    boundary()
+    # An additional original model/Adam/RNG copy observes step 1 while still
+    # executing the complete original update. The unobserved path above remains
+    # the reference for native metrics and the final full-rollout policy KL.
+    observed = copy.deepcopy(model)
+    observed_optimizer = _optimizer(observed, cfg)
+    observed_optimizer.load_state_dict(copy.deepcopy(optimizer.state_dict()))
+    observed_shuffle = torch.Generator(device="cpu")
+    observed_shuffle.set_state(shuffle.get_state())
+    observed_metrics, captured = _update_with_first_step_capture(observed, observed_optimizer, samples, cfg, observed_shuffle)
+    if (observed_metrics != metrics or identity(observed.state_dict()) != identity(updated.state_dict())
+            or identity(observed_optimizer.state_dict()) != identity(updated_optimizer.state_dict())
+            or identity(observed_shuffle.get_state()) != identity(private_shuffle.get_state())):
+        raise AssertionError("passive first-step observation changed the original complete update")
+    if identity(captured["before"]) != before_model:
+        raise AssertionError("first Adam step did not start at the original checkpoint model")
+    boundary()
+    objectives_before, probs_before = _fixed_minibatch_objectives(model, prepared, first_indexes, cfg)
+    matched_fields = ("policy_loss", "value_loss", "weighted_value_loss", "entropy", "weighted_entropy_loss", "loss")
+    for key in matched_fields:
+        if objectives_before[key] != first[key]:
+            raise AssertionError(f"first-step initial objective differs from original gradient measurement: {key}")
+    # Reuse the observer's disposable model only after its final identity has
+    # been compared; no parameters or optimizer state are promoted or saved.
+    observed_final_sha = identity(observed.state_dict())
+    observed.load_state_dict(captured["after"])
+    objectives_after, probs_after = _fixed_minibatch_objectives(observed, prepared, first_indexes, cfg)
+    parameter_names = dict(model.named_parameters())
+    motion = parameter_displacement({name: captured["before"][name] for name in parameter_names},
+                                    {name: captured["after"][name] for name in parameter_names},
+                                    first_gradients, first["shared_parameter_names"])
+    first_step = {"captured_step_ordinal": 1, "captured_step_samples": len(first_indexes),
+        "complete_update_steps": captured["step_count"], "sample_indexes_sha256": identity(first_indexes),
+        "advantage_normalization": "unchanged full-rollout statistics, never recomputed on the first minibatch",
+        "full_rollout_advantage_mean": advantage_mean, "full_rollout_advantage_std": advantage_std,
+        "first_minibatch_used_advantage_mean": float(prepared[3][first_indexes].mean()),
+        "parameter_displacement": motion,
+        "gradient_definitions": {"policy_surrogate": "gradient of minimized negative clipped actor surrogate",
+            "entropy_bonus": "gradient of negative entropy coefficient times entropy",
+            "actor_total": "policy_surrogate plus entropy_bonus",
+            "weighted_critic": "gradient of value coefficient times mean squared value error",
+            "combined": "gradient of original total loss before clipping"},
+        "projection_interpretation": "Original unclipped gradient dot actual Adam delta; negative predicts first-order decrease of the named loss. No causal interference claim.",
+        "fixed_first_minibatch_before": objectives_before, "fixed_first_minibatch_after": objectives_after,
+        "fixed_first_minibatch_kl_after_one_step": categorical_kl(probs_before, probs_after, observations[3][first_indexes]),
+        "model_before_step_sha256": identity(captured["before"]),
+        "model_after_one_step_sha256": identity(captured["after"]),
+        "model_after_complete_update_sha256": observed_final_sha,
+        "consistency_assertions": {"original_complete_update_metrics_exact": "passed",
+            "original_final_model_adam_shuffle_exact": "passed", "initial_objective_fields_exact": list(matched_fields),
+            "temporary_step_wrapper_restored": "passed"},
+        "limitation": "Displacement and fixed-minibatch losses describe Adam step 1 only. Existing full-batch post-update KL describes all complete_update_steps."}
+    boundary()
     if (identity(model.state_dict()) != before_model or identity(optimizer.state_dict()) != before_optimizer
             or identity(shuffle.get_state()) != before_shuffle):
         raise AssertionError("diagnostic changed reference model, Adam or shuffle state")
     return {"full_rollout_static_gradients": full, "first_original_minibatch_static_gradients": first,
+            "first_adam_step_displacement": first_step,
             "rollout_tensor_sha256": identity(prepared[:5]), "first_original_minibatch_indexes": first_indexes.tolist(),
             "original_update_metrics": metrics, "full_batch_post_update_kl": categorical_kl(old_probs, new_probs, observations[3]),
             "explained_variance_before": explained_variance(old_values, targets),

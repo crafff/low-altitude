@@ -1,0 +1,28 @@
+{
+  "source_run": "runs/20260905T090835Z-execution-ppo-400-95effea7",
+  "compatible_scientific_source_commit": "ea37154366ecc9bba058de35a1ae1e338b9e8380",
+  "completed_episodes": 400,
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "files": {
+    "latest.pt": {
+      "bytes": 1012297,
+      "sha256": "b6b0e36a8cc95f4c577d8e25bd5b7e38a5ebf09096638e913e2a95db9267f503"
+    },
+    "best.pt": {
+      "bytes": 506262,
+      "sha256": "cd851bd54ad00a0666ab1fa776ba7ec934e511b83f6a6eb37cb48cf223e193f5"
+    },
+    "result.json": {
+      "bytes": 49998,
+      "sha256": "e38001fa87c4c0dc3d9187e7d588c5afb7fab0a52f3ef0ca5b9ab2ca9067f430"
+    },
+    "development.jsonl": {
+      "bytes": 293802,
+      "sha256": "c94d9c505173b8883f61e4e2e6dc1cc76bda080d645820ac85cdcbf9ba5d4ce2"
+    },
+    "training.jsonl": {
+      "bytes": 357286,
+      "sha256": "4ee55f7128b23f41b8a8e9b4edcc17a099f2de3a91bc2cc8dbb20d46637b9d92"
+    }
+  }
+}

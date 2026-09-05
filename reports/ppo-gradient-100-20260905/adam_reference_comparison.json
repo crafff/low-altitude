@@ -1,0 +1,18 @@
+{
+  "run": "runs/20260905T094635Z-ppo-adam-step-probe-bf41552b",
+  "source_result_sha256": "3d8de5aa40581d5438a9c2ad38d14e2531efa2e6fe18b0ef9790f4ac879c544a",
+  "reference": "checkpoints/execution-150-20260905/training.jsonl",
+  "reference_sha256": "e6a7d4d3e0b6ce490bc5163533371ba8dbf053e448ac5d2383439f3574e349d7",
+  "reference_line": 1,
+  "prior_result_sha256": "be76b904f6e965a531679efaf7302061d5df66c1500de636a6c4323b53b1cd33",
+  "excluded_episode_fields": [
+    "wall_seconds",
+    "collection_wall_seconds",
+    "process_peak_rss_mib"
+  ],
+  "checks": {
+    "scientific_episode_exact": true,
+    "entire_original_update_exact": true,
+    "all_previous_diagnostic_fields_exact": true
+  }
+}

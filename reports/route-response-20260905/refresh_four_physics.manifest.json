@@ -1,0 +1,19 @@
+{
+  "source_path": "runs/20260905T094801Z-route-obs-fifty-float-25d5d741/artifacts/physics.csv",
+  "source_sha256": "0bdbe80873a16ec92c52622d5ef87447731bdf358a1c99d837a34bf721c44765",
+  "selected_case_ids": [
+    "refresh-amzn-north-s0-l1",
+    "refresh-amzn-north-s0-l2",
+    "refresh-amzn-north-s2-l1",
+    "refresh-amzn-north-s3-l1"
+  ],
+  "rows": {
+    "refresh-amzn-north-s0-l1": 762,
+    "refresh-amzn-north-s0-l2": 776,
+    "refresh-amzn-north-s2-l1": 431,
+    "refresh-amzn-north-s3-l1": 413
+  },
+  "output_path": "reports/route-response-20260905/refresh_four_physics.csv",
+  "output_sha256": "48d3b99965bcb22418465c732f525a66fc0c6085b4041de1490c7c1d4e008cb3",
+  "output_bytes": 1754325
+}

@@ -16,3 +16,9 @@ nice -n 15 ionice -c 3 taskset -c 14 python3 -B tools/lab.py run \
   --runtime "$PWD/.venv" --runtime "$PWD/environments/python" \
   -- "$PWD/.venv/bin/python" -B -m ppo_gradient_probe --config configs/ppo_gradient_probe.json
 ```
+
+The extended native run `runs/20260905T094635Z-ppo-adam-step-probe-bf41552b` completed in 19.27 supervisor seconds. All previous diagnostic fields, the original episode summary and entire PPO update still match exactly. Eight gradient tests passed within the 32-test controller job `runs/20260905T094320Z-current-diagnostic-tests-52e62e2a`; the independent observer path also reproduces the original final model, Adam, shuffle and metrics exactly.
+
+The first actual Adam step moved shared/all parameters by norms 0.000689369/0.000708232. Original actor-gradient dot displacement was −0.00000158874/−0.0000106747, while weighted-critic projections were positive (+0.000384402/+0.000434371). On its fixed 64 samples, actor loss fell from 0.021511704 to 0.021501027 while weighted value loss rose from 0.773128331 to 0.773564398. Thus this measured step improves its local actor objective despite the larger critic gradient; neither static gradient size nor a rising single-minibatch value loss identifies harmful critic interference or an optimizer defect. Adam carries moments from prior updates, and only the first of 77 minibatches was measured for displacement.
+
+Fixed-first-64 KL after one step is 7.45950e−9. It has a different sample support and update horizon from the existing full-4,889-sample, 77-step KL and is not used to infer an accumulation rate. The original report is retained alongside `adam_step_probe.json` and its exact-reference comparison. No checkpoint was modified or promoted, and the main training configuration remains unchanged.

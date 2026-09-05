@@ -1,0 +1,29 @@
+{
+  "schema": "bluesky.encoded-sensor-probe.v1",
+  "scope": "Constructed native encoded-fault plumbing diagnostic; no training, robustness or physical representativeness claim",
+  "environment_config": "configs/paper_environment_execution.json",
+  "policy_config": "configs/paper_ppo.json",
+  "sensor_config": "configs/encoded_sensor_faults.json",
+  "bluesky_version": "1.1.1",
+  "scenario_seed": 920001,
+  "model_seed": 930001,
+  "sampling_seed": 940001,
+  "inner_wall_seconds": 60.0,
+  "launcher_budget": {"seconds": 90, "disk_mib": 128, "memory_mib": 4096, "cpu_threads": 1},
+  "cases": ["plain", "emptyplan", "disabled", "missing", "abnormal", "falsified"],
+  "explicit_plan_contract": {
+    "missing": {"own_column": 2, "sentinel": 2.0},
+    "abnormal": {"own_column": 2, "value": -0.5},
+    "falsified": {"own_columns": [2, 3], "permutation": [1, 0]}
+  },
+  "reconstruction_choices": [
+    "Use the existing constructed_scenario('crossing','M100',920001): two 2 km crossing routes, both aircraft admitted at zero. Keep the original execution environment, native physics, timing, termination and truth-risk accounting.",
+    "Initialize one untrained SharedActorCritic on CPU with model seed 930001; eval mode and gradients disabled. Reset the original select_actions CPU sampling generator to 940001 per case. No checkpoint, optimizer, training update or extra forward pass exists.",
+    "Plain passes the original clean environment observations. Emptyplan calls transform with an empty plan; disabled calls it with a valid missing plan and enabled=False. Missing replaces own speed slot 2 with 2.0; abnormal replaces it with -0.5; falsified swaps original own slots 2 and 3. Apply the explicitly declared plan to every currently inferred ownship at each decision; this is no inferred event rate or random distribution.",
+    "Before and after every transformation compare clean feature/mask/ID packets, physical AircraftState values, native physical packets and accepted action/route fields. Check transformed masks and row IDs against clean inputs. Every live aircraft still receives ordinary policy inference and env.step actions; there is no communication holding or disappearance logic.",
+    "One passive forward hook checks the actual sorted batch, own and intruder feature bytes, padding/presence masks, action masks, finite legal logits and finite values. Invalid-action logits retain the model's negative-infinity mask. The hook returns None, performs no extra forward, and must not consume global or policy sampling RNG. Restore the hook and physical callback in finally.",
+    "Record exact source-coded fault traces, planned/applied/numeric/bit changes, clean and actual encoded packets, original sampled actions, passive forward evidence, per-physics-step truth and native conflict events. Missing/abnormal/falsified may change actions, trajectories and truth risk; no equality or improvement requirement is imposed on those cases.",
+    "Emptyplan and disabled must match plain observation/mask streams, sampled actions, forward streams, true trajectories and scientific environment summaries exactly, excluding only wall time and RSS. Full population accounting includes failures and requires neither all arrivals nor conflict elimination.",
+    "Use one global 60 s inner deadline checked between cases and decisions; controller supplies the 90 s outer launcher budget and single CPU. Retain failed/partial case files and mark cases not started after the deadline. This driver changes no running training source, model or process."
+  ]
+}
