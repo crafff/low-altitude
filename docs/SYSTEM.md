@@ -57,3 +57,15 @@ runs/<unique-id>/
 执行阶段标签为system/dev/train/eval/analysis，仅便于区分用途。源码快照比dirty Git HEAD更精确地描述实际执行内容；hash自动生成，不需要人工签名绑定。保存错误、超时和失败日志，不覆盖旧目录。
 
 获授权的研究时段内，可以在已定范围与预算中自主查资料、实现、运行小测试和迭代；仅在权限缺失、明显扩大成本/范围或需要用户科学选择时停下来。具体授权与预算写在任务中，不从旧任务或本页推断。
+
+## 主线程完成通知
+
+通知实现放在随Git维护的 [tools/notify.py](../tools/notify.py)，沿用用户已有的ntfy订阅。通知只发送固定的“本轮结果已准备好，请查看Codex”文字，不外发对话、研究结果、路径、线程ID或密钥；提醒不表示全部研究目标已完成或实验成功。显式调用发生在最终回复前，文案不声称最终回复已经送达。
+
+主线程更新记录后，在最终交付前执行`python3 -B tools/notify.py --complete`。脚本利用`CODEX_THREAD_ID`找到对应会话的首条身份元数据和最新turn_context；只接受本项目的主线程，拒绝子agent与未知来源。不会读取其他会话正文，也不依赖旧的HTML结束标记。元数据格式不是稳定API，若未来版本改变，脚本应报告跳过/失败并修复适配，不能默认放行。
+
+本机现有用户级Codex `notify`已指向`/home/magic/ruitaozhou/.codex-tools/codex_stage_notify.py`；它仅将低空项目事件交给本项目脚本，其余项目行为保留。恢复到新机器时，在用户级`~/.codex/config.toml`设置`notify = ["/usr/bin/python3", "-B", "/absolute/path/low-altitude/tools/notify.py"]`；已有其他项目分发器时合并路由，不覆盖。Codex会在结束事件里追加一个JSON参数，项目级配置中的notify可能被忽略。依据：[官方通知配置](https://learn.chatgpt.com/docs/config-file/config-advanced#notifications)。当前客户端可能不发送本地事件，故保留主线程显式发送。无需为每个实验子进程发送通知。
+
+私有接收配置仍在项目父目录的`.codex-tools/ntfy_topic`，不在Git中、不打印到聊天；使用[ntfy发布接口](https://docs.ntfy.sh/publish/)。`.cache/notifications.sqlite3`只保存最近4096条成功事件的散列与时间，用同一session/turn去重；显式发送与原生事件不会正常重复推送。失败不写成功记录，后续可重试；网络超时后的远端实际接收状态仍可能不确定，不能保证分布式“恰好一次”。去重记录过期或清除后也可能再发送。
+
+代码测试通过lab，在随机临时夹具中模拟网络；实际发送是用户授权的交付动作，在主线程执行，不向实验沙箱开放网络。`sent`表示服务HTTP接受，`duplicate`表示同轮已经成功提交，均不等于已证实手机显示；`failed`只输出错误类型，不输出可能含私有topic的异常文本。移除用户级notify路由并停止显式调用即可关闭。仅该通知脚本在主线程通知动作中读取所需的会话身份元数据与接收配置，实验程序不获取这些文件。

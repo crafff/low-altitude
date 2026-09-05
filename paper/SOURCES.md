@@ -13,6 +13,7 @@
 
 ## 系统一手依据
 
+- [Codex完成通知](https://learn.chatgpt.com/docs/config-file/config-advanced#notifications)与[客户端通知差异](https://learn.chatgpt.com/docs/notifications)：2026-09-05实际打开官方页面，核对notify外部程序的agent-turn-complete/cwd/thread-id/turn-id字段、用户级配置位置，以及IDE依赖连接主机通知。另读[Hooks](https://learn.chatgpt.com/docs/hooks)以区分Stop/SubagentStop及信任机制，本轮直接复用现有notify，不增加hook信任设置。[ntfy官方发布接口](https://docs.ntfy.sh/publish/)核对POST和标题/优先级字段；服务接受不证明设备显示。实际实现/测试/本机路由见任务001与SYSTEM。
 - [BlueSky官方仓库](https://github.com/TUDelft-CNS-ATM/bluesky)与[PyPI 1.1.1](https://pypi.org/project/bluesky-simulator/1.1.1/)：2026-09-05核实发布元数据并安装CPython3.11 Linux wheel。API以已安装1.1.1的`bluesky/__init__.py`、`core/{base,entity,simtime}.py`、`traffic/{traffic,route,autopilot}.py`、`traffic/performance/perfbase.py`为准，上游master可能不同。已验证detached headless步进与原生路线；没有据此指定原文的BlueSky版本或OpenAP模型。1.1.1强制依赖OpenAP是软件包事实，论文未指定它。
 - [`zmq==0.0.0`官方源码分发](https://files.pythonhosted.org/packages/6e/78/833b2808793c1619835edb1a4e17a023d5d625f4f97ff25ffff986d1f472/zmq-0.0.0.tar.gz)：2026-09-05内存读取归档和setup.py，确认仅依赖pyzmq的元包；哈希见任务001。允许本次特定构建，不代表泛化信任任意源码安装。
 - [OpenAI Codex配置](https://learn.chatgpt.com/docs/config-file/config-reference#configtoml)：2026-09-05重新读取官方配置参考，核对默认子agent模型/effort、角色config_file及每技能禁用设置；现有键有对应依据，无需增加配置层。Astra选择来自用户要求，不根据速度或成本自动降级。

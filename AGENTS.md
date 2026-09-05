@@ -38,3 +38,8 @@ Current scientific order: reproduce an effective no-delay/no-perturbation paper-
 - A user-authorized research block covers relevant implementation, diagnostics and bounded iteration within its stated budget. Do not repeatedly ask permission for every small step. Do not inherit expired goals, exceed scope/budget, open held-out data for tuning, or assume permission for a major expansion.
 - Literature review compares concrete problems, assumptions and mechanisms. Component overlap does not veto this paper topic. Keep source-backed limitations and unsettled choices explicit; do not claim novelty or mathematical guarantees merely from combining modules.
 - No automatic paper acceptance claim. No Claim/Phase/Gate/VAL approval chain. Review consequential changes proportionately, not every minor edit.
+
+## Completion notification
+
+- After meaningful work is finished, the **main agent only** updates NOW/the task, then runs `python3 -B tools/notify.py --complete` immediately before its final handoff. This is the user-authorized notification delivery action, not an experiment; do not place it inside the network-isolated lab workload. Sub-agents must not dispatch notifications.
+- The native completion notifier uses the same entry point and de-duplicates by session/turn. Report delivery failures briefly without hiding completed work; do not claim the user received an alert merely because the service accepted it. Configuration and recovery are documented in `docs/SYSTEM.md`.
