@@ -21,5 +21,8 @@
 | BlueSky1.1.1从默认性能模型直接切到PERF OFF后步进产生RecursionError；预调用PerfBase()也未得到所需实例 | 基类构造会按当前generator分派并返回proxy。诊断用具名PerfBase子类保留原生动力学，再断言实际实例；不修改vendor | [失败与修复记录](../tasks/001-baseline.md)；两次成功native smoke覆盖create/step/reset/delete |
 | BlueSky自定义cfg只写enabled_plugins会缺失navdata_path并初始化失败 | 从锁定版本的default.cfg继承必需路径，再覆盖本轮选项，所有生成配置放在沙箱临时目录 | [配置失败](../runs/20260905T030204Z-bluesky-nr-smoke-9c8c3aba/log.txt)与任务001最终成功运行 |
 | 源码检查：BlueSky1.1.1的DEST带有目的地高度/VNAV语义，普通航点则可明确保持平飞 | 平飞诊断采用普通经纬度航点、关闭VNAV并验证实际高度；不能把该机制直接判为旧模型共同下降根因 | installed traffic/route.py；[单机与交叉实测](../runs/20260905T030644Z-bluesky-nr-final-b9a03656/artifacts/result.json)高度误差为0 |
+| BlueSky原生垂直速度更新使用高度差决定方向、取VS幅值 | 非对称爬降包络须按目标高度方向选上/下限，不能只看命令VS符号 | paper_performance.clip_intent；[12机型实测](../runs/20260905T043537Z-paper-performance-probe-1319e270/artifacts/performance_probe.json)，正VS命令下降也受正确下降限制 |
+| 仅看终点距离会使近闭合路线在起点附近提前完成 | 同时要求最后航点已激活；保留终点状态和最后区间暴露 | nr_pilot.arrived_on_route；test_nearly_closed_route_cannot_arrive_at_its_origin |
+| 240架次全到达仍有7架Amzn越出走廊半宽 | 单列路线偏离、终止完整性和冲突指标；先追踪实际转弯状态，再改变动力学或宣称复现 | [NR新诊断](../runs/20260905T044040Z-paper-nr-final-44ce1be4/artifacts/result.json)；fly-by/25°bank只是当前有依据的原因解释 |
 
 不要把尚未运行的测试或待核对解释写成已证实经验。新bug只补最小相关回归，避免将每次失败升级成新审批层。

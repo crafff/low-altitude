@@ -1,0 +1,25 @@
+{
+  "source": "paper/REPRODUCTION.md, Fremond et al. Table 3, PDF pp.16–17",
+  "nominal_speed_fraction": 0.8,
+  "acceleration_mps2": 3.5,
+  "reconstruction_choices": [
+    "Table maximum speed is interpreted as true airspeed; one knot is 1852/3600 m/s.",
+    "Zero minimum TAS; no additional altitude ceiling or speed/vertical coupling is inferred.",
+    "Native BlueSky 1.1.1 turn bank, altitude capture and vertical acceleration are unchanged.",
+    "The 3.5 m/s2 acceleration magnitude applies to native horizontal acceleration and deceleration."
+  ],
+  "types": {
+    "Amzn": {"maximum_speed_kt": 196, "climb_mps": 8, "descent_mps": 8},
+    "Cranfield": {"maximum_speed_kt": 85, "climb_mps": 3, "descent_mps": 3},
+    "CranfieldV2": {"maximum_speed_kt": 39, "climb_mps": 3, "descent_mps": 3},
+    "M100": {"maximum_speed_kt": 43, "climb_mps": 5, "descent_mps": 4},
+    "M200": {"maximum_speed_kt": 45, "climb_mps": 5, "descent_mps": 3},
+    "M600": {"maximum_speed_kt": 35, "climb_mps": 5, "descent_mps": 5},
+    "Phan4": {"maximum_speed_kt": 39, "climb_mps": 6, "descent_mps": 4},
+    "Mavic": {"maximum_speed_kt": 35, "climb_mps": 5, "descent_mps": 3},
+    "Eh216": {"maximum_speed_kt": 69, "climb_mps": 11, "descent_mps": 11},
+    "Horsefly": {"maximum_speed_kt": 43, "climb_mps": 8, "descent_mps": 8},
+    "Mnet": {"maximum_speed_kt": 21, "climb_mps": 5, "descent_mps": 5},
+    "Tecnalia": {"maximum_speed_kt": 21, "climb_mps": 3, "descent_mps": 3}
+  }
+}
