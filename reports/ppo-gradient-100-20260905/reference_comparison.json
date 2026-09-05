@@ -1,0 +1,16 @@
+{
+  "probe_run": "runs/20260905T085732Z-ppo-gradient-probe-dd663a67",
+  "probe_result_sha256": "be76b904f6e965a531679efaf7302061d5df66c1500de636a6c4323b53b1cd33",
+  "reference_path": "checkpoints/execution-150-20260905/training.jsonl",
+  "reference_sha256": "e6a7d4d3e0b6ce490bc5163533371ba8dbf053e448ac5d2383439f3574e349d7",
+  "reference_line": 1,
+  "completed_episode": 101,
+  "scenario_seed": 610100,
+  "excluded_episode_fields": [
+    "wall_seconds",
+    "collection_wall_seconds",
+    "process_peak_rss_mib"
+  ],
+  "scientific_episode_exact": true,
+  "all_original_update_fields_exact": true
+}

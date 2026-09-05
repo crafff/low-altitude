@@ -29,5 +29,8 @@
 | 改mask或删除时间会改变全局Random.choice后续draw分配 | 同seed只保证初始输入/随机源，不保证同一逐机动作流；纯因果动作对照需固定可比干预与流分配 | [执行候选比较](../tasks/001-baseline.md)；paper_rollout的sorted-ID共享Random |
 | BlueSky Proxy缓存bound method，普通setattr可能只改底层对象而未改变调用入口 | 包装实际调用facade并精确finally恢复，核对真实调用计数，不只看赋值成功 | [navigation敏感性](../runs/20260905T065855Z-navigation-sensitivity-seven-c4774d42/artifacts/result.json)；test_navigation_sensitivity的fake Proxy回归 |
 | 假环境恢复测试不能覆盖BlueSky跨进程reset的隐式状态 | 首次集成保留真实native断点续训与连续运行参数/Adam/RNG比较；随后源码变更严格校验身份 | [native三轮精确比较](../runs/20260905T062109Z-literal-native-resume-compare-fe7da12f/artifacts/result.json)；checkpoint_compare.py |
+| 条件动作熵约2.1不一定是策略塌缩：当前合法数大多只有4或20，H/log(valid_count)仍约.992 | 同时报合法支持、条件熵和跨状态混合熵，不能直接除log60；动作占比按决策加权而非飞行时间 | [100轮原生策略诊断](../reports/policy-diagnostic-100-20260905/README.md)，12例与原评价精确一致 |
+| 当前53个超时全部是Mnet/Tecnalia，均匀四档速度的5NM平均航时约1279s超过1200s | 先核对机型包络、动作分布、路径长度和期限，再判断学习进展；不能靠放宽任务期限称改善 | [100轮逐机诊断](../runs/20260905T082427Z-policy-diagnostic-100-96e8dc93/artifacts/result.json)，29+24架次实测 |
+| 一个共同时间分母或pair方向因子无法改变LoWC/potential与NMAC/potential比值 | 比较分母不变量，再定位场景/计数差异；不要只让两项绝对值接近便认定作者分母 | [原生双分母审计](../reports/exposure-audit-20260905/README.md)，当前15.456%/3.837%与论文34.42%/9.32% |
 
 不要把尚未运行的测试或待核对解释写成已证实经验。新bug只补最小相关回归，避免将每次失败升级成新审批层。

@@ -1,0 +1,873 @@
+{
+  "schema": "ppo-gradient-probe-result.v1",
+  "scope": "execution-semantics PPO gradient diagnostic; no causal interference claim",
+  "state": "completed",
+  "training_scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "probe_config": {
+    "schema": "ppo-gradient-probe.v1",
+    "scope": "execution-semantics PPO gradient diagnostic; no causal interference claim",
+    "checkpoint": "checkpoints/execution-100-20260905/latest.pt",
+    "training_config": "configs/paper_train_execution.json",
+    "expected_completed_episodes": 100,
+    "expected_next_training_seed": 610100,
+    "eval_limit": null,
+    "device": "cpu",
+    "torch_num_threads": 1,
+    "torch_num_interop_threads": 1,
+    "wall_seconds": 105,
+    "save_grace_seconds": 5,
+    "maximum_rollout_samples": 10000,
+    "prediction_batch_size": 256,
+    "measurement_notes": [
+      "The controller declares the checkpoint with lab --input and plans CPU 14 affinity, a 120-second outer budget, 128 MiB output and 4096 MiB per-process address space. The probe is CPU-only and reads the checkpoint only inside the read-only lab source mount.",
+      "Strict current training/environment/action/observation/types/PPO/development-case configurations and all paper_train software/source versions must match. Restore the exact checkpoint sampling, shuffle and global RNG states; collect only the next training scenario, with no development or held-out rollout.",
+      "Measure static gradients at the checkpoint weights on the full fixed rollout and on the first minibatch selected by a clone of the restored shuffle stream. Advantage normalization uses the full rollout, exactly as shared_ppo.update. Report the negative clipped surrogate, weighted negative entropy, actor sum and weighted value MSE separately.",
+      "Gradient geometry uses query/key/value/shared parameters, excluding both output heads. Combined clipping uses every model parameter, as the original update does, and is measured with the actual torch clip_grad_norm_ function on a disposable measurement model. Static gradients are not the changing gradients of every subsequent Adam minibatch.",
+      "After measurement, call the unchanged shared_ppo.update on a separate model/Adam copy and a private restored shuffle stream, without hooks. Assert aggregate loss decomposition, raw advantage statistics, sample visits and gradient cap; when there is exactly one minibatch, also compare initial measured losses and gradient norms with the original returned fields.",
+      "Save old legal-action probability vectors in memory and compute full-rollout KL(old||new) after the original update. Zero old probability contributes zero; loss of positive old support produces an explicit infinite-KL status with null JSON scalar. Explained variance is null when return variance is zero.",
+      "No updated checkpoint is saved or promoted. The source checkpoint, reference model/Adam and reference RNG are checked unchanged. Report full collected episode summary and original update metrics so the controller can compare against the completed mainline episode 101 record, excluding runtime/RSS only as appropriate.",
+      "A norm, angle, clipping coefficient or small KL describes this one update and gradient geometry. It does not establish causal critic interference, baseline efficacy, or a justification for tuning by itself. Corridor containment remains unresolved."
+    ]
+  },
+  "strict_science_configs": {
+    "training": {
+      "schema": "bluesky.paper-like.train-dev.v1",
+      "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+      "environment_config": "configs/paper_environment_execution.json",
+      "ppo_config": "configs/paper_ppo.json",
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "training_seed": 61001,
+      "training_scenario_seed_start": 610000,
+      "sampling_seed": 710001,
+      "shuffle_seed": 710002,
+      "episodes": 300,
+      "wall_seconds": 600,
+      "deadline_grace_seconds": 15,
+      "initial_episode_seconds": 15,
+      "timing_safety_factor": 1.5,
+      "evaluate_every": 25,
+      "checkpoint_every": 5,
+      "dev_policy": "sample",
+      "dev_action_seed_base": 810000,
+      "report_argmax": false,
+      "selection_min_completed_fraction": 0.95,
+      "development_cases": [
+        {
+          "seed": 53001,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53002,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53003,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53004,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53005,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53006,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53007,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53008,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53009,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53010,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53011,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53012,
+          "corridor_count": 5
+        }
+      ],
+      "reconstruction_choices": [
+        "This execution-semantics learning diagnostic uses explicitly revised execution semantics. It is not literal paper behavior, an effective baseline, or a safety guarantee. Corridor containment remains unresolved; development selection is not held-out evidence and does not authorize delay experiments.",
+        "The environment_config pointer initially selects paper_environment_execution.json. Its resolved environment, action and termination settings are stored in every checkpoint; the controller determines final termination options from separate diagnostics before training. This training configuration does not override terminal-policy fields.",
+        "One native environment is reset for fresh training seeds training_scenario_seed_start + completed_episodes. No pre-birth transitions are fabricated. Arrival, deadline failure and any explicitly configured route-exhaustion failure terminate that aircraft with zero bootstrap; failed-route exposure remains reported and cannot be interpreted as a safety improvement.",
+        "Initialization, Python and NumPy use training_seed; training action sampling and PPO shuffling use separate saved CPU torch.Generator streams. Evaluation samples use dev_action_seed_base + case seed, reset identically for each policy checkpoint.",
+        "Preserve all 12 original development cases cycling 3/4/5 corridors. NR and sampled policy share each exact generated scenario. NR is cached once per geometry per job. Optional argmax is reported separately and never selects the checkpoint.",
+        "Aggregate rates divide summed unordered pair-seconds by summed flight-hours, retaining failed-flight exposure. Among models with completed/planned >=0.95, lower NMAC seconds per flight-hour wins, then lower LoWC. Before eligibility, higher completed fraction wins, then NMAC and LoWC. Exact ties keep the earlier checkpoint.",
+        "Run initial evaluation before updating, periodic evaluation every 25 completed episodes and final evaluation of the latest model when time allows. Any --eval-limit prefix is explicitly a smaller development diagnostic and remains part of strict checkpoint compatibility.",
+        "The initial target is 300 completed episodes with a 600-second inner budget; --episodes is the total target including resume. The controller bounds each job against the active research-block deadline and leaves startup/exit margin in the outer launcher.",
+        "Before starting another episode, reserve measured evaluation time and save grace. Check the inner cutoff between decisions. An interrupted episode is discarded, its pre-episode RNG states restored, and its scenario seed remains next; it is not updated or reported completed.",
+        "Atomic latest.pt is written initially, every 5 completed episodes and on orderly exit. best.pt follows the predeclared development selection; latest.pt embeds the selected best checkpoint. Scope, exact effective configurations and software/source versions must match on resume; checkpoints from literal execution are not relabeled or silently migrated."
+      ]
+    },
+    "environment": {
+      "schema": "bluesky.paper-like.environment.v1",
+      "scenario_config": "configs/nr_pilot.json",
+      "action_config": "configs/paper_actions_execution.json",
+      "observation_config": "configs/paper_observation.json",
+      "types_config": "configs/uav_types.json",
+      "decision_seconds": 5.0,
+      "device": "cpu",
+      "reconstruction_choices": [
+        "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+        "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+        "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+        "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+        "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+        "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+        "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+        "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training."
+      ],
+      "terminal_policy": "finite_exit",
+      "fail_on_native_route_exhaustion": true
+    },
+    "environment_parts": {
+      "scenario": {
+        "schema": "bluesky.paper-like.nr-pilot.v1",
+        "bluesky_version": "1.1.1",
+        "stage": "dev",
+        "scenario_count": 8,
+        "seeds": [
+          51001,
+          51002,
+          51003,
+          51004,
+          51005,
+          51006,
+          51007,
+          51008
+        ],
+        "origin_lat_lon_deg": [
+          52.0,
+          4.0
+        ],
+        "origin_square_side_nm": 2.0,
+        "earth_radius_m": 6371000.0,
+        "route_length_nm": 5.0,
+        "corridor_counts": [
+          3,
+          4,
+          5
+        ],
+        "corridor_count_distribution": "uniform_choice",
+        "aircraft_per_scenario": 30,
+        "allocation_method": "balanced_corridor_order",
+        "origin_distribution": "uniform_square_rejection",
+        "minimum_origin_spacing_ft": 1630.0,
+        "max_origin_sampling_attempts": 10000,
+        "intermediate_waypoint_count_range": [
+          0,
+          3
+        ],
+        "waypoint_count_distribution": "uniform_integer",
+        "initial_bearing_deg_range": [
+          0.0,
+          360.0
+        ],
+        "initial_bearing_distribution": "uniform",
+        "signed_turn_deg_range": [
+          -90.0,
+          90.0
+        ],
+        "signed_turn_distribution": "uniform",
+        "first_entry_seconds": 0.0,
+        "entry_interval_seconds_range": [
+          60.0,
+          90.0
+        ],
+        "entry_interval_distribution": "uniform",
+        "type_count": 12,
+        "type_distribution": "uniform_choice",
+        "dt_seconds": 0.25,
+        "per_flight_timeout_seconds": 1200.0,
+        "arrival_radius_m": 25.0,
+        "altitude_ft": 350.0,
+        "lowc_horizontal_ft": 1630.0,
+        "nmac_horizontal_ft": 500.0,
+        "vertical_tolerance_ft": 100.0,
+        "corridor_width_ft": 500.0,
+        "corridor_height_ft": 200.0,
+        "store_full_trajectories": false,
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed."
+        ]
+      },
+      "action": {
+        "schema": "bluesky.paper-actions.v1",
+        "source": "Fremond et al. 2026, PDF pp.14-15, Eqs.16-18; paper/REPRODUCTION.md",
+        "speed_ratios": [
+          0.5,
+          0.8,
+          1.0,
+          1.05
+        ],
+        "altitude_fractions": [
+          -0.5,
+          -0.25,
+          0.0,
+          0.25,
+          0.5
+        ],
+        "lane_fractions": [
+          -0.5,
+          0.0,
+          0.5
+        ],
+        "nominal_altitude_ft": 350.0,
+        "corridor_height_ft": 200.0,
+        "corridor_width_ft": 500.0,
+        "capture_angle_deg": 45.0,
+        "offset_join": "miter",
+        "altitude_capture_tolerance_m": 0.5,
+        "lane_capture_tolerance_m": 2.0,
+        "lane_capture_track_tolerance_deg": 5.0,
+        "reconstruction_choices": [
+          "Action indices use C-order unravel_index over (4,5,3); nominal (2,2,1) is index37. Eq18's repeated positive sign is interpreted as left/center/right: negative/zero/positive offset, following the prose.",
+          "While altitude or lane capture is active, that dimension's mask permits only its previously accepted index. Speed remains selectable. A masked joint proposal is rejected in full, preserving accepted targets; the caller must sample and compute log-probabilities using the same mask.",
+          "Speed instructions are absolute fractions of the initial nominal TAS. TAS is converted to CAS at the current altitude after every physics step for the next step. Native acceleration and the supplied PaperPerformance caps still apply; no speed or bank governor is added.",
+          "Native ALT receives the absolute target and the signed type-specific maximum climb/descent rate. Capture clears at altitude error <=0.5m; native altitude acquisition continues to the target. No vertical state teleportation is performed.",
+          "Nominal geometry uses a fixed local equirectangular frame anchored at the route origin with Earth radius6371000m. Positive lane is right of current nominal course. Initial route registration preserves exact supplied latitude/longitude and native fly-by behavior.",
+          "Shifted interior vertices use miter intersections of parallel adjacent nominal legs; endpoints shift perpendicular to their first/last leg. This deterministic join geometry is not specified by the paper and does not guarantee corridor containment.",
+          "Lane changes build a 45degree capture chord from the current physical position toward the absolute offset of the current nominal leg, followed by all remaining shifted nominal vertices. An artificial waypoint maps to no nominal progress. Native real-waypoint activation advances nominal progress monotonically, preserving fly-by semantics.",
+          "If the 45degree chord extends beyond the next shifted corner, its location and the next nominal vertex are both retained; capture_beyond_leg_end is reported. This may cause backtracking or capture failure. No hidden corner-feasibility mask or skipped mission waypoint is introduced.",
+          "A lane lock clears only while a real waypoint is active, the aircraft lies longitudinally on that finite shifted leg, lateral error <=2m and actual track error <=5degrees. It may capture a subsequent parallel leg after a corner. A completed lock does not reactivate solely because native tracking later deviates; actual errors remain observable.",
+          "Repeated accepted target indices do not rebuild the route or count as new physical commands. Registration builds the initial nominal route without counting an action. Native speed maintenance refreshes are counted separately from policy speed commands.",
+          "previous_waypoint and next_waypoint refer to the original nominal route. destination_waypoint uses the currently accepted offset endpoint; final_nominal_active requires the real final waypoint to be active, not an artificial capture point. The parent owns arrival radius, timeout and terminal accounting.",
+          "Width exposure uses each post-step distance to the complete nominal polyline multiplied by elapsed simulator time, matching NR's sampling convention. The caller must invoke update after every physics step; observed deviations are diagnostics, not guarantees.",
+          "Execution reconstruction variant, not disclosed author code. Altitude completion additionally requires actual absolute vertical speed <=0.05m/s, to avoid releasing a reversal while native vertical acquisition has residual motion.",
+          "On the final nominal leg only, mask a changed lane if its literal 45degree capture point lies beyond the shifted endpoint along that leg. Keep the accepted lane and every otherwise valid speed/altitude combination. This prevents constructing a backwards final route; it does not predict collision risk, constrain all turning trajectories, or guarantee containment."
+        ],
+        "altitude_completion_requires_settled_vs": true,
+        "altitude_capture_vs_tolerance_mps": 0.05,
+        "guard_final_leg_capture": true
+      },
+      "observation": {
+        "schema": "bluesky.paper-like.observation-reward.v1",
+        "earth_radius_m": 6371000.0,
+        "observation_radius_ft": 6000.0,
+        "waypoint_distance_scale_m": 9260.0,
+        "speed_reference_kt": 196.0,
+        "nominal_altitude_ft": 350.0,
+        "corridor_height_ft": 200.0,
+        "corridor_width_ft": 500.0,
+        "lowc_horizontal_ft": 1630.0,
+        "nmac_horizontal_ft": 500.0,
+        "vertical_tolerance_ft": 100.0,
+        "cpa_time_scale_seconds": 1200.0,
+        "cpa_relative_speed_epsilon_mps": 1e-06,
+        "efficiency_speed_weight": 0.3,
+        "efficiency_altitude_weight": 0.35,
+        "efficiency_lane_weight": 0.35,
+        "efficiency_reward_scale": 0.008,
+        "arrival_reward": 1.0,
+        "sources": [
+          "paper/REPRODUCTION.md",
+          "resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf: physical pp.11-16, Table 2, Eqs.14-15 and 19-22"
+        ],
+        "reconstruction_choices": [
+          "Table 2 feature meanings and order are preserved. Exact normalization bounds and angle conventions were not disclosed. Use p.13 [0,1], not the conflicting perturbation-section [0,9]; clip each scalar and count clips by feature before float32 conversion.",
+          "All positions and waypoints are lat/lon degrees; lengths, accepted targets and actual speeds use metres and metres per second. Ground speed and actual compass track, not target velocity, determine CPA. In the no-wind baseline the adapter maps accepted TAS commands to targeted ground speed.",
+          "Ownship previous/next waypoint distances are great-circle lengths on a 6371000 m sphere, divided by the nominal full-route length 9260 m. The adapter supplies the latest/next waypoint or route origin/destination, including its declared temporary-route handling.",
+          "Ownship accepted target speed is divided by the global 196 kt maximum. Target altitude is normalized from the 250 ft floor over the full 200 ft height. Right-positive accepted target lane is divided by the full 500 ft width then shifted by 0.5. The adapter supplies the two actual transition-lock flags.",
+          "Neighbors include every other aircraft at horizontal great-circle separation <=6000 ft, without a vertical filter or padding. Ownship and intruder IDs are sorted lexicographically; an empty encounter tensor has shape (0,10). The policy adapter, not this module, implements the paper's zero relative-vector convention.",
+          "Relative track and nominal-course angles use signed intruder minus ownship compass angles, wrapped to [-180,180) and divided by 360 then shifted by 0.5. Positive is clockwise/right; an exact half-turn takes -180. Same-corridor nominal cross-angle is forced to zero (normalized 0.5), even when aircraft occupy different route legs.",
+          "Relative accepted speed/altitude/lane targets use intruder minus ownship, divided by twice 196 kt, twice 200 ft or twice 500 ft respectively, then shifted by 0.5. Current actual altitude difference separately sets Eq.21 LoWC/NMAC thresholds, each normalized by 6000 ft.",
+          "CPA uses a common local east/north plane: relative position is great-circle range times the initial-bearing unit vector at ownship; velocities come from current ground speeds and tracks. For relative speed <=1e-6 m/s use t=0. Otherwise t=max(0,-r dot v/|v|^2). CPA distance uses that unbounded future time; only the normalized time feature clips at 1200 s. This local flat constant-velocity approximation is not a curved-flight forecast.",
+          "Safety uses the Eq.20 mean over all horizontally observed intruders, including zero-penalty neighbors; no neighbors gives zero. At or above 100 ft actual vertical separation both Eq.21 thresholds and the pair penalty are explicitly zero, including coincident horizontal positions.",
+          "Eq.22 compares accepted command targets exactly with stored nominal speed, configured 350 ft nominal altitude and zero lane. Nonnominal targets cost at each decision even if repeated, locked or completed; measured tracking error and rejected requests do not replace accepted targets. Accepted nominal commands should retain their canonical numerical values.",
+          "Reward total is safety +0.008*efficiency +1 for valid arrival. The environment is responsible for granting the arrival flag once, before its declared timeout; timeout or other deletion alone earns no arrival reward. Reward sampling and integration over physical steps belong to the environment adapter."
+        ]
+      }
+    },
+    "aircraft_types": {
+      "source": "paper/REPRODUCTION.md, Fremond et al. Table 3, PDF pp.16\u201317",
+      "nominal_speed_fraction": 0.8,
+      "acceleration_mps2": 3.5,
+      "reconstruction_choices": [
+        "Table maximum speed is interpreted as true airspeed; one knot is 1852/3600 m/s.",
+        "Zero minimum TAS; no additional altitude ceiling or speed/vertical coupling is inferred.",
+        "Native BlueSky 1.1.1 turn bank, altitude capture and vertical acceleration are unchanged.",
+        "The 3.5 m/s2 acceleration magnitude applies to native horizontal acceleration and deceleration."
+      ],
+      "types": {
+        "Amzn": {
+          "maximum_speed_kt": 196,
+          "climb_mps": 8,
+          "descent_mps": 8
+        },
+        "Cranfield": {
+          "maximum_speed_kt": 85,
+          "climb_mps": 3,
+          "descent_mps": 3
+        },
+        "CranfieldV2": {
+          "maximum_speed_kt": 39,
+          "climb_mps": 3,
+          "descent_mps": 3
+        },
+        "M100": {
+          "maximum_speed_kt": 43,
+          "climb_mps": 5,
+          "descent_mps": 4
+        },
+        "M200": {
+          "maximum_speed_kt": 45,
+          "climb_mps": 5,
+          "descent_mps": 3
+        },
+        "M600": {
+          "maximum_speed_kt": 35,
+          "climb_mps": 5,
+          "descent_mps": 5
+        },
+        "Phan4": {
+          "maximum_speed_kt": 39,
+          "climb_mps": 6,
+          "descent_mps": 4
+        },
+        "Mavic": {
+          "maximum_speed_kt": 35,
+          "climb_mps": 5,
+          "descent_mps": 3
+        },
+        "Eh216": {
+          "maximum_speed_kt": 69,
+          "climb_mps": 11,
+          "descent_mps": 11
+        },
+        "Horsefly": {
+          "maximum_speed_kt": 43,
+          "climb_mps": 8,
+          "descent_mps": 8
+        },
+        "Mnet": {
+          "maximum_speed_kt": 21,
+          "climb_mps": 5,
+          "descent_mps": 5
+        },
+        "Tecnalia": {
+          "maximum_speed_kt": 21,
+          "climb_mps": 3,
+          "descent_mps": 3
+        }
+      }
+    },
+    "ppo": {
+      "schema": "bluesky.paper-like.shared-ppo.v1",
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "own_dim": 7,
+      "intruder_dim": 10,
+      "action_dim": 60,
+      "attention_dim": 64,
+      "hidden_sizes": [
+        128,
+        128
+      ],
+      "learning_rate": 1e-05,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "clip_epsilon": 0.2,
+      "value_coefficient": 0.5,
+      "entropy_coefficient": 0.0001,
+      "update_epochs": 1,
+      "minibatch_size": 64,
+      "normalize_advantages": true,
+      "advantage_normalization_epsilon": 1e-08,
+      "max_grad_norm": 0.5,
+      "adam_betas": [
+        0.9,
+        0.999
+      ],
+      "adam_eps": 1e-08,
+      "weight_decay": 0.0,
+      "paper_sources": [
+        "paper/REPRODUCTION.md; original PDF pp.5-7, Algorithm 1 and PPO hyperparameters",
+        "original PDF pp.12-13, Eq.13 current-neighbor attention and Table 2"
+      ],
+      "reconstruction_choices": [
+        "CPU float32 and one PyTorch intra-op thread; no accelerator selection or fallback. The controller also limits native-library/inter-op threads and owns process priority.",
+        "One bias-free ownship query projection and bias-free intruder key/value projections, all width 64; scaled dot-product attention over current neighbors only. No recurrence, positional encoding or temporal memory.",
+        "Variable neighbor counts are padded with zero rows and explicitly masked before projection and softmax. An aircraft with no neighbors has exactly zero attention context.",
+        "Concatenate the 7 ownship features with the 64-dimensional context, then two shared width-128 Tanh layers with biased 60-class actor and scalar critic heads. All linear layers use PyTorch Linear default initialization; the controller seeds initialization explicitly.",
+        "Store the action-validity mask with each sampled observation and apply the identical mask to update logits. Masked classes have zero probability; at least one class must be valid. The environment owns action ordering and lock semantics.",
+        "Use Algorithm 1 minimization: negative clipped policy objective with ratio bounds [1-epsilon,1+epsilon], plus value_coefficient times full mean squared error, minus entropy_coefficient times entropy. This follows Algorithm 1 where surrounding printed equations have sign/lower-bound inconsistencies; no extra half-factor in value MSE and no value clipping.",
+        "Compute GAE separately for each contiguous aircraft trajectory using detached rollout values. Arrival and declared deadline failure are terminal with zero bootstrap. A live aircraft at a collector cutoff bootstraps from its final observed value; trajectories must never cross aircraft or reset boundaries.",
+        "Normalize advantages once across the complete pooled update batch using population standard deviation plus 1e-8; returns retain their original scale. Clip the global gradient norm to 0.5. These details are not specified in the paper.",
+        "Adam uses betas [0.9,0.999], epsilon 1e-8 and zero weight decay. Shuffle samples with the supplied CPU torch.Generator each epoch, use all samples including the final partial minibatch, and perform one epoch. No learning-rate schedule or KL early stopping.",
+        "Reported approximate KL and clip fraction are sample-weighted minibatch diagnostics before each minibatch step, not a final full-batch divergence or a scientific efficacy result. Initialization/sampling/shuffle seeds, rollout limits, checkpoint selection and evaluation deployment belong to the controller's training configuration."
+      ]
+    },
+    "effective_development_cases": [
+      {
+        "seed": 53001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53012,
+        "corridor_count": 5
+      }
+    ]
+  },
+  "strict_science_versions": {
+    "python": "3.11.13",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.4.6",
+    "bluesky": "1.1.1",
+    "source_sha256": {
+      "paper_train.py": "8b10e55137d46d66b32db3b820628a9fe5206443198f2a0d311ccc94e57256d5",
+      "shared_ppo.py": "3f393936ba01e1f296edcb2be537504ff5cdba630d1cee2009f1ae4ea095e93f",
+      "paper_environment.py": "0981d1dc7c65b6b4be362cf6ce04ea923b9fd7cd498ab7bcd4386e9557a78d2c",
+      "paper_actions.py": "f13cf945b1f76c3ac14009318ed66ffbd69573c3489d092907a60c57c1033a16",
+      "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+      "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+      "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+      "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+      "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+      "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064"
+    }
+  },
+  "checkpoint_path": "checkpoints/execution-100-20260905/latest.pt",
+  "checkpoint_sha256_before": "45f9e3a66519f99b0c93fe040b65c87f9e41191cd14a273013f40744407f552c",
+  "checkpoint_sha256_after": "45f9e3a66519f99b0c93fe040b65c87f9e41191cd14a273013f40744407f552c",
+  "checkpoint_completed_episodes": 100,
+  "training_scenario_seed": 610100,
+  "next_seed_index": 100,
+  "episode_summary": {
+    "seed": 610100,
+    "planned": 30,
+    "completed": 9,
+    "failed_timeout": 14,
+    "failed_route_exhausted": 7,
+    "outside_exit_crossings": 7,
+    "terminal_policy": "finite_exit",
+    "flight_hours": 6.7908333333333335,
+    "risk": {
+      "lowc": {
+        "unordered_pair_seconds": 2990.25,
+        "directed_pair_seconds": 5980.5,
+        "event_count": 287,
+        "events_ended_at_aircraft_exit": 0,
+        "same_corridor_event_count": 280,
+        "events_started_at_admission": 6,
+        "unordered_seconds_per_flight_hour": 440.3362375751626,
+        "directed_seconds_per_flight_hour": 880.6724751503252
+      },
+      "nmac": {
+        "unordered_pair_seconds": 504.25,
+        "directed_pair_seconds": 1008.5,
+        "event_count": 52,
+        "events_ended_at_aircraft_exit": 0,
+        "same_corridor_event_count": 52,
+        "events_started_at_admission": 0,
+        "unordered_seconds_per_flight_hour": 74.25450975579825,
+        "directed_seconds_per_flight_hour": 148.5090195115965
+      }
+    },
+    "path_length_m": 272098.5603602739,
+    "outside_corridor_aircraft_seconds": 5310.0,
+    "outside_corridor_flights": 30,
+    "max_centerline_distance_m": 424.84237858522323,
+    "outside_altitude_aircraft_seconds": 0.0,
+    "changed_instructions": 5471,
+    "policy_decisions": 4889,
+    "return_sum": -248.68441733802194,
+    "sim_seconds": 1686.75,
+    "physics_steps": 6747,
+    "decision_steps": 338,
+    "max_active": 24,
+    "wall_seconds": 8.727115210145712,
+    "process_peak_rss_mib": 562.515625,
+    "clipping_counts": {
+      "own.distance_next_waypoint": 1,
+      "intruders.cpa_time": 620,
+      "own.distance_previous_waypoint": 8
+    },
+    "clipping_count_scope": "All constructed observation snapshots, including terminal previews; not a policy-input rate.",
+    "completed_population": true,
+    "rollout_samples": 4889,
+    "rollout_aircraft": 30,
+    "collected_reward_sum": -248.68441733802652,
+    "action_histogram": [
+      63,
+      133,
+      79,
+      70,
+      78,
+      55,
+      70,
+      81,
+      71,
+      81,
+      82,
+      74,
+      81,
+      70,
+      57,
+      78,
+      135,
+      92,
+      78,
+      85,
+      85,
+      65,
+      84,
+      59,
+      77,
+      124,
+      60,
+      75,
+      96,
+      74,
+      73,
+      91,
+      148,
+      67,
+      87,
+      73,
+      84,
+      65,
+      62,
+      73,
+      108,
+      116,
+      79,
+      83,
+      75,
+      90,
+      118,
+      104,
+      77,
+      61,
+      62,
+      55,
+      46,
+      84,
+      58,
+      54,
+      94,
+      90,
+      130,
+      70
+    ],
+    "collection_wall_seconds": 8.722512029111385
+  },
+  "restored_rng_sha256": "29e657c14a5e23396c07869cf08c17985ebf2ef78a3eb84af7d8dfb9e85cced5",
+  "after_collection_rng_sha256": "9c377471cf2597c9da7fe2e0766e57e3599165b2c808d645613535279b2897dc",
+  "probe_source_sha256": "d93b766f4ebd905f964118b2f2afd426e91fd8264cfcb4f28ec7d0726ba28a2f",
+  "cpu_affinity": [
+    14
+  ],
+  "wall_seconds": 17.228597003035247,
+  "updated_checkpoint_saved": false,
+  "diagnostic": {
+    "full_rollout_static_gradients": {
+      "sample_count": 4889,
+      "sample_indexes_sha256": "8ee54cf0a01d3e588a19a9ec3e2016a4f564232f531afa1ba56b298a6cdb1e20",
+      "shared_parameter_names": [
+        "query.weight",
+        "key.weight",
+        "value.weight",
+        "shared.0.weight",
+        "shared.0.bias",
+        "shared.2.weight",
+        "shared.2.bias"
+      ],
+      "shared_parameter_count": 27456,
+      "shared_norms": {
+        "policy_surrogate": 0.02473006089887407,
+        "entropy_bonus": 5.90862817323325e-06,
+        "weighted_critic": 1.0266924628244072,
+        "combined": 1.0282421401627913,
+        "actor_total": 0.024729828593787077
+      },
+      "actor_total_vs_weighted_critic": {
+        "first_norm": 0.024729828593787077,
+        "second_norm": 1.0266924628244072,
+        "dot_product": 0.001286437310968032,
+        "cosine": 0.05066722833331886,
+        "angle_degrees": 87.09573813047328,
+        "status": "defined"
+      },
+      "surrogate_vs_weighted_critic": {
+        "first_norm": 0.02473006089887407,
+        "second_norm": 1.0266924628244072,
+        "dot_product": 0.0012910170953500347,
+        "cosine": 0.05084712868319162,
+        "angle_degrees": 87.0854172963679,
+        "status": "defined"
+      },
+      "entropy_vs_weighted_critic": {
+        "first_norm": 5.90862817323325e-06,
+        "second_norm": 1.0266924628244072,
+        "dot_product": -4.579784382001377e-06,
+        "cosine": -0.7549496655034055,
+        "angle_degrees": 139.0209718480861,
+        "status": "defined"
+      },
+      "shared_combined_norm_after_global_clip": 0.41436739097435904,
+      "gradient_norm": 1.2407363653182983,
+      "gradient_norm_after": 0.49999961256980896,
+      "global_clip_applied": true,
+      "global_clip_scale": 0.4029861834843046,
+      "policy_loss": 5.851959472558121e-10,
+      "value_loss": 2.2353038787841797,
+      "weighted_value_loss": 1.1176519393920898,
+      "entropy": 2.123033046722412,
+      "weighted_entropy_loss": -0.00021230330457910895,
+      "loss": 1.1174396276474,
+      "approx_kl": -1.219158246579255e-10,
+      "clip_fraction": 0.0,
+      "component_gradient_sum_assertion": "passed"
+    },
+    "first_original_minibatch_static_gradients": {
+      "sample_count": 64,
+      "sample_indexes_sha256": "349045b3ebc78c8c389352b037ff037b0c1b2b09932c01c866ec155377abd4a1",
+      "shared_parameter_names": [
+        "query.weight",
+        "key.weight",
+        "value.weight",
+        "shared.0.weight",
+        "shared.0.bias",
+        "shared.2.weight",
+        "shared.2.bias"
+      ],
+      "shared_parameter_count": 27456,
+      "shared_norms": {
+        "policy_surrogate": 0.15364900009506438,
+        "entropy_bonus": 5.3796900554815445e-06,
+        "weighted_critic": 1.2471114702706572,
+        "combined": 1.2444330530416021,
+        "actor_total": 0.1536491406055945
+      },
+      "actor_total_vs_weighted_critic": {
+        "first_norm": 0.1536491406055945,
+        "second_norm": 1.2471114702706572,
+        "dot_product": -0.015140639738208133,
+        "cosine": -0.07901486759072955,
+        "angle_degrees": 94.5319425505902,
+        "status": "defined"
+      },
+      "surrogate_vs_weighted_critic": {
+        "first_norm": 0.15364900009506438,
+        "second_norm": 1.2471114702706572,
+        "dot_product": -0.015136412530112551,
+        "cosine": -0.07899287918325544,
+        "angle_degrees": 94.53067875741678,
+        "status": "defined"
+      },
+      "entropy_vs_weighted_critic": {
+        "first_norm": 5.3796900554815445e-06,
+        "second_norm": 1.2471114702706572,
+        "dot_product": -4.227208095581292e-06,
+        "cosine": -0.6300733328602188,
+        "angle_degrees": 129.05553310874632,
+        "status": "defined"
+      },
+      "shared_combined_norm_after_global_clip": 0.36365252436031303,
+      "gradient_norm": 1.711018443107605,
+      "gradient_norm_after": 0.4999997019767761,
+      "global_clip_applied": true,
+      "global_clip_scale": 0.29222344387396615,
+      "policy_loss": 0.021723704412579536,
+      "value_loss": 1.5462566614151,
+      "weighted_value_loss": 0.77312833070755,
+      "entropy": 2.1200082302093506,
+      "weighted_entropy_loss": -0.0002120008139172569,
+      "loss": 0.7946400046348572,
+      "approx_kl": 0.0,
+      "clip_fraction": 0.0,
+      "component_gradient_sum_assertion": "passed"
+    },
+    "rollout_tensor_sha256": "c69370a6edadf422ccd5b55858cb76d63d7c55bcdafdc5c747c15ade316b1079",
+    "first_original_minibatch_indexes": [
+      1856,
+      3893,
+      872,
+      2086,
+      924,
+      1655,
+      3297,
+      4379,
+      619,
+      842,
+      2713,
+      3772,
+      3912,
+      121,
+      4218,
+      3946,
+      3762,
+      1414,
+      1786,
+      404,
+      4216,
+      2106,
+      2551,
+      360,
+      2167,
+      2862,
+      527,
+      2929,
+      4497,
+      2894,
+      253,
+      313,
+      1733,
+      4027,
+      149,
+      2918,
+      1512,
+      903,
+      2143,
+      4805,
+      2374,
+      2094,
+      4227,
+      2925,
+      1578,
+      1161,
+      814,
+      1041,
+      8,
+      3024,
+      2372,
+      3866,
+      4601,
+      3875,
+      410,
+      2870,
+      3894,
+      1340,
+      2520,
+      1841,
+      2719,
+      1963,
+      1476,
+      4655
+    ],
+    "original_update_metrics": {
+      "loss": 1.108039881193606,
+      "policy_loss": -4.071612913054078e-05,
+      "value_loss": 2.2165856744204837,
+      "entropy": 2.1224602125105037,
+      "approx_kl": 1.3987743474763257e-05,
+      "clip_fraction": 0.0,
+      "gradient_norm": 1.5355589870637023,
+      "gradient_norm_after": 0.4993223077035628,
+      "samples": 4889,
+      "sample_visits": 4889,
+      "minibatches": 77,
+      "epochs": 1,
+      "advantage_mean": -0.1781369000673294,
+      "advantage_std": 1.4844430685043335
+    },
+    "full_batch_post_update_kl": {
+      "direction": "KL(old||new)",
+      "weighting": "uniform over collected aircraft-decision samples",
+      "rows": 4889,
+      "infinite_rows": 0,
+      "mean": 3.604749870713324e-05,
+      "max": 0.00013238111809152367,
+      "finite_rows_mean": 3.604749870713324e-05,
+      "status": "finite"
+    },
+    "explained_variance_before": {
+      "value": 0.33045926480941257,
+      "return_variance": 3.2911681461533537,
+      "status": "defined"
+    },
+    "explained_variance_after": {
+      "value": 0.33276675571694736,
+      "return_variance": 3.2911681461533537,
+      "status": "defined"
+    },
+    "old_legal_action_probabilities_sha256": "ec7b248dbc6303cdbf30bccf982f48079f43cf1934b4241177dd13ce0442fe7f",
+    "old_legal_action_probabilities_storage": "retained in memory until full-support post-update KL is computed",
+    "old_selected_log_probability_consistency": "passed within float32 batching tolerance",
+    "reference_model_before_sha256": "6a292df95a67d314bd649a8ab3d90676dcb0f35c02faf55867f9fa80384b82e2",
+    "reference_model_after_sha256": "6a292df95a67d314bd649a8ab3d90676dcb0f35c02faf55867f9fa80384b82e2",
+    "reference_optimizer_before_sha256": "12e03d0256d2481b0e5efcaedceea580180ad064ef1d445f3d2fddb0d9e37368",
+    "reference_optimizer_after_sha256": "12e03d0256d2481b0e5efcaedceea580180ad064ef1d445f3d2fddb0d9e37368",
+    "disposable_model_before_sha256": "6a292df95a67d314bd649a8ab3d90676dcb0f35c02faf55867f9fa80384b82e2",
+    "disposable_model_after_sha256": "6074f91d9010cddb7d4f87c5dbc63edabdd7d11bb13a30d731ae53290c1d4188",
+    "disposable_optimizer_after_sha256": "598ff7e604dc96061efe032150dc2934232301a2b60602febaa0fe27fe699372",
+    "private_shuffle_after_sha256": "65d01d109584497f6aae1c98da8b3bcbf0ba0e66cf7fc57f45a5965e7d80f070",
+    "consistency_assertions": {
+      "aggregate_loss_decomposition": "passed",
+      "advantage_statistics": "passed",
+      "sample_accounting": "passed",
+      "gradient_cap": "passed",
+      "single_minibatch_exact_fields": [],
+      "limitation": "Multi-minibatch returned fields are visit-weighted averages at changing weights; static gradients are not asserted equal to those averages."
+    }
+  },
+  "interpretation": "One fixed rollout and disposable update diagnose scale/gradient geometry, not causal critic interference or a justification for tuning. No baseline efficacy or containment claim."
+}

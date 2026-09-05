@@ -434,3 +434,22 @@ route_fidelity针对新exposure返回：共同乘数若对齐论文，potential/
 全部53超时确认为29 Mnet+24 Tecnalia，各自0到达；两类策略期望速度比.840643/.842913（全局.842507），与前述1200s可达性机制相符。到达/超时/导航耗尽组平均age569.70/1200/529.85s、return−4.583/−10.050/−5.441；耗尽组平均回报反而比到达组差，这些非匹配分组不证明主动利用失败。安全总项−1948.1603、未缩放eff−36031.65×.008、arrival236与总−2000.4135逐机对账。完整结果/身份小报告见[策略诊断](../reports/policy-diagnostic-100-20260905/README.md)；5.11MB JSON含完整分组，原25.69MB CSV/逐机原始文件仍本地。
 
 [事件重聚合](../runs/20260905T082648Z-exposure-pair-decomposition-aa29f123/artifacts/pair_decomposition.json)0.066s通过每case原始暴露/连续事件计数还原断言；同走廊占potential/LoWC/NMAC的60.91%/81.40%/92.90%，现有5走廊子集44.61%/74.89%/89.59%。记录共同航路主导当前NMAC，但标签自身不证明每例追赶/几何交叉。脚本、24来源SHA输入及结果补进[NR报告](../reports/exposure-audit-20260905/README.md)。这些诊断不改变现有PPO源码、任务定义或训练随机流。
+
+08:32 150轮恢复点、策略诊断和同/跨走廊事件分解随4c178fbab6bdb052a9c6f1ce50badae94e9ccf86推送私有分支，远端SHA一致；本批doctor/diff检查通过。随后启动150→250（内1800/外1860s），当前唯一launcher负载，仍CPU14/单线程/nice15/idle IO/4096MiB虚拟地址上限，每5轮保存，持续轮询；10h截止15:15:13、14:45收尾不变。
+
+08:50左右250目标仍进行，175/200轮sample完成233/241（均53超时），NMAC64.824/67.699每flight-hour，尚无稳定任务改善。梯度探针3文件静态完成，独立review无阻断；待当前负载结束串行验证，再与原episode101（4889样本/77minibatch/1epoch）科学摘要及全部ppo字段比较，排除runtime/RSS/collection_wall_seconds。另observation_reward_spec只读自身7维对下一转弯的可观察性及原文敏捷假设，≤15min；不得把瞬时观测混叠直接声称无可行控制或论文创新，不改当前训练。
+
+
+### 08:55–09:07 UTC：250轮正常完成、梯度原生精确对照
+
+[150→250](../runs/20260905T083233Z-execution-ppo-250-dfe44090/artifacts/result.json)完成100轮，CLI1393.066s/job1394.878s，08:55:48正常退出，best仍25。175/200/225/250轮sample完成233/241/242/244，NMAC64.824/67.699/76.938/73.208每flight-hour。250轮53超时、63导航耗尽、347横向越界、0高度越界，64.992847flight-hours；LoWC25030.75/NMAC4758无向pair-s，LoWC385.130842/h，return−2300.19648。仍未建立有效baseline，不能按较低于NR的风险单项冻结。小副本[250恢复点](../checkpoints/execution-250-20260905/README.md)5份数据2011252字节，记录原run/源码身份与SHA，准备私有远端备份；下一段同科学配置计划250→400，内2400/外2460s，仍每25评价/每5保存，CPU14单线程低优先级，10h截止不变。
+
+[梯度5测试](../runs/20260905T085659Z-ppo-gradient-tests-3d751a9e/log.txt)通过，1.366s测试/2.890s job。[native探针](../runs/20260905T085732Z-ppo-gradient-probe-dd663a67/artifacts/gradient_probe.json)17.229s内部/19.005s监督正常完成。严格100轮checkpoint恢复下一training seed610100，4889样本、77minibatch、1epoch；controller与已完成150段首行episode101比较，除wall_seconds/collection_wall_seconds/process_peak_rss_mib外全部episode科学字段及整个ppo dict完全相同，包括动作直方图。比较源hash/行号和完整结果另存[梯度报告](../reports/ppo-gradient-100-20260905/README.md)。
+
+原权重全rollout共享actor/weighted-critic norm .0247298/1.0266925，cos+.050667；原首64样本为.1536491/1.2471115，cos−.079015。两个静态组合均触发global .5裁剪。原update在可丢弃model/Adam副本后，全batch KL(old||new)均值3.60475e−5、max.000132381；同固定returns的explained variance .330459→.332767。参考model/Adam/checkpoint未改变，更新副本未保存。大范数与近正交只描述原权重两个测量，不等于77步Adam方向或已证实critic妨碍学习，不据此直接改参。独立reviewer此前静态无阻断；追加≤15min只读实测解释核对、最多2个有依据后续，不修改/实验/嵌套。
+
+observation_reward_spec只读镜像可观察性回执：5NM首东4630m、后南/北4630m，首段中点同状态且未原生换航点，own7=[.25,.25,nominal_speed/(196kt),.5,.5,0,0]，Mavic速度维1/7、Amzn .8；无邻机、60动作全合法，任何同权重策略分布相同。底层_route知道完整未来航路，这不证明没有共同可行控制。先前Mavic inner/outer完成动作90/92.75s时已78.199m>76.2，早于原生首航点换315.75/326.25s；需区分首段capture容差与转弯。原文pp14–17敏捷few-seconds未披露bank/join/tolerance，不擅自赋瞬时航向或旧44m/s。
+
+追加builder route_trace：仅写route_observation_probe.py/对应配置/聚焦测试，不改core训练源码/既有配置；2例Mavic中心+24例Amzn左右转×4速度×3lane，名义高度、先NR到首段中点的首个5s边界再重复固定合法请求，保存触发时真实own7/mask/固定未训练模型输出、capture/转弯phase、越界/终态/原生导航摘要。可另列24例Amzn仅普通flyby刷新轴，总50例；保留Table3速度/宽76.2/bank25/1200s。≤30min静态，无实验/清理/信号/GPU/通知/嵌套且保留他人工作；controller后续≤180s串行验证。有限动作响应表不是所有时变策略可解性证明。
+
+0–250学习图输入已从五份备份development.jsonl及各manifest重组，13个原开发评价点；重复15/100/150全sample和NR aggregate逐项相同才合并，所有源SHA/行号保留。65点评价来自后续恢复初评，原中断run仍无65评价；旧图覆盖范围不冒充最新。

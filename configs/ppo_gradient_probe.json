@@ -1,0 +1,26 @@
+{
+  "schema": "ppo-gradient-probe.v1",
+  "scope": "execution-semantics PPO gradient diagnostic; no causal interference claim",
+  "checkpoint": "checkpoints/execution-100-20260905/latest.pt",
+  "training_config": "configs/paper_train_execution.json",
+  "expected_completed_episodes": 100,
+  "expected_next_training_seed": 610100,
+  "eval_limit": null,
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "torch_num_interop_threads": 1,
+  "wall_seconds": 105,
+  "save_grace_seconds": 5,
+  "maximum_rollout_samples": 10000,
+  "prediction_batch_size": 256,
+  "measurement_notes": [
+    "The controller declares the checkpoint with lab --input and plans CPU 14 affinity, a 120-second outer budget, 128 MiB output and 4096 MiB per-process address space. The probe is CPU-only and reads the checkpoint only inside the read-only lab source mount.",
+    "Strict current training/environment/action/observation/types/PPO/development-case configurations and all paper_train software/source versions must match. Restore the exact checkpoint sampling, shuffle and global RNG states; collect only the next training scenario, with no development or held-out rollout.",
+    "Measure static gradients at the checkpoint weights on the full fixed rollout and on the first minibatch selected by a clone of the restored shuffle stream. Advantage normalization uses the full rollout, exactly as shared_ppo.update. Report the negative clipped surrogate, weighted negative entropy, actor sum and weighted value MSE separately.",
+    "Gradient geometry uses query/key/value/shared parameters, excluding both output heads. Combined clipping uses every model parameter, as the original update does, and is measured with the actual torch clip_grad_norm_ function on a disposable measurement model. Static gradients are not the changing gradients of every subsequent Adam minibatch.",
+    "After measurement, call the unchanged shared_ppo.update on a separate model/Adam copy and a private restored shuffle stream, without hooks. Assert aggregate loss decomposition, raw advantage statistics, sample visits and gradient cap; when there is exactly one minibatch, also compare initial measured losses and gradient norms with the original returned fields.",
+    "Save old legal-action probability vectors in memory and compute full-rollout KL(old||new) after the original update. Zero old probability contributes zero; loss of positive old support produces an explicit infinite-KL status with null JSON scalar. Explained variance is null when return variance is zero.",
+    "No updated checkpoint is saved or promoted. The source checkpoint, reference model/Adam and reference RNG are checked unchanged. Report full collected episode summary and original update metrics so the controller can compare against the completed mainline episode 101 record, excluding runtime/RSS only as appropriate.",
+    "A norm, angle, clipping coefficient or small KL describes this one update and gradient geometry. It does not establish causal critic interference, baseline efficacy, or a justification for tuning by itself. Corridor containment remains unresolved."
+  ]
+}
