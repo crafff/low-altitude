@@ -1,8 +1,12 @@
 # 当前状态
 
-更新：2026-09-05 23:29 UTC。分支 `research/trc-baseline-system-20260905`。
+更新：2026-09-05 23:40 UTC。分支 `research/trc-baseline-system-20260905`。
 
 [001：无延迟、无扰动基线](../tasks/001-baseline.md)仍进行中；先有效paper-like BlueSky MARL，再冻结测延迟，最后研究改进。[目的/论文/期刊](PLAN.md)。旧850未有效，不冻结、不做延迟收益实验。
+
+## 当前授权：接入并行采样后小训练
+
+用户“好，开始”已授权4个CPU环境进程＋单线程PPO、验证完整批次和恢复、随后有界pilot。先做真实8连续 vs4+恢复8的系统/执行验证，再从新seed开始至多64场景（16次池化更新）、840s内/900s外的小训练。单lab串行、CPU12–15、nice15/idleIO，无GPU/他人进程操作，不继承旧10h。不因用户先搁置越界讨论而修改原指标/观测/奖励。详情在任务末节；40项回归通过，真实连续8与4+恢复8的样本/参数/Adam/RNG及best精确一致；[验证记录](../reports/parallel-pilot-20260905/README.md)。即将从新seed启动正式64场景pilot。
 
 ## 最新完成：CPU / 多核 / GPU测速
 

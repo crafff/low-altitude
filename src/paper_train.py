@@ -1,4 +1,4 @@
-"""Bounded CPU PPO training and paired development evaluation via tools/lab.py."""
+"""Bounded CPU PPO with serial or synchronous episode collection, via lab."""
 from __future__ import annotations
 
 import argparse
@@ -19,11 +19,36 @@ import numpy as np
 import torch
 
 from shared_ppo import SharedActorCritic, collate, compute_gae, update
+from rollout_errors import CollectionCutoff
 
 
 SCOPE = "literal-environment learning diagnostic; corridor containment unresolved"
 EXECUTION_SCOPE = "execution-semantics learning diagnostic; corridor containment unresolved"
 CHECKPOINT_SCHEMA = "bluesky.paper-like.training-checkpoint.v1"
+PARALLEL_CHECKPOINT_SCHEMA = "bluesky.paper-like.training-checkpoint.parallel.v1"
+
+
+def batch_size(cfg):
+    settings = cfg.get("parallel_rollout")
+    if settings is None:
+        return 1
+    if (not isinstance(settings, dict)
+            or settings.get("mode") != "synchronous_complete_episodes"
+            or settings.get("sampling_seed_rule") != "base_plus_episode_index"
+            or type(settings.get("workers")) is not int
+            or settings["workers"] != 4
+            or type(settings.get("episodes_per_update")) is not int
+            or settings["episodes_per_update"] != 4):
+        raise ValueError("parallel rollout requires four synchronous complete episodes")
+    cores = settings.get("cpu_ids")
+    if (not isinstance(cores, list) or len(cores) != 4 or len(set(cores)) != 4
+            or any(type(c) is not int or c < 0 for c in cores)):
+        raise ValueError("parallel rollout needs four distinct CPU IDs")
+    return 4
+
+
+def checkpoint_schema(cfg):
+    return PARALLEL_CHECKPOINT_SCHEMA if batch_size(cfg) > 1 else CHECKPOINT_SCHEMA
 
 
 def validated_scope(cfg):
@@ -32,10 +57,6 @@ def validated_scope(cfg):
     if not isinstance(scope, str) or scope not in (SCOPE, EXECUTION_SCOPE):
         raise ValueError("scope must be an explicitly supported learning diagnostic")
     return scope
-
-
-class CollectionCutoff(RuntimeError):
-    """A resource cutoff, never a completed population or task termination."""
 
 
 def _check_deadline(deadline):
@@ -163,15 +184,19 @@ def make_checkpoint(model, optimizer, *, completed_episodes, next_seed_index,
     scope = validated_scope(configs["training"])
     if evaluation is not None and evaluation.get("scope") != scope:
         raise ValueError("checkpoint evaluation scope differs from training scope")
-    if completed_episodes < 0 or next_seed_index != completed_episodes:
-        raise ValueError("one fresh scenario seed is required per completed episode")
+    size = batch_size(configs["training"])
+    if (type(completed_episodes) is not int or completed_episodes < 0
+            or type(next_seed_index) is not int or next_seed_index != completed_episodes
+            or completed_episodes % size):
+        raise ValueError("checkpoint requires complete rollout batches and fresh scenario seeds")
     if best_checkpoint is not None and best_checkpoint.get("best_checkpoint") is not None:
         raise ValueError("best checkpoint nesting must be at most one level")
     if best_checkpoint is not None:
         _validate_checkpoint(best_checkpoint, configs, versions)
-    return copy.deepcopy({"schema": CHECKPOINT_SCHEMA, "scope": scope,
+    return copy.deepcopy({"schema": checkpoint_schema(configs["training"]), "scope": scope,
         "model": model.state_dict(), "optimizer": optimizer.state_dict(),
         "completed_episodes": completed_episodes, "next_seed_index": next_seed_index,
+        "completed_update_batches": completed_episodes // size,
         "rng": capture_rng(sampling_generator, shuffle_generator),
         "configs": configs, "versions": versions, "evaluation": evaluation,
         "best_checkpoint": best_checkpoint})
@@ -196,7 +221,8 @@ def save_checkpoint(path, payload):
 
 def _validate_checkpoint(payload, configs, versions):
     scope = validated_scope(configs["training"])
-    if payload.get("schema") != CHECKPOINT_SCHEMA:
+    size = batch_size(configs["training"])
+    if payload.get("schema") != checkpoint_schema(configs["training"]):
         raise ValueError("unsupported training checkpoint")
     if payload.get("scope") != scope:
         raise ValueError("checkpoint scope differs from configured training scope")
@@ -208,7 +234,10 @@ def _validate_checkpoint(payload, configs, versions):
     if evaluation is not None and evaluation.get("scope") != scope:
         raise ValueError("checkpoint evaluation scope differs from training scope")
     episodes, index = payload["completed_episodes"], payload["next_seed_index"]
-    if isinstance(episodes, bool) or not isinstance(episodes, int) or episodes < 0 or index != episodes:
+    if (type(episodes) is not int or episodes < 0 or type(index) is not int
+            or index != episodes or episodes % size
+            or (size > 1 and (type(payload.get("completed_update_batches")) is not int
+                             or payload["completed_update_batches"] != episodes // size))):
         raise ValueError("invalid completed episode/next seed counters")
     for tensor in payload["model"].values():
         if tensor.device.type != "cpu" or not bool(torch.isfinite(tensor).all()):
@@ -320,6 +349,7 @@ class WallBudget:
         self.grace = cfg["deadline_grace_seconds"]
         self.estimate = cfg["initial_episode_seconds"]
         self.factor = cfg["timing_safety_factor"]
+        self.batch_estimate = cfg.get("initial_batch_seconds", self.estimate)
 
     @property
     def collection_deadline(self):
@@ -331,13 +361,20 @@ class WallBudget:
     def observe(self, duration):
         self.estimate = max(self.estimate, duration)
 
+    def can_start_batch(self, evaluation_units, startup_seconds=0.):
+        reserve = self.factor * (evaluation_units*self.estimate + self.batch_estimate)
+        return time.perf_counter()+reserve+startup_seconds < self.collection_deadline
+
+    def observe_batch(self, duration):
+        self.batch_estimate = max(self.batch_estimate, duration)
+
 
 def _versions():
     directory = Path(__file__).resolve().parent
     names = ("paper_train.py", "shared_ppo.py", "paper_environment.py", "paper_actions.py",
              "paper_observation.py", "paper_scenarios.py", "paper_performance.py",
              "nr_pilot.py", "bluesky_diagnostic.py", "route_completion.py", "navigation_refresh.py",
-             "nominal_turn_speed.py")
+             "nominal_turn_speed.py", "parallel_rollout.py", "rollout_errors.py")
     return {"python": platform.python_version(), "torch": str(torch.__version__),
             "numpy": str(np.__version__), "bluesky": importlib.metadata.version("bluesky-simulator"),
             "source_sha256": {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in names}}
@@ -353,16 +390,25 @@ def _validate_train_config(cfg, episodes, wall_seconds, eval_limit):
     if cfg["device"] != "cpu" or cfg["torch_num_threads"] != 1 or cfg["torch_num_interop_threads"] != 1:
         raise ValueError("this training block requires one CPU thread")
     validated_scope(cfg)
+    size = batch_size(cfg)
     if cfg["dev_policy"] != "sample":
         raise ValueError("sampled primary development policy must be explicit")
     for key in ("training_seed", "training_scenario_seed_start", "sampling_seed", "shuffle_seed", "dev_action_seed_base"):
         if isinstance(cfg[key], bool) or not isinstance(cfg[key], int) or cfg[key] < 0:
             raise ValueError(f"{key} must be a nonnegative integer")
-    if episodes < 0 or not math.isfinite(wall_seconds) or wall_seconds <= 0:
+    if type(episodes) is not int or episodes < 0 or not math.isfinite(wall_seconds) or wall_seconds <= 0:
         raise ValueError("episode target must be nonnegative and wall budget positive")
     for key in ("evaluate_every", "checkpoint_every"):
         if isinstance(cfg[key], bool) or not isinstance(cfg[key], int) or cfg[key] < 1:
             raise ValueError(f"{key} must be a positive integer")
+    if size > 1:
+        if any(value % size for value in (episodes, cfg["evaluate_every"], cfg["checkpoint_every"])):
+            raise ValueError("parallel episode target/evaluation/save intervals must align with complete batches")
+        if not cfg.get("development_scenarios_path"):
+            raise ValueError("parallel pilot requires the preserved development scenarios")
+        for key in ("initial_batch_seconds", "parallel_startup_seconds"):
+            if not math.isfinite(cfg[key]) or cfg[key] <= 0:
+                raise ValueError(f"{key} must be positive")
     if not isinstance(cfg["report_argmax"], bool):
         raise ValueError("report_argmax must be boolean")
     for key in ("deadline_grace_seconds", "initial_episode_seconds", "timing_safety_factor"):
@@ -382,6 +428,27 @@ def _validate_train_config(cfg, episodes, wall_seconds, eval_limit):
         raise ValueError("training and development seeds overlap")
     if eval_limit is not None and not 1 <= eval_limit <= len(cases):
         raise ValueError("eval-limit must select a nonempty prefix of declared development cases")
+
+
+def fixed_development_scenarios(cfg, cases):
+    """Load the preserved scenarios, validating the full declaration, then select."""
+    path = cfg.get("development_scenarios_path")
+    if path is None:
+        return None
+    raw = Path(path).read_bytes()
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest != cfg["development_scenarios_sha256"]:
+        raise ValueError("preserved development scenario file hash differs")
+    worlds = json.loads(raw)
+    if (not isinstance(worlds, list) or len(worlds) != len(cfg["development_cases"])
+            or len({w['seed'] for w in worlds}) != len(worlds)):
+        raise ValueError("preserved development scenarios must be unique and complete")
+    by_seed = {w['seed']: w for w in worlds}
+    for case in cfg['development_cases']:
+        world = by_seed.get(case['seed'])
+        if world is None or len(world['corridors']) != case['corridor_count']:
+            raise ValueError("preserved scenario seed/corridor declaration differs")
+    return [by_seed[case['seed']] for case in cases]
 
 
 def main(argv=None):
@@ -412,9 +479,12 @@ def main(argv=None):
     environment_cfg, parts = load_environment_config(cfg["environment_config"])
     ppo_cfg = json.loads(Path(cfg["ppo_config"]).read_text())
     cases = copy.deepcopy(cfg["development_cases"][:args.eval_limit])
+    scenarios = fixed_development_scenarios(cfg, cases)
     configs = {"training": cfg, "environment": environment_cfg, "environment_parts": parts,
                "aircraft_types": json.loads(Path(environment_cfg["types_config"]).read_text()),
                "ppo": ppo_cfg, "effective_development_cases": cases}
+    if scenarios is not None:
+        configs['effective_development_scenarios'] = scenarios
     versions = _versions()
     model = SharedActorCritic(ppo_cfg)
     optimizer = torch.optim.Adam(model.parameters(), lr=ppo_cfg["learning_rate"],
@@ -446,8 +516,9 @@ def main(argv=None):
     startup_rng = capture_rng(sampling, shuffle)
     env = PaperEnvironment(environment_cfg, parts)
     restore_rng(startup_rng, sampling, shuffle)
-    scenarios = [generate_scenario(dict(parts["scenario"], corridor_counts=[case["corridor_count"]]),
-                                   case["seed"], list(env.types)) for case in cases]
+    if scenarios is None:
+        scenarios = [generate_scenario(dict(parts["scenario"], corridor_counts=[case["corridor_count"]]),
+                                       case["seed"], list(env.types)) for case in cases]
     nr_cache, evaluations = {}, []
     evaluation_units = len(cases)*(1+int(cfg["report_argmax"]))
 
@@ -488,42 +559,84 @@ def main(argv=None):
     initial_evaluated = evaluate("initial_untrained" if completed == 0 else "initial_resumed")
     if not initial_evaluated:
         stop_reason = "insufficient_budget_for_initial_development_evaluation"
-    while initial_evaluated and completed < episodes:
-        # Reserve a full evaluation of the next model, plus collection/update.
-        if not budget.can_start(evaluation_units+1):
-            stop_reason = "stopped_between_episodes_to_reserve_final_evaluation"
-            break
-        episode_started = time.perf_counter()
-        before_rng = capture_rng(sampling, shuffle)
-        seed = cfg["training_scenario_seed_start"]+next_index
-        try:
-            observations = env.reset(seed)
-            samples, summary = collect_episode(env, model, sampling, ppo_cfg,
-                observations=observations, deadline=budget.collection_deadline)
-            _check_deadline(budget.collection_deadline)
-        except CollectionCutoff:
-            restore_rng(before_rng, sampling, shuffle)
-            stop_reason = "partial_episode_discarded_at_resource_cutoff"
-            break
-        updates = update(model, optimizer, samples, ppo_cfg, shuffle)
-        completed += 1
-        next_index += 1
-        last_evaluation = None  # The previous evaluation cannot describe updated weights.
-        duration = time.perf_counter()-episode_started
-        budget.observe(duration)
-        row = {"scope": scope, "completed_episode": completed, "scenario_seed": seed,
-               "environment": summary, "ppo": updates, "wall_seconds": duration,
-               "elapsed_seconds": time.perf_counter()-started}
-        _append_json(output/"training.jsonl", row)
-        print(json.dumps({"scope": scope, "event": "training", "completed_episode": completed, "seed": seed,
-                          "completed": summary["completed"], "planned": summary["planned"],
-                          "return_sum": summary["return_sum"], "ppo": updates,
-                          "wall_seconds": duration}, allow_nan=False), flush=True)
-        if completed % cfg["checkpoint_every"] == 0:
-            save_checkpoint(output/"latest.pt", checkpoint())
-        if completed % cfg["evaluate_every"] == 0 and not evaluate("periodic"):
-            stop_reason = "insufficient_budget_for_periodic_development_evaluation"
-            break
+    size = batch_size(cfg)
+    pool = None
+    try:
+        while initial_evaluated and completed < episodes:
+            startup = cfg.get("parallel_startup_seconds", 0.) if size > 1 and pool is None else 0.
+            can_start = (budget.can_start_batch(evaluation_units, startup) if size > 1
+                         else budget.can_start(evaluation_units+1))
+            if not can_start:
+                stop_reason = "stopped_between_batches_to_reserve_final_evaluation"
+                break
+            before_rng = capture_rng(sampling, shuffle)
+            seed = cfg["training_scenario_seed_start"]+next_index
+            batch = None
+            try:
+                if size > 1 and pool is None:
+                    from parallel_rollout import ParallelRolloutPool
+                    settings = cfg['parallel_rollout']
+                    pool_started = time.perf_counter()
+                    pool = ParallelRolloutPool(cfg['environment_config'], ppo_cfg,
+                        workers=settings['workers'], cpu_ids=settings['cpu_ids'],
+                        scenario_seed_start=cfg['training_scenario_seed_start'],
+                        sampling_seed=cfg['sampling_seed'], training_seed=cfg['training_seed'],
+                        startup_deadline=min(budget.collection_deadline, pool_started+startup))
+                    _append_json(output/'collection.jsonl', dict(event='pool_started',
+                        wall_seconds=time.perf_counter()-pool_started))
+                episode_started = time.perf_counter()
+                if size > 1:
+                    batch = pool.collect(copy.deepcopy(model.state_dict()),
+                        list(range(next_index, next_index+size)),
+                        policy_version=completed//size, deadline=budget.collection_deadline)
+                    samples = batch['samples']
+                    summary = aggregate_summaries([e['summary'] for e in batch['episodes']])
+                else:
+                    observations = env.reset(seed)
+                    samples, summary = collect_episode(env, model, sampling, ppo_cfg,
+                        observations=observations, deadline=budget.collection_deadline)
+                _check_deadline(budget.collection_deadline)
+            except CollectionCutoff:
+                restore_rng(before_rng, sampling, shuffle)
+                stop_reason = "partial_batch_discarded_at_resource_cutoff"
+                break
+            except Exception:
+                restore_rng(before_rng, sampling, shuffle)
+                save_checkpoint(output/"latest.pt", checkpoint())
+                raise
+            updates = update(model, optimizer, samples, ppo_cfg, shuffle)
+            completed += size
+            next_index += size
+            last_evaluation = None
+            duration = time.perf_counter()-episode_started
+            if size > 1:
+                budget.observe_batch(duration)
+                row = {"scope": scope, "completed_episodes": completed,
+                       "completed_update_batches": completed//size,
+                       "scenario_seeds": [e['scenario_seed'] for e in batch['episodes']],
+                       "episodes": batch['episodes'], "collection_timing": batch['timing'],
+                       "policy_version": completed//size-1,
+                       "environment": summary, "ppo": updates, "wall_seconds": duration,
+                       "elapsed_seconds": time.perf_counter()-started}
+            else:
+                budget.observe(duration)
+                row = {"scope": scope, "completed_episode": completed, "scenario_seed": seed,
+                       "environment": summary, "ppo": updates, "wall_seconds": duration,
+                       "elapsed_seconds": time.perf_counter()-started}
+            _append_json(output/"training.jsonl", row)
+            print(json.dumps({"scope": scope, "event": "training", "completed_episodes": completed,
+                              "completed_update_batches": completed//size, "first_seed": seed,
+                              "completed": summary["completed"], "planned": summary["planned"],
+                              "return_sum": summary["return_sum"], "ppo": updates,
+                              "wall_seconds": duration}, allow_nan=False), flush=True)
+            if completed % cfg["checkpoint_every"] == 0:
+                save_checkpoint(output/"latest.pt", checkpoint())
+            if completed % cfg["evaluate_every"] == 0 and not evaluate("periodic"):
+                stop_reason = "insufficient_budget_for_periodic_development_evaluation"
+                break
+    finally:
+        if pool is not None:
+            pool.close()
     final_evaluated = last_evaluation is not None and last_evaluation["completed_episodes"] == completed
     if initial_evaluated and not final_evaluated:
         final_evaluated = evaluate("final")
@@ -531,6 +644,7 @@ def main(argv=None):
     result = {"scope": scope, "configs": configs, "versions": versions,
               "initial_completed_episodes": initial_completed, "completed_episodes": completed,
               "episodes_completed_this_job": completed-initial_completed, "next_seed_index": next_index,
+              "completed_update_batches": completed//size, "episodes_per_update": size,
               "target_completed_episodes": episodes, "stop_reason": stop_reason,
               "initial_evaluated": initial_evaluated, "final_evaluated": final_evaluated,
               "best_completed_episodes": None if best_checkpoint is None else best_checkpoint["completed_episodes"],

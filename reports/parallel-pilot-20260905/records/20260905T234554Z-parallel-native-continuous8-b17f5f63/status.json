@@ -1,0 +1,11 @@
+{
+  "id": "20260905T234554Z-parallel-native-continuous8-b17f5f63",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:45:54.480240+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:47:21.858833+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

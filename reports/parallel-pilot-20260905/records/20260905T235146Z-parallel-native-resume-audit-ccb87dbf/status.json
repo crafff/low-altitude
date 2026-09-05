@@ -1,0 +1,11 @@
+{
+  "id": "20260905T235146Z-parallel-native-resume-audit-ccb87dbf",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:51:46.859991+00:00",
+  "pid": 6,
+  "finished_at": "2026-09-05T23:51:48.353477+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

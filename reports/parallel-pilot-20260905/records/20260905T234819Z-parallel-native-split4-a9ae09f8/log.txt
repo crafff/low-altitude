@@ -1,0 +1,126 @@
+Creating directory "/tmp/bluesky-paper-l31gn16i/scenario"
+Creating directory "/tmp/bluesky-paper-l31gn16i/plugins"
+Creating directory "/tmp/bluesky-paper-l31gn16i/output"
+Creating directory "/tmp/bluesky-paper-l31gn16i/cache"
+Copying default configfile to /tmp/bluesky-paper-l31gn16i/settings.cfg
+Reading config from /tmp/bluesky-paper-l31gn16i/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+{"scope": "execution-semantics learning diagnostic; corridor containment unresolved", "event": "development", "completed_episodes": 0, "phase": "initial_untrained", "selection_key": [1, -0.8, 82.08353309455991, 509.25294001522883], "sample": {"completed": 24, "failed_timeout": 3, "path_length_m": 281376.26580999634, "outside_corridor_aircraft_seconds": 3672.0, "outside_corridor_flights": 23, "outside_altitude_aircraft_seconds": 0.0, "changed_instructions": 4083, "policy_decisions": 3548, "return_sum": -209.93071207227172, "failed_route_exhausted": 3, "outside_exit_crossings": 3, "planned": 30, "flight_hours": 4.924861111111111, "completed_fraction": 0.8, "max_centerline_distance_m": 114.6895132051287, "risk": {"lowc": {"unordered_pair_seconds": 2508.0, "directed_pair_seconds": 5016.0, "unordered_seconds_per_flight_hour": 509.25294001522883, "directed_seconds_per_flight_hour": 1018.5058800304577}, "nmac": {"unordered_pair_seconds": 404.25, "directed_pair_seconds": 808.5, "unordered_seconds_per_flight_hour": 82.08353309455991, "directed_seconds_per_flight_hour": 164.16706618911982}}}, "nr": {"completed": 30, "failed_timeout": 0, "path_length_m": 277743.75732632057, "outside_corridor_aircraft_seconds": 0.0, "outside_corridor_flights": 0, "outside_altitude_aircraft_seconds": 0.0, "changed_instructions": 0, "policy_decisions": 0, "return_sum": -289.78063756820404, "failed_route_exhausted": 0, "outside_exit_crossings": 0, "planned": 30, "flight_hours": 4.106944444444444, "completed_fraction": 1.0, "max_centerline_distance_m": 25.364810211003896, "risk": {"lowc": {"unordered_pair_seconds": 3611.5, "directed_pair_seconds": 7223.0, "unordered_seconds_per_flight_hour": 879.3642204937437, "directed_seconds_per_flight_hour": 1758.7284409874874}, "nmac": {"unordered_pair_seconds": 904.25, "directed_pair_seconds": 1808.5, "unordered_seconds_per_flight_hour": 220.1758539059858, "directed_seconds_per_flight_hour": 440.3517078119716}}}}
+Creating directory "/tmp/bluesky-paper-azu23hc_/scenario"
+Creating directory "/tmp/bluesky-paper-azu23hc_/plugins"
+Creating directory "/tmp/bluesky-paper-azu23hc_/output"
+Creating directory "/tmp/bluesky-paper-azu23hc_/cache"
+Copying default configfile to /tmp/bluesky-paper-azu23hc_/settings.cfg
+Reading config from /tmp/bluesky-paper-azu23hc_/diagnostic.cfg
+Creating directory "/tmp/bluesky-paper-ok2prl1c/scenario"
+Creating directory "/tmp/bluesky-paper-ok2prl1c/plugins"
+Creating directory "/tmp/bluesky-paper-ok2prl1c/output"
+Creating directory "/tmp/bluesky-paper-ok2prl1c/cache"
+Copying default configfile to /tmp/bluesky-paper-ok2prl1c/settings.cfg
+Reading config from /tmp/bluesky-paper-ok2prl1c/diagnostic.cfg
+Creating directory "/tmp/bluesky-paper-t_6kjxj9/scenario"
+Creating directory "/tmp/bluesky-paper-t_6kjxj9/plugins"
+Creating directory "/tmp/bluesky-paper-t_6kjxj9/output"
+Creating directory "/tmp/bluesky-paper-t_6kjxj9/cache"
+Copying default configfile to /tmp/bluesky-paper-t_6kjxj9/settings.cfg
+Reading config from /tmp/bluesky-paper-t_6kjxj9/diagnostic.cfg
+Creating directory "/tmp/bluesky-paper-rk7je2xf/scenario"
+Creating directory "/tmp/bluesky-paper-rk7je2xf/plugins"
+Creating directory "/tmp/bluesky-paper-rk7je2xf/output"
+Creating directory "/tmp/bluesky-paper-rk7je2xf/cache"
+Copying default configfile to /tmp/bluesky-paper-rk7je2xf/settings.cfg
+Reading config from /tmp/bluesky-paper-rk7je2xf/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Using compiled geo functions
+Reading magnetic variation data
+Using compiled geo functions
+Reading magnetic variation data
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-azu23hc_/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-ok2prl1c/cache/navdata.p
+Reading nav.dat
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-t_6kjxj9/cache/navdata.p
+Reading nav.dat
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Reading fix.dat
+Cachefile not found: /tmp/bluesky-paper-rk7je2xf/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading fix.dat
+Reading awy.dat
+Reading awy.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-azu23hc_/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-t_6kjxj9/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-ok2prl1c/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-rk7je2xf/cache/navdata.p
+Matplotlib is building the font cache; this may take a moment.
+Matplotlib is building the font cache; this may take a moment.
+Matplotlib is building the font cache; this may take a moment.
+Matplotlib is building the font cache; this may take a moment.
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-azu23hc_/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-t_6kjxj9/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-rk7je2xf/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-ok2prl1c/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-azu23hc_/cache/navdata.p
+Loading global navigation database...
+Loading global navigation database...
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-t_6kjxj9/cache/navdata.p
+Reading cache: /tmp/bluesky-paper-ok2prl1c/cache/navdata.p
+Reading cache: /tmp/bluesky-paper-rk7je2xf/cache/navdata.p
+{"scope": "execution-semantics learning diagnostic; corridor containment unresolved", "event": "training", "completed_episodes": 4, "completed_update_batches": 1, "first_seed": 9400000, "completed": 85, "planned": 120, "return_sum": -639.558164807576, "ppo": {"loss": 0.6759396609526223, "policy_loss": -0.00013630300071567941, "value_loss": 1.3525996598831285, "entropy": 2.2386985159323722, "approx_kl": 0.0001648840338214225, "clip_fraction": 0.0, "gradient_norm": 0.9683204108769431, "gradient_norm_after": 0.4892500246289192, "samples": 15838, "sample_visits": 15838, "minibatches": 248, "epochs": 1, "advantage_mean": -0.5821914672851562, "advantage_std": 1.0830671787261963}, "wall_seconds": 12.209583560936153}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-l31gn16i/cache/navdata.p
+{"scope": "execution-semantics learning diagnostic; corridor containment unresolved", "event": "development", "completed_episodes": 4, "phase": "periodic", "selection_key": [1, -0.8666666666666667, 78.82729722484798, 497.59731373185286], "sample": {"completed": 26, "failed_timeout": 3, "path_length_m": 282043.94595229306, "outside_corridor_aircraft_seconds": 3435.25, "outside_corridor_flights": 23, "outside_altitude_aircraft_seconds": 0.0, "changed_instructions": 4075, "policy_decisions": 3544, "return_sum": -223.67596612034373, "failed_route_exhausted": 1, "outside_exit_crossings": 1, "planned": 30, "flight_hours": 4.922152777777778, "completed_fraction": 0.8666666666666667, "max_centerline_distance_m": 89.0431407746595, "risk": {"lowc": {"unordered_pair_seconds": 2449.25, "directed_pair_seconds": 4898.5, "unordered_seconds_per_flight_hour": 497.59731373185286, "directed_seconds_per_flight_hour": 995.1946274637057}, "nmac": {"unordered_pair_seconds": 388.0, "directed_pair_seconds": 776.0, "unordered_seconds_per_flight_hour": 78.82729722484798, "directed_seconds_per_flight_hour": 157.65459444969596}}}, "nr": {"completed": 30, "failed_timeout": 0, "path_length_m": 277743.75732632057, "outside_corridor_aircraft_seconds": 0.0, "outside_corridor_flights": 0, "outside_altitude_aircraft_seconds": 0.0, "changed_instructions": 0, "policy_decisions": 0, "return_sum": -289.78063756820404, "failed_route_exhausted": 0, "outside_exit_crossings": 0, "planned": 30, "flight_hours": 4.106944444444444, "completed_fraction": 1.0, "max_centerline_distance_m": 25.364810211003896, "risk": {"lowc": {"unordered_pair_seconds": 3611.5, "directed_pair_seconds": 7223.0, "unordered_seconds_per_flight_hour": 879.3642204937437, "directed_seconds_per_flight_hour": 1758.7284409874874}, "nmac": {"unordered_pair_seconds": 904.25, "directed_pair_seconds": 1808.5, "unordered_seconds_per_flight_hour": 220.1758539059858, "directed_seconds_per_flight_hour": 440.3517078119716}}}}

@@ -1,0 +1,20 @@
+{
+  "all_checks_passed": true,
+  "scope": "native resume diagnostic, not learning efficacy",
+  "continuous_episodes": 8,
+  "split_episodes": 4,
+  "resumed_episodes": 8,
+  "update_batches": 2,
+  "complete_sample_hashes_equal": true,
+  "model_adam_rng_exact": true,
+  "ppo_metrics_exact": true,
+  "inputs": {
+    "continuous": "reports/parallel-pilot-20260905/validation/continuous.pt",
+    "split": "reports/parallel-pilot-20260905/validation/split.pt",
+    "resumed": "reports/parallel-pilot-20260905/validation/resumed.pt",
+    "continuous_log": "reports/parallel-pilot-20260905/validation/continuous-training.jsonl",
+    "split_log": "reports/parallel-pilot-20260905/validation/split-training.jsonl",
+    "resumed_log": "reports/parallel-pilot-20260905/validation/resumed-training.jsonl"
+  },
+  "evaluation_case_count": 1
+}

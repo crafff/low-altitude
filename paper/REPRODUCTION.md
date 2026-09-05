@@ -21,6 +21,8 @@
 | 原baseline规模 | 250k训练episodes；每场景对照相同初态No Resolution；评价约1300–1400累计飞行小时 | 6、17–18、29 |
 | 原baseline结果参照 | 报告6.88 s LoWC/h、0.59 s NMAC/h；需先统一计数和分母再比较，不把该值当任意小pilot的硬门槛 | 18、29 |
 
+2026-09-05并行接入的明确变体：[parallel配置](../configs/paper_train_parallel.json)改为4个完整场景共用一次冻结策略，逐机GAE后池化一次epoch1/minibatch64更新，优势在四场景总批次归一化；场景、update-batch、Adam minibatch三种计数分开。这与原单场景后更新的采样/归一化节奏不同，不称严格逐步复现或仅硬件加速。每个episode的随机源按绝对序号固定；保留原12开发场景文件及完整来源身份。共享基础导航、7/10维特征、动作与奖励不变，运行证据见任务001。
+
 ## 训练预算口径（10:43续核）
 
 原文核对：p.6/Algorithm1的episode由整场experience收集和随后training组成，p.17每轮随机3–5走廊、计划30架次，故250k不是逐机架次/decision/minibatch数。p.18 Fig10(c)虽标Epoch，正文对应外层250k episodes。K=1是收集结束后一次小批次遍历、B=64为样本数；当前每轮Adam步数是ceil(逐机transitions/64)。当前旧400只是原文外层预算0.16%，不能称按论文规模验证失败；新refresh从头计数，不能加到旧400上。

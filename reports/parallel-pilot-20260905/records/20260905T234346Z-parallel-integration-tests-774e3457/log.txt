@@ -1,0 +1,93 @@
+test_digest_covers_scalar_values_and_array_dtype_shape_bytes (test_parallel_rollout.ResultProtocolTests.test_digest_covers_scalar_values_and_array_dtype_shape_bytes) ... ok
+test_duplicate_partial_and_truncated_aircraft_are_rejected (test_parallel_rollout.ResultProtocolTests.test_duplicate_partial_and_truncated_aircraft_are_rejected) ... ok
+test_encoded_payload_cap_precedes_transfer (test_parallel_rollout.ResultProtocolTests.test_encoded_payload_cap_precedes_transfer) ... ok
+test_stale_policy_batch_and_episode_are_rejected_before_rows (test_parallel_rollout.ResultProtocolTests.test_stale_policy_batch_and_episode_are_rejected_before_rows) ... ok
+test_cutoff_during_environment_step_reaps_only_owned_workers (test_parallel_rollout.SpawnPoolTests.test_cutoff_during_environment_step_reaps_only_owned_workers) ... ERROR
+test_full_numpy_gae_identity_order_persistence_and_restart (test_parallel_rollout.SpawnPoolTests.test_full_numpy_gae_identity_order_persistence_and_restart) ... ERROR
+test_startup_failure_and_expired_startup_are_bounded (test_parallel_rollout.SpawnPoolTests.test_startup_failure_and_expired_startup_are_bounded) ... ok
+test_worker_failure_discards_successful_peer_and_closes_pool (test_parallel_rollout.SpawnPoolTests.test_worker_failure_discards_successful_peer_and_closes_pool) ... ERROR
+test_checkpoint_rejects_partial_or_mismatched_update_counters (test_parallel_train_integration.ParallelTrainingTests.test_checkpoint_rejects_partial_or_mismatched_update_counters) ... ok
+test_parallel_batch_timing_does_not_inflate_sequential_evaluation_estimate (test_parallel_train_integration.ParallelTrainingTests.test_parallel_batch_timing_does_not_inflate_sequential_evaluation_estimate) ... ok
+test_preserved_development_loads_exact_payload_and_checks_mapping (test_parallel_train_integration.ParallelTrainingTests.test_preserved_development_loads_exact_payload_and_checks_mapping) ... ok
+test_script_and_worker_import_share_the_same_cutoff_exception (test_parallel_train_integration.ParallelTrainingTests.test_script_and_worker_import_share_the_same_cutoff_exception) ... ok
+test_targets_and_intervals_cannot_split_a_parallel_batch (test_parallel_train_integration.ParallelTrainingTests.test_targets_and_intervals_cannot_split_a_parallel_batch) ... ok
+test_execution_scope_round_trip_rejects_mixed_checkpoint_and_evaluation_scopes (test_paper_train.CheckpointTests.test_execution_scope_round_trip_rejects_mixed_checkpoint_and_evaluation_scopes) ... ok
+test_incompatible_configs_versions_or_corrupt_model_rejected_before_restore (test_paper_train.CheckpointTests.test_incompatible_configs_versions_or_corrupt_model_rejected_before_restore) ... ok
+test_weights_only_checkpoint_resumes_optimizer_all_rng_and_next_episode_exactly (test_paper_train.CheckpointTests.test_weights_only_checkpoint_resumes_optimizer_all_rng_and_next_episode_exactly) ... ok
+test_cutoff_has_no_completed_summary_and_rng_can_restore_for_retry (test_paper_train.CollectorTests.test_cutoff_has_no_completed_summary_and_rng_can_restore_for_retry) ... ok
+test_ids_masks_rewards_gae_and_birth_boundaries_survive_array_reordering (test_paper_train.CollectorTests.test_ids_masks_rewards_gae_and_birth_boundaries_survive_array_reordering) ... ok
+test_new_aircraft_cannot_receive_an_invented_previous_reward (test_paper_train.CollectorTests.test_new_aircraft_cannot_receive_an_invented_previous_reward) ... ok
+test_only_the_two_declared_diagnostic_scopes_are_accepted (test_paper_train.ScopeConfigTests.test_only_the_two_declared_diagnostic_scopes_are_accepted) ... ok
+test_aggregate_uses_total_flight_hours_and_retains_failed_population (test_paper_train.SelectionTests.test_aggregate_uses_total_flight_hours_and_retains_failed_population) ... ok
+test_paired_evaluation_caches_nr_and_repeats_fixed_policy_rng_on_exact_scenarios (test_paper_train.SelectionTests.test_paired_evaluation_caches_nr_and_repeats_fixed_policy_rng_on_exact_scenarios) ... ok
+test_selection_prioritizes_eligibility_then_safety_and_completion_while_ineligible (test_paper_train.SelectionTests.test_selection_prioritizes_eligibility_then_safety_and_completion_while_ineligible) ... ok
+test_default_cpu_and_optional_threads_preserve_initial_weights_and_forward (test_shared_ppo.AttentionTests.test_default_cpu_and_optional_threads_preserve_initial_weights_and_forward) ... ok
+test_forward_rejects_mixed_devices_before_tensor_operations (test_shared_ppo.AttentionTests.test_forward_rejects_mixed_devices_before_tensor_operations) ... ok
+test_invalid_masks_and_features_are_rejected (test_shared_ppo.AttentionTests.test_invalid_masks_and_features_are_rejected) ... ok
+test_neighbor_permutation_invariance_and_one_valid_action (test_shared_ppo.AttentionTests.test_neighbor_permutation_invariance_and_one_valid_action) ... ok
+test_rejects_invalid_device_and_thread_configuration (test_shared_ppo.AttentionTests.test_rejects_invalid_device_and_thread_configuration) ... ok
+test_variable_padding_is_excluded_and_no_neighbor_context_is_zero (test_shared_ppo.AttentionTests.test_variable_padding_is_excluded_and_no_neighbor_context_is_zero) ... ok
+test_analytic_terminal_and_live_collector_bootstrap (test_shared_ppo.GAETests.test_analytic_terminal_and_live_collector_bootstrap) ... ok
+test_lambda_endpoints_and_detached_rollout_values (test_shared_ppo.GAETests.test_lambda_endpoints_and_detached_rollout_values) ... ok
+test_rejects_cross_terminal_concatenation_and_invalid_inputs (test_shared_ppo.GAETests.test_rejects_cross_terminal_concatenation_and_invalid_inputs) ... ok
+test_clipped_objective_value_scale_entropy_sign_and_kl_analytically (test_shared_ppo.PPOTests.test_clipped_objective_value_scale_entropy_sign_and_kl_analytically) ... ok
+test_multicore_updates_preserve_objective_and_cpu_shuffle_order (test_shared_ppo.PPOTests.test_multicore_updates_preserve_objective_and_cpu_shuffle_order) ... ok
+test_omitted_device_and_thread_options_preserve_cpu_update_exactly (test_shared_ppo.PPOTests.test_omitted_device_and_thread_options_preserve_cpu_update_exactly) ... ok
+test_real_update_changes_shared_attention_and_both_heads_with_finite_gradients (test_shared_ppo.PPOTests.test_real_update_changes_shared_attention_and_both_heads_with_finite_gradients) ... ok
+test_rejects_corrupted_samples_before_changing_parameters (test_shared_ppo.PPOTests.test_rejects_corrupted_samples_before_changing_parameters) ... ok
+test_shuffle_is_reproducible_without_reusing_global_sampling_rng (test_shared_ppo.PPOTests.test_shuffle_is_reproducible_without_reusing_global_sampling_rng) ... ok
+test_update_rejects_device_configuration_mismatch_before_mutation (test_shared_ppo.PPOTests.test_update_rejects_device_configuration_mismatch_before_mutation) ... ok
+
+======================================================================
+ERROR: test_cutoff_during_environment_step_reaps_only_owned_workers (test_parallel_rollout.SpawnPoolTests.test_cutoff_during_environment_step_reaps_only_owned_workers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_parallel_rollout.py", line 210, in test_cutoff_during_environment_step_reaps_only_owned_workers
+    pool.collect(self.model.state_dict(), [0, 1], policy_version=0,
+  File "/workspace/src/parallel_rollout.py", line 442, in collect
+    weights_blob = _encode(snapshot, MAX_WEIGHTS_BYTES-4096)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/src/parallel_rollout.py", line 62, in _encode
+    pickle.dump(message, buffer, protocol=5)
+  File "/workspace/src/parallel_rollout.py", line 55, in write
+    if self.tell() + len(value) > self.limit:
+                     ^^^^^^^^^^
+TypeError: object of type 'pickle.PickleBuffer' has no len()
+
+======================================================================
+ERROR: test_full_numpy_gae_identity_order_persistence_and_restart (test_parallel_rollout.SpawnPoolTests.test_full_numpy_gae_identity_order_persistence_and_restart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_parallel_rollout.py", line 162, in test_full_numpy_gae_identity_order_persistence_and_restart
+    first = pool.collect(self.model.state_dict(), [1, 0], policy_version=0,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/src/parallel_rollout.py", line 442, in collect
+    weights_blob = _encode(snapshot, MAX_WEIGHTS_BYTES-4096)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/src/parallel_rollout.py", line 62, in _encode
+    pickle.dump(message, buffer, protocol=5)
+  File "/workspace/src/parallel_rollout.py", line 55, in write
+    if self.tell() + len(value) > self.limit:
+                     ^^^^^^^^^^
+TypeError: object of type 'pickle.PickleBuffer' has no len()
+
+======================================================================
+ERROR: test_worker_failure_discards_successful_peer_and_closes_pool (test_parallel_rollout.SpawnPoolTests.test_worker_failure_discards_successful_peer_and_closes_pool)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/tests/test_parallel_rollout.py", line 198, in test_worker_failure_discards_successful_peer_and_closes_pool
+    pool.collect(self.model.state_dict(), [0, 1], policy_version=0,
+  File "/workspace/src/parallel_rollout.py", line 442, in collect
+    weights_blob = _encode(snapshot, MAX_WEIGHTS_BYTES-4096)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/src/parallel_rollout.py", line 62, in _encode
+    pickle.dump(message, buffer, protocol=5)
+  File "/workspace/src/parallel_rollout.py", line 55, in write
+    if self.tell() + len(value) > self.limit:
+                     ^^^^^^^^^^
+TypeError: object of type 'pickle.PickleBuffer' has no len()
+
+----------------------------------------------------------------------
+Ran 39 tests in 6.456s
+
+FAILED (errors=3)

@@ -1,0 +1,11 @@
+{
+  "id": "20260905T234453Z-parallel-integration-tests-5bdd3b53",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:44:53.168507+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:45:02.511036+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

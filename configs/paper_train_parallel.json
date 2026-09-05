@@ -1,0 +1,99 @@
+{
+  "schema": "bluesky.paper-like.train-parallel-dev.v1",
+  "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+  "environment_config": "configs/paper_environment_shared_navigation.json",
+  "ppo_config": "configs/paper_ppo.json",
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "torch_num_interop_threads": 1,
+  "training_seed": 950001,
+  "training_scenario_seed_start": 9500000,
+  "sampling_seed": 9510000,
+  "shuffle_seed": 9520000,
+  "episodes": 64,
+  "wall_seconds": 840,
+  "deadline_grace_seconds": 20,
+  "initial_episode_seconds": 15,
+  "timing_safety_factor": 1.5,
+  "evaluate_every": 32,
+  "checkpoint_every": 4,
+  "dev_policy": "sample",
+  "dev_action_seed_base": 810000,
+  "report_argmax": false,
+  "selection_min_completed_fraction": 0.95,
+  "development_cases": [
+    {
+      "seed": 53001,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53002,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53003,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53004,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53005,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53006,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53007,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53008,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53009,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53010,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53011,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53012,
+      "corridor_count": 5
+    }
+  ],
+  "reconstruction_choices": [
+    "Explicit synchronous complete-episode PPO variant with shared navigation. Four persistent CPU workers each collect one whole 30-aircraft scenario under a frozen common policy; parent waits for all four, orders by absolute episode index and performs one pooled PPO epoch, batch64. This changes policy refresh and advantage normalization from the former update-after-each-episode runner.",
+    "Each episode uses scenario_seed_start+absolute_index, CPU action generator sampling_seed+absolute_index, and worker Python/NumPy/torch seeds training_seed+absolute_index. Worker identity, scheduling and restart do not select RNG streams. Parent initialization/shuffle/checkpoint RNG remain explicit. GAE stays per aircraft and is computed before pooling.",
+    "Do not admit stale/partial/duplicate payloads; a collection cutoff discards the complete four-episode batch and preserves model, Adam, counters and shuffle RNG. Save/resume only at complete batch boundaries; count update batches separately from optimizer minibatches.",
+    "Use all 12 preserved original development scenarios verbatim, identified by file SHA and embedded effective scenarios in checkpoint configs. NR and sampled policy share each exact scenario. Development action seeds, aggregation and selection remain as previously declared; never treat these seen scenes as held-out.",
+    "CPU-only learner thread1, four worker physical cores12\u201315 with intra-op/BLAS1; no GPU. Deadline estimates for sequential evaluation and parallel batch/update are separate. Outer launcher remains the trusted single supervisor.",
+    "New 64-episode/16-update-batch pilot, one initialization seed, 840s inner budget. Evaluate before training, at32 and64 episodes, save every4. A shorter budget cutoff remains visible, and learning effectiveness is not assumed.",
+    "Observations, actions, reward and boundary metrics are unchanged. User requested setting aside containment investigation; no new safety filter, type features, penalty or delayed execution is introduced. Fresh lineage, no old850 continuation."
+  ],
+  "initial_batch_seconds": 15,
+  "parallel_startup_seconds": 60,
+  "parallel_rollout": {
+    "mode": "synchronous_complete_episodes",
+    "workers": 4,
+    "episodes_per_update": 4,
+    "cpu_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "sampling_seed_rule": "base_plus_episode_index"
+  },
+  "development_scenarios_path": "reports/policy-modes-refresh-850-20260905/scenarios.json",
+  "development_scenarios_sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "20260905T235015Z-parallel-native-resumed8-ddfe012b",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:50:15.700983+00:00",
+  "pid": 6,
+  "finished_at": "2026-09-05T23:51:23.812066+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

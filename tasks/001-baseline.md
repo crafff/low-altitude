@@ -2,7 +2,7 @@
 
 状态：`doing`（12类性能、场景、动作/观测/奖励和共享PPO已接通；正在验证小训练及路线执行缺陷）。负责人：主线程。目标顺序由用户确认：先有效基线，再冻结后加延迟。当前尚无有效新基线证据。
 
-最新范围：用户2026-09-05新授权的CPU/多核/GPU训练速度诊断已完成，两个受保护PID3059945/3062529测试前后启动时间一致；只做有界benchmark，没有启动收敛训练。结果见本文件末节和NOW。此前10h授权05:15:13–15:15:13 UTC早已结束，不继承其预算。
+最新范围：用户在CPU/GPU测速结论后明确“好，开始”，授权接入4环境同步采样、验证真实断点恢复，再做小规模训练。训练pilot至多64场景/16池化更新、840s内/900s外；CPU12–15单lab、无GPU，保留两个他人实验。旧10h不继承。
 
 当前可恢复结果：新refresh累计850轮、保存best775，仍无有效baseline。最终850sample233/360完成、340架次横向越界；best775为260/360完成、336越界。35点曲线、48例解码重放、F0203188行判据诊断均已完成；当前只做收尾复核和私有备份。入口：[NOW](../paper/NOW.md)、[850恢复点](../checkpoints/refresh-850-20260905/README.md)、[F020机制与下一配对方案](../reports/lane-completion-f020-20260905/README.md)。实际运行与交接在本文件末尾14:22–14:43节；后续训练需新的授权块。
 
@@ -926,3 +926,24 @@ GPU实际24次遥测：原有两个PID全程存在、各10045/9887MiB；我们�
 环境准备保留两次失败：默认uv缓存只读；全局--no-build在zmq仅sdist上失败。改为项目缓存、固定主要包禁构建后，CPU与CUDA两环境locked/offline/check均无需改变。原root pyproject/uv.lock未改。54个唯一结果/manifest/log/用过的核心源码/夹具共4731768字节逐字节核对备份；完整source目录与缓存仍本机runs。源码hash仅识别实际版本，正确性来自测试和真实运算。
 
 剩余：目前paper_train仍CPU单环境，不能把4进程采样3.5×当作已集成训练。下一步建议明确同步采样批次/更新节奏、全批张量IPC及resume，先CPU单线程更新，再做共享导航新身份的小训练。没有继承旧10h或冻结无效850；本次不自动扩大科研预算。
+
+
+## 2026-09-05 23:33 UTC：并行PPO接入与小训练开始
+
+五字段代理交接：parallel_rollout负责问题“完整4场景同策略采样与确定性传输”，仅写src/parallel_rollout.py、tests/test_parallel_rollout.py，来源现有collect_episode和测速pool，交付持久spawn CPU池/完整payload/hash与失败关闭、静态检查，约15分钟不运行实验/清理/嵌套，保留他人改动。parallel_review只读审查现有runner、checkpoint和配置，输出批次边界、RNG、deadline及native恢复必须验证事项，约8分钟不改文件/执行实验；后续复核具体diff。两代理实际turn_context已核验Astra/xhigh：01a073eb-82f2-7f71-a358-5f00b3f79155和01a073eb-c0ef-72c2-bd4f-3999a545e846。主线程拥有paper_train/config/集成验证与全部负载执行。
+
+方案：每4个完整30机场景使用同一模型快照，按绝对episode序号排序一次epoch1/minibatch64更新；GAE仍逐机，优势在完整池化批次归一化。固定scenario/action/global seed都按绝对episode序号，worker调度/重启不决定随机序列。仅完整批次计数/保存，单列update_batches与Adam minibatches；异常/超时丢完整批次。新增独立parallel checkpoint schema、严格配置和worker源码身份。原单环境路径保留。
+
+先用resume诊断配置训练8连续和4+恢复8（显式只看原开发前1场景，非科研结果），核对全部sample字段hash/参数/Adam/RNG。正式pilot从新seed开始64场景至多16更新，保留全部原12开发场景JSON的确切SHA和几何，初始/32/64评价共享NR。最长840s内/900s外，按实测速率预留最终开发评价。配置见configs/paper_train_parallel.json与paper_train_parallel_resume.json。结果未知，不自动扩大为收敛或10h科研块。
+
+启动前CPU负载约2.3、MemAvailable约60.6GiB；主机GPU已用20886MiB/free3162MiB/99%，受保护3059945/3062529仍运行。本轮不请求GPU、改优先级/驱动或进入他人工作区。每个job给独立源码、runtime只读、输出/scratch受lab监督；全部计算由主线程串行启动。
+
+
+验证进度：审阅指出直接script/__main__和worker import paper_train可能生成不同CollectionCutoff类；主线程提取rollout_errors.py统一类身份，并以runpy __mp_main__作聚焦回归。恢复诊断评价改为每4场景，连续/分段都比较0/4/8候选，避免因多看4轮模型而错误归因恢复差异。
+
+首个[39项回归](../runs/20260905T234346Z-parallel-integration-tests-774e3457/log.txt)有3error：Pickle协议5向限长流直接写PickleBuffer而len()不可用。已改memoryview(...).nbytes，保留硬编码字节上限，补40000float32大数组往返/越额回归。[第二轮40项](../runs/20260905T234453Z-parallel-integration-tests-5bdd3b53/log.txt)全部通过。没有掩盖失败或修改隔离。
+
+[原生连续8](../runs/20260905T234554Z-parallel-native-continuous8-b17f5f63/artifacts/result.json)完成8场景、2次完整池化更新，85.50s，开发前1case的0/4/8评价均完成，best4。仅为恢复诊断，不是全开发评价或baseline有效。正在独立4轮及恢复8比较，尚未运行正式64场景pilot。
+
+
+23:51恢复验证完成：[分段4](../runs/20260905T234819Z-parallel-native-split4-a9ae09f8/artifacts/result.json)、[恢复8](../runs/20260905T235015Z-parallel-native-resumed8-ddfe012b/artifacts/result.json)、[精确比较](../runs/20260905T235146Z-parallel-native-resume-audit-ccb87dbf/artifacts/result.json)均成功。连续8和4+恢复8的两个完整批次全部样本hash、PPO汇总、模型/Adam/RNG、计数、best模型与评价聚合相同；比较排除wall时间、pool内部调用编号和评价phase等非训练状态。完整比较源码在parallel_resume_audit.py，三个checkpoint已复制到报告validation供独立恢复。下一步先把实现/验证证据推送私有研究分支，再运行新seed64场景pilot，不沿用诊断模型。

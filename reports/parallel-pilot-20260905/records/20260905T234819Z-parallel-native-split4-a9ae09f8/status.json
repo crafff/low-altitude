@@ -1,0 +1,11 @@
+{
+  "id": "20260905T234819Z-parallel-native-split4-a9ae09f8",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:48:19.148704+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:49:27.321511+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}
