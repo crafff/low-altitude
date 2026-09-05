@@ -1,0 +1,9 @@
+[project]
+name = "low-altitude-research"
+version = "0.1.0"
+description = "Baseline-first BlueSky MARL research on delayed conflict resolution"
+requires-python = ">=3.11,<3.12"
+dependencies = []
+
+[tool.uv]
+package = false

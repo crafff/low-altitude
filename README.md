@@ -7,6 +7,7 @@
 - [当前状态与下一步](paper/NOW.md)
 - [论文路线](paper/PLAN.md) · [原文复现核对表](paper/REPRODUCTION.md)
 - [协作与记忆](docs/SYSTEM.md) · [运行安全边界](docs/SAFETY.md)
+- [独立uv环境](docs/ENVIRONMENT.md)
 - [原论文 PDF](resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf)
 - [历史及恢复归档](legacy/README.md)
 

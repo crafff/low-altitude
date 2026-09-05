@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .cache/
 .venv/
+environments/
 .env
 .env.*
 human/

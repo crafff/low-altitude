@@ -189,6 +189,29 @@ else: raise AssertionError('runtime writable')
         self.assertEqual(MODULE.inherited_cap(128, 256), 128)
         self.assertEqual(MODULE.inherited_cap(2048, MODULE.resource.RLIM_INFINITY), 2048)
 
+    def test_environment_metadata_is_frozen_without_exposing_the_venv(self):
+        expected = {'pyproject.toml': '[project]\nname="fixture"\n',
+                    'uv.lock': 'version = 1\n', '.python-version': '3.11.13\n'}
+        for name, contents in expected.items():
+            (self.project / name).write_text(contents)
+        (self.project / '.venv').mkdir()
+        (self.project / '.venv/private.txt').write_text('do not snapshot')
+        code = f'''from pathlib import Path
+expected = {expected!r}
+for name, contents in expected.items():
+    p = Path('/workspace') / name
+    assert p.read_text() == contents
+    try: p.write_text('bad')
+    except OSError: pass
+    else: raise AssertionError('environment metadata writable')
+assert not Path('/workspace/.venv').exists()
+'''
+        call, result = self.invoke(code)
+        self.assertEqual(call.returncode, 0, call.stderr + str(result))
+        directory = self.project / 'runs' / result['id']
+        (self.project / '.python-version').write_text('changed after run')
+        self.assertEqual((directory / 'source/.python-version').read_text(), expected['.python-version'])
+
     def test_runtime_rejects_selected_project_ancestors_and_private_paths(self):
         private = self.project / "human"
         private.mkdir()

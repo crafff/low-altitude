@@ -26,7 +26,8 @@ import uuid
 
 DEFAULT_PROJECT = Path(__file__).resolve().parents[1]
 CODE_ROOTS = ("tools", "src", "tests", "configs")
-TEXT_ROOTS = ("README.md", "AGENTS.md", "paper", "tasks", "docs", *CODE_ROOTS)
+ENV_FILES = ("pyproject.toml", "uv.lock", ".python-version")
+TEXT_ROOTS = ("README.md", "AGENTS.md", "pyproject.toml", "uv.lock", "paper", "tasks", "docs", *CODE_ROOTS)
 TEXT_SUFFIXES = {".py", ".md", ".json", ".toml", ".yaml", ".yml", ".csv", ".txt", ".sh", ".ini", ".cfg", ".lock"}
 SKIP = {".git", ".codex", ".agents", "legacy", "human", "runs", "data", "models", ".venv", "__pycache__", ".cache"}
 
@@ -120,6 +121,13 @@ def scoped_files(project, roots=TEXT_ROOTS, *, source=False):
 
 def snapshot(project, destination, extras):
     sources = set(scoped_files(project, CODE_ROOTS, source=True))
+    # Explicit environment metadata is part of execution provenance; the venv is not.
+    for name in ENV_FILES:
+        path = plain_path(project / name)
+        if path.exists():
+            if not path.is_file():
+                raise ValueError(f"environment metadata must be a regular file: {name}")
+            sources.add(path)
     sources.update(project_file(project, item) for item in extras)
     if sum(p.stat().st_size for p in sources) > 64 * 1024**2:
         raise ValueError("source snapshot exceeds 64 MiB; use a declared read-only runtime for dependencies")
