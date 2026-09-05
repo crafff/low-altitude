@@ -739,3 +739,30 @@ lane probe先前5fixture在[20260905T142256Z-lane-completion-tests-d45afac7](../
 固定result/fixtures已逐字节复制加入[NR报告](../reports/nr-containment-20260905/README.md)manifest，4数据文件共10462657B。root只读核对两12case和固定50源快照中的环境/动作/性能/导航核心一致，完整代码未被本次NR改动；当前3模块/3测试静态与17fixture均通过，零模型/torch/GPU训练，无他人进程操作。独立review覆盖前述12case配对，固定50由root执行检查，不扩大review声明。18:04doctor入口/链接无issues/local_missing，diff空白检查通过；本次无失败lab负载，所有实验已结束。NOW缩为当前结果和稳定报告入口，详细历史保留本task；下一步统一策略执行语义，不自动续训。准备私有提交备份与主线程通知。
 
 18:05–18:07收尾：6Python AST/2配置JSON、4备份原字节/SHA及6实际受测源文件与对应snapshot精确一致，doctor与staged diff检查通过。19个明确文件提交`62a2cb334c11762b0063271cb61c63aa430c9b5a`并push当前私有研究分支，18:06本地/远端SHA精确同值，工作区当时干净。三子任务已完成、全部lab最晚18:03:42结束。本次NR修正授权已完成；任务001仍doing，未达到有效MARL基线。当前仅同步NOW/本task收尾文档，主线程随后通过已授权`python3 -B tools/notify.py --complete`发送完成通知，实际发送/去重状态由工具记录，不据服务接受声称用户已收到。
+
+2026-09-05用户后续追问NR不越界是否该由策略学习，并明确聚焦局部冲突消解。定向读取已保存[原文PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) pp.7–8、14–17，同时查询[期刊论文页](https://www.sciencedirect.com/science/article/pii/S0968090X26000306)确认研究定位。§4.1名义中心lane用于原计划跟踪，临时偏移用于冲突解脱；§4.2明确包括不受MARL控制、静态或动态意图UAS在内均假定遵守指定航道；§5.2.2战术调整保持计划路线并在航道内，§5.2.3以机间风险及指令效率为目标。因此本项目分工：名义跟踪为基础执行前提，解脱决策/执行保持航道合规为系统约束，NR本身不越界不是模型收益；零扰动/不越界不等于零机间冲突。PLAN与NOW补入此范围澄清；自动减速仍是未由作者核实的实现选择，当前NR-only成功不能代替所有策略共享执行链验证。只读原文/文档编辑，无新测试、模拟、模型加载或执行代码改动，不自动扩展成航迹控制研究。
+
+2026-09-05用户追问是否“基础导航→动作控制器→基础导航”交接。只读核对`src/paper_actions.py` register/_speed/_altitude/_route/apply/update：所有阶段均通过同一BlueSky AP执行，ActionController修改目标和航点、监测机动；update完成条件只将altitude_active/lane_active置False，不重置target_speed/target_alt/target_lane或自动重建中心路线。故机动完成是保持新目标并解锁后续同类动作，回原名义目标需新指令；NR-only自动弯道限速的出弯恢复不等同于避让动作自动恢复。NOW记入这一区别；无代码修改、测试或实验，当前NR验证范围与未统一策略执行的限制不变。
+
+2026-09-05 18:39用户问数学保证与导航来源。定向源码确认：PaperPerformance将Table3包络接入原生运动更新，ActionController通过selspdcmd/selaltcmd/route.addwpt/direct设置目标、CAP及偏移航点；navigation_refresh只在环境step期间包装原生reached，按实际TAS/bank/方位刷新普通fly-by提前距离，再调用原生判定一次并恢复；NR-only子类再覆盖速度指令为弯前减速/出弯恢复。不能将当前系统称为纯未修改BlueSky或全自研导航；原850使用refresh但未用NR-only限速。数学上可提出“全参考轨迹及已证明跟踪误差集合在走廊内”的充分条件；直航段可用绝对目标偏移加误差上界不超过半宽、垂向同理，来自三角不等式，尚未证明所需误差界。边界目标没有双向误差余量，不能因此无条件保证；也不能据此擅自收缩论文档位。保证还需安全可行初态、受限输入、航段/动作切换和采样/延迟条件。Ames2016及Singletary2020作者摘要入口已核对并记SOURCES，未逐条审定理或实施CBF。零新测试/实验/模型，只有说明和来源记录；现有17fixture/50native与原12NR结果仍为有限实验验证。
+
+### 2026-09-05 18:44–19:00 UTC：数学推导交付
+
+用户问“这个要做数学推导复杂吗？你能不能完成这个推导？”，授权完成具体推导与有界只读核验。此前10h已结束；本轮不实现安全过滤器、不启动模型/模拟/测试/GPU，不改变他人进程或当前执行代码。root独占新[CONTAINMENT_DERIVATION](../paper/CONTAINMENT_DERIVATION.md)及NOW/SOURCES/LESSONS/本任务文档；保留此前PLAN关于局部冲突解脱的范围澄清。
+
+两次原生、显式gpt-6-astra/xhigh、fresh bounded context交接（均禁止嵌套）：
+
+- `containment_proof_audit`：问题为当前执行链是否具备制动/转弯/误差推导所需的控制与更新语义；读写范围为只读src核心、配置、已安装BlueSky1.1.1与既有几何/NR报告；来源指向paper_actions/performance/environment/navigation_refresh/nominal_turn_speed及native traffic/AP/activewpdata；预期输出精确更新顺序、可证性质/反例和剩余证明义务；停止条件为一次有界源码审计，无修改、负载、通知或清理。线程`01a072e0-67ff-7983-adff-79ff28926ac1`，已从其匹配session元数据核验实际turn为gpt-6-astra/xhigh。
+- `containment_proof_review`：问题为新推导的代数、可行域、几何、度量、混合切换及结论是否严格；范围仅只读新笔记、必要源码和两篇原文；来源为新笔记各式、nr_pilot/RouteGeometry/native traffic、Ames2016与Singletary2020正文；输出独立逐项通过/缺陷、反例和必要修订；停止条件≤12min、无修改/项目执行/嵌套。线程`01a072e7-9781-7d70-bdd6-e02251ab07b7`，实际首turn同样已由匹配元数据核验gpt-6-astra/xhigh。未依赖角色名称推断模型，也未读认证信息。
+
+root完成六个带证明的条件命题：有界双积分位置集的不可控反例与精确制动可行域；全参考轨迹误差管充分条件；明确单模式Lipschitz动力学下的Gronwall误差界；已认证速度界下的相邻端点步内充分条件；可靠可达外包、末态安全续行集合K及非空认证动作条件下的组合归纳保证。另外给出五次平滑函数横移/升降/恢复构造与导数/理想控制界、一般内侧偏移圆弧最大距离和有限航段占用，以及直接对应native TAS分支的离散速度包络证明。简化模型和理想参考不是当前45°CAP/native导航的等价证明。
+
+独立源码审计实际完成：核对physics .25s/decision5s与policy→native子步→动作进度/锁更新顺序；native TAS→heading→VS→位置以及航点通过的模式切换。TAS3.5m/s²不是可独立选择的横向/垂向制动权限，VS近目标直接赋值分支的阈值未乘dt，不能以1.524m/s²作全局有限差分界；高度捕获/舍入需离散证明。全部控制器目标、锁、航点/CAP映射和NR状态必须进入证明状态。审计独立推得内侧圆弧公式；未完成建议的原生垂向不变性证明。无代码修改或实验。
+
+root还明确RouteGeometry固定原点投影与nr_pilot当前位置纬度评分的差别，推导对角矩阵尺度的上下界及保守证书半宽；实体航道宽度/动作/原始指标未修改。几何公式的精确值针对局部两航段，对完整折线仍是安全上界；若据此断言越界，须排除其它更近航段。内侧边界圆弧反例只否定该局部固定模板，不否定其它安全轨迹。完成谓词反例限定单东西直段、南向77.2m对目标76.2m，使两种度量一致；这是逻辑反例，无新native观测声明。
+
+独立数学复核返回未发现阻断的代数缺陷，确认度量变换、双积分精确可行域、五次函数两个极值、理想切/法向加速度、半角圆弧、Gronwall与半步端点界、native TAS分支。提出三项明确化已全部集成：参考模型声明可独立选择切/法向控制；组合定理固定T>0/执行存在，认证下一状态集合由末态外包与可靠测量交集传播，再归纳属于K；完成反例明确东西直段。复核定向读两篇原文，确认其输入/正则性/增量稳定性/延迟和初始化条件；实际读到章节更新SOURCES。独立review与审计均只读，无测试/模型/实验。
+
+结论：限定模型与条件的数学推导已完成首版，当前BlueSky全程安全证书仍未建立，缺实际跟踪界、混合切换可靠可达外包、可计算安全续行集合及始终可选的认证动作。NR360架/50固定验证不能替代这些假设，未将本推导称作创新或现60动作的保证。下一实证步骤仍为共享执行链的固定动作保持/过弯、横移/升降与恢复诊断，先取得有效无延迟baseline，再继续原研究路线；本轮不自动扩展实施。详细数学集中于专题笔记，避免在状态文件重建审批系统。
+
+19:00收尾只读检查：`lab doctor`的issues/local_missing均空、`git diff --check`通过，仅文档6文件；检查不构成数学或科学验证，数学核验依据上述逐项证明与独立审阅。本轮零新lab负载，不重复执行既有17fixture/50native。两新子任务均已完成，准备按既有授权将这6份文档提交当前私有研究分支并核对远端；最终交付前由root调用既有`tools/notify.py --complete`，实际推送/通知结果以工具输出为准。

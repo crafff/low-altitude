@@ -4,6 +4,8 @@
 
 以 Fremond 等的 **Resilient multi-agent reinforcement learning for centralised tactical conflict resolution under uncertain perturbations and non-cooperative traffic in urban air mobility**（TR-C 184, 105542, 2026）为参照，研究执行延迟下的低空多机冲突解脱：先量化延迟的影响，再改善安全表现，同时保留任务完成率与运输效率的约束。
 
+研究分工：本项目聚焦局部战术冲突解脱。无策略干预时的名义航道跟踪是仿真环境/自动驾驶执行层应提供的基础能力，其修复不作为MARL能力或论文贡献；避让决策及实际执行仍须遵守航道和性能约束。无模型与各策略必须使用相同的基础执行规则，单列越界诊断，不把基础导航失败混入冲突解脱效果。
+
 [原文 PDF](../resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf) · [原文逐项核对](REPRODUCTION.md)
 
 目标期刊是 **Transportation Research Part C: Emerging Technologies（TR-C）**，目标特刊为 [Intelligent and Safe Operations of Low-Altitude Aerial Transportation Systems](https://www.sciencedirect.com/special-issue/333589/intelligent-and-safe-operations-of-low-altitude-aerial-transportation-systems)。2026-09-05读取经[KU Leuven教师入口](https://feb.kuleuven.be/public/u0004371/)链接确认的[联合客座编辑Roel Leus现行主页](https://sites.google.com/view/roel-leus)，该页仍邀请新增投稿并列出 **2026-12-30** 截止日期；ScienceDirect官方征稿列表的搜索索引也给出同日，详情见SOURCES。该日期可作暂定投稿目标，截止时区未披露。特刊正文与作者指南仍403，投稿系统实时选项、完整CFP和具体格式/材料要求尚未核实；从标题判断主题相关，不等于已逐项符合征稿要求。
