@@ -1,0 +1,92 @@
+Creating directory "/tmp/bluesky-paper-o14cir84/scenario"
+Creating directory "/tmp/bluesky-paper-o14cir84/plugins"
+Creating directory "/tmp/bluesky-paper-o14cir84/output"
+Creating directory "/tmp/bluesky-paper-o14cir84/cache"
+Copying default configfile to /tmp/bluesky-paper-o14cir84/settings.cfg
+Reading config from /tmp/bluesky-paper-o14cir84/diagnostic.cfg
+Creating directory "/tmp/bluesky-paper-za2gj04a/scenario"
+Creating directory "/tmp/bluesky-paper-za2gj04a/plugins"
+Creating directory "/tmp/bluesky-paper-za2gj04a/output"
+Creating directory "/tmp/bluesky-paper-za2gj04a/cache"
+Copying default configfile to /tmp/bluesky-paper-za2gj04a/settings.cfg
+Creating directory "/tmp/bluesky-paper-2fuhiyup/scenario"
+Creating directory "/tmp/bluesky-paper-2fuhiyup/plugins"
+Creating directory "/tmp/bluesky-paper-2fuhiyup/output"
+Creating directory "/tmp/bluesky-paper-2fuhiyup/cache"
+Copying default configfile to /tmp/bluesky-paper-2fuhiyup/settings.cfg
+Reading config from /tmp/bluesky-paper-za2gj04a/diagnostic.cfg
+Reading config from /tmp/bluesky-paper-2fuhiyup/diagnostic.cfg
+Creating directory "/tmp/bluesky-paper-fe17xosa/scenario"
+Creating directory "/tmp/bluesky-paper-fe17xosa/plugins"
+Creating directory "/tmp/bluesky-paper-fe17xosa/output"
+Creating directory "/tmp/bluesky-paper-fe17xosa/cache"
+Copying default configfile to /tmp/bluesky-paper-fe17xosa/settings.cfg
+Reading config from /tmp/bluesky-paper-fe17xosa/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Using compiled geo functions
+Using compiled geo functions
+Reading magnetic variation data
+Reading magnetic variation data
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't workLoading global navigation database...
+
+Cachefile not found: /tmp/bluesky-paper-o14cir84/cache/navdata.p
+Reading nav.dat
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-za2gj04a/cache/navdata.p
+Reading nav.dat
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-2fuhiyup/cache/navdata.p
+Reading nav.dat
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-fe17xosa/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading fix.dat
+Reading fix.dat
+Reading fix.dat
+Reading awy.dat
+Reading awy.dat
+Reading awy.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-o14cir84/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-za2gj04a/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-2fuhiyup/cache/navdata.p
+Writing cache: /tmp/bluesky-paper-fe17xosa/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-fe17xosa/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-o14cir84/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-za2gj04a/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-2fuhiyup/cache/navdata.p
+Loading global navigation database...
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-2fuhiyup/cache/navdata.p
+Reading cache: /tmp/bluesky-paper-fe17xosa/cache/navdata.pLoading global navigation database...
+
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-za2gj04a/cache/navdata.p
+Reading cache: /tmp/bluesky-paper-o14cir84/cache/navdata.p

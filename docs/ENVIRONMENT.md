@@ -66,3 +66,27 @@ nice -n 15 ionice -c 3 taskset -c 14 python3 -B tools/lab.py run \
 ```
 
 单launcher串行、无--gpu、初期分钟级预算。内存参数是每进程地址空间上限，磁盘阈值是软监控，均不能当硬聚合资源配额。共享CPU/磁盘仍可能有少量影响，资源紧张时减少或暂停我们的任务，不调整其他人的进程。
+
+
+## 独立CUDA测速环境（2026-09-05新授权）
+
+用户允许小规模多核/GPU测速并要求保护现有两项实验。[声明](../runtime/cuda/pyproject.toml)和[独立锁](../runtime/cuda/uv.lock)固定torch2.9.1+cu128，其余原CPU环境已有包逐个同版本。CPU主环境的pyproject/uv.lock/.venv保持原样；CUDA runtime约6.9GiB，依然由uv单独管理：
+
+```bash
+UV_CACHE_DIR="$PWD/.cache/uv" \
+UV_PYTHON_INSTALL_DIR="$PWD/environments/python" \
+UV_PROJECT_ENVIRONMENT="$PWD/environments/cuda-benchmark" \
+UV_CONCURRENT_DOWNLOADS=1 UV_CONCURRENT_INSTALLS=1 UV_CONCURRENT_BUILDS=1 \
+uv sync --project runtime/cuda --locked --python 3.11.13 --managed-python \
+  --no-build-package bluesky-simulator --no-build-package numpy \
+  --no-build-package scipy --no-build-package pandas \
+  --no-build-package pyzmq --no-build-package matplotlib --no-build-package torch
+```
+
+运行时用lab声明两个runtime：`environments/cuda-benchmark`和`environments/python`，以及两个`--input runtime/cuda/pyproject.toml`、`--input runtime/cuda/uv.lock`；GPU命令还需`--gpu`及前述获准主机路径。所有新导入、测试和计算仍在原Bubblewrap内。实际命令和资源预算保存在[测速报告](../reports/training-speed-20260905/README.md)的manifest备份。
+
+SharedActorCritic/PPO支持显式CPU/CUDA及1–4计算线程；生产paper_train入口仍是原CPU单环境流程，测速的CUDA采样适配和多进程采样没有悄悄改成训练方案。第一次比较采用float32 IEEE、无AMP/TF32、同CPU采样与shuffle RNG、Adam foreach/fused=False，包含原检查、拷贝和同步成本。CPU构建与CUDA构建都在CPU1线程运行，作为构建差异对照。
+
+GPU只开一个上下文；torch allocator上限256MiB，启动前nvidia-smi实际free至少3000MiB、运行中至少2048MiB，自己的RSS软阈值2048MiB。每约1秒记录GPU原有PID/显存和自己的RSS，检查或日志失败都停止自己的进程。allocator上限不覆盖上下文和库分配，轮询不是显存预留或绝对保护；64GiB RLIMIT_AS只是每进程虚拟地址上限。GPU测试用实际总进程显存核对，而不只报告张量统计。
+
+依据：[PyTorch2.9.1构建矩阵](https://pytorch.org/get-started/previous-versions/#v291)、[CUDA异步计时](https://docs.pytorch.org/docs/2.9/notes/cuda.html#asynchronous-execution)、[allocator限制范围](https://docs.pytorch.org/docs/2.9/generated/torch.cuda.memory.set_per_process_memory_fraction.html)。这项测速不代表独占GPU速度、长期资源保证或MARL基线已有效。

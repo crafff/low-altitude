@@ -1,0 +1,46 @@
+[project]
+name = "low-altitude-cuda-benchmark"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "bluesky-navdata==1.0.0",
+  "bluesky-simulator==1.1.1",
+  "contourpy==1.3.3",
+  "cycler==0.12.1",
+  "filelock==3.32.5",
+  "fonttools==4.64.0",
+  "fsspec==2026.7.0",
+  "jinja2==3.1.6",
+  "kiwisolver==1.5.1",
+  "markupsafe==3.0.3",
+  "matplotlib==3.11.1",
+  "mpmath==1.3.0",
+  "msgpack==1.2.2",
+  "networkx==3.6.1",
+  "numpy==2.4.6",
+  "openap==2.6.0",
+  "packaging==26.3",
+  "pandas==3.0.5",
+  "pillow==12.3.0",
+  "pyparsing==3.3.2",
+  "python-dateutil==2.9.0.post0",
+  "pyyaml==6.0.3",
+  "pyzmq==27.2.0",
+  "scipy==1.17.1",
+  "six==1.17.0",
+  "sympy==1.14.0",
+  "torch==2.9.1",
+  "typing-extensions==4.16.0",
+  "zmq==0.0.0"
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

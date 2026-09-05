@@ -1,0 +1,11 @@
+{
+  "id": "20260905T232328Z-speed-pool-four-06428e04",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:23:28.809039+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:23:54.184962+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

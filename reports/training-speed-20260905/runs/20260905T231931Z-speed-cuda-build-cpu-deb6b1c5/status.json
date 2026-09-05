@@ -1,0 +1,11 @@
+{
+  "id": "20260905T231931Z-speed-cuda-build-cpu-deb6b1c5",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:19:31.285929+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:19:51.210924+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

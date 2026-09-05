@@ -35,3 +35,5 @@
 2026-09-05 18:39先核摘要，18:44–18:59随用户推导请求进一步定向读正文并独立复核：[Ames等，Control Barrier Function Based Quadratic Programs for Safety Critical Systems](https://arxiv.org/html/1609.06408v2) §III-B Corollary2/§III-C要求可行的屏障约束控制及适当反馈正则性；不变性结论在解的存在区间成立，高相对阶构造对受限输入不能直接照搬。[Singletary等，Control Barrier Functions for Sampled-Data Systems with Input Delays](https://arxiv.org/html/2005.06418v1) Theorem1及§IV Assumptions1–2还要求其增量稳定性/具体采样条件、该节整数步已知延迟和初始等待区间安全。没有逐条审完两篇全部定理，不将它们作为BlueSky混合导航/60动作现成证明。项目[条件推导](CONTAINMENT_DERIVATION.md)自行证明几何、误差管/步间界及组合条件；没有移植CBF、启动延迟实验或宣称创新。
 
 新来源或来源改变判断时在本页补充链接、核验日期、实际读到的内容和未解决项；详细调查留在任务或专题笔记，不重复登记每次搜索。来源失效时明确说明，不编造读过的全文。
+
+- 2026-09-05 CPU/CUDA测速依据：[PyTorch2.9.1官方wheel矩阵](https://pytorch.org/get-started/previous-versions/#v291)、[2.9 CUDA异步计时与FP32设置](https://docs.pytorch.org/docs/2.9/notes/cuda.html)、[allocator fraction范围](https://docs.pytorch.org/docs/2.9/generated/torch.cuda.memory.set_per_process_memory_fraction.html)。用于独立cu128环境和相同负载计时，不支持独占GPU性能或长期稳定性保证；本地结果见[报告](../reports/training-speed-20260905/README.md)。

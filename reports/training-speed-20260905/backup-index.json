@@ -1,0 +1,416 @@
+[
+  {
+    "source": "runs/20260905T231700Z-ppo-device-tests-b8b2ad77/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231700Z-ppo-device-tests-b8b2ad77/manifest.json",
+    "bytes": 28580,
+    "sha256": "27d724f2d654661b4659b811c66d7385fe97015105aab3ad5e3d4ca870431f2f"
+  },
+  {
+    "source": "runs/20260905T231700Z-ppo-device-tests-b8b2ad77/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231700Z-ppo-device-tests-b8b2ad77/status.json",
+    "bytes": 276,
+    "sha256": "b898deeb93e80b2fccc65e1098d68929dcc5a63e3cf2b48e6f4b33711e37aeae"
+  },
+  {
+    "source": "runs/20260905T231700Z-ppo-device-tests-b8b2ad77/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T231700Z-ppo-device-tests-b8b2ad77/log.txt",
+    "bytes": 2653,
+    "sha256": "c7871902b4df7748415fab499596634f843b525301314bd978ae24fffb1a7ee4"
+  },
+  {
+    "source": "runs/20260905T231700Z-ppo-device-tests-b8b2ad77/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T231700Z-ppo-device-tests-b8b2ad77/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/5a9f74ef238ac7d229c42a717c351c50c329b7cfe82ba07404eb2c5ab5d911ec-training_speed_probe.py",
+    "bytes": 17345,
+    "sha256": "5a9f74ef238ac7d229c42a717c351c50c329b7cfe82ba07404eb2c5ab5d911ec"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231729Z-speed-real-fixture-05a2d327/manifest.json",
+    "bytes": 28467,
+    "sha256": "3bbdd46d61fb8c9afdf173c029d03184a4685ba2c63b8136ca64c3a868f9b319"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231729Z-speed-real-fixture-05a2d327/status.json",
+    "bytes": 278,
+    "sha256": "3428e769708ba2f59f26cc5ccbd5dcc6628db70f1d67fce5907d97a100f8cb54"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T231729Z-speed-real-fixture-05a2d327/log.txt",
+    "bytes": 1074,
+    "sha256": "56c57c81b2acda6948c6b2e7d05699e0b4c44467415e758c025ebac37f106628"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/artifacts/fixture.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231729Z-speed-real-fixture-05a2d327/artifacts/fixture.json",
+    "bytes": 3643,
+    "sha256": "955dd2785798c062294f19f6edaba414d8585d7bb4e55a52e23be3956f7968af"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231729Z-speed-real-fixture-05a2d327/artifacts/runtime.json",
+    "bytes": 444,
+    "sha256": "5df1fb7ab0ec67023cc3c84d284b2e58b95be8677a7bbfd09c2ff5d1c671065a"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/5a9f74ef238ac7d229c42a717c351c50c329b7cfe82ba07404eb2c5ab5d911ec-training_speed_probe.py",
+    "bytes": 17345,
+    "sha256": "5a9f74ef238ac7d229c42a717c351c50c329b7cfe82ba07404eb2c5ab5d911ec"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/manifest.json",
+    "bytes": 28906,
+    "sha256": "9111c9cc170ed119607400d261b5bab099656e1f771e7a4d1c52c644b9e0fc2c"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/status.json",
+    "bytes": 274,
+    "sha256": "8c262596376cb01a91937483201223689d8ef69047bbffcf0dbe4d0256b1e6b8"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/log.txt",
+    "bytes": 23420,
+    "sha256": "78a29da31cabc2042f743ea399510374a5cfe2244591b65baa96d659c0268d9c"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-1.json",
+    "bytes": 8350,
+    "sha256": "5c98c0675c294a360834b0df93388b124bc1183ecb627294126a91b12cd95dd7"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-2.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-2.json",
+    "bytes": 8367,
+    "sha256": "f4a0cd2e2367cdd132bf45ac23d782a590adaf0d7d4b37ffb7768a1d56b2b3ec"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-4.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/bench-4.json",
+    "bytes": 8494,
+    "sha256": "f46edcfa771419c7902f20949e1842824690ebf7a3b8cc9bf1460913a37bd5ac"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-1.json",
+    "bytes": 4544,
+    "sha256": "5b6029352fd52e5100cef07698f062ab59e808748ce2b00fa15534efff28725d"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-2.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-2.json",
+    "bytes": 4555,
+    "sha256": "33d4da2b75d57718b83451b140b81544f8896f2bdf8c39442c46869a8379236b"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-4.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/fixed-4.json",
+    "bytes": 4682,
+    "sha256": "14acc8f99525c631d952d0e2d43c69f7acda677eb9f89926a30eabba0b1dc495"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231818Z-speed-cpu-arms-b6555087/artifacts/runtime.json",
+    "bytes": 523,
+    "sha256": "c65538f68a81b9a6d629a6ee7f634fb5b3cc3ee5ff8828ca90d04da0443c22a9"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T231818Z-speed-cpu-arms-b6555087/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/manifest.json",
+    "bytes": 29558,
+    "sha256": "f8c022d712083b4c6882937ea038805cf18766885488a9f5bd2375774cf169e8"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/status.json",
+    "bytes": 280,
+    "sha256": "aa56d9775ce732f514b5a5bc7f01f1d0972a6826e7f29b4ccd95d8ebe1122795"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/log.txt",
+    "bytes": 1208,
+    "sha256": "ac10eea3e72db6d56416bd13e018a109c9413d7b48c81d02b68f45bee7321203"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/bench-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/bench-1.json",
+    "bytes": 8354,
+    "sha256": "a9c534058c527c68aebae32cad01a085beafc02a51a7d03dc33d1f3a4ce809b3"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/fixed-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/fixed-1.json",
+    "bytes": 4545,
+    "sha256": "7f9f1b461672e78d1c2eda859851cc40026a5de46211d28904d3fdc7622e5c52"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/artifacts/runtime.json",
+    "bytes": 485,
+    "sha256": "bbbd7998aafbfedd2f08585fc5598a3da011de973a9f3161cc94929b71084ebc"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T231931Z-speed-cuda-build-cpu-deb6b1c5/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/manifest.json",
+    "bytes": 29859,
+    "sha256": "47c1aa82013e28f17572e32bb69d8245a2e90b7ef47fe82174f02eb2576cab3b"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/status.json",
+    "bytes": 282,
+    "sha256": "72042db6034f6925a71c797286257da232a8a0799cf1c78408938ce836d2c934"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/log.txt",
+    "bytes": 1208,
+    "sha256": "3b298c7ea235cdafcb30dd3592126c072d1f363058b867b0b4983d8035e8a0fa"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/bench-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/bench-1.json",
+    "bytes": 8502,
+    "sha256": "d57b65e6649c6090155e1ac5242311a4f87be480ce7d5de85d52920e041db933"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/fixed-1.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/fixed-1.json",
+    "bytes": 4689,
+    "sha256": "43d15cff5358442eb05f942431924d86a9c569b71b380d1ba8d48bcc49c588e8"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/gpu-memory.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/gpu-memory.json",
+    "bytes": 137,
+    "sha256": "ed59bffbcbccd8d0048c942dc26bd74ee8e30ebeac2688a689522ff7ba3e0738"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/runtime.json",
+    "bytes": 485,
+    "sha256": "7b94336fb2948edf80be89ce2cb4582e12a2e72d7cd8ef165662aad4c1fbfa25"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/gpu-telemetry.jsonl",
+    "backup": "reports/training-speed-20260905/runs/20260905T232008Z-speed-shared-gpu-907da07e/artifacts/gpu-telemetry.jsonl",
+    "bytes": 6324,
+    "sha256": "fcaa87beae6e85410338f5154e481ff83d79d2889324bb75edaa31698514f8b6"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T232008Z-speed-shared-gpu-907da07e/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232058Z-speed-pool-one-6ed430c2/manifest.json",
+    "bytes": 29026,
+    "sha256": "00a83635afcf32ef52d69646faa3e43d8e31789945d67e767e132a26e4489272"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232058Z-speed-pool-one-6ed430c2/status.json",
+    "bytes": 274,
+    "sha256": "10af26ff9e3282883e5ae1769680120a6bf99a7f22c58b55eb99c6f68c8293fb"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T232058Z-speed-pool-one-6ed430c2/log.txt",
+    "bytes": 1365,
+    "sha256": "7f8077a0aa424b4f0380765056e0c21c8e3427a21f8177698125e70e1fe97c79"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/artifacts/pool.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232058Z-speed-pool-one-6ed430c2/artifacts/pool.json",
+    "bytes": 16035,
+    "sha256": "5e6e209820802259b8144c2304e839afa89eebfeb7d61a21efa915bfeb3059c0"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232058Z-speed-pool-one-6ed430c2/artifacts/runtime.json",
+    "bytes": 505,
+    "sha256": "f1e91072b208551ff35b1cc27a63c6f95136916edbed3103ce72aefacb85af05"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T232058Z-speed-pool-one-6ed430c2/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232215Z-speed-pool-two-c00546da/manifest.json",
+    "bytes": 29026,
+    "sha256": "3c1dac3e633517a7fc2c4e0c28bd89a183782f7cef38c114cf761b2c76ff4d71"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232215Z-speed-pool-two-c00546da/status.json",
+    "bytes": 274,
+    "sha256": "7c712941115956b2bc10979ea6e2d1162bf5434a7d4a08cb77965bc93be48f65"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T232215Z-speed-pool-two-c00546da/log.txt",
+    "bytes": 2342,
+    "sha256": "14c19c0ba3ffbafea67f78bd467f2627f2ca9f1f9d2559f928ca90c63ac32c58"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/artifacts/pool.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232215Z-speed-pool-two-c00546da/artifacts/pool.json",
+    "bytes": 16230,
+    "sha256": "a848cbe24aae21aa483b2d8c9a4e791ed9ba1ea1a3a73dd9c162b0bfa9e32454"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232215Z-speed-pool-two-c00546da/artifacts/runtime.json",
+    "bytes": 505,
+    "sha256": "b2957c7504211dfbfc61f00d56b410bdeb3398c13cf7721d0edccbd82f5ff8ea"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T232215Z-speed-pool-two-c00546da/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232328Z-speed-pool-four-06428e04/manifest.json",
+    "bytes": 29030,
+    "sha256": "c05f1940edf7ed9d09074ef4529525c5933b2abd2ee1f7d962bd5e4a3152db3e"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232328Z-speed-pool-four-06428e04/status.json",
+    "bytes": 275,
+    "sha256": "4d1fdbfa77b795915b04817de114c040a35ba003fb48f1b5d2b935426a5082d3"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T232328Z-speed-pool-four-06428e04/log.txt",
+    "bytes": 4296,
+    "sha256": "15efa0dad26fef657b0f3a82472e5208caf70331a380eb3d17b9fe2697473981"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/artifacts/pool.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232328Z-speed-pool-four-06428e04/artifacts/pool.json",
+    "bytes": 16653,
+    "sha256": "d8f75460bcb59e3628350fb6e3ed30e56651fa52f6ac173fe3d18c9685856eb6"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/artifacts/runtime.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232328Z-speed-pool-four-06428e04/artifacts/runtime.json",
+    "bytes": 505,
+    "sha256": "a70c14a69553269d601747150bd792164535d3287e9df45dfb554f97a9da8c35"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T232328Z-speed-pool-four-06428e04/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T232428Z-speed-final-tests-c4781917/manifest.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232428Z-speed-final-tests-c4781917/manifest.json",
+    "bytes": 28926,
+    "sha256": "edab619e939546f66ebba9befa7a9d1853fd49f15c7b141725b673cd6dcf912d"
+  },
+  {
+    "source": "runs/20260905T232428Z-speed-final-tests-c4781917/status.json",
+    "backup": "reports/training-speed-20260905/runs/20260905T232428Z-speed-final-tests-c4781917/status.json",
+    "bytes": 277,
+    "sha256": "bca527bfd249b1a61b6b6a0e140aed592450da9b50759613da42d796e8ea67e8"
+  },
+  {
+    "source": "runs/20260905T232428Z-speed-final-tests-c4781917/log.txt",
+    "backup": "reports/training-speed-20260905/runs/20260905T232428Z-speed-final-tests-c4781917/log.txt",
+    "bytes": 5012,
+    "sha256": "29d3d91ccc6fe3003071af79cdd46792251ed21c63378b01255477d2306b3c9b"
+  },
+  {
+    "source": "runs/20260905T232428Z-speed-final-tests-c4781917/source/src/shared_ppo.py",
+    "backup": "reports/training-speed-20260905/source-used/3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec-shared_ppo.py",
+    "bytes": 19381,
+    "sha256": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec"
+  },
+  {
+    "source": "runs/20260905T232428Z-speed-final-tests-c4781917/source/src/training_speed_probe.py",
+    "backup": "reports/training-speed-20260905/source-used/be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95-training_speed_probe.py",
+    "bytes": 17897,
+    "sha256": "be647949a077546172e6c13d40399cd966f6ab3d20f10f7dbc2a165a9cc68d95"
+  },
+  {
+    "source": "runs/20260905T231729Z-speed-real-fixture-05a2d327/artifacts/fixture.pt",
+    "backup": "reports/training-speed-20260905/fixture.pt",
+    "bytes": 4243143,
+    "sha256": "b5af8c9ba5f8117f77be9022473d73e9257b83717a49a889e1f855bb56776c00"
+  }
+]

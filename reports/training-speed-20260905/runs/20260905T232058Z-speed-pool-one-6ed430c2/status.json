@@ -1,0 +1,11 @@
+{
+  "id": "20260905T232058Z-speed-pool-one-6ed430c2",
+  "stage": "dev",
+  "state": "succeeded",
+  "started_at": "2026-09-05T23:20:58.875714+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-05T23:21:48.771061+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

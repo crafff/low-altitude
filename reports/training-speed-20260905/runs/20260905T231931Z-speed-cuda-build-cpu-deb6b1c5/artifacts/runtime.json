@@ -1,0 +1,27 @@
+{
+  "torch": "2.9.1+cu128",
+  "cuda": "12.8",
+  "versions": {
+    "numpy": "2.4.6",
+    "bluesky-simulator": "1.1.1",
+    "openap": "2.6.0"
+  },
+  "affinity": [
+    14
+  ],
+  "interop": 1,
+  "fp32_precision": "ieee",
+  "adam_foreach": false,
+  "adam_fused": false,
+  "argv": {
+    "mode": "bench",
+    "fixture": "reports/training-speed-20260905/fixture.pt",
+    "device": "cpu",
+    "threads": [
+      1
+    ],
+    "workers": 1,
+    "episode": true
+  },
+  "allocator_cap_mib": null
+}

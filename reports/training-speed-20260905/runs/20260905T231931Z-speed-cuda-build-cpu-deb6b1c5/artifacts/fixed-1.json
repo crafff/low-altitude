@@ -1,0 +1,92 @@
+{
+  "config": {
+    "schema": "bluesky.paper-like.shared-ppo.v1",
+    "device": "cpu",
+    "torch_num_threads": 1,
+    "own_dim": 7,
+    "intruder_dim": 10,
+    "action_dim": 60,
+    "attention_dim": 64,
+    "hidden_sizes": [
+      128,
+      128
+    ],
+    "learning_rate": 1e-05,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_epsilon": 0.2,
+    "value_coefficient": 0.5,
+    "entropy_coefficient": 0.0001,
+    "update_epochs": 1,
+    "minibatch_size": 64,
+    "normalize_advantages": true,
+    "advantage_normalization_epsilon": 1e-08,
+    "max_grad_norm": 0.5,
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_eps": 1e-08,
+    "weight_decay": 0.0,
+    "paper_sources": [
+      "paper/REPRODUCTION.md; original PDF pp.5-7, Algorithm 1 and PPO hyperparameters",
+      "original PDF pp.12-13, Eq.13 current-neighbor attention and Table 2"
+    ],
+    "reconstruction_choices": [
+      "CPU float32 and one PyTorch intra-op thread; no accelerator selection or fallback. The controller also limits native-library/inter-op threads and owns process priority.",
+      "One bias-free ownship query projection and bias-free intruder key/value projections, all width 64; scaled dot-product attention over current neighbors only. No recurrence, positional encoding or temporal memory.",
+      "Variable neighbor counts are padded with zero rows and explicitly masked before projection and softmax. An aircraft with no neighbors has exactly zero attention context.",
+      "Concatenate the 7 ownship features with the 64-dimensional context, then two shared width-128 Tanh layers with biased 60-class actor and scalar critic heads. All linear layers use PyTorch Linear default initialization; the controller seeds initialization explicitly.",
+      "Store the action-validity mask with each sampled observation and apply the identical mask to update logits. Masked classes have zero probability; at least one class must be valid. The environment owns action ordering and lock semantics.",
+      "Use Algorithm 1 minimization: negative clipped policy objective with ratio bounds [1-epsilon,1+epsilon], plus value_coefficient times full mean squared error, minus entropy_coefficient times entropy. This follows Algorithm 1 where surrounding printed equations have sign/lower-bound inconsistencies; no extra half-factor in value MSE and no value clipping.",
+      "Compute GAE separately for each contiguous aircraft trajectory using detached rollout values. Arrival and declared deadline failure are terminal with zero bootstrap. A live aircraft at a collector cutoff bootstraps from its final observed value; trajectories must never cross aircraft or reset boundaries.",
+      "Normalize advantages once across the complete pooled update batch using population standard deviation plus 1e-8; returns retain their original scale. Clip the global gradient norm to 0.5. These details are not specified in the paper.",
+      "Adam uses betas [0.9,0.999], epsilon 1e-8 and zero weight decay. Shuffle samples with the supplied CPU torch.Generator each epoch, use all samples including the final partial minibatch, and perform one epoch. No learning-rate schedule or KL early stopping.",
+      "Reported approximate KL and clip fraction are sample-weighted minibatch diagnostics before each minibatch step, not a final full-batch divergence or a scientific efficacy result. Initialization/sampling/shuffle seeds, rollout limits, checkpoint selection and evaluation deployment belong to the controller's training configuration."
+    ]
+  },
+  "samples": 3726,
+  "inference_batch": 29,
+  "selection_seconds_per_batch": 0.0007343260726581017,
+  "update_seconds": [
+    0.16185814142227173,
+    0.1542009930126369,
+    0.1542936977930367
+  ],
+  "median_update_seconds": 0.1542936977930367,
+  "numerical_errors": [
+    {
+      "model": 0.0,
+      "adam": 0.0
+    },
+    {
+      "model": 0.0,
+      "adam": 0.0
+    },
+    {
+      "model": 0.0,
+      "adam": 0.0
+    }
+  ],
+  "max_logit_error": 0.0,
+  "max_value_error": 0.0,
+  "final_metrics": {
+    "loss": 0.4425970877586228,
+    "policy_loss": 3.946254602760893e-05,
+    "value_loss": 0.8855582746170697,
+    "entropy": 2.2151200900587162,
+    "approx_kl": 7.659596774519459e-06,
+    "clip_fraction": 0.0,
+    "gradient_norm": 0.8660183044703367,
+    "gradient_norm_after": 0.49853340295201914,
+    "samples": 3726,
+    "sample_visits": 3726,
+    "minibatches": 59,
+    "epochs": 1,
+    "advantage_mean": -0.42651668190956116,
+    "advantage_std": 0.8578020334243774
+  },
+  "affinity": [
+    14
+  ]
+}

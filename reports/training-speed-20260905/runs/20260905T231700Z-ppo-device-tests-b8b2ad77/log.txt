@@ -1,0 +1,21 @@
+test_default_cpu_and_optional_threads_preserve_initial_weights_and_forward (test_shared_ppo.AttentionTests.test_default_cpu_and_optional_threads_preserve_initial_weights_and_forward) ... ok
+test_forward_rejects_mixed_devices_before_tensor_operations (test_shared_ppo.AttentionTests.test_forward_rejects_mixed_devices_before_tensor_operations) ... ok
+test_invalid_masks_and_features_are_rejected (test_shared_ppo.AttentionTests.test_invalid_masks_and_features_are_rejected) ... ok
+test_neighbor_permutation_invariance_and_one_valid_action (test_shared_ppo.AttentionTests.test_neighbor_permutation_invariance_and_one_valid_action) ... ok
+test_rejects_invalid_device_and_thread_configuration (test_shared_ppo.AttentionTests.test_rejects_invalid_device_and_thread_configuration) ... ok
+test_variable_padding_is_excluded_and_no_neighbor_context_is_zero (test_shared_ppo.AttentionTests.test_variable_padding_is_excluded_and_no_neighbor_context_is_zero) ... ok
+test_analytic_terminal_and_live_collector_bootstrap (test_shared_ppo.GAETests.test_analytic_terminal_and_live_collector_bootstrap) ... ok
+test_lambda_endpoints_and_detached_rollout_values (test_shared_ppo.GAETests.test_lambda_endpoints_and_detached_rollout_values) ... ok
+test_rejects_cross_terminal_concatenation_and_invalid_inputs (test_shared_ppo.GAETests.test_rejects_cross_terminal_concatenation_and_invalid_inputs) ... ok
+test_clipped_objective_value_scale_entropy_sign_and_kl_analytically (test_shared_ppo.PPOTests.test_clipped_objective_value_scale_entropy_sign_and_kl_analytically) ... ok
+test_multicore_updates_preserve_objective_and_cpu_shuffle_order (test_shared_ppo.PPOTests.test_multicore_updates_preserve_objective_and_cpu_shuffle_order) ... ok
+test_omitted_device_and_thread_options_preserve_cpu_update_exactly (test_shared_ppo.PPOTests.test_omitted_device_and_thread_options_preserve_cpu_update_exactly) ... ok
+test_real_update_changes_shared_attention_and_both_heads_with_finite_gradients (test_shared_ppo.PPOTests.test_real_update_changes_shared_attention_and_both_heads_with_finite_gradients) ... ok
+test_rejects_corrupted_samples_before_changing_parameters (test_shared_ppo.PPOTests.test_rejects_corrupted_samples_before_changing_parameters) ... ok
+test_shuffle_is_reproducible_without_reusing_global_sampling_rng (test_shared_ppo.PPOTests.test_shuffle_is_reproducible_without_reusing_global_sampling_rng) ... ok
+test_update_rejects_device_configuration_mismatch_before_mutation (test_shared_ppo.PPOTests.test_update_rejects_device_configuration_mismatch_before_mutation) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.405s
+
+OK

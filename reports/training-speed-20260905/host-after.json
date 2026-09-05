@@ -1,0 +1,21 @@
+{
+  "timestamp": 1788650727.0819986,
+  "protected": {
+    "3059945": {
+      "state": "R",
+      "start_ticks": "348614026"
+    },
+    "3062529": {
+      "state": "S",
+      "start_ticks": "348620130"
+    }
+  },
+  "same_start_times": true,
+  "gpu": "24564, 20886, 3162, 98",
+  "loadavg": "2.41 2.81 2.58 4/3429 2635859",
+  "meminfo": {
+    "MemTotal": "97950664 kB",
+    "MemAvailable": "63689204 kB",
+    "SwapFree": "88 kB"
+  }
+}

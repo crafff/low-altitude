@@ -74,11 +74,56 @@ class GAETests(unittest.TestCase):
 
 class AttentionTests(unittest.TestCase):
     def setUp(self):
+        self.addCleanup(torch.set_num_threads, torch.get_num_threads())
         self.rng_scope = torch.random.fork_rng(devices=[])
         self.rng_scope.__enter__()
         self.addCleanup(self.rng_scope.__exit__, None, None, None)
         torch.manual_seed(104)
         self.model = SharedActorCritic(configuration())
+
+    def test_default_cpu_and_optional_threads_preserve_initial_weights_and_forward(self):
+        batch = collate([observation(0, 1), observation(3, 2)])
+        expected_logits, expected_values = self.model(*batch)
+        for threads in (1, 2, 4):
+            with self.subTest(threads=threads):
+                torch.manual_seed(104)
+                cfg = configuration(torch_num_threads=threads)
+                if threads == 1:
+                    del cfg["device"]
+                    del cfg["torch_num_threads"]
+                model = SharedActorCritic(cfg)
+                self.assertEqual(torch.get_num_threads(), threads)
+                self.assertEqual(model.cfg["device"], "cpu")
+                self.assertTrue(all(torch.equal(a, b)
+                                    for a, b in zip(self.model.parameters(), model.parameters())))
+                explicit = collate([observation(0, 1), observation(3, 2)],
+                                   device=torch.device("cpu"))
+                self.assertTrue(all(torch.equal(a, b) for a, b in zip(batch, explicit)))
+                logits, values = model(*explicit)
+                tolerance = {"rtol": 0, "atol": 0} if threads == 1 else {"rtol": 2e-5, "atol": 2e-7}
+                torch.testing.assert_close(logits, expected_logits, **tolerance)
+                torch.testing.assert_close(values, expected_values, **tolerance)
+
+    def test_rejects_invalid_device_and_thread_configuration(self):
+        for device in ("meta", "mps", "cpu:0", "cuda:-1", "unknown", None, 0):
+            with self.subTest(device=device), self.assertRaises(ValueError):
+                SharedActorCritic(configuration(device=device))
+            with self.subTest(collate_device=device), self.assertRaises(ValueError):
+                collate([observation()], device=device)
+        for threads in (0, 5, -1, True, False, 1., "2", None):
+            with self.subTest(threads=threads), self.assertRaises(ValueError):
+                SharedActorCritic(configuration(torch_num_threads=threads))
+
+    def test_forward_rejects_mixed_devices_before_tensor_operations(self):
+        original = collate([observation(2)])
+        for field in range(len(original)):
+            batch = list(original)
+            batch[field] = batch[field].to("meta")
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "match the model device"):
+                self.model(*batch)
+        self.model.critic.to("meta")
+        with self.assertRaisesRegex(ValueError, "parameters must share"):
+            self.model(*original)
 
     def test_variable_padding_is_excluded_and_no_neighbor_context_is_zero(self):
         observations = [observation(0, 1), observation(1, 2), observation(3, 3)]
@@ -143,6 +188,7 @@ class AttentionTests(unittest.TestCase):
 
 class PPOTests(unittest.TestCase):
     def setUp(self):
+        self.addCleanup(torch.set_num_threads, torch.get_num_threads())
         self.rng_scope = torch.random.fork_rng(devices=[])
         self.rng_scope.__enter__()
         self.addCleanup(self.rng_scope.__exit__, None, None, None)
@@ -223,6 +269,56 @@ class PPOTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertTrue(torch.equal(initial_rng, torch.random.get_rng_state()))
         self.assertTrue(all(torch.equal(a, b) for a, b in zip(self.model.parameters(), clone.parameters())))
+
+    def test_omitted_device_and_thread_options_preserve_cpu_update_exactly(self):
+        samples, _ = self.samples(67)
+        clone = copy.deepcopy(self.model)
+        cfg = dict(self.cfg)
+        del cfg["device"]
+        del cfg["torch_num_threads"]
+        explicit = update(self.model, self.optimizer(), samples, self.cfg,
+                          torch.Generator(device="cpu").manual_seed(22))
+        implicit = update(clone, self.optimizer(clone), samples, cfg,
+                          torch.Generator(device="cpu").manual_seed(22))
+        self.assertEqual(explicit, implicit)
+        self.assertTrue(all(torch.equal(a, b) for a, b in zip(self.model.parameters(), clone.parameters())))
+
+    def test_multicore_updates_preserve_objective_and_cpu_shuffle_order(self):
+        samples, old_targets = self.samples(67)
+        initial = copy.deepcopy(self.model.state_dict())
+        reference_generator = torch.Generator(device="cpu").manual_seed(22)
+        reference = update(self.model, self.optimizer(), samples, self.cfg, reference_generator)
+        for threads in (2, 4):
+            with self.subTest(threads=threads):
+                cfg = configuration(torch_num_threads=threads)
+                model = SharedActorCritic(cfg)
+                model.load_state_dict(initial)
+                generator = torch.Generator(device="cpu").manual_seed(22)
+                stats = update(model, self.optimizer(model), samples, cfg, generator)
+                self.assertEqual(torch.get_num_threads(), threads)
+                self.assertTrue(torch.equal(reference_generator.get_state(), generator.get_state()))
+                for key, value in reference.items():
+                    if isinstance(value, int):
+                        self.assertEqual(stats[key], value, key)
+                    else:
+                        self.assertTrue(math.isclose(stats[key], value, rel_tol=2e-5, abs_tol=2e-6), key)
+                for reference_parameter, parameter in zip(self.model.parameters(), model.parameters()):
+                    torch.testing.assert_close(parameter, reference_parameter, rtol=2e-5, atol=2e-6)
+                self.assertTrue(all(target.grad is None for target in old_targets))
+
+    def test_update_rejects_device_configuration_mismatch_before_mutation(self):
+        samples, _ = self.samples(4)
+        before = copy.deepcopy(self.model.state_dict())
+        optimizer = self.optimizer()
+        generator = torch.Generator(device="cpu").manual_seed(22)
+        rng_before = generator.get_state().clone()
+        for device in ("cuda", "cuda:0"):
+            with self.subTest(device=device), self.assertRaisesRegex(ValueError, "configuration device"):
+                update(self.model, optimizer, samples, configuration(device=device), generator)
+            self.assertFalse(optimizer.state)
+            self.assertTrue(torch.equal(generator.get_state(), rng_before))
+            self.assertTrue(all(torch.equal(value, before[name])
+                                for name, value in self.model.state_dict().items()))
 
     def test_rejects_corrupted_samples_before_changing_parameters(self):
         good, _ = self.samples(4)

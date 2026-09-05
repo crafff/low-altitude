@@ -1,0 +1,168 @@
+Creating directory "/tmp/bluesky-paper-b1_owmt0/scenario"
+Creating directory "/tmp/bluesky-paper-b1_owmt0/plugins"
+Creating directory "/tmp/bluesky-paper-b1_owmt0/output"
+Creating directory "/tmp/bluesky-paper-b1_owmt0/cache"
+Copying default configfile to /tmp/bluesky-paper-b1_owmt0/settings.cfg
+Reading config from /tmp/bluesky-paper-b1_owmt0/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-b1_owmt0/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-b1_owmt0/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-b1_owmt0/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-b1_owmt0/cache/navdata.p
+{"threads": 1, "update_seconds": [0.14985968405380845, 0.14845506800338626, 0.148729485925287], "episode_seconds": 8.50678530568257}
+Creating directory "/tmp/bluesky-paper-h7i03cp9/scenario"
+Creating directory "/tmp/bluesky-paper-h7i03cp9/plugins"
+Creating directory "/tmp/bluesky-paper-h7i03cp9/output"
+Creating directory "/tmp/bluesky-paper-h7i03cp9/cache"
+Copying default configfile to /tmp/bluesky-paper-h7i03cp9/settings.cfg
+Reading config from /tmp/bluesky-paper-h7i03cp9/diagnostic.cfg
+Reading magnetic variation data
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-h7i03cp9/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-h7i03cp9/cache/navdata.p
+Attempt to reimplement PLUGINS from <function init.<locals>.manage at 0x7b8ad5523ce0> to <function init.<locals>.manage at 0x7b8ad5367a60>
+Attempt to reimplement ADDNODES from <bound method Node.addnodes of <bluesky.network.detached.Node object at 0x7b8ad54a2d50>> to <bound method Node.addnodes of <bluesky.network.detached.Node object at 0x7b8acfaaaf90>>
+Attempt to reimplement AIRWAY from <bound method Traffic.airwaycmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.airwaycmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement ATALT from <bound method Condition.ataltcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.ataltcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement ATDIST from <bound method Condition.atdistcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.atdistcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement ATSPD from <bound method Condition.atspdcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.atspdcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement BANK from <bound method Traffic.setbanklim of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setbanklim of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement BATCH from <bound method Simulation.batch of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.batch of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement BLUESKY from <function singbluesky at 0x7b8ad53e7920> to <function singbluesky at 0x7b8ad53e7920>
+Attempt to reimplement BENCHMARK from <bound method Simulation.benchmark of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.benchmark of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement BOX from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522700> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad5367a60>
+Attempt to reimplement CALC from <function calculator at 0x7b8ad53e7f60> to <function calculator at 0x7b8ad53e7f60>
+Attempt to reimplement CASMACHTHR from <function casmachthr at 0x7b8ae7f81a80> to <function casmachthr at 0x7b8ae7f81a80>
+Attempt to reimplement CD from <function setscenpath at 0x7b8ad55200e0> to <function setscenpath at 0x7b8ad55200e0>
+Attempt to reimplement CIRCLE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55231a0> to <function initbasecmds.<locals>.<lambda> at 0x7b8b009b4ae0>
+Attempt to reimplement CLRCRECMD from <bound method Traffic.clrcrecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.clrcrecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRE from <bound method Traffic.cre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.cre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRECMD from <bound method Traffic.crecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.crecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRECONFS from <bound method Traffic.creconfs of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.creconfs of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement DATE from <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement DEFWPT from <bound method Navdatabase.defwpt of <bluesky.navdatabase.navdatabase.Navdatabase object at 0x7b8ae32d1410>> to <bound method Navdatabase.defwpt of <bluesky.navdatabase.navdatabase.Navdatabase object at 0x7b8acdbdfe90>>
+Attempt to reimplement DEL from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55234c0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad551c0e0>
+Attempt to reimplement DIST from <function distcalc at 0x7b8ad5520040> to <function distcalc at 0x7b8ad5520040>
+Attempt to reimplement DOC from <bound method ScreenIO.show_cmd_doc of <bluesky.simulation.screenio.ScreenIO object at 0x7b8ad60c6c90>> to <bound method ScreenIO.show_cmd_doc of <bluesky.simulation.screenio.ScreenIO object at 0x7b8ad60c6c90>>
+Attempt to reimplement DT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523560> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad551c2c0>
+Attempt to reimplement DTMULT from <bound method Simulation.set_dtmult of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.set_dtmult of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement FF from <bound method Simulation.fastforward of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.fastforward of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement FIXDT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522b60> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad551c5e0>
+Attempt to reimplement GROUP from <bound method TrafficGroups.group of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>> to <bound method TrafficGroups.group of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>>
+Attempt to reimplement HOLD from <bound method Simulation.hold of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.hold of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement IMPLEMENTATION from <function select_implementation at 0x7b8ae32a09a0> to <function select_implementation at 0x7b8ae32a09a0>
+Attempt to reimplement LEGEND from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55237e0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad551c540>
+Attempt to reimplement LINE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55225c0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad5387c40>
+Attempt to reimplement LSVAR from <function lsvar at 0x7b8adf1d1300> to <function lsvar at 0x7b8adf1d1300>
+Attempt to reimplement MAGVAR from <function magdeccmd at 0x7b8ae2435580> to <function magdeccmd at 0x7b8ae2435580>
+Attempt to reimplement MCRE from <bound method Traffic.mcre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.mcre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement MOVE from <bound method Traffic.move of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.move of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement NOISE from <bound method Traffic.setnoise of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setnoise of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement OP from <bound method Simulation.op of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.op of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement PLOT from <function plot at 0x7b8ad53e7420> to <function plot at 0x7b8ad53e7420>
+Attempt to reimplement POLY from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523ec0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad5386ca0>
+Attempt to reimplement POLYALT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523d80> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad601c7c0>
+Attempt to reimplement POLYLINE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522c00> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad601ce00>
+Attempt to reimplement POS from <bound method Traffic.poscommand of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.poscommand of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement REALTIME from <bound method Simulation.realtime of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.realtime of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement RESET from <bound method Simulation.reset of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.reset of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement SEED from <function Simulation.setseed at 0x7b8ad55214e0> to <function Simulation.setseed at 0x7b8ad55214e0>
+Attempt to reimplement THR from <bound method Traffic.setthrottle of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setthrottle of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement TIME from <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8acfab2e90>>
+Attempt to reimplement TRAIL from <bound method Trails.setTrails of <bluesky.traffic.trails.Trails object at 0x7b8ad535dcd0>> to <bound method Trails.setTrails of <bluesky.traffic.trails.Trails object at 0x7b8ad535dcd0>>
+Attempt to reimplement UNGROUP from <bound method TrafficGroups.ungroup of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>> to <bound method TrafficGroups.ungroup of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>>
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-h7i03cp9/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-h7i03cp9/cache/navdata.p
+{"threads": 2, "update_seconds": [0.1513999616727233, 0.15154354413971305, 0.15354447672143579], "episode_seconds": 8.639493835158646}
+Creating directory "/tmp/bluesky-paper-8ttg21i6/scenario"
+Creating directory "/tmp/bluesky-paper-8ttg21i6/plugins"
+Creating directory "/tmp/bluesky-paper-8ttg21i6/output"
+Creating directory "/tmp/bluesky-paper-8ttg21i6/cache"
+Copying default configfile to /tmp/bluesky-paper-8ttg21i6/settings.cfg
+Reading config from /tmp/bluesky-paper-8ttg21i6/diagnostic.cfg
+Reading magnetic variation data
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-8ttg21i6/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-8ttg21i6/cache/navdata.p
+Attempt to reimplement PLUGINS from <function init.<locals>.manage at 0x7b8ad5523ce0> to <function init.<locals>.manage at 0x7b8ad54de660>
+Attempt to reimplement ADDNODES from <bound method Node.addnodes of <bluesky.network.detached.Node object at 0x7b8ad54a2d50>> to <bound method Node.addnodes of <bluesky.network.detached.Node object at 0x7b8ac6db2f90>>
+Attempt to reimplement AIRWAY from <bound method Traffic.airwaycmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.airwaycmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement ATALT from <bound method Condition.ataltcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.ataltcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement ATDIST from <bound method Condition.atdistcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.atdistcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement ATSPD from <bound method Condition.atspdcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>> to <bound method Condition.atspdcmd of <bluesky.traffic.conditional.Condition object at 0x7b8ae2521bd0>>
+Attempt to reimplement BANK from <bound method Traffic.setbanklim of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setbanklim of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement BATCH from <bound method Simulation.batch of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.batch of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement BLUESKY from <function singbluesky at 0x7b8ad53e7920> to <function singbluesky at 0x7b8ad53e7920>
+Attempt to reimplement BENCHMARK from <bound method Simulation.benchmark of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.benchmark of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement BOX from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522700> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54de660>
+Attempt to reimplement CALC from <function calculator at 0x7b8ad53e7f60> to <function calculator at 0x7b8ad53e7f60>
+Attempt to reimplement CASMACHTHR from <function casmachthr at 0x7b8ae7f81a80> to <function casmachthr at 0x7b8ae7f81a80>
+Attempt to reimplement CD from <function setscenpath at 0x7b8ad55200e0> to <function setscenpath at 0x7b8ad55200e0>
+Attempt to reimplement CIRCLE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55231a0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dec00>
+Attempt to reimplement CLRCRECMD from <bound method Traffic.clrcrecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.clrcrecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRE from <bound method Traffic.cre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.cre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRECMD from <bound method Traffic.crecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.crecmd of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement CRECONFS from <bound method Traffic.creconfs of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.creconfs of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement DATE from <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement DEFWPT from <bound method Navdatabase.defwpt of <bluesky.navdatabase.navdatabase.Navdatabase object at 0x7b8ae32d1410>> to <bound method Navdatabase.defwpt of <bluesky.navdatabase.navdatabase.Navdatabase object at 0x7b8ac87bbf10>>
+Attempt to reimplement DEL from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55234c0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54de5c0>
+Attempt to reimplement DIST from <function distcalc at 0x7b8ad5520040> to <function distcalc at 0x7b8ad5520040>
+Attempt to reimplement DOC from <bound method ScreenIO.show_cmd_doc of <bluesky.simulation.screenio.ScreenIO object at 0x7b8ad60c6c90>> to <bound method ScreenIO.show_cmd_doc of <bluesky.simulation.screenio.ScreenIO object at 0x7b8ad60c6c90>>
+Attempt to reimplement DT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523560> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54deb60>
+Attempt to reimplement DTMULT from <bound method Simulation.set_dtmult of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.set_dtmult of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement FF from <bound method Simulation.fastforward of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.fastforward of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement FIXDT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522b60> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dcc20>
+Attempt to reimplement GROUP from <bound method TrafficGroups.group of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>> to <bound method TrafficGroups.group of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>>
+Attempt to reimplement HOLD from <bound method Simulation.hold of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.hold of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement IMPLEMENTATION from <function select_implementation at 0x7b8ae32a09a0> to <function select_implementation at 0x7b8ae32a09a0>
+Attempt to reimplement LEGEND from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55237e0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54de340>
+Attempt to reimplement LINE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad55225c0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dd4e0>
+Attempt to reimplement LSVAR from <function lsvar at 0x7b8adf1d1300> to <function lsvar at 0x7b8adf1d1300>
+Attempt to reimplement MAGVAR from <function magdeccmd at 0x7b8ae2435580> to <function magdeccmd at 0x7b8ae2435580>
+Attempt to reimplement MCRE from <bound method Traffic.mcre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.mcre of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement MOVE from <bound method Traffic.move of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.move of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement NOISE from <bound method Traffic.setnoise of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setnoise of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement OP from <bound method Simulation.op of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.op of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement PLOT from <function plot at 0x7b8ad53e7420> to <function plot at 0x7b8ad53e7420>
+Attempt to reimplement POLY from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523ec0> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dd580>
+Attempt to reimplement POLYALT from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5523d80> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dcfe0>
+Attempt to reimplement POLYLINE from <function initbasecmds.<locals>.<lambda> at 0x7b8ad5522c00> to <function initbasecmds.<locals>.<lambda> at 0x7b8ad54dcb80>
+Attempt to reimplement POS from <bound method Traffic.poscommand of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.poscommand of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement REALTIME from <bound method Simulation.realtime of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.realtime of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement RESET from <bound method Simulation.reset of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.reset of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement SEED from <function Simulation.setseed at 0x7b8ad55214e0> to <function Simulation.setseed at 0x7b8ad55214e0>
+Attempt to reimplement THR from <bound method Traffic.setthrottle of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>> to <bound method Traffic.setthrottle of <bluesky.traffic.traffic.Traffic object at 0x7b8ad71f5610>>
+Attempt to reimplement TIME from <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ae25dbe50>> to <bound method Simulation.setutc of <bluesky.simulation.simulation.Simulation object at 0x7b8ac6dcedd0>>
+Attempt to reimplement TRAIL from <bound method Trails.setTrails of <bluesky.traffic.trails.Trails object at 0x7b8ad535dcd0>> to <bound method Trails.setTrails of <bluesky.traffic.trails.Trails object at 0x7b8ad535dcd0>>
+Attempt to reimplement UNGROUP from <bound method TrafficGroups.ungroup of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>> to <bound method TrafficGroups.ungroup of <bluesky.traffic.trafficgroups.TrafficGroups object at 0x7b8ad53d60d0>>
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-8ttg21i6/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-8ttg21i6/cache/navdata.p
+{"threads": 4, "update_seconds": [0.16623502876609564, 0.17717933375388384, 0.15818704245612025], "episode_seconds": 9.18099962035194}
+Exception ignored in: <function Shape.__del__ at 0x7b8ae2440b80>
+Traceback (most recent call last):
+  File "/home/magic/ruitaozhou/low-altitude/.venv/lib/python3.11/site-packages/bluesky/tools/shapes.py", line 72, in __del__
+AttributeError: 'NoneType' object has no attribute 'areatree'
