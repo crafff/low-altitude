@@ -1,0 +1,36 @@
+{
+  "scope": "Two-episode literal-environment learning diagnostic; not an effective or corridor-valid baseline",
+  "source_run": "runs/20260905T061300Z-literal-ppo-pilot-ba54a8c6",
+  "files": {
+    "latest.pt": {
+      "bytes": 664620,
+      "sha256": "2f68ac8f654d88672e69135605a22f26a92701dccf89de4b34b70f6b1216da5a"
+    },
+    "best.pt": {
+      "bytes": 198201,
+      "sha256": "5c1c9574198171a9beea66f5077729eb8f92416e9c34a527e3092c6d60b0bdda"
+    },
+    "result.json": {
+      "bytes": 32174,
+      "sha256": "ededd348e81b46f27f53f0db4114b9130b5e341de4a7fa787c427e58b6dbb390"
+    },
+    "training.jsonl": {
+      "bytes": 4673,
+      "sha256": "89a049aa73e3a47cbcbf678365c05c8c34fe34d89d64a4228c9130a4c11503be"
+    },
+    "development.jsonl": {
+      "bytes": 16436,
+      "sha256": "f197e2bdf863e235ba4dc5d5399adb69ab67bec019848e1784134a5944fd8a49"
+    },
+    "resumed-three.pt": {
+      "bytes": 687596,
+      "sha256": "94db7da8c0def72e88d06d23a85f13538c0aaf4fb1d6f7c1e891e90736afbd24"
+    }
+  },
+  "latest_completed_episodes": 2,
+  "best_completed_episodes": 0,
+  "resume_cli": "--episodes 3 --eval-limit 2 --resume checkpoints/literal-pilot-20260905/latest.pt",
+  "resumed_three_source_run": "runs/20260905T061702Z-literal-ppo-resume-78630a7b",
+  "continuous_three_source_run": "runs/20260905T061901Z-literal-ppo-continuous-three-fc6bdb9a",
+  "resume_comparison_run": "runs/20260905T062109Z-literal-native-resume-compare-fe7da12f"
+}

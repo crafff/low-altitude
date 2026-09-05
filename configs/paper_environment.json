@@ -1,0 +1,16 @@
+{
+  "schema": "bluesky.paper-like.environment.v1",
+  "scenario_config": "configs/nr_pilot.json",
+  "action_config": "configs/paper_actions.json",
+  "observation_config": "configs/paper_observation.json",
+  "types_config": "configs/uav_types.json",
+  "decision_seconds": 5.0,
+  "device": "cpu",
+  "reconstruction_choices": [
+    "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+    "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+    "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+    "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+    "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee."
+  ]
+}

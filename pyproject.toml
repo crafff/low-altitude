@@ -5,7 +5,16 @@ description = "Baseline-first BlueSky MARL research on delayed conflict resoluti
 requires-python = ">=3.11,<3.12"
 dependencies = [
     "bluesky-simulator==1.1.1",
+    "torch==2.9.1",
 ]
 
 [tool.uv]
 package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

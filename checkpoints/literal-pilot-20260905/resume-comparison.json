@@ -1,0 +1,21 @@
+{
+  "left": "checkpoints/literal-pilot-20260905/resumed-three.pt",
+  "right": "checkpoints/literal-pilot-20260905/continuous-three.pt",
+  "completed_episodes": 3,
+  "all_equal": true,
+  "differences": {
+    "schema": [],
+    "scope": [],
+    "model": [],
+    "optimizer": [],
+    "completed_episodes": [],
+    "next_seed_index": [],
+    "rng": [],
+    "configs": [],
+    "versions": [],
+    "evaluation": [],
+    "best_checkpoint": [],
+    "best_evaluation": []
+  },
+  "comparison": "Exact tensor/scalar equality. Evaluation phase and measured runtime/RSS excluded; full configs remain exact."
+}

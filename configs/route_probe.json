@@ -1,0 +1,81 @@
+{
+  "schema": "bluesky.route-probe.v1",
+  "stage": "dev",
+  "bluesky_version": "1.1.1",
+  "dt_seconds": 0.25,
+  "timeout_seconds": 1200.0,
+  "altitude_ft": 350.0,
+  "arrival_radius_m": 25.0,
+  "corridor_width_ft": 500.0,
+  "types_path": "configs/uav_types.json",
+  "types_sha256": "bbc18e82878c92422eed41dad5694ec74b69128d1a6b351f4a5afa951bb61fbc",
+  "source": {
+    "scenario_path": "runs/20260905T044040Z-paper-nr-final-44ce1be4/artifacts/seed-51005/scenario.json",
+    "scenario_sha256": "14bbf5bf09436af58fb677c12148ede9e051466da2818118c9d1a4a9d9a171dd",
+    "result_path": "runs/20260905T044040Z-paper-nr-final-44ce1be4/artifacts/seed-51005/result.json",
+    "seed": 51005,
+    "actual_entry_s": 68.0,
+    "saved_flight_result": {
+      "id": "F025",
+      "type": "Amzn",
+      "corridor_id": "C04",
+      "scheduled_entry_s": 67.97721785223565,
+      "status": "arrived",
+      "actual_entry_s": 68.0,
+      "flight_seconds": 108.25,
+      "path_length_m": 8731.98558235519,
+      "admission_lowc_pairs": 0,
+      "admission_nmac_pairs": 0,
+      "max_centerline_distance_m": 363.1461882537369,
+      "outside_corridor_seconds": 14.75,
+      "terminal_time_s": 176.25,
+      "terminal_state": [
+        52.035814148733124,
+        4.056075833975814,
+        106.68,
+        80.66498226127314
+      ],
+      "endpoint_distance_m": 5.506143183515111,
+      "active_waypoint": 3
+    }
+  },
+  "flight": {
+    "id": "F025",
+    "type": "Amzn",
+    "corridor_id": "C04",
+    "scheduled_entry_s": 67.97721785223565
+  },
+  "corridor": {
+    "id": "C04",
+    "waypoints_lat_lon_deg": [
+      [
+        51.990300858446695,
+        3.9944068837917257
+      ],
+      [
+        52.01095412275012,
+        3.990144633305647
+      ],
+      [
+        52.02891797801932,
+        4.007245163374279
+      ],
+      [
+        52.04598274890939,
+        4.02663291128593
+      ],
+      [
+        52.03578989070157,
+        4.056146008405108
+      ]
+    ]
+  },
+  "reconstruction_choices": [
+    "Exact saved seed51005 F025 Amzn/C04 geometry and original schedule copied verbatim; input source paths are provenance only and are not read during the workload.",
+    "Only this flight is replayed, admitted at simulator t=0 instead of its saved t=68; original_scenario_time_s adds the saved actual entry time for comparison, without claiming identical global timer phase.",
+    "Default route construction, PaperPerformance and no-wind/no-noise/no-CR/no-CD/no-VNAV settings match nr_pilot. Native fly-by, bank and speed remain unchanged unless --bank-deg is supplied.",
+    "A supplied --bank-deg changes native ap.bankdef before adding waypoints and is always labeled diagnostic_bank_override; it is not a validated baseline change or a real-aircraft bank envelope.",
+    "Every 0.25-second native step is recorded, including initial and terminal states. Arrival requires the last waypoint active and endpoint distance <=25 m; timeout remains an explicit failure.",
+    "Width exposure uses NR post-step distance >76.2 m times dt. Crossing times are adjacent-sample brackets, not interpolated continuous-time events. Bank-limit settings and heading-rate-derived equivalent bank are distinct fields."
+  ]
+}

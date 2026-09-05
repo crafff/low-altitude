@@ -1,0 +1,37 @@
+{
+  "schema": "bluesky.paper-like.observation-reward.v1",
+  "earth_radius_m": 6371000.0,
+  "observation_radius_ft": 6000.0,
+  "waypoint_distance_scale_m": 9260.0,
+  "speed_reference_kt": 196.0,
+  "nominal_altitude_ft": 350.0,
+  "corridor_height_ft": 200.0,
+  "corridor_width_ft": 500.0,
+  "lowc_horizontal_ft": 1630.0,
+  "nmac_horizontal_ft": 500.0,
+  "vertical_tolerance_ft": 100.0,
+  "cpa_time_scale_seconds": 1200.0,
+  "cpa_relative_speed_epsilon_mps": 0.000001,
+  "efficiency_speed_weight": 0.30,
+  "efficiency_altitude_weight": 0.35,
+  "efficiency_lane_weight": 0.35,
+  "efficiency_reward_scale": 0.008,
+  "arrival_reward": 1.0,
+  "sources": [
+    "paper/REPRODUCTION.md",
+    "resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf: physical pp.11-16, Table 2, Eqs.14-15 and 19-22"
+  ],
+  "reconstruction_choices": [
+    "Table 2 feature meanings and order are preserved. Exact normalization bounds and angle conventions were not disclosed. Use p.13 [0,1], not the conflicting perturbation-section [0,9]; clip each scalar and count clips by feature before float32 conversion.",
+    "All positions and waypoints are lat/lon degrees; lengths, accepted targets and actual speeds use metres and metres per second. Ground speed and actual compass track, not target velocity, determine CPA. In the no-wind baseline the adapter maps accepted TAS commands to targeted ground speed.",
+    "Ownship previous/next waypoint distances are great-circle lengths on a 6371000 m sphere, divided by the nominal full-route length 9260 m. The adapter supplies the latest/next waypoint or route origin/destination, including its declared temporary-route handling.",
+    "Ownship accepted target speed is divided by the global 196 kt maximum. Target altitude is normalized from the 250 ft floor over the full 200 ft height. Right-positive accepted target lane is divided by the full 500 ft width then shifted by 0.5. The adapter supplies the two actual transition-lock flags.",
+    "Neighbors include every other aircraft at horizontal great-circle separation <=6000 ft, without a vertical filter or padding. Ownship and intruder IDs are sorted lexicographically; an empty encounter tensor has shape (0,10). The policy adapter, not this module, implements the paper's zero relative-vector convention.",
+    "Relative track and nominal-course angles use signed intruder minus ownship compass angles, wrapped to [-180,180) and divided by 360 then shifted by 0.5. Positive is clockwise/right; an exact half-turn takes -180. Same-corridor nominal cross-angle is forced to zero (normalized 0.5), even when aircraft occupy different route legs.",
+    "Relative accepted speed/altitude/lane targets use intruder minus ownship, divided by twice 196 kt, twice 200 ft or twice 500 ft respectively, then shifted by 0.5. Current actual altitude difference separately sets Eq.21 LoWC/NMAC thresholds, each normalized by 6000 ft.",
+    "CPA uses a common local east/north plane: relative position is great-circle range times the initial-bearing unit vector at ownship; velocities come from current ground speeds and tracks. For relative speed <=1e-6 m/s use t=0. Otherwise t=max(0,-r dot v/|v|^2). CPA distance uses that unbounded future time; only the normalized time feature clips at 1200 s. This local flat constant-velocity approximation is not a curved-flight forecast.",
+    "Safety uses the Eq.20 mean over all horizontally observed intruders, including zero-penalty neighbors; no neighbors gives zero. At or above 100 ft actual vertical separation both Eq.21 thresholds and the pair penalty are explicitly zero, including coincident horizontal positions.",
+    "Eq.22 compares accepted command targets exactly with stored nominal speed, configured 350 ft nominal altitude and zero lane. Nonnominal targets cost at each decision even if repeated, locked or completed; measured tracking error and rejected requests do not replace accepted targets. Accepted nominal commands should retain their canonical numerical values.",
+    "Reward total is safety +0.008*efficiency +1 for valid arrival. The environment is responsible for granting the arrival flag once, before its declared timeout; timeout or other deletion alone earns no arrival reward. Reward sampling and integration over physical steps belong to the environment adapter."
+  ]
+}

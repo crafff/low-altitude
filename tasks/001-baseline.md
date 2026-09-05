@@ -1,6 +1,8 @@
 # 001 — 原文式无延迟、无扰动基线
 
-状态：`doing`（12类性能和论文式NR小批诊断完成，发现Amzn转弯越出走廊；动作/观测/奖励/PPO待实现）。负责人：主线程。目标顺序由用户确认：先有效基线，再冻结后加延迟。尚未执行新模型训练。
+状态：`doing`（12类性能、场景、动作/观测/奖励和共享PPO已接通；正在验证小训练及路线执行缺陷）。负责人：主线程。目标顺序由用户确认：先有效基线，再冻结后加延迟。当前尚无有效新基线证据。
+
+最新范围：用户已启动10h，2026-09-05 05:15:13–15:15:13 UTC；14:45:13起预留收尾。用户要求不停止/不影响其他人的两个GPU实验，当前块使用CPU且不提交GPU负载；执行预算与交接见末节。此前15分钟预算均已结束。
 
 本次执行块已结束：用户再次明确“开始”，2026-09-05 04:29:42 UTC起，预算至04:44:42 UTC、≤15分钟/≤2GiB输出；12类性能、论文式场景生成/入场退出、小批无避让诊断，不训练。6个串行job最后于04:41:05 UTC结束，约11分23秒内完成；保存80,354,700字节产物（约76.6MiB），随后仅记录和Git交付。两个具名Astra/xhigh builder分别只写paper_performance及机型配置/测试、paper_scenarios及NR配置/测试；只读scholar核对原PDF场景语义。主线程写NR执行器/事件统计、集成并独占实验执行。
 
@@ -169,3 +171,124 @@ python3 -B tools/lab.py run --label paper-nr --stage dev \
   --runtime "$PWD/.venv" --runtime "$PWD/environments/python" \
   -- "$PWD/.venv/bin/python" -B -m nr_pilot --config configs/nr_pilot.json
 ```
+
+## 2026-09-05：未来10h双线安排提案（未启动）
+
+**用户请求与建议。** 用户准备授权自主10h，先要求比较既定执行延迟路线与深入复现TR-C2026扰动/非合作路线。建议两条都推进，约80%主要投入名义baseline、20%用于原文机制核验和可独立验证的接口；比例是优先级而非第二个并行训练预算。两线共享BlueSky环境、观测、动作、奖励和PPO。原文也先有名义baseline再评价/训练扰动变体，因此共同前置工作优先。稳定PLAN中的科学顺序不变，本提案等待用户后续启动指令，不把讨论当作10h开始。
+
+**本轮核验。** 已将原PDFpp.8–11、17–25的机制、训练规模、未披露参数和执行延迟关系写入REPRODUCTION。定位/通信/传感器扰动和非合作交通属于原文，风与湍流不属于其实际实验；原文p.25提到延迟执行导致指令过时。FULL/NC额外100k训练episodes意味着后续比较需要追加训练量匹配。作者机构论文条目已访问，有限搜索未核实公开代码/权重；没有联系作者。本轮没有运行项目测试、安装环境或开始实验。
+
+**建议墙钟安排。** 以下时间窗用于调整投入，前置问题未解决时不因到点而跳到后续科学结论。
+
+| 从后续启动起 | 主线程重点 | 可检查产物 |
+| --- | --- | --- |
+| 0–1.5h | 保存路线定向追踪Amzn偏离、核对入场冲突；补三走廊原生开发覆盖；检查并锁定PyTorch、实际沙箱CUDA/CPU及可用备份 | 根因轨迹与明确重建选择；小诊断结果、真实吞吐与环境锁定记录 |
+| 1.5–4h | 接通60动作、5s决策、机动完成锁/目标路线、7/10维观测与CPA、原奖励、逐机终止 | 同链路NR/固定动作/随机策略诊断；构造可解脱场景验证动作有物理效果，同时保留随机人口失败 |
+| 4–8h | 共享attention actor-critic与PPO、逐机GAE、保存/恢复；先短pilot测速度，再在预算内训练并用独立开发场景配对NR | checkpoint、学习曲线、动作/奖励分布、安全与任务效率；优先一个训练种子跑通，有余量再独立复跑 |
+| 8–9.5h | 有可信名义改善时冻结checkpoint，先做小延迟扫描；时间允许再分开做定位/通信扰动诊断。尚无改善则集中定位物理/动作/观测/奖励/PPO瓶颈 | 与NR和零延迟一致口径的开发对照，或具体无改善证据；不预设必须得到退化/提升 |
+| 9.5–10h | 停止新训练、保存恢复点、整理可复现命令/配置/图表/失败与下一步、Git交付和既有渠道通知 | 可继续的研究记录和产物清单；未完成项明确列出 |
+
+**配套复现工作。** 在主线实现或训练时，以有边界的Astra只读调查/独立文件实现推进：把原文扰动定义变成参数表、补齐触发/持续/恢复/重叠的明确选择；隔离物理真值与受损观测，使用独立随机流，确保安全指标仍按真值计算。优先可校验的位置误差与通信中断；传感器三类、静态/动态非合作UAS和CAT/GA先形成准确规范，再按余量实现。零扰动/零延迟须退化到同一个名义接口。此块不承诺训完原文6个专门模型加FULL/NC，更不将单次注入测试称为抗扰策略复现。
+
+**判断与资源。** 不预先承诺10h内250k episodes或baseline收敛。当前NR的8场景rollout约16.79s只说明无策略采样吞吐，不能外推PPO。先做5–15分钟pilot，依据实测决定后续episode数与单job时限；所有项目负载由主线程经lab串行监督，最多一个GPU训练，保存可恢复checkpoint。建议本块新增运行产物软预算≤10GiB，依赖/缓存另计且安装前估算；只读df当前约146GiB可用，不能当作总量硬配额。原有产物不自动清理。重要长训练前需要独立持久副本；若尚无已授权目的地，先做短且可重建的开发工作，不把同盘复制当独立备份。
+
+可信改善至少要在预先固定的开发集合上比较同初态NR，联合检查LoWC/NMAC事件与暴露、flight-hour、完成/失败、航程/延误、控制和越界；不能只看回报，不能通过失败提前退出降低风险分子。模型选择限于开发集，最终测试集保持未看。单训练种子仍只作初步趋势。后续对原文抗扰训练与我们的延迟方法使用同等训练预算，并分开延迟、观测扰动及二者叠加。
+
+后续用户启动时记录实际UTC起止、预算和子agent停止条件；相关实现、诊断与有界修复连续执行，不逐个小步骤再次询问。预留收尾时间，不启动跨过截止的负载。10h内若基线未有效，交付实现/失败诊断和扰动规范，不宣称完成有效基线或推进未经验证的改进模型。
+
+**只读交接回执。** scholar `perturbation_scope`：问题为原文扰动复现的具体范围及其与执行延迟的关系；只读范围为本地原PDF与活动研究记录，禁止代码修改、实验、通知和嵌套委派；来源重点pp.7–11、17–25；输出机制/参数/未知项、可并行准备与训练依赖；≤4分钟。线程`01a06fe6-e5e9-7c62-8dfc-34d89ba6fa0e`实际turn_context核对为gpt-6-astra/xhigh。返回上述来源支持的清单，无修改或测试；下一步为主线程整合计划，本轮已完成。
+
+## 2026-09-05：用户要求的GPU/CUDA连接检查
+
+用户确认既定主线优先、深入扰动复现按进度安排，并要求先检查GPU和CUDA。本轮仅做连接/计算诊断，不启动10h、不安装PyTorch、不训练。主线程本地完成，没有新委派。
+
+**定位与证据。** 普通受限命令中nvidia-smi退出9，/dev下没有nvidia设备节点；但/proc与/sys可见已加载驱动580.173.02，PCI可见NVIDIA显卡，nvcc报告12.8/V12.8.61。随后经自动审查获准的主机只读nvidia-smi查询成功：NVIDIA GeForce RTX4090，驱动580.173.02，显存24564MiB，空闲3492MiB。故初次错误是当前执行环境没有暴露设备，不能推导为主机驱动损坏。
+
+主线程串行调用三次launcher，固定源码快照和Bubblewrap隔离始终保留：
+
+1. [普通受限GPU启动](../runs/20260905T050428Z-gpu-visibility-1e787327/status.json)：20s/16MiB预算，supervisor检测不到GPU设备而拒绝，pid为空，负载未开始。这是保留的失败。
+2. [获准主机环境内的lab查询](../runs/20260905T050512Z-gpu-host-sandbox-d2575898/log.txt)：20s/16MiB预算，沙箱内nvidia-smi成功，型号/驱动/显存与上方一致；约0.057s job。
+3. [CUDA实际计算](../runs/20260905T050609Z-cuda-kernel-probe-20d365fd/log.txt)：45s/32MiB输出/8192MiB每进程虚拟地址空间预算，约0.911s job，编译并执行[极小核函数](../tools/cuda_probe.cu)。cudaMalloc分配16KiB输出，GPU计算4096个3*i+7，显式同步并回传与CPU逐项比较，mismatches=0；这16KiB不包括CUDA上下文本身开销。device_count=1，compute capability8.9，driver API报告13000，Runtime报告12080（实际使用12.8）；分配前可用显存3251044352 bytes。未测持续负载、PPO吞吐或模型容量。
+
+启动方式是执行工具的require_escalated获准主机权限，再运行原有lab --gpu；不是sudo、修改设备权限或取消沙箱。没有更改驱动/Toolkit、lab隔离实现，也没有终止或调整任何已有GPU负载。当前卡已有较多显存占用，后续训练需按实际可用量小批量测试，不能预设24GiB全部可用。
+
+项目依赖元数据只读检查确认BlueSky1.1.1和numpy2.4.6，未发现torch；CUDA原生核函数通过不等于PyTorch/attention反向传播通过。下一步在正式研究准备中通过uv固定兼容PyTorch wheel，并沿同一获准lab路径验证前向、反向和保存恢复；完整10h仍等待用户启动。复用命令见ENVIRONMENT，本轮代码直接以实际CUDA探针验证，未新增镜像式单测或运行无关回归。
+
+## 2026-09-05：用户要求追查GPU占用
+
+05:08–05:09 UTC经获准主机权限只读查询nvidia-smi和指定PID的/proc进程元数据，未运行实验、读取外项目源码/日志或进程环境变量，未终止/调整负载。GPU利用率99%，总占用20556MiB、空闲3492MiB；两个主要进程均属magic，入口scripts/reinforcement_learning/rl_games/train.py，工作目录/home/magic/cxy/IsaacLab_DexAssemble，解释器/home/magic/miniconda3/envs/env_isaaclab/bin/python3.11，由tmux下bash启动。
+
+| PID | GPU占用 | 任务参数 | 并行环境 | 最大迭代参数 | 已运行 |
+| --- | --- | --- | --- | --- | --- |
+| 3059945 | 9831MiB | Isaac-DexAssembly-GeometryDRSharpaNutFixedTacmapAlignedFlushRobotBaseTest1-Direct-v0 | 1024 | 1000 | 20h22m59s |
+| 3062529 | 9771MiB | Isaac-DexAssembly-GeometryDRSharpaNutFixedTacmapAlignedFlushRobotBaseTest2-Direct-v0 | 1024 | 1000 | 20h21m58s |
+
+二者均headless；只输出明确白名单参数，未展开其他任意参数。max_iterations是启动参数，不代表已经完成的进度；没有读取训练日志，因此不能判断还需多久。其余列出的Xorg、GNOME、TeamViewer和其他图形进程合计约770MiB。以上是实时查询快照，不是持续监控结论；后续研究前重新确认可用量。低空项目当前仍未开始PPO或10h研究块。
+
+## 2026-09-05：保留其他GPU进程时的可行性评估
+
+用户询问不停止进程是否能继续项目。05:12 UTC只读检查/proc/meminfo、/proc/cpuinfo、sched_getaffinity和loadavg：AMD Ryzen9 7950X（16核），当前可用32逻辑线程；1/5/15分钟load=2.056/2.121/2.176；MemTotal=97950664KiB，MemAvailable=64591668KiB（约61.6GiB）。普通受限会话的ps只列本命名空间，未将其当作全机CPU进程清单；上述资源数值为瞬时/滑动窗口观测，非预留配额。
+
+判断：已有CPU BlueSky实际运行证据加上当前CPU/内存余量，足以支持继续环境、动作、观测、奖励与小闭环开发；PPO小训练优先验证CPU方案。GPU仍可访问，但05:08–05:09利用率99%且仅约3.4GiB空闲，因此不能承诺共享训练速度或显存始终足够，也不能承诺对其他训练完全无影响。保留其他进程，不干预其任务。
+
+后续沿用单launcher、从当前线程设置和短pilot起步，以实际PPO网络比较CPU/GPU前向、反向和完整rollout吞吐，记录显存峰值；小CUDA整数探针不回答这些问题。计时参考[PyTorch官方benchmark工具](https://docs.pytorch.org/docs/stable/benchmark_utils.html)，不用异步提交耗时冒充已完成计算时间；此文档查阅不代表已安装其当前版本。若共享GPU收益不足则明确选择CPU并记录，不静默回退；大规模训练另按实测安排。本轮没有训练、安装或启动10h研究块。
+
+## 2026-09-05：已授权10h执行块（进行中）
+
+用户明确“开始10h计划”，并强调另外两个GPU进程属于其他人的实验，禁止停止或影响。主线程于05:15:13 UTC开始，截止15:15:13 UTC；14:45:13起预留记录/保存/交付。既定baseline-first与配套原文复现适用，未授权扩大到全规模原文复现或读取最终测试。输出软目标≤10GiB，依赖/缓存另计并先估算；不递归清理任何原有产物。单launcher串行，初期单线程CPU、nice15/idle I/O优先级，运行预算先分钟级。按用户最新约束取消共享GPU对照，CPU wheel与无--gpu沙箱保证不向该卡提交计算；不kill/renice/修改另外两个任务或其工作区。共享主机的CPU/磁盘影响不能绝对保证为零，持续检查主机余量，紧张则减少/暂停自己的负载。
+
+第一批独立交接（均禁止嵌套委派、实验/清理/通知；builder明确共享工作区并保留他人修改）：
+
+- scholar `route_fidelity`：问题为原文走廊约束、未披露转弯语义与可辩护跟踪选择；只读原PDFpp7、14–17和原生BlueSky源码、活动记录；交付事实/缺失参数/候选方案及横移动作风险；≤15min。线程01a06ffe-a137-7c21-842d-f914a73e1517，实际元数据gpt-6-astra/xhigh。
+- scholar `observation_reward_spec`：问题为Table2精确特征、CPA、Eq19–22与GAE终止语义；只读原PDFpp5–7、11–16和活动记录；交付逐维可实现规范、未披露项与重建选择；≤15min。线程01a06ffe-d14e-7a43-a134-df5b7a6db9d8，实际元数据gpt-6-astra/xhigh。
+- builder `route_trace`：问题为保存seed51005/F025/C04的定向原生轨迹；仅写src/route_probe.py、configs/route_probe.json及必要test_route_probe.py；读取保存场景与nr/performance/原生源码；交付逐步位置/航点/目标和实际朝向/bank/速度/转弯距离/偏离与峰值记录；≤15min，主线程执行。线程01a06fff-1ea2-7d22-9fb1-912236dee3b5，实际元数据gpt-6-astra/xhigh。
+
+主线程负责CPU依赖、资源与备份准备、native环境/动作集成、所有负载执行和结果记录。重要训练的独立备份仍需落实；优先使用已有获准私有GitHub分支保存可恢复的小型研究产物，具体备份内容/大小和远端结果在有实际checkpoint后记录，不把同盘复制冒充独立备份。
+
+### 05:23–06:16 UTC：物理定位、CPU依赖与学习链路
+
+**实际依赖。** uv固定torch2.9.1+cpu，官方175.9MiB CPU wheel，无CUDA依赖。pytorch-cpu显式索引只绑定torch，其余依赖保持PyPI；第一次非显式索引解析使其他包选到该索引，保存中间锁到.cache/uv-lock-before-explicit-20260905.toml后，从HEAD恢复仅本次生成的uv.lock并重新解析，确认无其他索引迁移、原packaging26.3保留。sync时仍只允许已核验的zmq元包构建；全部运行间隙安装，未修改正在运行的解释器。命令、官方来源与恢复方法更新ENVIRONMENT。
+
+**原生转弯实证。** [route-probe-native](../runs/20260905T052301Z-route-probe-native-0c160aa5/artifacts/result.json)单独重放seed51005/F025/C04（时间平移至0），精确再现最大363.146188m、越界14.75s、飞行108.25s。峰值age82.5s，实际heading76.224°/目标108.267°，bank25°、heading rate3.248°/s、半径1422.908m；保存每0.25s CSV。原文未披露bank、路径拐角连接/捕获控制。中心90°理想圆弧的解析偏离R(1-cos45°)显示高速原生圆弧并不自动满足76.2m半宽；内侧满幅偏移再加有限半径更不能假设包含在走廊内。计算只是几何解释，不是实机保证或作者参数。
+
+**已实现。** paper_actions保留绝对60动作、5s接口、native加减速/爬降、45°捕获与miter平移路线；分量锁与容差明确为未披露处的重建选择，未增加速度governor或走廊过滤。paper_observation实现7/10维、当前航迹CPA、水平6000ft邻居、Eq19–22及归一化裁剪计数。paper_environment统一NR与策略的入场/物理步进/终止/真值风险，保留失败及越界；paper_rollout提供开发诊断。shared_ppo为当前邻居单query attention、共享128/128 Tanh、CPU PPO，宽度/归一化/Adam等配置明确。paper_train已实现逐ID轨迹、完整episode GAE、原子checkpoint/RNG恢复及配对开发评价，当前只作literal环境学习诊断。
+
+**Controller实际验证（均单launcher、nice15/idle IO、CPU14单线程，无GPU）。**
+
+| Run | 结果与边界 |
+| --- | --- |
+| [paper-learning-core-tests](../runs/20260905T053547Z-paper-learning-core-tests-e5baefc8/log.txt) | 81项中2个断言失败：横移符号误写、浮点近零要求绝对精确；保存失败 |
+| [paper-learning-core-fixed](../runs/20260905T054007Z-paper-learning-core-fixed-3c1a280f/log.txt) | 修正断言后81项通过，实际执行torch反向及参数更新；不是训练有效性 |
+| [paper-env-crossing](../runs/20260905T054030Z-paper-env-crossing-e956cf79/artifacts/result.json) | 构造M100双机交叉：NR/名义2/2、LoWC39.75/NMAC12.25 pair-s；固定上下高度2/2且两项0，无越界，只证明此构造可解脱 |
+| [paper-env-population](../runs/20260905T054206Z-paper-env-population-be961306/artifacts/result.json) | seed51001 NR与名义物理指标完全一致且复现旧NR：30/30、LoWC3817.5/NMAC815.5 pair-s、5.166389 flight-hours；random21/30、9超时、27越界，不能据NMAC降低称改善 |
+| [paper-lane-m100](../runs/20260905T054532Z-paper-lane-m100-a625f240/artifacts/result.json) | 2km直线右横移1/1完成，但最大90.010m、越界107.25s；末端lane误差0.151m，初始超调不是零误差跟踪 |
+| [paper-lane-amzn](../runs/20260905T054829Z-paper-lane-amzn-2f2dd042/artifacts/result.json) | 同类直线右横移1/1完成、最大76.006m、不越界；不同机型不能仅按速度推断失败 |
+| [paper-train-tests](../runs/20260905T061237Z-paper-train-tests-e263dd3d/log.txt) | 新8项收集/ID/GAE、实际weights-only checkpoint恢复Adam与全部RNG、配对评价与选模测试通过，1.392s；两轮真实pilot随后启动 |
+
+人口random的F007/Cranfield超时最大20234.45m、F021/M200超时4206.15m，均记录过capture_beyond_leg_end；原生提前切换名义腿和末端LNAV关闭是待核查机制，不能先归咎学习器。继续做7个预声明5NM/90°单机case与末端语义调查；在严重越界/失败未解释前不投入小时级训练或宣布有效baseline。
+
+**追加交接与回执。** 以下线程实际turn_context两轮均核对gpt-6-astra/xhigh，fresh/bounded上下文；builder仅做实现与AST/JSON静态检查，所有测试/实验由主线程执行。
+
+- route_trace（01a06fff-1ea2-7d22-9fb1-912236dee3b5）在完成定向追踪后续接动作：问题为60绝对动作/锁/native45°路线；独占paper_actions.py、同名配置/测试，来源PDFpp14–15及原生源码；交付3文件和语义限制，约20min，实现完成，无实验。
+- paper_features（01a07006-e650-73e1-a02b-b7f3fcc07a40）：问题为7/10维和原奖励；独占paper_observation.py/配置/测试；来源observation_reward_spec与PDF，输出纯函数与18项测试，约25min，实现完成。06:12续接7case route_action_study.py/配置/必要同名测试，约20min；来源environment/action回调、原生跟踪发现；不得改主环境或执行负载，当前进行中。
+- shared_ppo（01a07007-ab17-7c11-9aae-99bc858955e9）：先独占shared_ppo.py/配置/测试实现共享attention PPO；后独占paper_train.py/paper_train_dev.json/test_paper_train.py实现收集/保存恢复与开发评价，约40min；来源原PDF/REPRODUCTION及当前API；均已交付，仅静态检查，无实验。主线程正在执行两轮literal pilot。
+- learning_integration_review（01a07012-cad8-7d00-99ae-b13c0691e4bf）：只读环境/动作/观测/奖励/PPO集成，一轮约15min，指出env应整批验证mask后执行、裁剪计数须标范围，主线程已落实；后续只读trainer/GAE/checkpoint/resume审查进行中。
+- route_fidelity原调查与续审返回：先保持literal参考、用几何与tracking而非奖励选择跟踪候选，不将内侧边界内缩静默当数值修正（会改变最小横向间隔）；本轮继续只读调查末端LNAV/25m到达与路线重建冲突，≤15min，无实验。
+
+主线程下一步：完成并审查两轮训练/恢复诊断，保留原始路线问题，依定向几何结果实现明确、可比较的最小执行修正候选；重要checkpoint落实已有获准私有GitHub备份。当前10h仍在进行，截止不变。
+
+### 06:13–06:18 UTC：首次真实PPO两轮pilot
+
+[literal-ppo-pilot](../runs/20260905T061300Z-literal-ppo-pilot-ba54a8c6/artifacts/result.json)预算300s/256MiB/4096MiB，实际job67.98s、CLI66.17s；两轮训练seed610000/610001，4524/4247逐机转移、71/67个minibatch、各K=1，单轮7.730/7.589s，真实参数更新。初始和终末仅用预声明开发前2例53001/53002（3/4走廊），同初态NR60/60；初始sample42/60、两轮后40/60，越界48/54架次、最大74.06/75.17km。选模保留第0轮，说明best不等于达标。学习轮数太少且物理链路有缺陷，既不能论证原文方法失败，也不能用低NMAC率论证成功。
+
+latest.pt 664620字节（内嵌第0轮best）、best.pt 198201字节；固定副本及开发/训练记录准备到checkpoints/literal-pilot-20260905，manifest含SHA/源run。当前只是同盘副本，尚未验证远端持久备份。随后启动跨进程续到3轮，与连续3轮比较，专门检验native重置/续训状态，不是扩大科学训练。
+
+只读trainer审查回执：未发现阻断收集/GAE/恢复的实质bug，指出假环境恢复单测不能替代native跨进程证据，已据此安排上述对照；无文件改动或测试执行。route_fidelity中间调查将seed51001的9超时分成7个Mnet/Tecnalia低速真实任务超时（累计航程8.54–8.95km、尚差终点0.69–1.44km）与2个严重远飞；不能将全部超时归为末端LNAV问题。
+
+追加builder route_trace（同Astra/xhigh线程）只写action_failure_probe.py/对应配置，重放原random人口并仅追踪F007/F021；依据现env/actions与原native WP代码，输出逐步LNAV/最后WP/终点距离/动作变更和旧结果复现检查，约20min静态实现、不运行实验，主线程独占验证。
+
+### 06:17–06:21 UTC：native跨进程续训一致
+
+[literal-ppo-resume](../runs/20260905T061702Z-literal-ppo-resume-78630a7b/artifacts/result.json)从两轮checkpoint续到总3轮；[continuous-three](../runs/20260905T061901Z-literal-ppo-continuous-three-fc6bdb9a/artifacts/result.json)从头连续3轮。两者均正常完成，分别约59.62/74.64s job，未同时运行。[独立checkpoint比较](../runs/20260905T062109Z-literal-native-resume-compare-fe7da12f/artifacts/result.json)实际weights-only加载两份产物，model、Adam、全部RNG、计数器、配置/源码身份、最佳checkpoint及科学开发评价逐项完全一致；仅排除评价phase及实际墙钟/RSS。比较脚本src/checkpoint_compare.py随源码保存。该证据覆盖真实BlueSky跨进程reset/续训，仍不证明策略有效。
+
+准备将小型恢复点checkpoints/literal-pilot-20260905（2轮latest、0轮best、3轮resumed及配置/指标/比较证据）随当前已授权私有GitHub分支提交；原始runs不加入Git，重复continuous-three.pt不加入Git。06:16主机load约2.39、MemAvailable61.42GiB、磁盘可用145.08GiB；未向GPU提交计算或操作其他实验进程。
