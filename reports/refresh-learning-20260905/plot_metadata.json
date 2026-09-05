@@ -3,7 +3,7 @@
   "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
   "input_schema": "execution-learning-curve.v1",
   "input_path": "reports/refresh-learning-20260905/input.json",
-  "input_sha256": "42937556696a14e83ea746c2222f21a33c067d2fcf6b231bbd6fb3be3663a555",
+  "input_sha256": "6619c4ba7a5bed412240db04b1ff9324db9bab62bf0a019e497d3d19563db509",
   "title": "Current-state flyby refresh: PPO development diagnostic",
   "parameters": {
     "figure_size_inches": [
@@ -17,7 +17,15 @@
       25,
       50,
       75,
-      100
+      100,
+      125,
+      150,
+      175,
+      200,
+      225,
+      250,
+      275,
+      300
     ],
     "smoothing": false,
     "error_bars": false,
@@ -38,7 +46,7 @@
     "numeric_consistency_absolute_tolerance": 1e-10,
     "x_axis_limits": [
       0.0,
-      104.0
+      312.0
     ],
     "y_axis_limits": {
       "completed_percent": [
@@ -67,7 +75,7 @@
       ]
     }
   },
-  "checkpoint_count": 5,
+  "checkpoint_count": 13,
   "renderer_source_sha256": "273665aa2233ae1b6435f39a16c8432c07c5acaea14339f9af39dbd7a2f76a63",
   "source_records": [
     {
@@ -104,6 +112,69 @@
       "sha256": "22295fa8e8c18608365e99a8160cd55c4133fe4809f9271a64ab463f1bec5211",
       "line": 5,
       "completed_episodes": 100
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 1,
+      "completed_episodes": 100
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 2,
+      "completed_episodes": 125
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 3,
+      "completed_episodes": 150
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 4,
+      "completed_episodes": 175
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 5,
+      "completed_episodes": 200
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 6,
+      "completed_episodes": 225
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 7,
+      "completed_episodes": 250
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 8,
+      "completed_episodes": 275
+    },
+    {
+      "run": "runs/20260905T111952Z-refresh-ppo-300-bebea134",
+      "path": "checkpoints/refresh-300-20260905/development.jsonl",
+      "sha256": "1dcc8a61343fb680eb55e0e477144402fc3bc85aa7e778689f6a8bfa585efed9",
+      "line": 9,
+      "completed_episodes": 300
     }
   ],
   "source_record_verification": "Provenance copied from controller input; referenced source files are not read by this renderer.",
@@ -213,6 +284,174 @@
         "nmac_seconds_per_flight_hour": 161.16392372722717,
         "lowc_seconds_per_flight_hour": 648.5351033851229
       }
+    },
+    {
+      "completed_episodes": 125,
+      "sample": {
+        "completed_percent": 70.0,
+        "outside_corridor_percent": 94.72222222222223,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 15.277777777777779,
+        "mean_flight_seconds": 667.701388888889,
+        "nmac_seconds_per_flight_hour": 78.41079990431516,
+        "lowc_seconds_per_flight_hour": 418.8811116080249
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 150,
+      "sample": {
+        "completed_percent": 65.83333333333333,
+        "outside_corridor_percent": 95.27777777777777,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 19.444444444444443,
+        "mean_flight_seconds": 668.1020833333333,
+        "nmac_seconds_per_flight_hour": 83.13849243347916,
+        "lowc_seconds_per_flight_hour": 432.77443254991596
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 175,
+      "sample": {
+        "completed_percent": 68.61111111111111,
+        "outside_corridor_percent": 94.44444444444444,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 16.666666666666668,
+        "mean_flight_seconds": 665.3388888888888,
+        "nmac_seconds_per_flight_hour": 77.39289084092485,
+        "lowc_seconds_per_flight_hour": 416.14882975259064
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 200,
+      "sample": {
+        "completed_percent": 71.94444444444444,
+        "outside_corridor_percent": 94.16666666666667,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 13.333333333333334,
+        "mean_flight_seconds": 666.1055555555556,
+        "nmac_seconds_per_flight_hour": 70.16155264013878,
+        "lowc_seconds_per_flight_hour": 418.7737178792149
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 225,
+      "sample": {
+        "completed_percent": 67.77777777777777,
+        "outside_corridor_percent": 92.77777777777777,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 17.5,
+        "mean_flight_seconds": 665.9340277777777,
+        "nmac_seconds_per_flight_hour": 69.55268550333962,
+        "lowc_seconds_per_flight_hour": 417.70278795968494
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 250,
+      "sample": {
+        "completed_percent": 70.55555555555556,
+        "outside_corridor_percent": 93.61111111111111,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 14.722222222222221,
+        "mean_flight_seconds": 665.2159722222223,
+        "nmac_seconds_per_flight_hour": 77.77173453483674,
+        "lowc_seconds_per_flight_hour": 419.67573187905765
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 275,
+      "sample": {
+        "completed_percent": 71.11111111111111,
+        "outside_corridor_percent": 93.61111111111111,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 14.166666666666666,
+        "mean_flight_seconds": 664.1791666666667,
+        "nmac_seconds_per_flight_hour": 76.53431867656192,
+        "lowc_seconds_per_flight_hour": 401.16058041567595
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
+    },
+    {
+      "completed_episodes": 300,
+      "sample": {
+        "completed_percent": 70.0,
+        "outside_corridor_percent": 93.05555555555556,
+        "timeout_percent": 14.722222222222221,
+        "route_exhausted_percent": 15.277777777777779,
+        "mean_flight_seconds": 663.7930555555556,
+        "nmac_seconds_per_flight_hour": 74.43961576043404,
+        "lowc_seconds_per_flight_hour": 407.6458735675233
+      },
+      "nr": {
+        "completed_percent": 100.0,
+        "outside_corridor_percent": 4.444444444444445,
+        "timeout_percent": 0.0,
+        "route_exhausted_percent": 0.0,
+        "mean_flight_seconds": 549.0527777777778,
+        "nmac_seconds_per_flight_hour": 161.16392372722717,
+        "lowc_seconds_per_flight_hour": 648.5351033851229
+      }
     }
   ],
   "versions": {
@@ -223,18 +462,18 @@
   "outputs": [
     {
       "filename": "learning_curve.svg",
-      "sha256": "d6aab3f08e5208fb3f05136ee54d1aa3fb4318bc4db21689eb13b37050ec7670",
-      "bytes": 64529
+      "sha256": "eebc8aedafa333867ce0767f88e752b4d0958fecb1264f08c87264c533f626f7",
+      "bytes": 80580
     },
     {
       "filename": "learning_curve.png",
-      "sha256": "8ff85fafe75538caa4060a95d8c1bb274a03d0484b6fee700a72b2f68912dc18",
-      "bytes": 471285
+      "sha256": "b421e37559b5e97693916a00f3bec1f82743c3976cd659642e84a7c473709a0e",
+      "bytes": 503324
     },
     {
       "filename": "learning_curve.pdf",
-      "sha256": "64c797d2a7dc788d8708c8b55da10b6d44d59af1a2cd7cd9218f7847a6dd554a",
-      "bytes": 41068
+      "sha256": "846f7db533f78848b5d294cde297d0b3443bf7a94a34688d544c4cfba266f4f3",
+      "bytes": 42104
     }
   ]
 }

@@ -544,3 +544,52 @@ route_fidelity只读原p6§3.4/Algorithm1确认训练采样；p17§6.1frozenpoli
 新图首[render](../runs/20260905T111403Z-refresh-learning-figure-100-af4a767e/status.json)数值正确但总标题被subplot循环变量覆盖，controller目视发现；仅renderer将figure_title与子标题分开。新增1个owned随机临时夹具，实际导出默认/自定义两组六子图；首[fixture](../runs/20260905T111600Z-learning-title-regression-ea9c6c10/log.txt)误假定SVG文字存为path注释而失败，metadata标题已正确；改为解析真实SVG text节点后[回归](../runs/20260905T111652Z-learning-title-regression-svg-text-a1fa873b/log.txt)通过，4.081s job。该测试不改任何模型/指标。固定图[render](../runs/20260905T111615Z-refresh-learning-figure-100-title-fixed-0e6283ec/status.json)3.343s，SVG/PNG/PDF/metadata逐字节复制、PNG目视通过，见[新学习曲线](../reports/refresh-learning-20260905/README.md)。
 
 另纠正此前README的PDF缺失推断：rg文件枚举遵从ignore而未列PDF，但输出常量和实际文件表明renderer一直生成PDF。400图PDF38072B已从明确源run复制，旧README已改回“PDF本地保留、不入Git”；不改原run。不是数据丢失或新增PDF功能。当前无launcher负载，准备将本批已验证新100/图/报告/工具与来源记录私有备份，再同源码535cad4恢复100→300。
+
+11:19提交`1325351f961b53d6ef33edd7e1f7156caaf9ee38`已push且ls-remote同SHA，包含新100恢复点及已验证四模式/曲线/预算与三篇近邻来源；源码/文档检查通过，生成SVG尾空白按原样保留。随后[20260905T111952Z-refresh-ppo-300-bebea134](../runs/20260905T111952Z-refresh-ppo-300-bebea134/status.json)启动，原科学源码535cad4/同配置恢复100→300、内3300/外3360s、256MiB输出/4096MiB地址空间，CPU14/nice15/idle IO单线程，当前唯一job。持续轮询、原25轮评价/5轮保存和截止预留不变。
+
+11:24 refresh100→300的恢复初评188.046s完成，整个NR/sample aggregate与新100副本末评精确一致；已续到107、最后seed610106，单轮9.268s，当前运行正常。这里只核对实际已完成的恢复评价，不预报300完成。
+
+11:29新refresh125轮全12评价105.468s：252/360、53超时55耗尽、341width/46934.75aircraft-s、NMAC78.410800/LoWC418.881112每flight-hour、return−2585.656747，仍0height。完成与50同为252但NMAC高于50的76.568498，不作有效基线或稳定趋势判断。
+
+11:32追加shared_ppo仅新lateral_exposure_audit.py/refresh100配置/聚焦测试，问题为新模型剩余越界主要机型与横移执行状态；只读当前535科学源码、100副本和原12sample参考，通过原_evaluate_case旁路真实physics callback聚合逐机/机型outside，按post-update lane_active和capture-active分区，保存首/峰/末样本及终态。所有科学摘要/动作hist须精确参考，不追加forward/RNG、不改物理/奖励/终止；以completed*dt给出有效出口后整末步贡献的保守上界，不擅自删步或作连续安全判定。输出紧凑聚合、无巨大全量CSV；内<=450/外480s、128MiB，当前300结束后controller单job执行。builder<=25min静态实现，不执行负载/清理/信号/GPU/通知/嵌套，保留他人修改。
+
+11:33获准主机只读GPU审计：原PID3059945/3062529仍9891/9771MiB，GPU98%、used20616/free3432MiB；未向GPU计算或干预进程。主机load3.396/3.258/3.096、MemAvailable60.662GiB、磁盘143.343GiB。新refresh已150轮、正在全开发评价，当前唯一launcher仍100→300。
+
+11:39追加observation_reward_spec只读理想90°几何推导，问题为Table3异质转弯半径与中心/内外极限lane可行性：名义入射ray x<=0,y0、出射x0,y>=0，半宽76.2，恒R切向1/4圆连接平行偏移；独立核对controller候选a=1−1/sqrt2及max-distance/端点/投影分支，不把候选当证据。来源50fixed刷新与旧Mavic响应、当前几何/机型；输出假设/证明或反例、原生偏差和有限航段边界。<=15min，无修改/实验/加载checkpoint/信号/GPU/通知/嵌套，不据理想模型宣称BlueSky连续安全、策略不可行或创新；当前baseline不改。
+
+新refresh150/175全12评价105.936/105.669s。150：237/360、53超时70耗尽、343width/46835.75s、NMAC83.138492/LoWC432.774433每flight-hour、return−2617.307704。175：247/360、53超时60耗尽、340width/52226.75s、NMAC77.392891/LoWC416.148830、return−2462.515055。均0height，无稳定改善。11:41训练已180轮，唯一job继续100→300。
+
+11:46新refresh200轮全12评价105.236s：259/360、53超时48耗尽、339width/49165.75aircraft-s、NMAC70.161553/LoWC418.773718每flight-hour、return−2444.970593，0height。为当前新谱系最高完成数、NMAC较初始下降；仍有显著失败/越界，不据单点晋升有效baseline，继续300目标。
+
+
+### 11:55 UTC：越界归因与理想转弯独立核对
+
+shared_ppo交付3个owned侧向暴露审计文件，AST/JSON/空白静态检查通过，未执行测试或native。controller已核对主流程，原_evaluate_case/sample/12case不变；随后交observation_reward_spec只读独立review，<=20min，范围新probe/config/tests及必要helper，重点精确重放、状态归因、逐机/机型对账和完成数乘dt上界。当前训练结束后才串行fixture/native，尚不宣称实测通过。
+
+observation_reward_spec完成理想90度恒R推导，中心aR、内边w+aR、外边三分支及有限ray投影均独立确认，a=1-1/sqrt(2)。w76.2时中心R上限260.163073m、外边区间76.2–520.326147m；小Mavic R45.373348的外边圆角仍可越界。只适用已经捕获平行航线后的固定精确四分之一圆，不推广任意控制/连续安全/创新。完整假设、分支证明、三组原生差异和终点/协议边界写入[几何报告](../reports/turn-geometry-20260905/README.md)。
+
+route_trace获新绘图handoff：仅turn_geometry_plot.py与可选聚焦fixture，<=20min静态；root拥有报告/input，输入已从原始保存case取得精确R/最大距离及源SHA。预期归一化公式曲线、两组理想路径与明确原生比较图，SVG/PNG/PDF/metadata；不执行render/实验，不拟合R，保留半速Amzn出口后76.487578及旧Mavic捕获协议限制。
+
+新refresh225全12sample：244/360、53超时63耗尽、334width/46663.25s、NMAC69.552686/LoWC417.702788每flight-hour、return−2321.746016。完成数较200回落，当前仍无稳定有效基线。11:55训练已250，正在评价，300目标继续。
+
+11:59仅读取上述3个研究线程自身turn_context：shared_ppo第12turn、route_trace第15turn、observation_reward_spec第10turn实际均gpt-6-astra/xhigh；未读认证信息。refresh250全12评价105.301s：254/360、53超时53耗尽、337width/45557.5s、NMAC77.771735/LoWC419.675732每flight-hour、return−2429.715931。11:58已260，仍同300job。
+
+12:02独立lateral review未见正常采样/物理/归因静态阻断；指出实际forward rows未动态检查60000上限，以及JSON超限后重复保存同一大对象可能缺最终错误。交原builder仅probe/test窄修正，<=8min静态，动态计数异常仍恢复hook、保留最后有效partial并额外小failure旁注；controller稍后执行。全局RNG检查不单独证明私有sampling generator状态，须由原链路静态不访问及完整参考重放补证；分区为末态整步分类而非精确驻留时长。
+
+12:03 refresh275全12sample：256/360、53超时51耗尽、337width/51819s、NMAC76.534319/LoWC401.160580每flight-hour、return−2331.521226。训练已282轮，继续300。下一续训将依据实际间隙后墙钟选择较长同配置段，减少重复恢复初评；仍不越过14:45收尾/15:15:13硬截止，不承诺未完成轮数。
+
+
+### 12:08–12:10 UTC：新300正常完成与侧向暴露重放
+
+[refresh100→300](../runs/20260905T111952Z-refresh-ppo-300-bebea134/status.json)12:08:14.961正常完成200新增轮、最终评价，CLI2900.276671s/job2902.142s、best200。300sample252/360、53超时55耗尽、335width/47705aircraft-s、0height、FH66.37930556；LoWC27059.25/NMAC4941.25无向pair-s，407.645874/74.439616每flight-hour，return−2278.502708。仍未有效，不冻结。
+
+[300副本](../checkpoints/refresh-300-20260905/README.md)五数据文件2406481字节，与已完成源run逐字节相同，manifest SHA保存；latest含model/Adam/RNG/best200，原科学源码535cad4保持，下一训练seed610300。新学习图输入延伸13点0–300；恢复100重复NR/sample aggregate逐项一致才合并，每行源SHA/行号保留，等待单job渲染。
+
+侧向审计两项review修正已交付，controller复核实际forward rows限额及输出超限小旁注/原partial不变。[6项fixture](../runs/20260905T120840Z-lateral-audit-tests-84a72342/log.txt)0.014s测试/1.431s job通过。随后[原生12例审计](../runs/20260905T120908Z-lateral-exposure-refresh-100-35f42563/status.json)启动，内450/外480s、128MiB/4096MiB、CPU14单线程，当前唯一job。12:10前4case已完成且逐项参考与逐机对账通过，不能提前称全部通过。
+
+
+12:11[侧向审计](../reports/lateral-exposure-refresh-100-20260905/README.md)全12sample/360flight正常通过，内部131.646202s/job133.410s；961666飞机物理样本、3784forward/48101policyrows，全部13项顶层检查/逐case参考/逐机环境-controller三方对账精确，模型/输入不变、0grad、hooks恢复。结果3325366B及manifest已复制核对。47057.5s总outside中lane-active37757(80.24%)，capture-active710.5(1.51%)；四joint分支9300.5/0/37046.5/710.5s。M600+Mavic14561.25(30.94%)，Amzn817.25(1.74%)；53timeouts仍29Mnet+24Tecnalia。成功出口后整末步上界60s仅0.128%，保留raw、不减去/不作连续安全保证。原生当前状态分类不能直接证明永久锁或因果。
+
+12:14交observation_reward_spec只读后续判别设计，<=20min、审计完整样本+paper_actions必要helper；最多一个小固定响应/旁路诊断，必须区分已存首峰末样本与未观察区间，核对实际完成条件，不改主训练或执行实验。
+
+[几何4fixture](../runs/20260905T121137Z-turn-geometry-tests-7d3df300/log.txt)0.022s通过；[render](../runs/20260905T121145Z-turn-geometry-plot-940007d3/status.json)3.501s正常，四artifact逐字节/输出SHA核对、PNG目视通过，理想/实际差异和两类排除含义明确。新[0–300 render](../runs/20260905T121247Z-refresh-learning-figure-300-0254bc91/status.json)3.296s，四artifact复制核对/PNG目视通过；13actual评价、重复100 aggregate精确，报告更新。PDF本地、SVG/PNG/meta入Git。当前无launcher，准备本批备份；下一较长同配置目标300→850，按12:20前可用窗口内8100/外8160s，不跨14:45收尾或硬截止。

@@ -1,0 +1,72 @@
+{
+  "schema": "bluesky.lateral-exposure-audit.v1",
+  "scope": "Passive lateral-exposure development audit; observational categories, not causal turn labels",
+  "training_config": "configs/paper_train_execution_refresh.json",
+  "completed_episodes": 100,
+  "device": "cpu",
+  "torch_num_threads": 1,
+  "wall_seconds": 450,
+  "maximum_aircraft_physics_samples": 2000000,
+  "maximum_policy_decisions": 60000,
+  "maximum_json_bytes": 33554432,
+  "development_cases": [
+    {
+      "seed": 53001,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53002,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53003,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53004,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53005,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53006,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53007,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53008,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53009,
+      "corridor_count": 5
+    },
+    {
+      "seed": 53010,
+      "corridor_count": 3
+    },
+    {
+      "seed": 53011,
+      "corridor_count": 4
+    },
+    {
+      "seed": 53012,
+      "corridor_count": 5
+    }
+  ],
+  "reconstruction_choices": [
+    "Require the explicit saved fresh-refresh100 checkpoint and its full same-round development reference as read-only lab inputs. Reuse policy_diagnostic.strict_inputs and the unchanged checkpoint source/config/software validator. No fallback, checkpoint migration or nearby-round selection is allowed.",
+    "Execute the original _evaluate_case for sample on all twelve original cases with the same per-case action seeds. Compare every scientific summary, action histogram and aggregate exactly, excluding only wall_seconds and process_peak_rss_mib. Never replace the private sampling calculation or run another policy forward.",
+    "The physics callback runs after ActionController.update and before environment terminal accounting/deletion. Recompute finite-polyline centerline distance from true positions using the exact existing formula. The strict distance>half-width condition retains the original whole-step exposure convention.",
+    "Assign each full physics interval to the post-update lane_active and active native waypoint mapping None (artificial capture) versus nominal categories. Both two-way marginals and the exhaustive four-way joint partition are reported. These are observations, not causal turn labels or proof that a capture produced a violation.",
+    "Use persistent aircraft IDs, first actual entry and contiguous physics ticks. Reconcile each aircraft and type against original environment/action-controller outside seconds, outside-flight counts, maxima and physics lifetimes. Keep full terminal records and first/peak/last outside plus last physical samples; do not buffer a trajectory CSV.",
+    "For each group report the conservative completed_flights*dt upper bound on possible whole-final-step-after-valid-exit exposure. Retain every raw step and outcome. This is not a subtraction, a measured post-exit duration, or evidence that remaining pre-exit motion was safe.",
+    "Read native arrays and existing controller fields without repeated state_fields geometry/deep-copy work. Compare consumed physical/control state and Python/NumPy/torch global RNG state before and after every callback. Restore the prior physics callback and passive forward-count hook in finally; retain explicit partial results on failure.",
+    "Bound the inner job to450s, two million aircraft-physics samples and32MiB JSON under a480s/128MiB/4096MiB single-CPU outer job. Preserve all twelve cases; a limit stops with an explicit incomplete/error result rather than silently selecting fewer cases. No optimizer, checkpoint write, selection or training modification."
+  ]
+}

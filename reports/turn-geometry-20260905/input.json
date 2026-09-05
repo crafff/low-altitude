@@ -1,0 +1,109 @@
+{
+  "schema": "turn-geometry-plot.v1",
+  "half_width_m": 76.2,
+  "leg_lengths_m": [
+    4630.0,
+    4630.0
+  ],
+  "source_records": [
+    {
+      "path": "reports/route-response-20260905/result.json",
+      "sha256": "9888a97b4fe144e2a00d82f1ef76b1bce3fe6f03099cb7dbd37c0760d38effc1"
+    },
+    {
+      "path": "reports/route-execution-20260905/figure-input.json",
+      "sha256": "08979f85e3789da520e8120d4c30e49fd2d4f583441eb5ff943b0d20caf9eb9e"
+    }
+  ],
+  "radius_cases": [
+    {
+      "id": "mavic",
+      "label": "Mavic nominal",
+      "radius_m": 45.373347513304495
+    },
+    {
+      "id": "amzn_half",
+      "label": "Amzn half speed",
+      "radius_m": 355.7270419516812
+    },
+    {
+      "id": "amzn_nominal",
+      "label": "Amzn nominal",
+      "radius_m": 1422.908133261725
+    }
+  ],
+  "native_comparisons": [
+    {
+      "radius_case_id": "mavic",
+      "lane": "centre",
+      "max_deviation_m": 12.2650281791216,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "native-mavic-north",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "mavic",
+      "lane": "inner",
+      "max_deviation_m": 88.47314377587627,
+      "comparison": "different_start_capture_protocol",
+      "source_case_id": "mavic_inner",
+      "source_path": "reports/route-execution-20260905/figure-input.json"
+    },
+    {
+      "radius_case_id": "mavic",
+      "lane": "outer",
+      "max_deviation_m": 88.84002068320872,
+      "comparison": "different_start_capture_protocol",
+      "source_case_id": "mavic_outer",
+      "source_path": "reports/route-execution-20260905/figure-input.json"
+    },
+    {
+      "radius_case_id": "amzn_half",
+      "lane": "centre",
+      "max_deviation_m": 102.67617349002542,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "refresh-amzn-north-s0-l1",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "amzn_half",
+      "lane": "inner",
+      "max_deviation_m": 169.71386349448727,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "refresh-amzn-north-s0-l0",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "amzn_half",
+      "lane": "outer",
+      "max_deviation_m": 76.48757819302699,
+      "comparison": "excluded_final_post_exit_sample",
+      "source_case_id": "refresh-amzn-north-s0-l2",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "amzn_nominal",
+      "lane": "centre",
+      "max_deviation_m": 406.1421541081051,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "refresh-amzn-north-s2-l1",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "amzn_nominal",
+      "lane": "inner",
+      "max_deviation_m": 465.79623049926795,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "refresh-amzn-north-s2-l0",
+      "source_path": "reports/route-response-20260905/result.json"
+    },
+    {
+      "radius_case_id": "amzn_nominal",
+      "lane": "outer",
+      "max_deviation_m": 358.3618168816793,
+      "comparison": "same_midpoint_protocol",
+      "source_case_id": "refresh-amzn-north-s2-l2",
+      "source_path": "reports/route-response-20260905/result.json"
+    }
+  ]
+}

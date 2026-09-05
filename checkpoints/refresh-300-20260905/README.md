@@ -1,0 +1,9 @@
+# Current-state-refresh 300-episode recovery point
+
+Same-lineage continuation from100 completed200 additional episodes and the full final development evaluation normally in `runs/20260905T111952Z-refresh-ppo-300-bebea134`. Internal time2900.277s; supervisor2902.142s, finished2026-09-05 12:08:14UTC. The five copied data files total2,406,481 bytes and were byte-verified against the completed run. `manifest.json` retains sizes and SHA-256; `latest.pt` includes episode300 model/Adam/RNG and embedded best200. No held-out data were opened.
+
+Episode300 sampled development completes252/360, with53 timeouts,55 navigation-exhaustion failures,335 lateral-outside flights/47705 aircraft-seconds and zero altitude-outside time. LoWC/NMAC are27059.25/4941.25 unordered pair-seconds over66.379306 flight-hours (407.646/74.440 per flight-hour). Best200 completes259/360, still below the95% completion eligibility threshold and with339 lateral-outside flights. Neither is an effective baseline.
+
+Compatible scientific source remains `535cad4cd6ebffe3f13034459ca59fc2669997e0`, including `navigation_refresh.py`; initialization61001, original12 development cases and all scientific configurations remain fixed. The resumed100 NR/sample aggregates reproduced the saved100 reference exactly. Training logs in this directory cover101–300; episodes1–100 remain in the previous recovery point, not duplicated or mixed with the old cached-guidance400 lineage.
+
+The next training scenario seed is610300. Continue only with the strict same-source/config/software checkpoint validator and an active wall-clock authorization. Use cumulative `--episodes`, explicit checkpoint `--input`, CPU14/one thread/nice15/idle IO, and one lab job; never submit GPU work or alter other people's experiments in this block. The10h block ends15:15:13UTC and reserves wrap-up from14:45:13. This is a recoverable development checkpoint, not a frozen scientific result.
