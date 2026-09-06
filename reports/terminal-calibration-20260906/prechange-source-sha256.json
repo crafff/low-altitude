@@ -1,0 +1,16 @@
+{
+  "paper_train.py": "938535619dbc06a5aa84a83dc3091349772fefb10392adc96e83e079d309c118",
+  "shared_ppo.py": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec",
+  "paper_environment.py": "bf67054d2720aeabfcb52e27f0b3043cbe9cd085d63ee63d2b0f813400363400",
+  "paper_actions.py": "f3318793a827cd5e27b9deb15eaf8496460ebf4c25fde2aae0dbbec63c04ff96",
+  "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+  "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+  "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+  "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+  "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+  "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064",
+  "navigation_refresh.py": "c7cf67ab4f99a308f1feca11041fbbb0b1d8e04d62abdc342f94f288112d0fd1",
+  "nominal_turn_speed.py": "af5c41ebb511868659925c9a387dfba680a8676cca37cbcd99f36ad5efa4971b",
+  "parallel_rollout.py": "1b00443410fbe7d3b5099cf13c559924b6d8d1ea5de6e68b12137c65ec5ff974",
+  "rollout_errors.py": "7ad3246cbdf6d3cf83e603b6eff17cfef160c623f4af773a966217689a6d3d11"
+}

@@ -60,6 +60,12 @@ class PaperEnvironment:
         self.terminal_policy = cfg.get('terminal_policy', 'sampled_endpoint')
         if self.terminal_policy not in ('sampled_endpoint', 'swept_endpoint', 'finite_exit'):
             raise ValueError('Unknown explicitly selected terminal policy')
+        self.exit_width_tolerance_m = cfg.get('exit_width_tolerance_m', 1e-7)
+        if (isinstance(self.exit_width_tolerance_m, bool)
+                or not isinstance(self.exit_width_tolerance_m, (int, float))
+                or not math.isfinite(self.exit_width_tolerance_m)
+                or self.exit_width_tolerance_m < 0):
+            raise ValueError('Exit width tolerance must be finite and nonnegative')
         if not isinstance(cfg.get('fail_on_native_route_exhaustion', False), bool):
             raise ValueError('Route exhaustion handling must be boolean')
         if self.dt <= 0 or not math.isclose(self.decision_dt / self.dt, round(self.decision_dt / self.dt)):
@@ -261,7 +267,8 @@ class PaperEnvironment:
                         arrival_detail = finite_exit_crossing((*start_xy, before[acid][2]),
                             (*end_xy, state[2]), geometry.xy[-1], geometry.unit[-1],
                             self.scenario_cfg['corridor_width_ft']*FT/2,
-                            middle-half_height, middle+half_height)
+                            middle-half_height, middle+half_height,
+                            width_tolerance_m=self.exit_width_tolerance_m)
                         arrived = bool(record['final_leg_activated'] and arrival_detail
                             and arrival_detail['within_width'] and arrival_detail['within_height'])
                         if record['final_leg_activated'] and arrival_detail and not arrived:

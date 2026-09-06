@@ -23,6 +23,7 @@
     "No forced lane return, reference inset, fixed holding time, certified action filter or training change is supplied by this navigation integration. Existing action masks retain only component locks and the declared final-leg backward-capture guard."
   ],
   "terminal_policy": "finite_exit",
+  "exit_width_tolerance_m": 0.0001,
   "fail_on_native_route_exhaustion": true,
   "ordinary_flyby_guidance": "current_state_refresh",
   "shared_navigation": {

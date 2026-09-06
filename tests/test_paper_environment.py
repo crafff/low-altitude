@@ -1,11 +1,20 @@
 """Focused wrapper regression; fake creation avoids an unrelated native rollout."""
 from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
-from paper_environment import PaperEnvironment
+from paper_environment import PaperEnvironment, load_environment_config
 
 
 class AdmissionProgressTests(unittest.TestCase):
+    def test_invalid_exit_tolerance_is_rejected_before_native_initialization(self):
+        cfg, parts = load_environment_config('configs/paper_environment_shared_navigation.json')
+        for value in (-1., float('nan'), float('inf'), True, '0.001'):
+            with patch('paper_environment.initialise') as initialise:
+                with self.assertRaises(ValueError):
+                    PaperEnvironment(dict(cfg, exit_width_tolerance_m=value), parts)
+                initialise.assert_not_called()
+
     def test_final_leg_activation_is_recorded_before_first_action_can_insert_capture(self):
         env = PaperEnvironment.__new__(PaperEnvironment)
         env.bs = SimpleNamespace(sim=SimpleNamespace(simt=0.), traf=SimpleNamespace(

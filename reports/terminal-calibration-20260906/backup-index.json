@@ -1,0 +1,194 @@
+[
+  {
+    "source": "runs/20260906T015644Z-terminal-calibration-tests-c0f6eca4/manifest.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015644Z-terminal-calibration-tests-c0f6eca4/manifest.json",
+    "bytes": 30637,
+    "sha256": "0204945dceb4768f8fd9c6fed7a57c2da2fc9fdc9c8913c52eba1fa526003c43"
+  },
+  {
+    "source": "runs/20260906T015644Z-terminal-calibration-tests-c0f6eca4/status.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015644Z-terminal-calibration-tests-c0f6eca4/status.json",
+    "bytes": 289,
+    "sha256": "2a9e6fd2939a5fdfe595b7026bb5a097b720683bb40b6328a49777c2f36f1360"
+  },
+  {
+    "source": "runs/20260906T015644Z-terminal-calibration-tests-c0f6eca4/log.txt",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015644Z-terminal-calibration-tests-c0f6eca4/log.txt",
+    "bytes": 2092,
+    "sha256": "01c94695bc475cad04a46a1d315dbf238ec2cc170642ed5ca242249377a30d0b"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/manifest.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/manifest.json",
+    "bytes": 31792,
+    "sha256": "2e76114ada7cff0087aed63c490bb7ea12ab4c9994f10005748e59789cc4ffb4"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/status.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/status.json",
+    "bytes": 287,
+    "sha256": "f3f2ce87daf7a174e7b69620072fc8b29abde734f4dbad8e0f12cc8a864d479a"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/log.txt",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/log.txt",
+    "bytes": 7864,
+    "sha256": "9ad5d4fb40113564e4c93bb295d491899a07a8617be29d0466c656f2efe2289a"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/episodes.jsonl",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/episodes.jsonl",
+    "bytes": 520960,
+    "sha256": "3445a0df8954915285792d7bf88e1f53fae59ca620f19365f1ed9322dcaf88e3"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/result.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/result.json",
+    "bytes": 10171,
+    "sha256": "052f8e1ecba680847cdeb4ea390cfed3b30ec8e7f87daa06554c0f8b4c71e439"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/fixed-scripts.jsonl",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/fixed-scripts.jsonl",
+    "bytes": 85817,
+    "sha256": "60af24c4e985a44e6f2ca4f75ceaa026f20fb455de9642d958dc7867e452a35f"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/identity.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/identity.json",
+    "bytes": 167917,
+    "sha256": "55a9d2ab731380c69b7fcd62da5a8de31e8a0f6d9272756fe1ec7be5a1ced9ec"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/decisions.jsonl.gz",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/artifacts/decisions.jsonl.gz",
+    "bytes": 306036,
+    "sha256": "c294e595499e5146ea5213262d7561b6582f8a9c3640d5fac1b69f0b69434101"
+  },
+  {
+    "source": "runs/20260906T015951Z-terminal-calibration-pilot-ec756df1/source/src/terminal_calibration.py",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T015951Z-terminal-calibration-pilot-ec756df1/source/src/terminal_calibration.py",
+    "bytes": 13502,
+    "sha256": "983650db85289f1c64455f874307c1b9257ec2a133fa85e667c9ce486016dc78"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/manifest.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/manifest.json",
+    "bytes": 31771,
+    "sha256": "ef811d3e515f906606ec188c9e622c32aa3457505db277f005f893951c1a0b2d"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/status.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/status.json",
+    "bytes": 292,
+    "sha256": "dc6df6f8e539aea7ff49571122ac36c924860c5cfffa2120ec2f46ec8c746691"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/log.txt",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/log.txt",
+    "bytes": 26995,
+    "sha256": "99c37c439a121d6a81ebcfe650b497d334a300a25ad0303181a1386ebb1a37e3"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/source/src/terminal_calibration.py",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/source/src/terminal_calibration.py",
+    "bytes": 13568,
+    "sha256": "f4e1cf9423a0d319b1c96bed45aa82ac373e5111a078480cdf06e162001faf84"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/episodes.jsonl",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/episodes.jsonl",
+    "bytes": 8977783,
+    "sha256": "20a219f38d9198268a07c35b4f5ae5aa612d47f4ccbf656c7885ced30f94a655"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/identity.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/identity.json",
+    "bytes": 271815,
+    "sha256": "6bf6175a50faeeb1b665dffeea9087e5f557f6f4f6ae01d49745fb41de0d0d9f"
+  },
+  {
+    "source": "runs/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/decisions.jsonl.gz",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts/decisions.jsonl.gz",
+    "bytes": 3598426,
+    "sha256": "71aaa6a283b278eb6815de1f1bb522d6e1126fc78740bf89180a9f84b3a1fb79"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/manifest.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/manifest.json",
+    "bytes": 31762,
+    "sha256": "1d0763182c7ecc76980769542e7f501c36b562609ce042317b233143ffde8633"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/status.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/status.json",
+    "bytes": 290,
+    "sha256": "3ce8aee5e872c305b309e4d9603161a4c980890fbafa58db9e4ad898abe7bfbf"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/log.txt",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/log.txt",
+    "bytes": 3162,
+    "sha256": "989596f409aafffd950f8f3da1b4d0bb230ce9654a61e3b05a2a350133ccfd3a"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/episodes.jsonl",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/episodes.jsonl",
+    "bytes": 722984,
+    "sha256": "41b2c405dfbcf414b9bdf14b7023059106a67312f4d6baabe23a4ab06ad5c59b"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/result.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/result.json",
+    "bytes": 10127,
+    "sha256": "0766cf2847d041bd445d5d578cfc6080fb99c4c365be3a93d7f5256a28928f4a"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/identity.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/identity.json",
+    "bytes": 169053,
+    "sha256": "7e85c057000019232db69ad57af02176eeaaef8b7368c099820e37681dc75e45"
+  },
+  {
+    "source": "runs/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/decisions.jsonl.gz",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts/decisions.jsonl.gz",
+    "bytes": 291231,
+    "sha256": "5933df948ba079142457a171fefdb6988a85eb566cc4680ed87ee6fd6826a940"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/manifest.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/manifest.json",
+    "bytes": 32853,
+    "sha256": "e17c65e0a121891b111520789205e26292e474d70bda622475c9bc3e451fcceb"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/status.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/status.json",
+    "bytes": 291,
+    "sha256": "2054c09112fc958d1b6f4df75ad3a5d2784847ecfac7a019be1057f26cf020e7"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/log.txt",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/log.txt",
+    "bytes": 504,
+    "sha256": "cac22ce9f1cbfed81bb387ab8e7269141009f45a1b0ba0510f3a4f78e037dc78"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/terminal-comparison.png",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/terminal-comparison.png",
+    "bytes": 106517,
+    "sha256": "3659b74ab9dc664c0e4e9cb2c70643cc970ca1a88a5c8008b23e573317596f1d"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/audit.json",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/audit.json",
+    "bytes": 53865,
+    "sha256": "a88fb3b96a80b8191c212b8837bf97dc8132f6dfe96c9c4c76307e87a74ec028"
+  },
+  {
+    "source": "runs/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/terminal-comparison.pdf",
+    "backup": "reports/terminal-calibration-20260906/records/20260906T022453Z-terminal-calibration-audit-d9acea6d/artifacts/terminal-comparison.pdf",
+    "bytes": 19599,
+    "sha256": "3f74dbf78e4755f21c1ccb1847e481e0977ba5edf36ea464a2aa60382f9f7ac2"
+  }
+]

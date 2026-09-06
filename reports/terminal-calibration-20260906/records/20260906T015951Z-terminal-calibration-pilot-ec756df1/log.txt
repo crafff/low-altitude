@@ -1,0 +1,120 @@
+Creating directory "/tmp/bluesky-paper-uy4u9imi/scenario"
+Creating directory "/tmp/bluesky-paper-uy4u9imi/plugins"
+Creating directory "/tmp/bluesky-paper-uy4u9imi/output"
+Creating directory "/tmp/bluesky-paper-uy4u9imi/cache"
+Copying default configfile to /tmp/bluesky-paper-uy4u9imi/settings.cfg
+Reading config from /tmp/bluesky-paper-uy4u9imi/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "initial", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "elapsed": 15.210884632077068}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "64", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "elapsed": 23.814818212762475}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "256", "seed": 53001, "completed": 15, "timeout": 3, "exhausted": 12, "elapsed": 32.25671521294862}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "initial", "seed": 53001, "completed": 25, "timeout": 3, "exhausted": 2, "elapsed": 40.823859761003405}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "64", "seed": 53001, "completed": 25, "timeout": 3, "exhausted": 2, "elapsed": 49.309288781136274}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "256", "seed": 53001, "completed": 23, "timeout": 3, "exhausted": 4, "elapsed": 57.77280511613935}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "nr", "seed": 53001, "completed": 30, "timeout": 0, "exhausted": 0, "elapsed": 64.57489335397258}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new2400", "policy": "256", "seed": 53001, "completed": 26, "timeout": 0, "exhausted": 4, "elapsed": 74.1164444158785}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "case", "arm": "new2400", "policy": "nr", "seed": 53001, "completed": 30, "timeout": 0, "exhausted": 0, "elapsed": 80.79718274390325}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Amzn", "lane": 0, "status": "arrived", "elapsed": 81.08430044306442}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Amzn", "lane": 2, "status": "arrived", "elapsed": 81.370413382072}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Cranfield", "lane": 0, "status": "arrived", "elapsed": 82.04286634502932}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Cranfield", "lane": 2, "status": "arrived", "elapsed": 82.58113666903228}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "CranfieldV2", "lane": 0, "status": "arrived", "elapsed": 83.63908554799855}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "CranfieldV2", "lane": 2, "status": "arrived", "elapsed": 84.69516868982464}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M100", "lane": 0, "status": "arrived", "elapsed": 85.65907479682937}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M100", "lane": 2, "status": "arrived", "elapsed": 86.62371312873438}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M200", "lane": 0, "status": "arrived", "elapsed": 87.66483974410221}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M200", "lane": 2, "status": "arrived", "elapsed": 88.59612272493541}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M600", "lane": 0, "status": "arrived", "elapsed": 89.76199129084125}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "M600", "lane": 2, "status": "arrived", "elapsed": 90.927318201866}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Phan4", "lane": 0, "status": "arrived", "elapsed": 91.98100972175598}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Phan4", "lane": 2, "status": "arrived", "elapsed": 93.16020297817886}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Mavic", "lane": 0, "status": "arrived", "elapsed": 94.3213033080101}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Mavic", "lane": 2, "status": "arrived", "elapsed": 95.48459977982566}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Eh216", "lane": 0, "status": "arrived", "elapsed": 96.11078777490184}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Eh216", "lane": 2, "status": "arrived", "elapsed": 96.74554726481438}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Horsefly", "lane": 0, "status": "arrived", "elapsed": 97.70943323289976}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Horsefly", "lane": 2, "status": "arrived", "elapsed": 98.79727901192382}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Mnet", "lane": 0, "status": "arrived", "elapsed": 100.68566270079464}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Mnet", "lane": 2, "status": "arrived", "elapsed": 102.56479798583314}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Tecnalia", "lane": 0, "status": "arrived", "elapsed": 104.44400341296569}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-uy4u9imi/cache/navdata.p
+{"event": "fixed", "type": "Tecnalia", "lane": 2, "status": "arrived", "elapsed": 106.32236819993705}

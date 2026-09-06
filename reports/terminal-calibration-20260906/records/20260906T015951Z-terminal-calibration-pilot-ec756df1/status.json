@@ -1,0 +1,11 @@
+{
+  "id": "20260906T015951Z-terminal-calibration-pilot-ec756df1",
+  "stage": "eval",
+  "state": "succeeded",
+  "started_at": "2026-09-06T01:59:51.107311+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-06T02:01:39.173951+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

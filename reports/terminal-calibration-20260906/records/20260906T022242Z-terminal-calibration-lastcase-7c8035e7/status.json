@@ -1,0 +1,11 @@
+{
+  "id": "20260906T022242Z-terminal-calibration-lastcase-7c8035e7",
+  "stage": "eval",
+  "state": "succeeded",
+  "started_at": "2026-09-06T02:22:42.102995+00:00",
+  "pid": 7,
+  "finished_at": "2026-09-06T02:24:25.672982+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

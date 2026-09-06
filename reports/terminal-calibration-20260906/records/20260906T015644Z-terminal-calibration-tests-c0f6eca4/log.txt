@@ -1,0 +1,17 @@
+test_chord_detects_disk_crossing_missed_by_both_samples (test_route_completion.ArrivalGeometryTests.test_chord_detects_disk_crossing_missed_by_both_samples) ... ok
+test_declared_width_tolerance_accepts_observed_micron_residuals (test_route_completion.ArrivalGeometryTests.test_declared_width_tolerance_accepts_observed_micron_residuals) ... ok
+test_exit_uses_crossing_altitude_and_not_post_step_altitude (test_route_completion.ArrivalGeometryTests.test_exit_uses_crossing_altitude_and_not_post_step_altitude) ... ok
+test_finite_exit_rejects_far_plane_crossing_and_reverse_motion (test_route_completion.ArrivalGeometryTests.test_finite_exit_rejects_far_plane_crossing_and_reverse_motion) ... ok
+test_native_numpy_coordinates_produce_serializable_terminal_record (test_route_completion.ArrivalGeometryTests.test_native_numpy_coordinates_produce_serializable_terminal_record) ... ok
+test_starting_at_or_remaining_beyond_plane_is_not_new_crossing (test_route_completion.ArrivalGeometryTests.test_starting_at_or_remaining_beyond_plane_is_not_new_crossing) ... ok
+test_width_change_does_not_relax_height_or_forward_crossing (test_route_completion.ArrivalGeometryTests.test_width_change_does_not_relax_height_or_forward_crossing) ... ok
+test_width_tolerance_is_bounded_in_rotated_translated_frames (test_route_completion.ArrivalGeometryTests.test_width_tolerance_is_bounded_in_rotated_translated_frames) ... ok
+test_width_tolerance_validation_and_zero_tolerance (test_route_completion.ArrivalGeometryTests.test_width_tolerance_validation_and_zero_tolerance) ... ok
+test_final_leg_activation_is_recorded_before_first_action_can_insert_capture (test_paper_environment.AdmissionProgressTests.test_final_leg_activation_is_recorded_before_first_action_can_insert_capture) ... Using Python-based geo functions
+ok
+test_invalid_exit_tolerance_is_rejected_before_native_initialization (test_paper_environment.AdmissionProgressTests.test_invalid_exit_tolerance_is_rejected_before_native_initialization) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.007s
+
+OK

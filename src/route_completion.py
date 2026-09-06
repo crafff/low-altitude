@@ -26,15 +26,19 @@ def segment_nearest_endpoint(before_xy, after_xy, endpoint_xy):
 
 
 def finite_exit_crossing(before_xyz, after_xyz, endpoint_xy, final_unit_xy,
-                         half_width_m, floor_m, ceiling_m):
+                         half_width_m, floor_m, ceiling_m, *, width_tolerance_m=1e-7):
     """Report a forward crossing of the *finite* final corridor cross-section.
 
     The caller separately requires genuine final-leg mission progress, including
     for nearly closed/self-intersecting routes. Altitude and lateral position are
     interpolated at the crossing, not measured at the end of the physical tick.
+    Width tolerance is an explicit terminal-label convention, not extra action
+    space or a bound on tracking error. The default preserves historical callers.
     """
     _finite((*before_xyz, *after_xyz, *endpoint_xy, *final_unit_xy,
-             half_width_m, floor_m, ceiling_m))
+             half_width_m, floor_m, ceiling_m, width_tolerance_m))
+    if isinstance(width_tolerance_m, bool) or width_tolerance_m < 0:
+        raise ValueError("Exit width tolerance must be finite and nonnegative")
     if half_width_m <= 0 or floor_m >= ceiling_m:
         raise ValueError("Invalid finite exit dimensions")
     if not math.isclose(math.hypot(*final_unit_xy), 1., abs_tol=1e-10):
@@ -47,9 +51,9 @@ def finite_exit_crossing(before_xyz, after_xyz, endpoint_xy, final_unit_xy,
     fraction = -along_before/(along_after-along_before)
     point = tuple(a + fraction*(b-a) for a, b in zip(before_xyz, after_xyz))
     lateral = (point[0]-endpoint_xy[0])*uy - (point[1]-endpoint_xy[1])*ux
-    # Sub-micrometre numerical tolerance only, not additional maneuver space.
-    tolerance = 1e-7
+    # Height semantics are unchanged; only width has a configurable tolerance.
+    height_tolerance = 1e-7
     return {"fraction": float(fraction), "cross_track_m": float(lateral),
             "altitude_m": float(point[2]),
-            "within_width": bool(abs(lateral) <= half_width_m+tolerance),
-            "within_height": bool(floor_m-tolerance <= point[2] <= ceiling_m+tolerance)}
+            "within_width": bool(abs(lateral) <= half_width_m+width_tolerance_m),
+            "within_height": bool(floor_m-height_tolerance <= point[2] <= ceiling_m+height_tolerance)}

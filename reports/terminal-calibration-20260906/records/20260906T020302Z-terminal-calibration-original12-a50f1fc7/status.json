@@ -1,0 +1,11 @@
+{
+  "id": "20260906T020302Z-terminal-calibration-original12-a50f1fc7",
+  "stage": "eval",
+  "state": "failed",
+  "started_at": "2026-09-06T02:03:02.721181+00:00",
+  "pid": 5,
+  "finished_at": "2026-09-06T02:22:04.497998+00:00",
+  "reason": "nonzero_exit",
+  "exit_code": 1,
+  "error": null
+}

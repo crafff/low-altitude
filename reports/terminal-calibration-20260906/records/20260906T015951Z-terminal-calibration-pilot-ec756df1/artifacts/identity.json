@@ -1,0 +1,4201 @@
+{
+  "scope": "frozen seen-DEV terminal calibration, no training or held-out use",
+  "arms": [
+    [
+      "old1200",
+      1e-07,
+      1200.0,
+      [
+        "initial",
+        "64",
+        "256"
+      ]
+    ],
+    [
+      "new1200",
+      0.0001,
+      1200.0,
+      [
+        "initial",
+        "64",
+        "256",
+        "nr"
+      ]
+    ],
+    [
+      "new2400",
+      0.0001,
+      2400.0,
+      [
+        "256",
+        "nr"
+      ]
+    ]
+  ],
+  "checkpoints": {
+    "64": {
+      "path": "reports/parallel-pilot-20260905/checkpoints/latest.pt",
+      "sha256": "7665bec4002b2e3e3b1a1d25023404f5d0156487526db32f7a0b08cd461bea46"
+    },
+    "256": {
+      "path": "reports/parallel-continue256-20260906/checkpoints/latest.pt",
+      "sha256": "affad9079f586a37b48e8f6503c990a8106b7dba59fd9d6701855619a4c9e092"
+    }
+  },
+  "training_versions": {
+    "python": "3.11.13",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.4.6",
+    "bluesky": "1.1.1",
+    "source_sha256": {
+      "paper_train.py": "938535619dbc06a5aa84a83dc3091349772fefb10392adc96e83e079d309c118",
+      "shared_ppo.py": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec",
+      "paper_environment.py": "bf67054d2720aeabfcb52e27f0b3043cbe9cd085d63ee63d2b0f813400363400",
+      "paper_actions.py": "f3318793a827cd5e27b9deb15eaf8496460ebf4c25fde2aae0dbbec63c04ff96",
+      "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+      "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+      "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+      "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+      "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+      "route_completion.py": "a1272615e9c6e35de6583d5dd1f754c94096db3c9e3a747a8e14637e3cc86064",
+      "navigation_refresh.py": "c7cf67ab4f99a308f1feca11041fbbb0b1d8e04d62abdc342f94f288112d0fd1",
+      "nominal_turn_speed.py": "af5c41ebb511868659925c9a387dfba680a8676cca37cbcd99f36ad5efa4971b",
+      "parallel_rollout.py": "1b00443410fbe7d3b5099cf13c559924b6d8d1ea5de6e68b12137c65ec5ff974",
+      "rollout_errors.py": "7ad3246cbdf6d3cf83e603b6eff17cfef160c623f4af773a966217689a6d3d11"
+    }
+  },
+  "evaluation_versions": {
+    "python": "3.11.13",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.4.6",
+    "bluesky": "1.1.1",
+    "source_sha256": {
+      "paper_train.py": "938535619dbc06a5aa84a83dc3091349772fefb10392adc96e83e079d309c118",
+      "shared_ppo.py": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec",
+      "paper_environment.py": "0f614d79f1af4c9f8a1109abb6c34aae27a8f848c286c43b36117396c4845148",
+      "paper_actions.py": "f3318793a827cd5e27b9deb15eaf8496460ebf4c25fde2aae0dbbec63c04ff96",
+      "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+      "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+      "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+      "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+      "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+      "route_completion.py": "3556b151293727b42af66940dc5fe00ffa74a5d86c0ac881cf46492fd676164c",
+      "navigation_refresh.py": "c7cf67ab4f99a308f1feca11041fbbb0b1d8e04d62abdc342f94f288112d0fd1",
+      "nominal_turn_speed.py": "af5c41ebb511868659925c9a387dfba680a8676cca37cbcd99f36ad5efa4971b",
+      "parallel_rollout.py": "1b00443410fbe7d3b5099cf13c559924b6d8d1ea5de6e68b12137c65ec5ff974",
+      "rollout_errors.py": "7ad3246cbdf6d3cf83e603b6eff17cfef160c623f4af773a966217689a6d3d11"
+    }
+  },
+  "allowed_source_changes": [
+    "paper_environment.py",
+    "route_completion.py"
+  ],
+  "training_configs": {
+    "training": {
+      "schema": "bluesky.paper-like.train-parallel-dev.v1",
+      "scope": "execution-semantics learning diagnostic; corridor containment unresolved",
+      "environment_config": "configs/paper_environment_shared_navigation.json",
+      "ppo_config": "configs/paper_ppo.json",
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "training_seed": 950001,
+      "training_scenario_seed_start": 9500000,
+      "sampling_seed": 9510000,
+      "shuffle_seed": 9520000,
+      "episodes": 64,
+      "wall_seconds": 840,
+      "deadline_grace_seconds": 20,
+      "initial_episode_seconds": 15,
+      "timing_safety_factor": 1.5,
+      "evaluate_every": 32,
+      "checkpoint_every": 4,
+      "dev_policy": "sample",
+      "dev_action_seed_base": 810000,
+      "report_argmax": false,
+      "selection_min_completed_fraction": 0.95,
+      "development_cases": [
+        {
+          "seed": 53001,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53002,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53003,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53004,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53005,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53006,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53007,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53008,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53009,
+          "corridor_count": 5
+        },
+        {
+          "seed": 53010,
+          "corridor_count": 3
+        },
+        {
+          "seed": 53011,
+          "corridor_count": 4
+        },
+        {
+          "seed": 53012,
+          "corridor_count": 5
+        }
+      ],
+      "reconstruction_choices": [
+        "Explicit synchronous complete-episode PPO variant with shared navigation. Four persistent CPU workers each collect one whole 30-aircraft scenario under a frozen common policy; parent waits for all four, orders by absolute episode index and performs one pooled PPO epoch, batch64. This changes policy refresh and advantage normalization from the former update-after-each-episode runner.",
+        "Each episode uses scenario_seed_start+absolute_index, CPU action generator sampling_seed+absolute_index, and worker Python/NumPy/torch seeds training_seed+absolute_index. Worker identity, scheduling and restart do not select RNG streams. Parent initialization/shuffle/checkpoint RNG remain explicit. GAE stays per aircraft and is computed before pooling.",
+        "Do not admit stale/partial/duplicate payloads; a collection cutoff discards the complete four-episode batch and preserves model, Adam, counters and shuffle RNG. Save/resume only at complete batch boundaries; count update batches separately from optimizer minibatches.",
+        "Use all 12 preserved original development scenarios verbatim, identified by file SHA and embedded effective scenarios in checkpoint configs. NR and sampled policy share each exact scenario. Development action seeds, aggregation and selection remain as previously declared; never treat these seen scenes as held-out.",
+        "CPU-only learner thread1, four worker physical cores12\u201315 with intra-op/BLAS1; no GPU. Deadline estimates for sequential evaluation and parallel batch/update are separate. Outer launcher remains the trusted single supervisor.",
+        "New 64-episode/16-update-batch pilot, one initialization seed, 840s inner budget. Evaluate before training, at32 and64 episodes, save every4. A shorter budget cutoff remains visible, and learning effectiveness is not assumed.",
+        "Observations, actions, reward and boundary metrics are unchanged. User requested setting aside containment investigation; no new safety filter, type features, penalty or delayed execution is introduced. Fresh lineage, no old850 continuation."
+      ],
+      "initial_batch_seconds": 15,
+      "parallel_startup_seconds": 60,
+      "parallel_rollout": {
+        "mode": "synchronous_complete_episodes",
+        "workers": 4,
+        "episodes_per_update": 4,
+        "cpu_ids": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "sampling_seed_rule": "base_plus_episode_index"
+      },
+      "development_scenarios_path": "reports/policy-modes-refresh-850-20260905/scenarios.json",
+      "development_scenarios_sha256": "3ed3692695fcbeb8503200e3d1b5bb1560583d9f98ac742f0727d99a65a4bf2c"
+    },
+    "environment": {
+      "schema": "bluesky.paper-like.environment.v1",
+      "scenario_config": "configs/nr_pilot.json",
+      "action_config": "configs/paper_actions_shared_navigation.json",
+      "observation_config": "configs/paper_observation.json",
+      "types_config": "configs/uav_types.json",
+      "decision_seconds": 5.0,
+      "device": "cpu",
+      "reconstruction_choices": [
+        "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+        "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+        "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+        "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+        "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+        "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+        "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+        "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training.",
+        "Explicit ordinary-flyby current-state reconstruction: immediately before each native reached call, refresh only ordinary flyby turndist using current actual TAS, native bankdef, current waypoint bearing and next_qdr. Cached turnspd and selected target speed do not enter this formula. Reject flyturn and its transition modes; native reached alone determines waypoint passage. This follows the audited old author-fork formula, not a confirmed 2026 setup or a safety filter.",
+        "Retain Table3 speeds, native bank25, corridor dimensions, actions, observations, rewards and execution terminal policies. Corridor containment remains unresolved; existing whole-tick terminal exposure remains unchanged. The adapter is installed only for one environment step and restored before reset or caller-side sampling. Cumulative per-episode navigation_audit is available separately from the unchanged episode summary schema.",
+        "Shared NR/policy corner-speed dispatcher is installed before admissions on every reset. Nominal-route geometry supplies the same cap for all target actions; neither traffic nor a full avoidance trajectory is certified. CAP and offset-route corner containment remain limitations, not hidden feasibility rejections.",
+        "Requested discrete speed, altitude and lane remain policy-owned absolute targets. Continuous execution speed is the minimum of the requested speed and active nominal corner caps, including caps below the policy minimum. A speed change cannot revive a completed past corner. Turn completion restores the current requested speed, never an old nominal request.",
+        "Execution feedback in info distinguishes requested/selected/actual speed, physical tracking, component completion and full-interval boundary exposure including terminal ticks. It is diagnostic only: the paper-like own7/intruder10 features and reward formula have not gained boundary feedback or a boundary penalty. Locks record command completion, not current safety. step(None) preserves previous targets.",
+        "No forced lane return, reference inset, fixed holding time, certified action filter or training change is supplied by this navigation integration. Existing action masks retain only component locks and the declared final-leg backward-capture guard."
+      ],
+      "terminal_policy": "finite_exit",
+      "fail_on_native_route_exhaustion": true,
+      "ordinary_flyby_guidance": "current_state_refresh",
+      "shared_navigation": {
+        "mode": "shared_corner_speed",
+        "width_fraction": 0.5,
+        "tangent_leg_fraction": 0.45,
+        "release_track_tolerance_deg": 1.0,
+        "prediction_reserve_m": 1.0
+      },
+      "execution_feedback": true
+    },
+    "environment_parts": {
+      "scenario": {
+        "schema": "bluesky.paper-like.nr-pilot.v1",
+        "bluesky_version": "1.1.1",
+        "stage": "dev",
+        "scenario_count": 8,
+        "seeds": [
+          51001,
+          51002,
+          51003,
+          51004,
+          51005,
+          51006,
+          51007,
+          51008
+        ],
+        "origin_lat_lon_deg": [
+          52.0,
+          4.0
+        ],
+        "origin_square_side_nm": 2.0,
+        "earth_radius_m": 6371000.0,
+        "route_length_nm": 5.0,
+        "corridor_counts": [
+          3,
+          4,
+          5
+        ],
+        "corridor_count_distribution": "uniform_choice",
+        "aircraft_per_scenario": 30,
+        "allocation_method": "balanced_corridor_order",
+        "origin_distribution": "uniform_square_rejection",
+        "minimum_origin_spacing_ft": 1630.0,
+        "max_origin_sampling_attempts": 10000,
+        "intermediate_waypoint_count_range": [
+          0,
+          3
+        ],
+        "waypoint_count_distribution": "uniform_integer",
+        "initial_bearing_deg_range": [
+          0.0,
+          360.0
+        ],
+        "initial_bearing_distribution": "uniform",
+        "signed_turn_deg_range": [
+          -90.0,
+          90.0
+        ],
+        "signed_turn_distribution": "uniform",
+        "first_entry_seconds": 0.0,
+        "entry_interval_seconds_range": [
+          60.0,
+          90.0
+        ],
+        "entry_interval_distribution": "uniform",
+        "type_count": 12,
+        "type_distribution": "uniform_choice",
+        "dt_seconds": 0.25,
+        "per_flight_timeout_seconds": 1200.0,
+        "arrival_radius_m": 25.0,
+        "altitude_ft": 350.0,
+        "lowc_horizontal_ft": 1630.0,
+        "nmac_horizontal_ft": 500.0,
+        "vertical_tolerance_ft": 100.0,
+        "corridor_width_ft": 500.0,
+        "corridor_height_ft": 200.0,
+        "store_full_trajectories": false,
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed."
+        ]
+      },
+      "action": {
+        "schema": "bluesky.paper-actions.v1",
+        "source": "Fremond et al. 2026, PDF pp.14-15, Eqs.16-18; paper/REPRODUCTION.md",
+        "speed_ratios": [
+          0.5,
+          0.8,
+          1.0,
+          1.05
+        ],
+        "altitude_fractions": [
+          -0.5,
+          -0.25,
+          0.0,
+          0.25,
+          0.5
+        ],
+        "lane_fractions": [
+          -0.5,
+          0.0,
+          0.5
+        ],
+        "nominal_altitude_ft": 350.0,
+        "corridor_height_ft": 200.0,
+        "corridor_width_ft": 500.0,
+        "capture_angle_deg": 45.0,
+        "offset_join": "miter",
+        "altitude_capture_tolerance_m": 0.5,
+        "lane_capture_tolerance_m": 2.0,
+        "lane_capture_track_tolerance_deg": 5.0,
+        "reconstruction_choices": [
+          "Action indices use C-order unravel_index over (4,5,3); nominal (2,2,1) is index37. Eq18's repeated positive sign is interpreted as left/center/right: negative/zero/positive offset, following the prose.",
+          "While altitude or lane capture is active, that dimension's mask permits only its previously accepted index. Speed remains selectable. A masked joint proposal is rejected in full, preserving accepted targets; the caller must sample and compute log-probabilities using the same mask.",
+          "Speed instructions are absolute fractions of the initial nominal TAS. TAS is converted to CAS at the current altitude after every physics step for the next step. Native acceleration and the supplied PaperPerformance caps still apply; the shared environment may apply its declared corner speed cap after selecting the requested TAS; bank remains native.",
+          "Native ALT receives the absolute target and the signed type-specific maximum climb/descent rate. Capture clears at altitude error <=0.5m; native altitude acquisition continues to the target. No vertical state teleportation is performed.",
+          "Nominal geometry uses a fixed local equirectangular frame anchored at the route origin with Earth radius6371000m. Positive lane is right of current nominal course. Initial route registration preserves exact supplied latitude/longitude and native fly-by behavior.",
+          "Shifted interior vertices use miter intersections of parallel adjacent nominal legs; endpoints shift perpendicular to their first/last leg. This deterministic join geometry is not specified by the paper and does not guarantee corridor containment.",
+          "Lane changes build a 45degree capture chord from the current physical position toward the absolute offset of the current nominal leg, followed by all remaining shifted nominal vertices. An artificial waypoint maps to no nominal progress. Native real-waypoint activation advances nominal progress monotonically, preserving fly-by semantics.",
+          "If the 45degree chord extends beyond the next shifted corner, its location and the next nominal vertex are both retained; capture_beyond_leg_end is reported. This may cause backtracking or capture failure. No hidden corner-feasibility mask or skipped mission waypoint is introduced.",
+          "A lane lock clears only while a real waypoint is active, the aircraft lies longitudinally on that finite shifted leg, lateral error <=2m and actual track error <=5degrees. It may capture a subsequent parallel leg after a corner. A completed lock does not reactivate solely because native tracking later deviates; actual errors remain in execution diagnostics, not the seven policy features.",
+          "Repeated accepted target indices do not rebuild the route or count as new physical commands. Registration builds the initial nominal route without counting an action. Native speed maintenance refreshes are counted separately from policy speed commands.",
+          "previous_waypoint and next_waypoint refer to the original nominal route. destination_waypoint uses the currently accepted offset endpoint; final_nominal_active requires the real final waypoint to be active, not an artificial capture point. The parent owns arrival radius, timeout and terminal accounting.",
+          "Width exposure uses each post-step distance to the complete nominal polyline multiplied by elapsed simulator time, matching NR's sampling convention. The caller must invoke update after every physics step; observed deviations are diagnostics, not guarantees.",
+          "Execution reconstruction variant, not disclosed author code. Altitude completion additionally requires actual absolute vertical speed <=0.05m/s, to avoid releasing a reversal while native vertical acquisition has residual motion.",
+          "On the final nominal leg only, mask a changed lane if its literal 45degree capture point lies beyond the shifted endpoint along that leg. Keep the accepted lane and every otherwise valid speed/altitude combination. This prevents constructing a backwards final route; it does not predict collision risk, constrain all turning trajectories, or guarantee containment."
+        ],
+        "altitude_completion_requires_settled_vs": true,
+        "altitude_capture_vs_tolerance_mps": 0.05,
+        "guard_final_leg_capture": true
+      },
+      "observation": {
+        "schema": "bluesky.paper-like.observation-reward.v1",
+        "earth_radius_m": 6371000.0,
+        "observation_radius_ft": 6000.0,
+        "waypoint_distance_scale_m": 9260.0,
+        "speed_reference_kt": 196.0,
+        "nominal_altitude_ft": 350.0,
+        "corridor_height_ft": 200.0,
+        "corridor_width_ft": 500.0,
+        "lowc_horizontal_ft": 1630.0,
+        "nmac_horizontal_ft": 500.0,
+        "vertical_tolerance_ft": 100.0,
+        "cpa_time_scale_seconds": 1200.0,
+        "cpa_relative_speed_epsilon_mps": 1e-06,
+        "efficiency_speed_weight": 0.3,
+        "efficiency_altitude_weight": 0.35,
+        "efficiency_lane_weight": 0.35,
+        "efficiency_reward_scale": 0.008,
+        "arrival_reward": 1.0,
+        "sources": [
+          "paper/REPRODUCTION.md",
+          "resources/literature/local/fremond-et-al-2026-resilient-marl-urban-air-conflict-resolution.pdf: physical pp.11-16, Table 2, Eqs.14-15 and 19-22"
+        ],
+        "reconstruction_choices": [
+          "Table 2 feature meanings and order are preserved. Exact normalization bounds and angle conventions were not disclosed. Use p.13 [0,1], not the conflicting perturbation-section [0,9]; clip each scalar and count clips by feature before float32 conversion.",
+          "All positions and waypoints are lat/lon degrees; lengths, accepted targets and actual speeds use metres and metres per second. Ground speed and actual compass track, not target velocity, determine CPA. In the no-wind baseline the adapter maps accepted TAS commands to targeted ground speed.",
+          "Ownship previous/next waypoint distances are great-circle lengths on a 6371000 m sphere, divided by the nominal full-route length 9260 m. The adapter supplies the latest/next waypoint or route origin/destination, including its declared temporary-route handling.",
+          "Ownship accepted target speed is divided by the global 196 kt maximum. Target altitude is normalized from the 250 ft floor over the full 200 ft height. Right-positive accepted target lane is divided by the full 500 ft width then shifted by 0.5. The adapter supplies the two actual transition-lock flags.",
+          "Neighbors include every other aircraft at horizontal great-circle separation <=6000 ft, without a vertical filter or padding. Ownship and intruder IDs are sorted lexicographically; an empty encounter tensor has shape (0,10). The policy adapter, not this module, implements the paper's zero relative-vector convention.",
+          "Relative track and nominal-course angles use signed intruder minus ownship compass angles, wrapped to [-180,180) and divided by 360 then shifted by 0.5. Positive is clockwise/right; an exact half-turn takes -180. Same-corridor nominal cross-angle is forced to zero (normalized 0.5), even when aircraft occupy different route legs.",
+          "Relative accepted speed/altitude/lane targets use intruder minus ownship, divided by twice 196 kt, twice 200 ft or twice 500 ft respectively, then shifted by 0.5. Current actual altitude difference separately sets Eq.21 LoWC/NMAC thresholds, each normalized by 6000 ft.",
+          "CPA uses a common local east/north plane: relative position is great-circle range times the initial-bearing unit vector at ownship; velocities come from current ground speeds and tracks. For relative speed <=1e-6 m/s use t=0. Otherwise t=max(0,-r dot v/|v|^2). CPA distance uses that unbounded future time; only the normalized time feature clips at 1200 s. This local flat constant-velocity approximation is not a curved-flight forecast.",
+          "Safety uses the Eq.20 mean over all horizontally observed intruders, including zero-penalty neighbors; no neighbors gives zero. At or above 100 ft actual vertical separation both Eq.21 thresholds and the pair penalty are explicitly zero, including coincident horizontal positions.",
+          "Eq.22 compares accepted command targets exactly with stored nominal speed, configured 350 ft nominal altitude and zero lane. Nonnominal targets cost at each decision even if repeated, locked or completed; measured tracking error and rejected requests do not replace accepted targets. Accepted nominal commands should retain their canonical numerical values.",
+          "Reward total is safety +0.008*efficiency +1 for valid arrival. The environment is responsible for granting the arrival flag once, before its declared timeout; timeout or other deletion alone earns no arrival reward. Reward sampling and integration over physical steps belong to the environment adapter."
+        ]
+      }
+    },
+    "aircraft_types": {
+      "source": "paper/REPRODUCTION.md, Fremond et al. Table 3, PDF pp.16\u201317",
+      "nominal_speed_fraction": 0.8,
+      "acceleration_mps2": 3.5,
+      "reconstruction_choices": [
+        "Table maximum speed is interpreted as true airspeed; one knot is 1852/3600 m/s.",
+        "Zero minimum TAS; no additional altitude ceiling or speed/vertical coupling is inferred.",
+        "Native BlueSky 1.1.1 turn bank, altitude capture and vertical acceleration are unchanged.",
+        "The 3.5 m/s2 acceleration magnitude applies to native horizontal acceleration and deceleration."
+      ],
+      "types": {
+        "Amzn": {
+          "maximum_speed_kt": 196,
+          "climb_mps": 8,
+          "descent_mps": 8
+        },
+        "Cranfield": {
+          "maximum_speed_kt": 85,
+          "climb_mps": 3,
+          "descent_mps": 3
+        },
+        "CranfieldV2": {
+          "maximum_speed_kt": 39,
+          "climb_mps": 3,
+          "descent_mps": 3
+        },
+        "M100": {
+          "maximum_speed_kt": 43,
+          "climb_mps": 5,
+          "descent_mps": 4
+        },
+        "M200": {
+          "maximum_speed_kt": 45,
+          "climb_mps": 5,
+          "descent_mps": 3
+        },
+        "M600": {
+          "maximum_speed_kt": 35,
+          "climb_mps": 5,
+          "descent_mps": 5
+        },
+        "Phan4": {
+          "maximum_speed_kt": 39,
+          "climb_mps": 6,
+          "descent_mps": 4
+        },
+        "Mavic": {
+          "maximum_speed_kt": 35,
+          "climb_mps": 5,
+          "descent_mps": 3
+        },
+        "Eh216": {
+          "maximum_speed_kt": 69,
+          "climb_mps": 11,
+          "descent_mps": 11
+        },
+        "Horsefly": {
+          "maximum_speed_kt": 43,
+          "climb_mps": 8,
+          "descent_mps": 8
+        },
+        "Mnet": {
+          "maximum_speed_kt": 21,
+          "climb_mps": 5,
+          "descent_mps": 5
+        },
+        "Tecnalia": {
+          "maximum_speed_kt": 21,
+          "climb_mps": 3,
+          "descent_mps": 3
+        }
+      }
+    },
+    "ppo": {
+      "schema": "bluesky.paper-like.shared-ppo.v1",
+      "device": "cpu",
+      "torch_num_threads": 1,
+      "own_dim": 7,
+      "intruder_dim": 10,
+      "action_dim": 60,
+      "attention_dim": 64,
+      "hidden_sizes": [
+        128,
+        128
+      ],
+      "learning_rate": 1e-05,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "clip_epsilon": 0.2,
+      "value_coefficient": 0.5,
+      "entropy_coefficient": 0.0001,
+      "update_epochs": 1,
+      "minibatch_size": 64,
+      "normalize_advantages": true,
+      "advantage_normalization_epsilon": 1e-08,
+      "max_grad_norm": 0.5,
+      "adam_betas": [
+        0.9,
+        0.999
+      ],
+      "adam_eps": 1e-08,
+      "weight_decay": 0.0,
+      "paper_sources": [
+        "paper/REPRODUCTION.md; original PDF pp.5-7, Algorithm 1 and PPO hyperparameters",
+        "original PDF pp.12-13, Eq.13 current-neighbor attention and Table 2"
+      ],
+      "reconstruction_choices": [
+        "CPU float32 and one PyTorch intra-op thread; no accelerator selection or fallback. The controller also limits native-library/inter-op threads and owns process priority.",
+        "One bias-free ownship query projection and bias-free intruder key/value projections, all width 64; scaled dot-product attention over current neighbors only. No recurrence, positional encoding or temporal memory.",
+        "Variable neighbor counts are padded with zero rows and explicitly masked before projection and softmax. An aircraft with no neighbors has exactly zero attention context.",
+        "Concatenate the 7 ownship features with the 64-dimensional context, then two shared width-128 Tanh layers with biased 60-class actor and scalar critic heads. All linear layers use PyTorch Linear default initialization; the controller seeds initialization explicitly.",
+        "Store the action-validity mask with each sampled observation and apply the identical mask to update logits. Masked classes have zero probability; at least one class must be valid. The environment owns action ordering and lock semantics.",
+        "Use Algorithm 1 minimization: negative clipped policy objective with ratio bounds [1-epsilon,1+epsilon], plus value_coefficient times full mean squared error, minus entropy_coefficient times entropy. This follows Algorithm 1 where surrounding printed equations have sign/lower-bound inconsistencies; no extra half-factor in value MSE and no value clipping.",
+        "Compute GAE separately for each contiguous aircraft trajectory using detached rollout values. Arrival and declared deadline failure are terminal with zero bootstrap. A live aircraft at a collector cutoff bootstraps from its final observed value; trajectories must never cross aircraft or reset boundaries.",
+        "Normalize advantages once across the complete pooled update batch using population standard deviation plus 1e-8; returns retain their original scale. Clip the global gradient norm to 0.5. These details are not specified in the paper.",
+        "Adam uses betas [0.9,0.999], epsilon 1e-8 and zero weight decay. Shuffle samples with the supplied CPU torch.Generator each epoch, use all samples including the final partial minibatch, and perform one epoch. No learning-rate schedule or KL early stopping.",
+        "Reported approximate KL and clip fraction are sample-weighted minibatch diagnostics before each minibatch step, not a final full-batch divergence or a scientific efficacy result. Initialization/sampling/shuffle seeds, rollout limits, checkpoint selection and evaluation deployment belong to the controller's training configuration."
+      ]
+    },
+    "effective_development_cases": [
+      {
+        "seed": 53001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 53010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 53011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 53012,
+        "corridor_count": 5
+      }
+    ],
+    "effective_development_scenarios": [
+      {
+        "seed": 53001,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99881450435875,
+                3.986482355409379
+              ],
+              [
+                52.01032893959774,
+                3.9214807877862086
+              ],
+              [
+                51.97890620741271,
+                3.877111032011669
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01658369260549,
+                3.9868673189720027
+              ],
+              [
+                52.076760393800384,
+                4.08046778312621
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.012263231631664,
+                3.996960867168525
+              ],
+              [
+                52.09553205183461,
+                3.9988798231923397
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F011",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F021",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F002",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 62.19310047816073
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 66.38000824103396
+          },
+          {
+            "id": "F012",
+            "type": "M200",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 76.16969534454748
+          },
+          {
+            "id": "F013",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 137.7015969605441
+          },
+          {
+            "id": "F003",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 144.593093084752
+          },
+          {
+            "id": "F023",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 148.94839436769655
+          },
+          {
+            "id": "F014",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 208.4273164047609
+          },
+          {
+            "id": "F004",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 220.93235974659444
+          },
+          {
+            "id": "F024",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 230.72141399877836
+          },
+          {
+            "id": "F015",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 284.2578541275746
+          },
+          {
+            "id": "F005",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 287.5365354039149
+          },
+          {
+            "id": "F025",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 291.1237076577844
+          },
+          {
+            "id": "F006",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 351.64644101051385
+          },
+          {
+            "id": "F016",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 352.4309903727735
+          },
+          {
+            "id": "F026",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 377.5239993499751
+          },
+          {
+            "id": "F007",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 438.0738326502577
+          },
+          {
+            "id": "F027",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 440.4474287945392
+          },
+          {
+            "id": "F017",
+            "type": "M200",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 441.14664734291046
+          },
+          {
+            "id": "F018",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 509.5569850781947
+          },
+          {
+            "id": "F008",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 514.8340032644917
+          },
+          {
+            "id": "F028",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 523.4077507049109
+          },
+          {
+            "id": "F019",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 582.3588467688066
+          },
+          {
+            "id": "F009",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 590.0939587434566
+          },
+          {
+            "id": "F029",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 612.8304991619084
+          },
+          {
+            "id": "F020",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 653.5471953907687
+          },
+          {
+            "id": "F010",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 667.0795573168476
+          },
+          {
+            "id": "F030",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 694.4410471023417
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53002,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01480688316314,
+                3.9775024171568987
+              ],
+              [
+                52.034382487063546,
+                3.945516795926693
+              ],
+              [
+                52.055994349638155,
+                3.973841867493462
+              ],
+              [
+                52.070744167019264,
+                4.0120925650676895
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99687834437676,
+                3.978754887862948
+              ],
+              [
+                51.93665811031974,
+                3.8853953077294534
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.015984369013815,
+                4.017698656150856
+              ],
+              [
+                52.052319879909234,
+                3.984644287639611
+              ],
+              [
+                52.068074051478646,
+                3.921955414193576
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00952188996066,
+                3.9916659384889215
+              ],
+              [
+                51.97668748954383,
+                3.9500810756897238
+              ],
+              [
+                51.95665467343139,
+                3.8908347074750793
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F009",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F017",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F024",
+            "type": "M100",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F025",
+            "type": "Cranfield",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 60.83405225937833
+          },
+          {
+            "id": "F018",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 67.12782090691115
+          },
+          {
+            "id": "F010",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 70.73695034735167
+          },
+          {
+            "id": "F002",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 83.1983588506024
+          },
+          {
+            "id": "F019",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 127.87595128629356
+          },
+          {
+            "id": "F011",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 131.45763547092383
+          },
+          {
+            "id": "F026",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 147.3339952283035
+          },
+          {
+            "id": "F003",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 153.2402271758022
+          },
+          {
+            "id": "F020",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 207.9462362424904
+          },
+          {
+            "id": "F012",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 212.83114693408427
+          },
+          {
+            "id": "F004",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 217.057944171001
+          },
+          {
+            "id": "F027",
+            "type": "Amzn",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 219.1138014746673
+          },
+          {
+            "id": "F021",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 276.3267962875672
+          },
+          {
+            "id": "F013",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 283.564125880797
+          },
+          {
+            "id": "F005",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 294.73688424226407
+          },
+          {
+            "id": "F028",
+            "type": "Mavic",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 297.02308152990906
+          },
+          {
+            "id": "F006",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 360.8640539970221
+          },
+          {
+            "id": "F022",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 361.4203221946897
+          },
+          {
+            "id": "F014",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 363.99962373995004
+          },
+          {
+            "id": "F029",
+            "type": "M100",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 373.9148341365363
+          },
+          {
+            "id": "F007",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 438.9227602975553
+          },
+          {
+            "id": "F030",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 443.8882611121292
+          },
+          {
+            "id": "F023",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 450.29311923065893
+          },
+          {
+            "id": "F015",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 453.5279408409628
+          },
+          {
+            "id": "F008",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 500.1946024642028
+          },
+          {
+            "id": "F016",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 534.2897286301259
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53003,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99578272084632,
+                3.9770351394649026
+              ],
+              [
+                52.02277269829049,
+                3.966493143080214
+              ],
+              [
+                52.02597178279106,
+                3.9216809687907244
+              ],
+              [
+                52.00455293439607,
+                3.892990141957114
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01054705967279,
+                3.9963592432757196
+              ],
+              [
+                51.99708805314633,
+                4.022161170199183
+              ],
+              [
+                51.99003276794009,
+                4.053971796263056
+              ],
+              [
+                52.009484218518125,
+                4.066026843241076
+              ],
+              [
+                52.03028904797505,
+                4.064765905552292
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99818875533648,
+                3.9877492997042623
+              ],
+              [
+                51.982269950888565,
+                3.9508197085436336
+              ],
+              [
+                51.95769496467896,
+                3.929866491505237
+              ],
+              [
+                51.958669726122835,
+                3.8848481528545733
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                51.998974166222936,
+                4.001680275832115
+              ],
+              [
+                51.95613102691673,
+                3.885747417727316
+              ]
+            ]
+          },
+          {
+            "id": "C05",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00772291759458,
+                4.006086964921849
+              ],
+              [
+                52.02696922756498,
+                4.066084077166494
+              ],
+              [
+                52.04228712755733,
+                4.12902229705432
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F007",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F013",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F019",
+            "type": "CranfieldV2",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F025",
+            "type": "M600",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F014",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 71.44617093931257
+          },
+          {
+            "id": "F002",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 78.53795854421499
+          },
+          {
+            "id": "F020",
+            "type": "Amzn",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 86.20691295488402
+          },
+          {
+            "id": "F026",
+            "type": "Eh216",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 87.19750458451402
+          },
+          {
+            "id": "F008",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 87.61885010189921
+          },
+          {
+            "id": "F015",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 140.43527882148243
+          },
+          {
+            "id": "F009",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 147.82331732875045
+          },
+          {
+            "id": "F027",
+            "type": "Mavic",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 158.0771922945887
+          },
+          {
+            "id": "F021",
+            "type": "Tecnalia",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 163.40142899984173
+          },
+          {
+            "id": "F003",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 168.4218385400871
+          },
+          {
+            "id": "F010",
+            "type": "Tecnalia",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 214.86203971183068
+          },
+          {
+            "id": "F016",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 222.65740786895586
+          },
+          {
+            "id": "F028",
+            "type": "M200",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 237.65254686175038
+          },
+          {
+            "id": "F004",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 241.20416905856163
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 246.12131589523088
+          },
+          {
+            "id": "F011",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 287.52090188546464
+          },
+          {
+            "id": "F005",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 306.3866871522865
+          },
+          {
+            "id": "F017",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 311.3328367025583
+          },
+          {
+            "id": "F029",
+            "type": "Mnet",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 324.93094634007304
+          },
+          {
+            "id": "F023",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 328.89019845078053
+          },
+          {
+            "id": "F012",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 353.0083431810153
+          },
+          {
+            "id": "F018",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 373.4490319856568
+          },
+          {
+            "id": "F006",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 387.4121323236758
+          },
+          {
+            "id": "F024",
+            "type": "Tecnalia",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 390.2820136876284
+          },
+          {
+            "id": "F030",
+            "type": "M600",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 406.50251848671815
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53004,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99350755946545,
+                4.023049489151958
+              ],
+              [
+                52.007224544411585,
+                3.9838504066349003
+              ],
+              [
+                52.03182103580916,
+                4.004760158479826
+              ],
+              [
+                52.03363454964524,
+                4.049784949756628
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01412581466985,
+                4.019416131116259
+              ],
+              [
+                52.06730971168941,
+                4.123598124700379
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99616210879684,
+                4.010795273561882
+              ],
+              [
+                51.97706954917523,
+                4.024275341654004
+              ],
+              [
+                51.98259174778523,
+                4.056865548883508
+              ],
+              [
+                51.96775709719582,
+                4.080578754500806
+              ],
+              [
+                51.963913201260105,
+                4.113788182981949
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F011",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F021",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 60.558817369782965
+          },
+          {
+            "id": "F002",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 70.09635033889393
+          },
+          {
+            "id": "F012",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 82.6266874885113
+          },
+          {
+            "id": "F003",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 130.85750593678807
+          },
+          {
+            "id": "F023",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 133.02666088889535
+          },
+          {
+            "id": "F013",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 162.33544101273785
+          },
+          {
+            "id": "F004",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 192.92586595303925
+          },
+          {
+            "id": "F024",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 205.40500243434423
+          },
+          {
+            "id": "F014",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 246.815081210507
+          },
+          {
+            "id": "F005",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 266.33925564192975
+          },
+          {
+            "id": "F025",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 279.3726565296169
+          },
+          {
+            "id": "F015",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 328.45535483747267
+          },
+          {
+            "id": "F006",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 331.32447530325464
+          },
+          {
+            "id": "F026",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 367.20827367457025
+          },
+          {
+            "id": "F016",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 398.6095030103738
+          },
+          {
+            "id": "F007",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 404.3246964936637
+          },
+          {
+            "id": "F027",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 449.62865158731483
+          },
+          {
+            "id": "F017",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 464.30251804387444
+          },
+          {
+            "id": "F008",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 468.4580138919207
+          },
+          {
+            "id": "F018",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 535.6236114986783
+          },
+          {
+            "id": "F028",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 538.5431274756241
+          },
+          {
+            "id": "F009",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 554.0648869864913
+          },
+          {
+            "id": "F019",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 614.6976980208756
+          },
+          {
+            "id": "F029",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 617.5429649946675
+          },
+          {
+            "id": "F010",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 619.1202117997647
+          },
+          {
+            "id": "F020",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 686.9585483474698
+          },
+          {
+            "id": "F030",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 690.8752796333519
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53005,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00069248569146,
+                3.9798822513657512
+              ],
+              [
+                51.986691973889435,
+                4.018810168875177
+              ],
+              [
+                51.97755598492502,
+                4.061369457108555
+              ],
+              [
+                52.00078918471427,
+                4.086038694587444
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.006586223787814,
+                3.9771460678939548
+              ],
+              [
+                52.01853793943004,
+                3.949449408150514
+              ],
+              [
+                52.03926620337491,
+                3.946288538760058
+              ],
+              [
+                52.054372000959034,
+                3.922993544061171
+              ],
+              [
+                52.0751882891371,
+                3.922417989875072
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0096141732243,
+                4.017739129635487
+              ],
+              [
+                52.02952873193137,
+                4.027603895426324
+              ],
+              [
+                52.047872085176074,
+                4.043612003673331
+              ],
+              [
+                52.05965434989356,
+                4.015698638580659
+              ],
+              [
+                52.080363832742194,
+                4.012224571249504
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                51.989812681957986,
+                4.000663397068962
+              ],
+              [
+                51.976879926272666,
+                4.027153877302226
+              ],
+              [
+                51.970477829787036,
+                4.059312570249119
+              ],
+              [
+                51.949659976358625,
+                4.0589149612819995
+              ],
+              [
+                51.92887402308565,
+                4.060825424664955
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F009",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F017",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F024",
+            "type": "M600",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F018",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 67.71227568192782
+          },
+          {
+            "id": "F002",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 73.77001684682044
+          },
+          {
+            "id": "F025",
+            "type": "Mavic",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 88.44513060104073
+          },
+          {
+            "id": "F010",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 89.97000348357977
+          },
+          {
+            "id": "F003",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 149.3404364980753
+          },
+          {
+            "id": "F011",
+            "type": "M100",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 153.93511669729943
+          },
+          {
+            "id": "F019",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 156.4207538981783
+          },
+          {
+            "id": "F026",
+            "type": "M100",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 157.49962793358793
+          },
+          {
+            "id": "F012",
+            "type": "Tecnalia",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 223.85033472644608
+          },
+          {
+            "id": "F027",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 231.9796852032992
+          },
+          {
+            "id": "F004",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 232.7185486881894
+          },
+          {
+            "id": "F020",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 245.93341153484732
+          },
+          {
+            "id": "F013",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 307.590785661768
+          },
+          {
+            "id": "F005",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 309.2840828596047
+          },
+          {
+            "id": "F028",
+            "type": "M600",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 311.67421191420544
+          },
+          {
+            "id": "F021",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 334.2200373105121
+          },
+          {
+            "id": "F006",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 372.343468116282
+          },
+          {
+            "id": "F014",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 396.6659496184794
+          },
+          {
+            "id": "F029",
+            "type": "Mavic",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 399.2087115443386
+          },
+          {
+            "id": "F022",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 410.3611196807903
+          },
+          {
+            "id": "F007",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 455.2579872090589
+          },
+          {
+            "id": "F030",
+            "type": "Mnet",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 461.8436797779156
+          },
+          {
+            "id": "F015",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 466.14704944075515
+          },
+          {
+            "id": "F023",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 476.16310941735276
+          },
+          {
+            "id": "F008",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 534.2075015056994
+          },
+          {
+            "id": "F016",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 535.6921454892303
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53006,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01263303851774,
+                4.006594510234606
+              ],
+              [
+                52.0449781432728,
+                3.9639763206850205
+              ],
+              [
+                52.08424100453882,
+                3.986527135877054
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01421626121052,
+                4.023818642485253
+              ],
+              [
+                52.03158349238119,
+                4.085318595605571
+              ],
+              [
+                52.04968377300203,
+                4.1462819273502305
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.98732205620138,
+                4.001954158405823
+              ],
+              [
+                52.00169260437036,
+                4.040525488738126
+              ],
+              [
+                52.00901631097241,
+                4.0840213545031645
+              ],
+              [
+                52.00506359547297,
+                4.1286571189766335
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00778428450275,
+                3.983697687934267
+              ],
+              [
+                51.99783669607915,
+                4.013405858910119
+              ],
+              [
+                52.00334280260017,
+                4.046018357061968
+              ],
+              [
+                52.0224550739904,
+                4.059432445532536
+              ],
+              [
+                52.03221029417057,
+                4.029540052754129
+              ]
+            ]
+          },
+          {
+            "id": "C05",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00926630548706,
+                4.014953454909602
+              ],
+              [
+                52.019589596868144,
+                4.056821287101712
+              ],
+              [
+                52.0298877450201,
+                4.098715117864231
+              ],
+              [
+                52.03555850351986,
+                4.142884758198846
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F007",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F013",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F019",
+            "type": "Cranfield",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F025",
+            "type": "Mnet",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F002",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 60.878739852038365
+          },
+          {
+            "id": "F026",
+            "type": "Cranfield",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 84.88564611501575
+          },
+          {
+            "id": "F014",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 85.92187904916022
+          },
+          {
+            "id": "F020",
+            "type": "Horsefly",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 87.93309178668625
+          },
+          {
+            "id": "F008",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 88.80269677966366
+          },
+          {
+            "id": "F003",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 131.78611148635628
+          },
+          {
+            "id": "F027",
+            "type": "Horsefly",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 148.027736114329
+          },
+          {
+            "id": "F009",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 157.01421450007868
+          },
+          {
+            "id": "F021",
+            "type": "M100",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 160.89658640774263
+          },
+          {
+            "id": "F015",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 163.83606611267447
+          },
+          {
+            "id": "F004",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 217.24623908562972
+          },
+          {
+            "id": "F028",
+            "type": "Phan4",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 227.0555992354947
+          },
+          {
+            "id": "F010",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 234.69945708890697
+          },
+          {
+            "id": "F022",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 244.57931909646734
+          },
+          {
+            "id": "F016",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 248.4603026003275
+          },
+          {
+            "id": "F005",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 288.49989737328895
+          },
+          {
+            "id": "F011",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 308.6192710736473
+          },
+          {
+            "id": "F029",
+            "type": "Mnet",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 309.6589019434537
+          },
+          {
+            "id": "F017",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 326.7767783881264
+          },
+          {
+            "id": "F023",
+            "type": "CranfieldV2",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 332.9559933943056
+          },
+          {
+            "id": "F006",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 369.77729543128623
+          },
+          {
+            "id": "F012",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 380.22977339208774
+          },
+          {
+            "id": "F018",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 390.43147532928947
+          },
+          {
+            "id": "F030",
+            "type": "Cranfield",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 394.36972817424385
+          },
+          {
+            "id": "F024",
+            "type": "Cranfield",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 404.33356495832555
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53007,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.9924619246122,
+                3.985686545555069
+              ],
+              [
+                52.01767749301387,
+                4.004542840699912
+              ],
+              [
+                52.04476098546465,
+                3.9946492396300073
+              ],
+              [
+                52.05265014981111,
+                4.037925300560573
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.98740351963709,
+                4.00519072342945
+              ],
+              [
+                51.96018338043357,
+                3.9963545203715967
+              ],
+              [
+                51.9331829609111,
+                3.9858979563180696
+              ],
+              [
+                51.92241566571547,
+                3.944406691470647
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.000464723812314,
+                4.005420218601756
+              ],
+              [
+                52.01010728603687,
+                3.963134699599209
+              ],
+              [
+                52.03785794584687,
+                3.9642444517500905
+              ],
+              [
+                52.06539656300729,
+                3.958566900482481
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F011",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F021",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F002",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 74.36797055629583
+          },
+          {
+            "id": "F012",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 80.04604859821318
+          },
+          {
+            "id": "F022",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 85.22785006991661
+          },
+          {
+            "id": "F003",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 137.3847116468412
+          },
+          {
+            "id": "F013",
+            "type": "M200",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 156.16737359104118
+          },
+          {
+            "id": "F023",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 169.90225664038044
+          },
+          {
+            "id": "F004",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 207.07985012885018
+          },
+          {
+            "id": "F024",
+            "type": "M600",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 231.544120302411
+          },
+          {
+            "id": "F014",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 245.17924281495732
+          },
+          {
+            "id": "F005",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 271.42649587036215
+          },
+          {
+            "id": "F025",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 294.6241208155272
+          },
+          {
+            "id": "F015",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 319.7305570261586
+          },
+          {
+            "id": "F006",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 344.3366882453902
+          },
+          {
+            "id": "F026",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 356.58690573595817
+          },
+          {
+            "id": "F016",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 387.78697448607073
+          },
+          {
+            "id": "F027",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 419.0566996006378
+          },
+          {
+            "id": "F007",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 419.80734531643435
+          },
+          {
+            "id": "F017",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 468.42907615128183
+          },
+          {
+            "id": "F008",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 484.51025298555805
+          },
+          {
+            "id": "F028",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 488.8457872518967
+          },
+          {
+            "id": "F018",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 552.1872301634123
+          },
+          {
+            "id": "F009",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 553.9632986900832
+          },
+          {
+            "id": "F029",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 574.0160637858819
+          },
+          {
+            "id": "F010",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 618.4787826275475
+          },
+          {
+            "id": "F019",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 632.284714059638
+          },
+          {
+            "id": "F030",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 650.9528126388113
+          },
+          {
+            "id": "F020",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 702.1799996908128
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53008,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99164752959102,
+                4.006436122778496
+              ],
+              [
+                51.980352586511835,
+                3.9780380563002495
+              ],
+              [
+                51.98211820365497,
+                3.944357857053973
+              ],
+              [
+                51.991080149630015,
+                3.913844271150168
+              ],
+              [
+                52.01141745834939,
+                3.906609790915894
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99242456972244,
+                3.9870013233512793
+              ],
+              [
+                52.032086789938504,
+                4.0075961709113415
+              ],
+              [
+                52.06965925318351,
+                4.036779541631091
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99887630337262,
+                4.018376702317312
+              ],
+              [
+                51.92256264038615,
+                4.072476510635596
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                51.98877152786013,
+                4.012403541087707
+              ],
+              [
+                51.96862528147502,
+                4.003878743515372
+              ],
+              [
+                51.95159452544641,
+                4.023311769419365
+              ],
+              [
+                51.93830468108298,
+                3.9973136758436283
+              ],
+              [
+                51.91755868451283,
+                4.000144240149808
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F009",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F017",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F024",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F010",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 62.249085630491315
+          },
+          {
+            "id": "F018",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 68.27653554965143
+          },
+          {
+            "id": "F002",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 71.60515412872515
+          },
+          {
+            "id": "F025",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 79.52988048166597
+          },
+          {
+            "id": "F011",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 137.70460719904497
+          },
+          {
+            "id": "F019",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 145.14691348245424
+          },
+          {
+            "id": "F003",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 149.98014143263075
+          },
+          {
+            "id": "F026",
+            "type": "Mavic",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 155.5137592549782
+          },
+          {
+            "id": "F012",
+            "type": "M100",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 212.18631050281897
+          },
+          {
+            "id": "F027",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 218.91468324096658
+          },
+          {
+            "id": "F020",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 219.9689756982708
+          },
+          {
+            "id": "F004",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 222.62261479921307
+          },
+          {
+            "id": "F013",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 283.38513267320496
+          },
+          {
+            "id": "F005",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 286.8320118023845
+          },
+          {
+            "id": "F021",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 293.68425287634216
+          },
+          {
+            "id": "F028",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 298.44216924045696
+          },
+          {
+            "id": "F006",
+            "type": "Tecnalia",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 348.0162126193613
+          },
+          {
+            "id": "F029",
+            "type": "Amzn",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 358.73411626484625
+          },
+          {
+            "id": "F014",
+            "type": "M100",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 360.52672847615736
+          },
+          {
+            "id": "F022",
+            "type": "CranfieldV2",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 375.7053622485171
+          },
+          {
+            "id": "F007",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 436.5097733401383
+          },
+          {
+            "id": "F023",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 441.1949580365582
+          },
+          {
+            "id": "F030",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 443.3560542679418
+          },
+          {
+            "id": "F015",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 444.72604729631973
+          },
+          {
+            "id": "F008",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 513.5378511264554
+          },
+          {
+            "id": "F016",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 532.7297590958553
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53009,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                51.995996762542596,
+                3.9945669911192
+              ],
+              [
+                52.066054619585316,
+                4.067745691611208
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.992558910823675,
+                4.009570260213451
+              ],
+              [
+                52.03104932676064,
+                4.0353748457786764
+              ],
+              [
+                52.05433342430188,
+                4.09149798962568
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99151344401711,
+                3.9869595161701454
+              ],
+              [
+                51.97619734451815,
+                4.024549900095309
+              ],
+              [
+                51.94893671188673,
+                4.033048653881821
+              ],
+              [
+                51.92117791416756,
+                4.0328528489328335
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99545014809887,
+                3.9773657843659294
+              ],
+              [
+                52.056666002133944,
+                3.8856064255901117
+              ]
+            ]
+          },
+          {
+            "id": "C05",
+            "waypoints_lat_lon_deg": [
+              [
+                52.01370304913914,
+                3.9876101174764926
+              ],
+              [
+                52.044205266851606,
+                4.0336783437338966
+              ],
+              [
+                52.07723852501523,
+                3.9924486518590925
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F007",
+            "type": "Mavic",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F013",
+            "type": "M600",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F019",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F025",
+            "type": "CranfieldV2",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F020",
+            "type": "Horsefly",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 66.58322893377243
+          },
+          {
+            "id": "F014",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 70.95075517376479
+          },
+          {
+            "id": "F008",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 75.49127549842194
+          },
+          {
+            "id": "F026",
+            "type": "M600",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 84.9560620395747
+          },
+          {
+            "id": "F002",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 89.5038664765014
+          },
+          {
+            "id": "F021",
+            "type": "M600",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 130.7469462232105
+          },
+          {
+            "id": "F009",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 135.66123535998338
+          },
+          {
+            "id": "F015",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 145.37553577610984
+          },
+          {
+            "id": "F027",
+            "type": "Horsefly",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 148.1207615877226
+          },
+          {
+            "id": "F003",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 154.22010113016424
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 214.278653199002
+          },
+          {
+            "id": "F004",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 215.02303253587422
+          },
+          {
+            "id": "F010",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 217.60543607798013
+          },
+          {
+            "id": "F028",
+            "type": "Eh216",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 221.87149637176827
+          },
+          {
+            "id": "F016",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 225.27099589822097
+          },
+          {
+            "id": "F005",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 279.7027482382218
+          },
+          {
+            "id": "F011",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 285.78301748786936
+          },
+          {
+            "id": "F023",
+            "type": "Mnet",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 290.5133924440657
+          },
+          {
+            "id": "F029",
+            "type": "Amzn",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 306.95816525852064
+          },
+          {
+            "id": "F017",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 315.25716230857904
+          },
+          {
+            "id": "F012",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 367.3243178333884
+          },
+          {
+            "id": "F006",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 369.16956222049805
+          },
+          {
+            "id": "F024",
+            "type": "Mnet",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 374.62828696777495
+          },
+          {
+            "id": "F030",
+            "type": "Mavic",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 392.2392419601647
+          },
+          {
+            "id": "F018",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 395.6357510154815
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53010,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00835845928052,
+                4.008659830183461
+              ],
+              [
+                52.090792959927484,
+                3.9894445125414393
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99475357439799,
+                3.9818020526258238
+              ],
+              [
+                51.97552665016757,
+                3.9947683742153117
+              ],
+              [
+                51.958315889360286,
+                4.013782055314948
+              ],
+              [
+                51.95127767091578,
+                4.045575133773156
+              ],
+              [
+                51.93545280064943,
+                4.067521079126692
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00927097093613,
+                3.9997919663196626
+              ],
+              [
+                51.97237732133298,
+                3.9684440664507576
+              ],
+              [
+                51.952544094121045,
+                4.0278614854295824
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F011",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F021",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F002",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 72.72703430001118
+          },
+          {
+            "id": "F022",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 75.20317084533936
+          },
+          {
+            "id": "F012",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 78.04606034960429
+          },
+          {
+            "id": "F003",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 133.73217879123925
+          },
+          {
+            "id": "F023",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 141.22722166464575
+          },
+          {
+            "id": "F013",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 143.83545002433522
+          },
+          {
+            "id": "F004",
+            "type": "Amzn",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 219.7880687346168
+          },
+          {
+            "id": "F014",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 220.2925488698143
+          },
+          {
+            "id": "F024",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 226.6257640539631
+          },
+          {
+            "id": "F015",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 291.1495339715272
+          },
+          {
+            "id": "F005",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 292.17154768990963
+          },
+          {
+            "id": "F025",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 302.62722978528177
+          },
+          {
+            "id": "F016",
+            "type": "M200",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 356.1575626575905
+          },
+          {
+            "id": "F006",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 364.9178417501556
+          },
+          {
+            "id": "F026",
+            "type": "M600",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 376.2042933380933
+          },
+          {
+            "id": "F017",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 417.0117852968077
+          },
+          {
+            "id": "F027",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 441.59182064205555
+          },
+          {
+            "id": "F007",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 441.60879092075766
+          },
+          {
+            "id": "F018",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 492.9228009583867
+          },
+          {
+            "id": "F028",
+            "type": "Phan4",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 520.3377692296023
+          },
+          {
+            "id": "F008",
+            "type": "M200",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 527.3555739309846
+          },
+          {
+            "id": "F019",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 554.8429464034456
+          },
+          {
+            "id": "F029",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 585.7510871778225
+          },
+          {
+            "id": "F009",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 605.7190673993936
+          },
+          {
+            "id": "F020",
+            "type": "Eh216",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 618.4364639058706
+          },
+          {
+            "id": "F030",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 652.8805594826654
+          },
+          {
+            "id": "F010",
+            "type": "Horsefly",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 675.4424815556586
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53011,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.014761075733055,
+                3.993674515854309
+              ],
+              [
+                51.994038726133645,
+                3.9969344330648937
+              ],
+              [
+                51.98165796986254,
+                4.024114039806449
+              ],
+              [
+                51.96577538013828,
+                4.045964769711333
+              ],
+              [
+                51.971443348806915,
+                4.078480800788924
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99710298960997,
+                4.017961285781865
+              ],
+              [
+                51.96146565868255,
+                4.140158084770945
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00402407833205,
+                3.9995313117452156
+              ],
+              [
+                51.98653398912269,
+                4.0178728245469415
+              ],
+              [
+                51.965727047450024,
+                4.01670868452544
+              ],
+              [
+                51.94525306382859,
+                4.022836021915907
+              ],
+              [
+                51.924672881130526,
+                4.027939031100033
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                51.99078089879134,
+                4.02636420089658
+              ],
+              [
+                52.006191701065816,
+                3.9635367118885085
+              ],
+              [
+                52.045001099320615,
+                3.988055292842347
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F009",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F017",
+            "type": "Amzn",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F024",
+            "type": "Horsefly",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F002",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 61.210496460242524
+          },
+          {
+            "id": "F018",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 62.06440031564308
+          },
+          {
+            "id": "F010",
+            "type": "Tecnalia",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 71.54255185160508
+          },
+          {
+            "id": "F025",
+            "type": "Phan4",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 82.39697415627437
+          },
+          {
+            "id": "F003",
+            "type": "Mavic",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 125.79736453977677
+          },
+          {
+            "id": "F011",
+            "type": "Phan4",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 132.71123551251463
+          },
+          {
+            "id": "F019",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 137.50756898048536
+          },
+          {
+            "id": "F026",
+            "type": "Horsefly",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 169.6051383222731
+          },
+          {
+            "id": "F004",
+            "type": "Mnet",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 199.68412727041593
+          },
+          {
+            "id": "F012",
+            "type": "Tecnalia",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 201.39627742133754
+          },
+          {
+            "id": "F020",
+            "type": "Cranfield",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 213.03116723281596
+          },
+          {
+            "id": "F027",
+            "type": "Tecnalia",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 243.72758864700427
+          },
+          {
+            "id": "F005",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 263.2211842511944
+          },
+          {
+            "id": "F013",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 263.9318224063462
+          },
+          {
+            "id": "F021",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 282.315985873159
+          },
+          {
+            "id": "F028",
+            "type": "M600",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 317.15974377480904
+          },
+          {
+            "id": "F014",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 325.758292395468
+          },
+          {
+            "id": "F006",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 327.1088965075505
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 354.7503319773907
+          },
+          {
+            "id": "F029",
+            "type": "Mnet",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 393.4236849886966
+          },
+          {
+            "id": "F007",
+            "type": "M600",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 403.15965022574846
+          },
+          {
+            "id": "F015",
+            "type": "Mnet",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 414.93974881102145
+          },
+          {
+            "id": "F023",
+            "type": "M600",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 427.47266967074614
+          },
+          {
+            "id": "F030",
+            "type": "Mavic",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 468.37085754400806
+          },
+          {
+            "id": "F008",
+            "type": "CranfieldV2",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 475.2858708409758
+          },
+          {
+            "id": "F016",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 500.3283947864619
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      },
+      {
+        "seed": 53012,
+        "corridors": [
+          {
+            "id": "C01",
+            "waypoints_lat_lon_deg": [
+              [
+                52.0155733893712,
+                3.984672423928572
+              ],
+              [
+                52.04139515900052,
+                4.0012315204764946
+              ],
+              [
+                52.06035882399521,
+                3.968267221079145
+              ],
+              [
+                52.08796499643659,
+                3.973000733087588
+              ]
+            ]
+          },
+          {
+            "id": "C02",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00896060166212,
+                4.024583866708923
+              ],
+              [
+                52.00043283954148,
+                4.0674962237686145
+              ],
+              [
+                52.021223075140995,
+                4.097379922201071
+              ],
+              [
+                52.01031229197112,
+                4.138853834387703
+              ]
+            ]
+          },
+          {
+            "id": "C03",
+            "waypoints_lat_lon_deg": [
+              [
+                51.990238585797904,
+                3.9823652310321336
+              ],
+              [
+                52.03830050563485,
+                4.092864419381954
+              ]
+            ]
+          },
+          {
+            "id": "C04",
+            "waypoints_lat_lon_deg": [
+              [
+                52.004182573309606,
+                4.003894558791956
+              ],
+              [
+                52.031307940294305,
+                3.9943117158473456
+              ],
+              [
+                52.05732605172897,
+                4.0100435847906795
+              ],
+              [
+                52.07938553961707,
+                3.9826317125970263
+              ]
+            ]
+          },
+          {
+            "id": "C05",
+            "waypoints_lat_lon_deg": [
+              [
+                52.00778881712967,
+                3.9934107540892683
+              ],
+              [
+                51.98713247621874,
+                3.9346907887958764
+              ],
+              [
+                51.98949061626569,
+                3.867184677271979
+              ]
+            ]
+          }
+        ],
+        "flights": [
+          {
+            "id": "F001",
+            "type": "Eh216",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F007",
+            "type": "Amzn",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F013",
+            "type": "M100",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F019",
+            "type": "Eh216",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F025",
+            "type": "CranfieldV2",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 0.0
+          },
+          {
+            "id": "F026",
+            "type": "Cranfield",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 61.92834231432352
+          },
+          {
+            "id": "F002",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 71.92083767113051
+          },
+          {
+            "id": "F014",
+            "type": "Eh216",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 73.1524773459644
+          },
+          {
+            "id": "F008",
+            "type": "M100",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 79.21442371764456
+          },
+          {
+            "id": "F020",
+            "type": "Mnet",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 89.68916938038264
+          },
+          {
+            "id": "F027",
+            "type": "Tecnalia",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 131.98790524019515
+          },
+          {
+            "id": "F003",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 136.38893019951507
+          },
+          {
+            "id": "F015",
+            "type": "Mavic",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 148.72787061341404
+          },
+          {
+            "id": "F009",
+            "type": "Cranfield",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 165.39267751457032
+          },
+          {
+            "id": "F021",
+            "type": "Phan4",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 172.14455913782518
+          },
+          {
+            "id": "F028",
+            "type": "Tecnalia",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 208.64619464199126
+          },
+          {
+            "id": "F004",
+            "type": "Cranfield",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 224.79336497597063
+          },
+          {
+            "id": "F016",
+            "type": "Horsefly",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 229.85640273610585
+          },
+          {
+            "id": "F010",
+            "type": "Horsefly",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 236.2247356693852
+          },
+          {
+            "id": "F022",
+            "type": "M200",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 253.50456610045552
+          },
+          {
+            "id": "F005",
+            "type": "Phan4",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 287.4960141295497
+          },
+          {
+            "id": "F029",
+            "type": "Amzn",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 296.6968022913511
+          },
+          {
+            "id": "F017",
+            "type": "Tecnalia",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 299.1988113268256
+          },
+          {
+            "id": "F011",
+            "type": "M600",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 307.37619383127145
+          },
+          {
+            "id": "F023",
+            "type": "CranfieldV2",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 318.1213106463497
+          },
+          {
+            "id": "F006",
+            "type": "M100",
+            "corridor_id": "C01",
+            "scheduled_entry_s": 361.0159665555452
+          },
+          {
+            "id": "F030",
+            "type": "Mnet",
+            "corridor_id": "C05",
+            "scheduled_entry_s": 365.511109770336
+          },
+          {
+            "id": "F018",
+            "type": "Mnet",
+            "corridor_id": "C03",
+            "scheduled_entry_s": 374.3081706606303
+          },
+          {
+            "id": "F012",
+            "type": "CranfieldV2",
+            "corridor_id": "C02",
+            "scheduled_entry_s": 377.7449395125146
+          },
+          {
+            "id": "F024",
+            "type": "Horsefly",
+            "corridor_id": "C04",
+            "scheduled_entry_s": 405.78936634436633
+          }
+        ],
+        "reconstruction_choices": [
+          "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+          "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+          "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+          "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+          "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+          "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+          "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+          "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+          "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+          "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+          "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+          "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+          "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+        ]
+      }
+    ]
+  },
+  "evaluation_environment": {
+    "schema": "bluesky.paper-like.environment.v1",
+    "scenario_config": "configs/nr_pilot.json",
+    "action_config": "configs/paper_actions_shared_navigation.json",
+    "observation_config": "configs/paper_observation.json",
+    "types_config": "configs/uav_types.json",
+    "decision_seconds": 5.0,
+    "device": "cpu",
+    "reconstruction_choices": [
+      "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+      "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+      "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+      "Per-flight1200s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+      "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+      "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+      "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+      "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training.",
+      "Explicit ordinary-flyby current-state reconstruction: immediately before each native reached call, refresh only ordinary flyby turndist using current actual TAS, native bankdef, current waypoint bearing and next_qdr. Cached turnspd and selected target speed do not enter this formula. Reject flyturn and its transition modes; native reached alone determines waypoint passage. This follows the audited old author-fork formula, not a confirmed 2026 setup or a safety filter.",
+      "Retain Table3 speeds, native bank25, corridor dimensions, actions, observations, rewards and execution terminal policies. Corridor containment remains unresolved; existing whole-tick terminal exposure remains unchanged. The adapter is installed only for one environment step and restored before reset or caller-side sampling. Cumulative per-episode navigation_audit is available separately from the unchanged episode summary schema.",
+      "Shared NR/policy corner-speed dispatcher is installed before admissions on every reset. Nominal-route geometry supplies the same cap for all target actions; neither traffic nor a full avoidance trajectory is certified. CAP and offset-route corner containment remain limitations, not hidden feasibility rejections.",
+      "Requested discrete speed, altitude and lane remain policy-owned absolute targets. Continuous execution speed is the minimum of the requested speed and active nominal corner caps, including caps below the policy minimum. A speed change cannot revive a completed past corner. Turn completion restores the current requested speed, never an old nominal request.",
+      "Execution feedback in info distinguishes requested/selected/actual speed, physical tracking, component completion and full-interval boundary exposure including terminal ticks. It is diagnostic only: the paper-like own7/intruder10 features and reward formula have not gained boundary feedback or a boundary penalty. Locks record command completion, not current safety. step(None) preserves previous targets.",
+      "No forced lane return, reference inset, fixed holding time, certified action filter or training change is supplied by this navigation integration. Existing action masks retain only component locks and the declared final-leg backward-capture guard."
+    ],
+    "terminal_policy": "finite_exit",
+    "exit_width_tolerance_m": 0.0001,
+    "fail_on_native_route_exhaustion": true,
+    "ordinary_flyby_guidance": "current_state_refresh",
+    "shared_navigation": {
+      "mode": "shared_corner_speed",
+      "width_fraction": 0.5,
+      "tangent_leg_fraction": 0.45,
+      "release_track_tolerance_deg": 1.0,
+      "prediction_reserve_m": 1.0
+    },
+    "execution_feedback": true
+  },
+  "scenarios": [
+    {
+      "seed": 53001,
+      "corridors": [
+        {
+          "id": "C01",
+          "waypoints_lat_lon_deg": [
+            [
+              51.99881450435875,
+              3.986482355409379
+            ],
+            [
+              52.01032893959774,
+              3.9214807877862086
+            ],
+            [
+              51.97890620741271,
+              3.877111032011669
+            ]
+          ]
+        },
+        {
+          "id": "C02",
+          "waypoints_lat_lon_deg": [
+            [
+              52.01658369260549,
+              3.9868673189720027
+            ],
+            [
+              52.076760393800384,
+              4.08046778312621
+            ]
+          ]
+        },
+        {
+          "id": "C03",
+          "waypoints_lat_lon_deg": [
+            [
+              52.012263231631664,
+              3.996960867168525
+            ],
+            [
+              52.09553205183461,
+              3.9988798231923397
+            ]
+          ]
+        }
+      ],
+      "flights": [
+        {
+          "id": "F001",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 0.0
+        },
+        {
+          "id": "F011",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 0.0
+        },
+        {
+          "id": "F021",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 0.0
+        },
+        {
+          "id": "F002",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 62.19310047816073
+        },
+        {
+          "id": "F022",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 66.38000824103396
+        },
+        {
+          "id": "F012",
+          "type": "M200",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 76.16969534454748
+        },
+        {
+          "id": "F013",
+          "type": "Amzn",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 137.7015969605441
+        },
+        {
+          "id": "F003",
+          "type": "Phan4",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 144.593093084752
+        },
+        {
+          "id": "F023",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 148.94839436769655
+        },
+        {
+          "id": "F014",
+          "type": "Cranfield",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 208.4273164047609
+        },
+        {
+          "id": "F004",
+          "type": "Tecnalia",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 220.93235974659444
+        },
+        {
+          "id": "F024",
+          "type": "Amzn",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 230.72141399877836
+        },
+        {
+          "id": "F015",
+          "type": "Cranfield",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 284.2578541275746
+        },
+        {
+          "id": "F005",
+          "type": "Mnet",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 287.5365354039149
+        },
+        {
+          "id": "F025",
+          "type": "Mnet",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 291.1237076577844
+        },
+        {
+          "id": "F006",
+          "type": "M200",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 351.64644101051385
+        },
+        {
+          "id": "F016",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 352.4309903727735
+        },
+        {
+          "id": "F026",
+          "type": "Phan4",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 377.5239993499751
+        },
+        {
+          "id": "F007",
+          "type": "Mavic",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 438.0738326502577
+        },
+        {
+          "id": "F027",
+          "type": "Horsefly",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 440.4474287945392
+        },
+        {
+          "id": "F017",
+          "type": "M200",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 441.14664734291046
+        },
+        {
+          "id": "F018",
+          "type": "Phan4",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 509.5569850781947
+        },
+        {
+          "id": "F008",
+          "type": "M200",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 514.8340032644917
+        },
+        {
+          "id": "F028",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 523.4077507049109
+        },
+        {
+          "id": "F019",
+          "type": "Mavic",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 582.3588467688066
+        },
+        {
+          "id": "F009",
+          "type": "Eh216",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 590.0939587434566
+        },
+        {
+          "id": "F029",
+          "type": "M200",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 612.8304991619084
+        },
+        {
+          "id": "F020",
+          "type": "Eh216",
+          "corridor_id": "C02",
+          "scheduled_entry_s": 653.5471953907687
+        },
+        {
+          "id": "F010",
+          "type": "Horsefly",
+          "corridor_id": "C01",
+          "scheduled_entry_s": 667.0795573168476
+        },
+        {
+          "id": "F030",
+          "type": "Cranfield",
+          "corridor_id": "C03",
+          "scheduled_entry_s": 694.4410471023417
+        }
+      ],
+      "reconstruction_choices": [
+        "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+        "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+        "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+        "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+        "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+        "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+        "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+        "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+        "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=1200 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+        "The 1200 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+        "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+        "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+        "Origin spacing constrains corridor start points only; this generator does not enforce spacing against airborne traffic at scheduled entries."
+      ]
+    }
+  ],
+  "initial_model_seed": 950001,
+  "action_seed_base": 810000,
+  "timeout_override_scope": "deep-copied scenario parts only",
+  "width_tolerance_rationale": "0.1mm numerical acceptance convention; not a floating-point or tracking-error guarantee",
+  "height_tolerance_m": 1e-07,
+  "physical_width_m": 152.4,
+  "keep_whole_terminal_tick": true
+}

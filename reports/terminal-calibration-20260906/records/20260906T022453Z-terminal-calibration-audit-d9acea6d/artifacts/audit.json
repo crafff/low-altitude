@@ -1,0 +1,2054 @@
+{
+  "all_checks_passed": true,
+  "flights": 3240,
+  "trace_rows": 419831,
+  "exact_duplicate_episodes": 5,
+  "ignored_duplicate_or_partial_trace_rows": 23585,
+  "input_sources": [
+    "reports/terminal-calibration-20260906/records/20260906T020302Z-terminal-calibration-original12-a50f1fc7/artifacts",
+    "reports/terminal-calibration-20260906/records/20260906T022242Z-terminal-calibration-lastcase-7c8035e7/artifacts"
+  ],
+  "groups": {
+    "new1200/256": {
+      "aggregate": {
+        "completed": 291,
+        "failed_timeout": 53,
+        "path_length_m": 3439136.268718376,
+        "outside_corridor_aircraft_seconds": 43770.25,
+        "outside_corridor_flights": 337,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 56848,
+        "policy_decisions": 47889,
+        "return_sum": -2602.8919431480504,
+        "failed_route_exhausted": 16,
+        "outside_exit_crossings": 16,
+        "planned": 360,
+        "flight_hours": 66.48805555555555,
+        "completed_fraction": 0.8083333333333333,
+        "max_centerline_distance_m": 183.62386962204204,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5332.5,
+            "directed_pair_seconds": 10665.0,
+            "unordered_seconds_per_flight_hour": 80.20237553111045,
+            "directed_seconds_per_flight_hour": 160.4047510622209
+          },
+          "lowc": {
+            "unordered_pair_seconds": 28669.0,
+            "directed_pair_seconds": 57338.0,
+            "unordered_seconds_per_flight_hour": 431.190230492528,
+            "directed_seconds_per_flight_hour": 862.380460985056
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 664.8805555555556,
+        "min": 117.25,
+        "median": 653.625,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 291,
+        "mean": 565.7972508591065,
+        "min": 117.25,
+        "median": 627.0,
+        "max": 909.0
+      },
+      "exit_failure_excess_m": {
+        "count": 16,
+        "mean": 5.649063059995841,
+        "min": 0.24765111073330104,
+        "median": 2.3384652607778733,
+        "max": 26.193051966983504
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 145.04032258064515,
+            "min": 117.25,
+            "median": 140.25,
+            "max": 188.5
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 41
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 314.109756097561,
+            "min": 281.5,
+            "median": 310.75,
+            "max": 345.75
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 731.1428571428571,
+            "min": 687.0,
+            "median": 732.0,
+            "max": 829.25
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "route_exhausted_without_arrival": 2,
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 383.73333333333335,
+            "min": 350.75,
+            "median": 387.25,
+            "max": 401.75
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 32,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 636.5984848484849,
+            "min": 603.5,
+            "median": 633.5,
+            "max": 675.75
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 633.45,
+            "min": 581.5,
+            "median": 639.5,
+            "max": 680.25
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 30,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 600.991935483871,
+            "min": 559.75,
+            "median": 600.5,
+            "max": 658.25
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 24,
+            "route_exhausted_without_arrival": 4
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 842.0446428571429,
+            "min": 800.0,
+            "median": 832.625,
+            "max": 909.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 33,
+            "route_exhausted_without_arrival": 2
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 839.75,
+            "min": 776.0,
+            "median": 840.0,
+            "max": 906.25
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 718.2,
+            "min": 663.75,
+            "median": 720.0,
+            "max": 765.25
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    },
+    "new1200/64": {
+      "aggregate": {
+        "completed": 298,
+        "failed_timeout": 53,
+        "path_length_m": 3439044.9908596077,
+        "outside_corridor_aircraft_seconds": 48073.5,
+        "outside_corridor_flights": 325,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 57563,
+        "policy_decisions": 48330,
+        "return_sum": -2273.7063484214013,
+        "failed_route_exhausted": 9,
+        "outside_exit_crossings": 9,
+        "planned": 360,
+        "flight_hours": 67.09465277777778,
+        "completed_fraction": 0.8277777777777777,
+        "max_centerline_distance_m": 738.9179113859751,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 4957.5,
+            "directed_pair_seconds": 9915.0,
+            "unordered_seconds_per_flight_hour": 73.88815344822767,
+            "directed_seconds_per_flight_hour": 147.77630689645534
+          },
+          "lowc": {
+            "unordered_pair_seconds": 27468.75,
+            "directed_pair_seconds": 54937.5,
+            "unordered_seconds_per_flight_hour": 409.40296823620855,
+            "directed_seconds_per_flight_hour": 818.8059364724171
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 670.9465277777778,
+        "min": 121.25,
+        "median": 659.75,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 298,
+        "mean": 577.5796979865772,
+        "min": 121.25,
+        "median": 635.25,
+        "max": 943.5
+      },
+      "exit_failure_excess_m": {
+        "count": 9,
+        "mean": 3.302349473146669,
+        "min": 0.5852943999182543,
+        "median": 1.6662631512566008,
+        "max": 8.515432439401138
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 143.08064516129033,
+            "min": 121.25,
+            "median": 139.0,
+            "max": 171.0
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 40,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 313.1951219512195,
+            "min": 288.0,
+            "median": 313.25,
+            "max": 333.5
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 27,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 736.8303571428571,
+            "min": 704.25,
+            "median": 735.875,
+            "max": 785.25
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 30
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 392.3,
+            "min": 371.25,
+            "median": 393.75,
+            "max": 412.25
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 30,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 641.4469696969697,
+            "min": 610.0,
+            "median": 640.75,
+            "max": 680.75
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 24,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 643.48,
+            "min": 611.75,
+            "median": 640.75,
+            "max": 683.5
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 30,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 606.983870967742,
+            "min": 573.75,
+            "median": 605.5,
+            "max": 659.25
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 27,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 856.8035714285714,
+            "min": 766.25,
+            "median": 851.375,
+            "max": 943.5
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 35
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 855.7428571428571,
+            "min": 787.75,
+            "median": 851.25,
+            "max": 935.5
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "route_exhausted_without_arrival": 1,
+            "arrived": 24
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 730.05,
+            "min": 690.0,
+            "median": 728.5,
+            "max": 783.0
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    },
+    "new1200/initial": {
+      "aggregate": {
+        "completed": 297,
+        "failed_timeout": 53,
+        "path_length_m": 3436932.454858211,
+        "outside_corridor_aircraft_seconds": 48823.75,
+        "outside_corridor_flights": 341,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 57612,
+        "policy_decisions": 48212,
+        "return_sum": -2880.2576179913267,
+        "failed_route_exhausted": 10,
+        "outside_exit_crossings": 10,
+        "planned": 360,
+        "flight_hours": 66.93472222222222,
+        "completed_fraction": 0.825,
+        "max_centerline_distance_m": 177.88839163890208,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5793.75,
+            "directed_pair_seconds": 11587.5,
+            "unordered_seconds_per_flight_hour": 86.55821384848423,
+            "directed_seconds_per_flight_hour": 173.11642769696846
+          },
+          "lowc": {
+            "unordered_pair_seconds": 31446.75,
+            "directed_pair_seconds": 62893.5,
+            "unordered_seconds_per_flight_hour": 469.8122133919864,
+            "directed_seconds_per_flight_hour": 939.6244267839728
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 669.3472222222222,
+        "min": 120.75,
+        "median": 660.25,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 297,
+        "mean": 576.4099326599327,
+        "min": 120.75,
+        "median": 633.5,
+        "max": 927.0
+      },
+      "exit_failure_excess_m": {
+        "count": 10,
+        "mean": 5.433905651908948,
+        "min": 0.28545055844539036,
+        "median": 3.4673278462376373,
+        "max": 17.988723353267588
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 144.67741935483872,
+            "min": 120.75,
+            "median": 140.75,
+            "max": 176.75
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 40,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 314.5121951219512,
+            "min": 294.5,
+            "median": 314.75,
+            "max": 337.75
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 732.8660714285714,
+            "min": 703.25,
+            "median": 733.0,
+            "max": 790.0
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 27,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 389.55,
+            "min": 365.25,
+            "median": 389.25,
+            "max": 426.5
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 33
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 638.4090909090909,
+            "min": 599.25,
+            "median": 638.25,
+            "max": 675.0
+          }
+        },
+        "M100": {
+          "statuses": {
+            "route_exhausted_without_arrival": 1,
+            "arrived": 24
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 640.37,
+            "min": 598.25,
+            "median": 640.25,
+            "max": 692.25
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 610.8548387096774,
+            "min": 574.0,
+            "median": 612.25,
+            "max": 649.75
+          }
+        },
+        "M600": {
+          "statuses": {
+            "route_exhausted_without_arrival": 2,
+            "arrived": 26
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 854.9285714285714,
+            "min": 775.25,
+            "median": 849.5,
+            "max": 927.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 34,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 841.7071428571429,
+            "min": 792.75,
+            "median": 832.0,
+            "max": 915.5
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 23,
+            "route_exhausted_without_arrival": 2
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 734.69,
+            "min": 695.0,
+            "median": 735.5,
+            "max": 776.0
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    },
+    "new1200/nr": {
+      "aggregate": {
+        "completed": 360,
+        "failed_timeout": 0,
+        "path_length_m": 3329784.80093567,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3026.6577632518565,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 55.051458333333336,
+        "completed_fraction": 1.0,
+        "max_centerline_distance_m": 38.67089041863699,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 8924.0,
+            "directed_pair_seconds": 17848.0,
+            "unordered_seconds_per_flight_hour": 162.1028810166246,
+            "directed_seconds_per_flight_hour": 324.2057620332492
+          },
+          "lowc": {
+            "unordered_pair_seconds": 36010.75,
+            "directed_pair_seconds": 72021.5,
+            "unordered_seconds_per_flight_hour": 654.1289021256626,
+            "directed_seconds_per_flight_hour": 1308.2578042513253
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 550.5145833333333,
+        "min": 114.75,
+        "median": 523.5,
+        "max": 1071.5
+      },
+      "flight_seconds_arrived": {
+        "count": 360,
+        "mean": 550.5145833333333,
+        "min": 114.75,
+        "median": 523.5,
+        "max": 1071.5
+      },
+      "exit_failure_excess_m": {
+        "count": 0
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 127.5,
+            "min": 114.75,
+            "median": 119.5,
+            "max": 160.0
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 41
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 264.8658536585366,
+            "min": 264.0,
+            "median": 264.75,
+            "max": 267.25
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 576.3928571428571,
+            "min": 575.25,
+            "median": 576.625,
+            "max": 577.0
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 30
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 325.6666666666667,
+            "min": 324.5,
+            "median": 326.0,
+            "max": 326.25
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 33
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 522.9015151515151,
+            "min": 521.5,
+            "median": 523.0,
+            "max": 523.5
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 25
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 522.73,
+            "min": 521.5,
+            "median": 523.0,
+            "max": 523.5
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 499.2741935483871,
+            "min": 498.25,
+            "median": 499.5,
+            "max": 500.0
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 642.4375,
+            "min": 641.75,
+            "median": 642.375,
+            "max": 643.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 35
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 642.3928571428571,
+            "min": 641.25,
+            "median": 642.5,
+            "max": 643.0
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "arrived": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1071.396551724138,
+            "min": 1070.75,
+            "median": 1071.5,
+            "max": 1071.5
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 25
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 576.43,
+            "min": 575.25,
+            "median": 576.75,
+            "max": 577.0
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "arrived": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1071.2291666666667,
+            "min": 1070.5,
+            "median": 1071.5,
+            "max": 1071.5
+          }
+        }
+      }
+    },
+    "new2400/256": {
+      "aggregate": {
+        "completed": 348,
+        "failed_timeout": 0,
+        "path_length_m": 3573345.6750505143,
+        "outside_corridor_aircraft_seconds": 45814.75,
+        "outside_corridor_flights": 337,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 61324,
+        "policy_decisions": 51560,
+        "return_sum": -2851.253931904124,
+        "failed_route_exhausted": 12,
+        "outside_exit_crossings": 12,
+        "planned": 360,
+        "flight_hours": 71.58298611111113,
+        "completed_fraction": 0.9666666666666667,
+        "max_centerline_distance_m": 183.62386962204204,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5983.0,
+            "directed_pair_seconds": 11966.0,
+            "unordered_seconds_per_flight_hour": 83.5813134522383,
+            "directed_seconds_per_flight_hour": 167.1626269044766
+          },
+          "lowc": {
+            "unordered_pair_seconds": 30389.25,
+            "directed_pair_seconds": 60778.5,
+            "unordered_seconds_per_flight_hour": 424.53174491533224,
+            "directed_seconds_per_flight_hour": 849.0634898306645
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 715.8298611111111,
+        "min": 117.25,
+        "median": 653.625,
+        "max": 1673.75
+      },
+      "flight_seconds_arrived": {
+        "count": 348,
+        "mean": 717.7334770114943,
+        "min": 117.25,
+        "median": 653.625,
+        "max": 1673.75
+      },
+      "exit_failure_excess_m": {
+        "count": 12,
+        "mean": 6.998354658230535,
+        "min": 0.24765111073330104,
+        "median": 4.218461501713605,
+        "max": 26.193051966983504
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 145.04032258064515,
+            "min": 117.25,
+            "median": 140.25,
+            "max": 188.5
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 41
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 314.109756097561,
+            "min": 281.5,
+            "median": 310.75,
+            "max": 345.75
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 731.0089285714286,
+            "min": 687.0,
+            "median": 732.0,
+            "max": 829.25
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "route_exhausted_without_arrival": 2,
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 383.73333333333335,
+            "min": 350.75,
+            "median": 387.25,
+            "max": 401.75
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 32,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 636.5984848484849,
+            "min": 603.5,
+            "median": 633.5,
+            "max": 675.75
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 633.45,
+            "min": 581.5,
+            "median": 639.5,
+            "max": 680.25
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 30,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 600.991935483871,
+            "min": 559.75,
+            "median": 600.5,
+            "max": 658.25
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 27,
+            "route_exhausted_without_arrival": 1
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 839.6785714285714,
+            "min": 786.25,
+            "median": 835.25,
+            "max": 909.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 33,
+            "route_exhausted_without_arrival": 2
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 840.3214285714286,
+            "min": 776.0,
+            "median": 840.0,
+            "max": 906.25
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "arrived": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1532.5603448275863,
+            "min": 1386.5,
+            "median": 1528.25,
+            "max": 1673.75
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 23,
+            "route_exhausted_without_arrival": 2
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 718.04,
+            "min": 663.75,
+            "median": 720.0,
+            "max": 765.25
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "arrived": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1564.6458333333333,
+            "min": 1451.5,
+            "median": 1568.5,
+            "max": 1644.0
+          }
+        }
+      }
+    },
+    "new2400/nr": {
+      "aggregate": {
+        "completed": 360,
+        "failed_timeout": 0,
+        "path_length_m": 3329784.80093567,
+        "outside_corridor_aircraft_seconds": 0.0,
+        "outside_corridor_flights": 0,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 0,
+        "policy_decisions": 0,
+        "return_sum": -3026.6577632518565,
+        "failed_route_exhausted": 0,
+        "outside_exit_crossings": 0,
+        "planned": 360,
+        "flight_hours": 55.051458333333336,
+        "completed_fraction": 1.0,
+        "max_centerline_distance_m": 38.67089041863699,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 8924.0,
+            "directed_pair_seconds": 17848.0,
+            "unordered_seconds_per_flight_hour": 162.1028810166246,
+            "directed_seconds_per_flight_hour": 324.2057620332492
+          },
+          "lowc": {
+            "unordered_pair_seconds": 36010.75,
+            "directed_pair_seconds": 72021.5,
+            "unordered_seconds_per_flight_hour": 654.1289021256626,
+            "directed_seconds_per_flight_hour": 1308.2578042513253
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 550.5145833333333,
+        "min": 114.75,
+        "median": 523.5,
+        "max": 1071.5
+      },
+      "flight_seconds_arrived": {
+        "count": 360,
+        "mean": 550.5145833333333,
+        "min": 114.75,
+        "median": 523.5,
+        "max": 1071.5
+      },
+      "exit_failure_excess_m": {
+        "count": 0
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 127.5,
+            "min": 114.75,
+            "median": 119.5,
+            "max": 160.0
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 41
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 264.8658536585366,
+            "min": 264.0,
+            "median": 264.75,
+            "max": 267.25
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 576.3928571428571,
+            "min": 575.25,
+            "median": 576.625,
+            "max": 577.0
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 30
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 325.6666666666667,
+            "min": 324.5,
+            "median": 326.0,
+            "max": 326.25
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 33
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 522.9015151515151,
+            "min": 521.5,
+            "median": 523.0,
+            "max": 523.5
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 25
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 522.73,
+            "min": 521.5,
+            "median": 523.0,
+            "max": 523.5
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 31
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 499.2741935483871,
+            "min": 498.25,
+            "median": 499.5,
+            "max": 500.0
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 28
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 642.4375,
+            "min": 641.75,
+            "median": 642.375,
+            "max": 643.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 35
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 642.3928571428571,
+            "min": 641.25,
+            "median": 642.5,
+            "max": 643.0
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "arrived": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1071.396551724138,
+            "min": 1070.75,
+            "median": 1071.5,
+            "max": 1071.5
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 25
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 576.43,
+            "min": 575.25,
+            "median": 576.75,
+            "max": 577.0
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "arrived": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1071.2291666666667,
+            "min": 1070.5,
+            "median": 1071.5,
+            "max": 1071.5
+          }
+        }
+      }
+    },
+    "old1200/256": {
+      "aggregate": {
+        "completed": 234,
+        "failed_timeout": 53,
+        "path_length_m": 3440589.4795243605,
+        "outside_corridor_aircraft_seconds": 43491.0,
+        "outside_corridor_flights": 339,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 56906,
+        "policy_decisions": 47913,
+        "return_sum": -2612.677786962309,
+        "failed_route_exhausted": 73,
+        "outside_exit_crossings": 73,
+        "planned": 360,
+        "flight_hours": 66.51722222222222,
+        "completed_fraction": 0.65,
+        "max_centerline_distance_m": 183.62386962204204,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5290.25,
+            "directed_pair_seconds": 10580.5,
+            "unordered_seconds_per_flight_hour": 79.53203431024548,
+            "directed_seconds_per_flight_hour": 159.06406862049096
+          },
+          "lowc": {
+            "unordered_pair_seconds": 28269.5,
+            "directed_pair_seconds": 56539.0,
+            "unordered_seconds_per_flight_hour": 424.99519756788135,
+            "directed_seconds_per_flight_hour": 849.9903951357627
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 665.1722222222222,
+        "min": 117.25,
+        "median": 655.0,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 234,
+        "mean": 582.6741452991453,
+        "min": 117.25,
+        "median": 633.375,
+        "max": 909.0
+      },
+      "exit_failure_excess_m": {
+        "count": 73,
+        "mean": 1.123027567119707,
+        "min": 1.0126895233497635e-07,
+        "median": 4.291012203339051e-07,
+        "max": 26.193051966983504
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "route_exhausted_without_arrival": 11,
+            "arrived": 20
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 145.1290322580645,
+            "min": 117.25,
+            "median": 140.25,
+            "max": 188.5
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 33,
+            "route_exhausted_without_arrival": 8
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 313.969512195122,
+            "min": 281.5,
+            "median": 310.75,
+            "max": 346.0
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 25,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 730.6607142857143,
+            "min": 687.0,
+            "median": 731.0,
+            "max": 829.5
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "route_exhausted_without_arrival": 9,
+            "arrived": 21
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 383.5083333333333,
+            "min": 350.75,
+            "median": 384.375,
+            "max": 401.75
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 27,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 637.2348484848485,
+            "min": 603.5,
+            "median": 633.5,
+            "max": 684.0
+          }
+        },
+        "M100": {
+          "statuses": {
+            "arrived": 21,
+            "route_exhausted_without_arrival": 4
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 633.56,
+            "min": 581.5,
+            "median": 639.5,
+            "max": 680.25
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 9
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 601.008064516129,
+            "min": 559.0,
+            "median": 600.5,
+            "max": 663.75
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 844.0803571428571,
+            "min": 800.0,
+            "median": 839.125,
+            "max": 909.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 29,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 842.7285714285714,
+            "min": 776.25,
+            "median": 844.5,
+            "max": 906.25
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "route_exhausted_without_arrival": 11,
+            "arrived": 14
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 715.91,
+            "min": 659.5,
+            "median": 717.75,
+            "max": 765.25
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    },
+    "old1200/64": {
+      "aggregate": {
+        "completed": 244,
+        "failed_timeout": 53,
+        "path_length_m": 3441006.4674449344,
+        "outside_corridor_aircraft_seconds": 48014.5,
+        "outside_corridor_flights": 328,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 57646,
+        "policy_decisions": 48386,
+        "return_sum": -2414.8157444435024,
+        "failed_route_exhausted": 63,
+        "outside_exit_crossings": 63,
+        "planned": 360,
+        "flight_hours": 67.16243055555556,
+        "completed_fraction": 0.6777777777777778,
+        "max_centerline_distance_m": 738.9179113859751,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5101.25,
+            "directed_pair_seconds": 10202.5,
+            "unordered_seconds_per_flight_hour": 75.95392182509443,
+            "directed_seconds_per_flight_hour": 151.90784365018885
+          },
+          "lowc": {
+            "unordered_pair_seconds": 27618.75,
+            "directed_pair_seconds": 55237.5,
+            "unordered_seconds_per_flight_hour": 411.22320576463153,
+            "directed_seconds_per_flight_hour": 822.4464115292631
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 671.6243055555556,
+        "min": 121.5,
+        "median": 660.0,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 244,
+        "mean": 582.9395491803278,
+        "min": 121.75,
+        "median": 635.25,
+        "max": 943.5
+      },
+      "exit_failure_excess_m": {
+        "count": 63,
+        "mean": 0.37733351591281133,
+        "min": 1.0599005406675133e-07,
+        "median": 4.231980597069196e-07,
+        "max": 8.515432439401138
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "arrived": 21,
+            "route_exhausted_without_arrival": 10
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 143.16129032258064,
+            "min": 121.5,
+            "median": 139.0,
+            "max": 171.0
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 35,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 314.2317073170732,
+            "min": 288.0,
+            "median": 314.25,
+            "max": 345.75
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 22,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 736.5178571428571,
+            "min": 684.75,
+            "median": 735.375,
+            "max": 785.25
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 25,
+            "route_exhausted_without_arrival": 5
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 392.2916666666667,
+            "min": 371.25,
+            "median": 393.75,
+            "max": 412.25
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 24,
+            "route_exhausted_without_arrival": 9
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 643.4015151515151,
+            "min": 610.25,
+            "median": 645.25,
+            "max": 683.0
+          }
+        },
+        "M100": {
+          "statuses": {
+            "route_exhausted_without_arrival": 5,
+            "arrived": 20
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 644.09,
+            "min": 611.75,
+            "median": 640.75,
+            "max": 694.25
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 28,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 607.016129032258,
+            "min": 573.75,
+            "median": 605.5,
+            "max": 659.25
+          }
+        },
+        "M600": {
+          "statuses": {
+            "arrived": 21,
+            "route_exhausted_without_arrival": 7
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 859.1517857142857,
+            "min": 766.25,
+            "median": 858.75,
+            "max": 943.5
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 29,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 856.5285714285715,
+            "min": 785.25,
+            "median": 851.25,
+            "max": 935.5
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "route_exhausted_without_arrival": 6,
+            "arrived": 19
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 731.41,
+            "min": 690.0,
+            "median": 728.5,
+            "max": 781.25
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    },
+    "old1200/initial": {
+      "aggregate": {
+        "completed": 245,
+        "failed_timeout": 53,
+        "path_length_m": 3436754.931551661,
+        "outside_corridor_aircraft_seconds": 49394.5,
+        "outside_corridor_flights": 337,
+        "outside_altitude_aircraft_seconds": 0.0,
+        "changed_instructions": 57581,
+        "policy_decisions": 48221,
+        "return_sum": -2750.30858249449,
+        "failed_route_exhausted": 62,
+        "outside_exit_crossings": 62,
+        "planned": 360,
+        "flight_hours": 66.94895833333334,
+        "completed_fraction": 0.6805555555555556,
+        "max_centerline_distance_m": 177.88839163890208,
+        "risk": {
+          "nmac": {
+            "unordered_pair_seconds": 5379.75,
+            "directed_pair_seconds": 10759.5,
+            "unordered_seconds_per_flight_hour": 80.35599259386036,
+            "directed_seconds_per_flight_hour": 160.71198518772073
+          },
+          "lowc": {
+            "unordered_pair_seconds": 30079.5,
+            "directed_pair_seconds": 60159.0,
+            "unordered_seconds_per_flight_hour": 449.29003749747164,
+            "directed_seconds_per_flight_hour": 898.5800749949433
+          }
+        }
+      },
+      "flight_seconds_all": {
+        "count": 360,
+        "mean": 669.4895833333334,
+        "min": 120.75,
+        "median": 660.25,
+        "max": 1200.0
+      },
+      "flight_seconds_arrived": {
+        "count": 245,
+        "mean": 594.8122448979592,
+        "min": 120.75,
+        "median": 641.25,
+        "max": 927.0
+      },
+      "exit_failure_excess_m": {
+        "count": 62,
+        "mean": 0.5226718134835682,
+        "min": 1.0350105128509313e-07,
+        "median": 5.436829368932194e-07,
+        "max": 17.988723353267588
+      },
+      "exit_failures_without_crossing": 0,
+      "by_type": {
+        "Amzn": {
+          "statuses": {
+            "route_exhausted_without_arrival": 10,
+            "arrived": 21
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 145.0241935483871,
+            "min": 120.75,
+            "median": 141.0,
+            "max": 176.75
+          }
+        },
+        "Cranfield": {
+          "statuses": {
+            "arrived": 32,
+            "route_exhausted_without_arrival": 9
+          },
+          "flight_seconds": {
+            "count": 41,
+            "mean": 314.0243902439024,
+            "min": 299.75,
+            "median": 313.25,
+            "max": 337.75
+          }
+        },
+        "CranfieldV2": {
+          "statuses": {
+            "arrived": 26,
+            "route_exhausted_without_arrival": 2
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 730.4910714285714,
+            "min": 696.0,
+            "median": 728.125,
+            "max": 790.0
+          }
+        },
+        "Eh216": {
+          "statuses": {
+            "arrived": 21,
+            "route_exhausted_without_arrival": 9
+          },
+          "flight_seconds": {
+            "count": 30,
+            "mean": 389.175,
+            "min": 365.25,
+            "median": 389.75,
+            "max": 426.5
+          }
+        },
+        "Horsefly": {
+          "statuses": {
+            "arrived": 30,
+            "route_exhausted_without_arrival": 3
+          },
+          "flight_seconds": {
+            "count": 33,
+            "mean": 639.7121212121212,
+            "min": 599.25,
+            "median": 638.25,
+            "max": 680.75
+          }
+        },
+        "M100": {
+          "statuses": {
+            "route_exhausted_without_arrival": 6,
+            "arrived": 19
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 641.86,
+            "min": 598.25,
+            "median": 640.25,
+            "max": 692.5
+          }
+        },
+        "M200": {
+          "statuses": {
+            "arrived": 23,
+            "route_exhausted_without_arrival": 8
+          },
+          "flight_seconds": {
+            "count": 31,
+            "mean": 611.7741935483871,
+            "min": 574.0,
+            "median": 611.5,
+            "max": 649.75
+          }
+        },
+        "M600": {
+          "statuses": {
+            "route_exhausted_without_arrival": 3,
+            "arrived": 25
+          },
+          "flight_seconds": {
+            "count": 28,
+            "mean": 854.9375,
+            "min": 775.25,
+            "median": 849.5,
+            "max": 927.0
+          }
+        },
+        "Mavic": {
+          "statuses": {
+            "arrived": 29,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 35,
+            "mean": 843.6071428571429,
+            "min": 794.5,
+            "median": 835.0,
+            "max": 915.5
+          }
+        },
+        "Mnet": {
+          "statuses": {
+            "flight_timeout": 29
+          },
+          "flight_seconds": {
+            "count": 29,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        },
+        "Phan4": {
+          "statuses": {
+            "arrived": 19,
+            "route_exhausted_without_arrival": 6
+          },
+          "flight_seconds": {
+            "count": 25,
+            "mean": 733.2,
+            "min": 688.0,
+            "median": 734.5,
+            "max": 776.25
+          }
+        },
+        "Tecnalia": {
+          "statuses": {
+            "flight_timeout": 24
+          },
+          "flight_seconds": {
+            "count": 24,
+            "mean": 1200.0,
+            "min": 1200.0,
+            "median": 1200.0,
+            "max": 1200.0
+          }
+        }
+      }
+    }
+  },
+  "pairs": {
+    "initial:old1200->new1200": {
+      "statuses": [
+        {
+          "before": "arrived",
+          "after": "arrived",
+          "count": 244
+        },
+        {
+          "before": "arrived",
+          "after": "route_exhausted_without_arrival",
+          "count": 1
+        },
+        {
+          "before": "flight_timeout",
+          "after": "flight_timeout",
+          "count": 53
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "arrived",
+          "count": 53
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "route_exhausted_without_arrival",
+          "count": 9
+        }
+      ],
+      "common_arrived_seconds_delta": {
+        "count": 244,
+        "mean": -0.673155737704918,
+        "min": -81.75,
+        "median": 0.0,
+        "max": 51.5
+      },
+      "previous_timeout_new_flight_seconds": {
+        "count": 53,
+        "mean": 1200.0,
+        "min": 1200.0,
+        "median": 1200.0,
+        "max": 1200.0
+      }
+    },
+    "64:old1200->new1200": {
+      "statuses": [
+        {
+          "before": "arrived",
+          "after": "arrived",
+          "count": 243
+        },
+        {
+          "before": "arrived",
+          "after": "route_exhausted_without_arrival",
+          "count": 1
+        },
+        {
+          "before": "flight_timeout",
+          "after": "flight_timeout",
+          "count": 53
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "arrived",
+          "count": 55
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "route_exhausted_without_arrival",
+          "count": 8
+        }
+      ],
+      "common_arrived_seconds_delta": {
+        "count": 243,
+        "mean": -0.845679012345679,
+        "min": -51.75,
+        "median": 0.0,
+        "max": 13.0
+      },
+      "previous_timeout_new_flight_seconds": {
+        "count": 53,
+        "mean": 1200.0,
+        "min": 1200.0,
+        "median": 1200.0,
+        "max": 1200.0
+      }
+    },
+    "256:old1200->new1200": {
+      "statuses": [
+        {
+          "before": "arrived",
+          "after": "arrived",
+          "count": 233
+        },
+        {
+          "before": "arrived",
+          "after": "route_exhausted_without_arrival",
+          "count": 1
+        },
+        {
+          "before": "flight_timeout",
+          "after": "flight_timeout",
+          "count": 53
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "arrived",
+          "count": 58
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "route_exhausted_without_arrival",
+          "count": 15
+        }
+      ],
+      "common_arrived_seconds_delta": {
+        "count": 233,
+        "mean": -0.3229613733905579,
+        "min": -53.25,
+        "median": 0.0,
+        "max": 29.25
+      },
+      "previous_timeout_new_flight_seconds": {
+        "count": 53,
+        "mean": 1200.0,
+        "min": 1200.0,
+        "median": 1200.0,
+        "max": 1200.0
+      }
+    },
+    "256:new1200->new2400": {
+      "statuses": [
+        {
+          "before": "arrived",
+          "after": "arrived",
+          "count": 291
+        },
+        {
+          "before": "flight_timeout",
+          "after": "arrived",
+          "count": 53
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "arrived",
+          "count": 4
+        },
+        {
+          "before": "route_exhausted_without_arrival",
+          "after": "route_exhausted_without_arrival",
+          "count": 12
+        }
+      ],
+      "common_arrived_seconds_delta": {
+        "count": 291,
+        "mean": -0.1134020618556701,
+        "min": -31.0,
+        "median": 0.0,
+        "max": 27.25
+      },
+      "previous_timeout_new_flight_seconds": {
+        "count": 53,
+        "mean": 1547.0896226415093,
+        "min": 1386.5,
+        "median": 1550.5,
+        "max": 1673.75
+      }
+    }
+  },
+  "fixed_scripts": {
+    "count": 24,
+    "types": 12,
+    "statuses": {
+      "arrived": 24
+    },
+    "crossing_excess_m": {
+      "count": 24,
+      "mean": -7.003710796501157e-09,
+      "min": -4.698842090533617e-06,
+      "median": -2.869235515845503e-09,
+      "max": 4.600597705461951e-06
+    }
+  }
+}

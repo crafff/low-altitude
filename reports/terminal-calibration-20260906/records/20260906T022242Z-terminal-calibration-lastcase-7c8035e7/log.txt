@@ -1,0 +1,48 @@
+Creating directory "/tmp/bluesky-paper-nsq6rbe8/scenario"
+Creating directory "/tmp/bluesky-paper-nsq6rbe8/plugins"
+Creating directory "/tmp/bluesky-paper-nsq6rbe8/output"
+Creating directory "/tmp/bluesky-paper-nsq6rbe8/cache"
+Copying default configfile to /tmp/bluesky-paper-nsq6rbe8/settings.cfg
+Reading config from /tmp/bluesky-paper-nsq6rbe8/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "initial", "seed": 53012, "completed": 20, "timeout": 6, "exhausted": 4, "elapsed": 17.70277789188549}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "64", "seed": 53012, "completed": 20, "timeout": 6, "exhausted": 4, "elapsed": 28.707272911909968}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "old1200", "policy": "256", "seed": 53012, "completed": 18, "timeout": 6, "exhausted": 6, "elapsed": 39.49318656697869}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "initial", "seed": 53012, "completed": 24, "timeout": 6, "exhausted": 0, "elapsed": 50.34172939369455}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "64", "seed": 53012, "completed": 23, "timeout": 6, "exhausted": 1, "elapsed": 61.304052096791565}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "256", "seed": 53012, "completed": 24, "timeout": 6, "exhausted": 0, "elapsed": 72.27408622065559}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new1200", "policy": "nr", "seed": 53012, "completed": 30, "timeout": 0, "exhausted": 0, "elapsed": 80.85137603897601}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new2400", "policy": "256", "seed": 53012, "completed": 30, "timeout": 0, "exhausted": 0, "elapsed": 93.24571781186387}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-nsq6rbe8/cache/navdata.p
+{"event": "case", "arm": "new2400", "policy": "nr", "seed": 53012, "completed": 30, "timeout": 0, "exhausted": 0, "elapsed": 101.81165274092928}
