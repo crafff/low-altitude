@@ -1,0 +1,11 @@
+{
+  "id": "20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-06T01:17:11.400490+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-06T01:17:15.154782+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

@@ -1,0 +1,161 @@
+{
+  "all_checks_passed": true,
+  "trajectories": 1200,
+  "trace_rows": 160423,
+  "policies": {
+    "initial": {
+      "arrived": 245,
+      "timeouts": {
+        "Tecnalia": 24,
+        "Mnet": 29
+      },
+      "exit_failure_below_1mm": 54,
+      "exit_failure_above_1mm": 8,
+      "near_boundary_excess_range_m": [
+        1.0350105128509313e-07,
+        7.067521394787946e-06
+      ],
+      "near_boundary_example": {
+        "seed": 53001,
+        "id": "F009",
+        "type": "Eh216",
+        "exit_width_excess_m": 3.0289722445786538e-06,
+        "observed_exit_crossings": [
+          {
+            "fraction": 0.8069450619034876,
+            "cross_track_m": 76.20000302897225,
+            "altitude_m": 121.92,
+            "within_width": false,
+            "within_height": true,
+            "time_s": 981.25
+          }
+        ]
+      },
+      "lane_locked_fraction": 0.8266937641276623,
+      "altitude_locked_fraction": 0.581966363202754,
+      "weighted_efficiency_reward": -294.05479999999994,
+      "reward_components": {
+        "safety": -2701.2537824944907,
+        "efficiency": -36756.85000000027,
+        "arrival": 245.0,
+        "total": -2750.3085824945
+      }
+    },
+    "64": {
+      "arrived": 244,
+      "timeouts": {
+        "Tecnalia": 24,
+        "Mnet": 29
+      },
+      "exit_failure_below_1mm": 54,
+      "exit_failure_above_1mm": 9,
+      "near_boundary_excess_range_m": [
+        1.0599005406675133e-07,
+        1.9073527610657948e-05
+      ],
+      "near_boundary_example": {
+        "seed": 53001,
+        "id": "F009",
+        "type": "Eh216",
+        "exit_width_excess_m": 7.490194917636472e-07,
+        "observed_exit_crossings": [
+          {
+            "fraction": 0.2983806795134808,
+            "cross_track_m": -76.2000007490195,
+            "altitude_m": 121.92,
+            "within_width": false,
+            "within_height": true,
+            "time_s": 982.25
+          }
+        ]
+      },
+      "lane_locked_fraction": 0.8251147025999256,
+      "altitude_locked_fraction": 0.5828338775678915,
+      "weighted_efficiency_reward": -296.8559999999998,
+      "reward_components": {
+        "safety": -2361.959744443502,
+        "efficiency": -37107.00000000024,
+        "arrival": 244.0,
+        "total": -2414.8157444435305
+      }
+    },
+    "256": {
+      "arrived": 234,
+      "timeouts": {
+        "Tecnalia": 24,
+        "Mnet": 29
+      },
+      "exit_failure_below_1mm": 59,
+      "exit_failure_above_1mm": 14,
+      "near_boundary_excess_range_m": [
+        1.0126895233497635e-07,
+        3.098955235714129e-05
+      ],
+      "near_boundary_example": {
+        "seed": 53001,
+        "id": "F002",
+        "type": "Eh216",
+        "exit_width_excess_m": 1.3158567924165254e-07,
+        "observed_exit_crossings": [
+          {
+            "fraction": 0.17882554194770284,
+            "cross_track_m": -76.20000013158568,
+            "altitude_m": 137.16,
+            "within_width": false,
+            "within_height": true,
+            "time_s": 454.75
+          }
+        ]
+      },
+      "lane_locked_fraction": 0.8264562853505312,
+      "altitude_locked_fraction": 0.5826811095109886,
+      "weighted_efficiency_reward": -294.14080000000007,
+      "reward_components": {
+        "safety": -2552.53698696231,
+        "efficiency": -36767.600000000246,
+        "arrival": 234.0,
+        "total": -2612.6777869623193
+      }
+    }
+  },
+  "paired_status64_to256": [
+    {
+      "before": "arrived",
+      "after": "arrived",
+      "count": 187
+    },
+    {
+      "before": "arrived",
+      "after": "route_exhausted_without_arrival",
+      "count": 57
+    },
+    {
+      "before": "flight_timeout",
+      "after": "flight_timeout",
+      "count": 53
+    },
+    {
+      "before": "route_exhausted_without_arrival",
+      "after": "arrived",
+      "count": 47
+    },
+    {
+      "before": "route_exhausted_without_arrival",
+      "after": "route_exhausted_without_arrival",
+      "count": 16
+    }
+  ],
+  "gradient_diagnostic": {
+    "backbone_critic_to_actor_norm_ratio_min": 4.207016680819863,
+    "mean": 8.413938947980935,
+    "max": 12.721939695266963,
+    "negative_cosine_minibatches": 2,
+    "minibatches": 8
+  },
+  "interpretation_limits": [
+    "Sub-millimetre exit categories describe recorded physical crossings; they are not a rerun with relaxed tolerance or a corrected efficacy score.",
+    "Positive terminal advantage is a TD residual relative to an imperfect critic, not positive environment reward and not proof of deliberate failure seeking.",
+    "Global clipping and Adam make gradient norms alone insufficient to identify the causal effect of the shared critic.",
+    "GAE targets depend on the collecting critic; prefer fixed-input Monte Carlo explained variance when comparing critic learning."
+  ]
+}

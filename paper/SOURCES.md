@@ -37,3 +37,5 @@
 新来源或来源改变判断时在本页补充链接、核验日期、实际读到的内容和未解决项；详细调查留在任务或专题笔记，不重复登记每次搜索。来源失效时明确说明，不编造读过的全文。
 
 - 2026-09-05 CPU/CUDA测速依据：[PyTorch2.9.1官方wheel矩阵](https://pytorch.org/get-started/previous-versions/#v291)、[2.9 CUDA异步计时与FP32设置](https://docs.pytorch.org/docs/2.9/notes/cuda.html)、[allocator fraction范围](https://docs.pytorch.org/docs/2.9/generated/torch.cuda.memory.set_per_process_memory_fraction.html)。用于独立cu128环境和相同负载计时，不支持独占GPU性能或长期稳定性保证；本地结果见[报告](../reports/training-speed-20260905/README.md)。
+
+- 2026-09-06学习诊断：再次读本地TRC2026正文6–7/17–18页，确认250k外层、20k约达80%以及1200s safeguard的wall-time/实践不触发表述；期刊页仍403。打开[Schulman等PPO原文入口](https://arxiv.org/abs/1707.06347)与[GAE原文正文](https://arxiv.org/html/1506.02438v6)，用于概率比/价值降方差与信用分配背景，当前实现递推正确性由本地独立轨迹审计核对。[Huang等ICLR2022实现复现](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/)定向读取global gradient clip、debug KL以及共享/独立网络实现与其经典控制实验；不同环境的表现不自动解释本项目，未据此改共享架构或超参数。具体结果与限制见[诊断报告](../reports/learning-diagnosis-20260906/README.md)。

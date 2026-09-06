@@ -1,0 +1,11 @@
+{
+  "id": "20260906T010414Z-learning-diagnosis-pilot-1f09e104",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-06T01:04:14.256939+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-06T01:04:58.893224+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

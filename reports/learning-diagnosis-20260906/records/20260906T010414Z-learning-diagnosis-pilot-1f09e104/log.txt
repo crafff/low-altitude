@@ -1,0 +1,34 @@
+Creating directory "/tmp/bluesky-paper-0myzvdz_/scenario"
+Creating directory "/tmp/bluesky-paper-0myzvdz_/plugins"
+Creating directory "/tmp/bluesky-paper-0myzvdz_/output"
+Creating directory "/tmp/bluesky-paper-0myzvdz_/cache"
+Copying default configfile to /tmp/bluesky-paper-0myzvdz_/settings.cfg
+Reading config from /tmp/bluesky-paper-0myzvdz_/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "samples": 3573, "exact_reference": true, "elapsed": 14.789446976967156}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "samples": 3532, "exact_reference": true, "elapsed": 22.81368989124894}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53001, "completed": 15, "timeout": 3, "exhausted": 12, "samples": 3514, "exact_reference": true, "elapsed": 30.69505489524454}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-0myzvdz_/cache/navdata.p
+{"event": "frozen_training_probe", "seed": 9500000, "samples": 3900, "elapsed": 40.706607991829515}
+{"event": "complete", "replay_cases": 3, "probe_samples": 3900, "wall_seconds": 42.78402034705505}

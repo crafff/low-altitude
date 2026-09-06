@@ -1,0 +1,142 @@
+Creating directory "/tmp/bluesky-paper-z852xk0z/scenario"
+Creating directory "/tmp/bluesky-paper-z852xk0z/plugins"
+Creating directory "/tmp/bluesky-paper-z852xk0z/output"
+Creating directory "/tmp/bluesky-paper-z852xk0z/cache"
+Copying default configfile to /tmp/bluesky-paper-z852xk0z/settings.cfg
+Reading config from /tmp/bluesky-paper-z852xk0z/diagnostic.cfg
+Using compiled geo functions
+Reading magnetic variation data
+Warning: RTree could not be loaded. areafilter get_intersecting and get_knearest won't work
+Loading global navigation database...
+Cachefile not found: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+Reading nav.dat
+Reading fix.dat
+Reading awy.dat
+Reading apt.dat from apt.zip
+Writing cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+Successfully loaded OpenAP performance model
+Failed to load BADA performance model
+Successfully loaded legacy performance model
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "samples": 3573, "exact_reference": true, "elapsed": 15.252486799377948}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53001, "completed": 21, "timeout": 3, "exhausted": 6, "samples": 3532, "exact_reference": true, "elapsed": 23.464194062165916}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53001, "completed": 15, "timeout": 3, "exhausted": 12, "samples": 3514, "exact_reference": true, "elapsed": 31.658848021179438}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53002, "completed": 15, "timeout": 7, "exhausted": 8, "samples": 4133, "exact_reference": true, "elapsed": 41.72274303436279}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53002, "completed": 18, "timeout": 7, "exhausted": 5, "samples": 4105, "exact_reference": true, "elapsed": 51.83455305127427}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53002, "completed": 21, "timeout": 7, "exhausted": 2, "samples": 4072, "exact_reference": true, "elapsed": 61.79138449439779}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53003, "completed": 23, "timeout": 5, "exhausted": 2, "samples": 4169, "exact_reference": true, "elapsed": 72.16059028543532}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53003, "completed": 19, "timeout": 5, "exhausted": 6, "samples": 4148, "exact_reference": true, "elapsed": 82.58067676331848}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53003, "completed": 22, "timeout": 5, "exhausted": 3, "samples": 4138, "exact_reference": true, "elapsed": 92.89196651801467}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53004, "completed": 17, "timeout": 3, "exhausted": 10, "samples": 4058, "exact_reference": true, "elapsed": 102.98671994637698}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53004, "completed": 23, "timeout": 3, "exhausted": 4, "samples": 4102, "exact_reference": true, "elapsed": 113.20413044141605}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53004, "completed": 20, "timeout": 3, "exhausted": 7, "samples": 4060, "exact_reference": true, "elapsed": 123.45513318525627}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53005, "completed": 26, "timeout": 2, "exhausted": 2, "samples": 4451, "exact_reference": true, "elapsed": 135.21478781942278}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53005, "completed": 22, "timeout": 2, "exhausted": 6, "samples": 4466, "exact_reference": true, "elapsed": 147.01755734533072}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53005, "completed": 24, "timeout": 2, "exhausted": 4, "samples": 4393, "exact_reference": true, "elapsed": 158.78718755207956}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53006, "completed": 19, "timeout": 5, "exhausted": 6, "samples": 4075, "exact_reference": true, "elapsed": 168.99093973636627}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53006, "completed": 22, "timeout": 5, "exhausted": 3, "samples": 4119, "exact_reference": true, "elapsed": 179.29365968424827}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53006, "completed": 17, "timeout": 5, "exhausted": 8, "samples": 4096, "exact_reference": true, "elapsed": 189.52249920507893}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53007, "completed": 25, "timeout": 2, "exhausted": 3, "samples": 3762, "exact_reference": true, "elapsed": 199.35905625717714}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53007, "completed": 24, "timeout": 2, "exhausted": 4, "samples": 3713, "exact_reference": true, "elapsed": 209.00509862042964}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53007, "completed": 19, "timeout": 2, "exhausted": 9, "samples": 3700, "exact_reference": true, "elapsed": 218.56161939818412}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53008, "completed": 18, "timeout": 5, "exhausted": 7, "samples": 4206, "exact_reference": true, "elapsed": 229.1778836371377}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53008, "completed": 22, "timeout": 5, "exhausted": 3, "samples": 4250, "exact_reference": true, "elapsed": 239.7486287774518}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53008, "completed": 22, "timeout": 5, "exhausted": 3, "samples": 4186, "exact_reference": true, "elapsed": 250.1919455542229}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53009, "completed": 20, "timeout": 6, "exhausted": 4, "samples": 3992, "exact_reference": true, "elapsed": 259.7316585443914}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53009, "completed": 19, "timeout": 6, "exhausted": 5, "samples": 4040, "exact_reference": true, "elapsed": 269.5310464040376}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53009, "completed": 20, "timeout": 6, "exhausted": 4, "samples": 4029, "exact_reference": true, "elapsed": 279.1674916250631}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53010, "completed": 21, "timeout": 1, "exhausted": 8, "samples": 3305, "exact_reference": true, "elapsed": 287.5976808704436}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53010, "completed": 15, "timeout": 1, "exhausted": 14, "samples": 3339, "exact_reference": true, "elapsed": 296.13516633817926}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53010, "completed": 18, "timeout": 1, "exhausted": 11, "samples": 3292, "exact_reference": true, "elapsed": 304.68841798137873}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53011, "completed": 20, "timeout": 8, "exhausted": 2, "samples": 4491, "exact_reference": true, "elapsed": 315.75728008244187}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53011, "completed": 19, "timeout": 8, "exhausted": 3, "samples": 4501, "exact_reference": true, "elapsed": 326.82303527835757}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53011, "completed": 18, "timeout": 8, "exhausted": 4, "samples": 4445, "exact_reference": true, "elapsed": 337.9502872391604}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "initial", "seed": 53012, "completed": 20, "timeout": 6, "exhausted": 4, "samples": 4006, "exact_reference": true, "elapsed": 347.7852545953356}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "64", "seed": 53012, "completed": 20, "timeout": 6, "exhausted": 4, "samples": 4071, "exact_reference": true, "elapsed": 357.7063461430371}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "replay", "policy": "256", "seed": 53012, "completed": 18, "timeout": 6, "exhausted": 6, "samples": 3988, "exact_reference": true, "elapsed": 367.474312431179}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "frozen_training_probe", "seed": 9500000, "samples": 3900, "elapsed": 377.81631781719625}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "frozen_training_probe", "seed": 9500001, "samples": 3788, "elapsed": 387.48184529319406}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "frozen_training_probe", "seed": 9500002, "samples": 4079, "elapsed": 397.8463411941193}
+Loading global navigation database...
+Reading cache: /tmp/bluesky-paper-z852xk0z/cache/navdata.p
+{"event": "frozen_training_probe", "seed": 9500003, "samples": 4136, "elapsed": 408.3375004134141}
+{"event": "complete", "replay_cases": 36, "probe_samples": 15903, "wall_seconds": 412.3253775630146}

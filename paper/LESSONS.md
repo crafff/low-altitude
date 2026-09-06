@@ -59,3 +59,6 @@
 - 显存allocator限额不包括CUDA上下文/库；本次torch reserved24MiB而总进程最高观测492MiB。错误日志写失败不能绕过停止自己的进程；watchdog用finally退出，初始化后立即复查余量并做聚焦回归。来源：[测速实现/测试/报告](../reports/training-speed-20260905/README.md)。
 
 - 持久worker并行时，绝对episode序号决定随机源、按序合并完整样本后更新，才可跨进程重启精确恢复；本次真实8连续 vs4+恢复8已比较完整样本/模型/Adam/RNG和best。恢复测试还须对齐评价候选时点，否则“多看一个中间模型”会改变best。来源：[并行恢复验证](../reports/parallel-pilot-20260905/README.md)。
+
+- 出口穿越可能先于native路线耗尽，末态terminal_geometry为None不表示没有穿过出口。保留穿越时刻、插值点及当时宽高判定；当前256的73个出口失败全部由逐物理步回调找回，其中59例仅超出0.101–30.990微米，而出口容差为0.1微米。先审查数值敏感性，不能把这些标签全归因于大幅偏航，也不能未经同链路重评直接改记成功。来源：[36次精确重放与独立1200轨迹审计](../reports/learning-diagnosis-20260906/README.md)。
+- 检查“是否在学习”应在同一输入/mask比较策略概率与价值，并区分在线小批次KL和更新后完整分布KL。GAE目标含采样critic，跨critic解释方差宜同时看MC标签；终止正优势r−V也不等于正失败奖励或故意失败。来源：[固定15903样本及独立奖励GAE核查](../reports/learning-diagnosis-20260906/README.md)。

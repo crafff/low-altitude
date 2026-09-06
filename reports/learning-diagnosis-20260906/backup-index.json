@@ -1,0 +1,144 @@
+{
+  "files": [
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/manifest.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/manifest.json",
+      "bytes": 31356,
+      "sha256": "b98dbc2ce2035536d747bec8a660f751db502df8884021eac1d1f1a0276264df"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/status.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/status.json",
+      "bytes": 289,
+      "sha256": "6cc1c2e15f56a6cc4b8923d6109c1bf637ec88dc005374648db6e5df64f12611"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/log.txt",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/log.txt",
+      "bytes": 2082,
+      "sha256": "a8c67fbdcbee07f4f4e2ec4f11048115ffb6274d610f287dcd31958ea5bc0b58"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/result.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/result.json",
+      "bytes": 62569,
+      "sha256": "56dde04e107bfa6003fa1cff9988cd4bffb2cd8523cb7c9f82b375906347828d"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/episodes.jsonl",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/episodes.jsonl",
+      "bytes": 210229,
+      "sha256": "637ddd9ae04f0d7490ef2a544306b6a2a915946fd60c94db9186f99f7e34e1ca"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/training-probes.jsonl",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/training-probes.jsonl",
+      "bytes": 70505,
+      "sha256": "b4d824c34573f1b1849f7e7f85fc45a5e2f73a1cba16beb6459933efbd2216fc"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/decision-diagnostics.jsonl.gz",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/decision-diagnostics.jsonl.gz",
+      "bytes": 1136755,
+      "sha256": "4e9e4d482c83cfa071461b1912117211168d66e32a595dcbdadb05dda3b1fc1a"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/frozen-training-samples.pt",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/artifacts/frozen-training-samples.pt",
+      "bytes": 4416871,
+      "sha256": "d533070bbe44ca1ce8ce67657ea2f331f62e389fcbb8326e589ce8eda9524f8d"
+    },
+    {
+      "source": "runs/20260906T010414Z-learning-diagnosis-pilot-1f09e104/source/src/learning_diagnosis.py",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010414Z-learning-diagnosis-pilot-1f09e104/source/src/learning_diagnosis.py",
+      "bytes": 20312,
+      "sha256": "42c4c8a381b7fa8bbf338c9ab920a9325aa281a995e6bc700a4badd80a5f8ceb"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/manifest.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/manifest.json",
+      "bytes": 31378,
+      "sha256": "ef9f75751505aa7def2cf60143502fed787c34c4b28298feb2a427bc69745c07"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/status.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/status.json",
+      "bytes": 294,
+      "sha256": "0bd84923b5905090d05f674bd8861b847bd6a956a6ae3ac8f0d1474f2fb0f957"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/log.txt",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/log.txt",
+      "bytes": 11570,
+      "sha256": "a71187fd89c4c06da91a8a464ba31774d5995632951e6bf78480e5f5395bc7a7"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/result.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/result.json",
+      "bytes": 85710,
+      "sha256": "22cc33ce4e79fc5db1f273c36aed284c5dff7b7061cfc627bb0740daf5d8bc1e"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/episodes.jsonl",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/episodes.jsonl",
+      "bytes": 2713740,
+      "sha256": "c2d5c1bbcc849fec1c4d5b16e08809bcf2199b12d4f37f2b7934e9158e67b2cf"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/training-probes.jsonl",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/training-probes.jsonl",
+      "bytes": 302944,
+      "sha256": "57636e3f2eeaa87f69414ebc4490eb05679207797fcfbd761b523d0adfe22c7e"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/decision-diagnostics.jsonl.gz",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/decision-diagnostics.jsonl.gz",
+      "bytes": 12407233,
+      "sha256": "1a8a710a20246ccdb488f070292be5e6b2614f726508858f55f06a737678cb27"
+    },
+    {
+      "source": "runs/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/frozen-training-samples.pt",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T010713Z-learning-diagnosis-original12-2aac1384/artifacts/frozen-training-samples.pt",
+      "bytes": 17860535,
+      "sha256": "6da04277dcc63d47711c860776da83dd0012bec9094c01263046e63c909a2213"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/manifest.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/manifest.json",
+      "bytes": 31578,
+      "sha256": "42af802cb2b0eadbfc287469871edf7f215c2cfe30d65174d9346ac5410b4872"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/status.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/status.json",
+      "bytes": 295,
+      "sha256": "8646c2e8df7011f9a2e3569c8f0c465d7cbc930d86bcc66929a6b2cd472ed139"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/log.txt",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/log.txt",
+      "bytes": 4087,
+      "sha256": "6c532e1e005d1c81240c3a5d9b06df3ca5d049eac5030ca50e0bfb4a0ea38c6d"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/audit.json",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/audit.json",
+      "bytes": 4788,
+      "sha256": "51dde07bb19f168e60d3d8ee24f58d1983477ed804fff905d74bda96bb45c811"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/failure-decomposition.png",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/failure-decomposition.png",
+      "bytes": 79359,
+      "sha256": "d38546cb35d7dd17f8bafbd77a047f2c0523e97f929775f10e971d82d5383712"
+    },
+    {
+      "source": "runs/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/failure-decomposition.pdf",
+      "backup": "reports/learning-diagnosis-20260906/records/20260906T011711Z-learning-diagnosis-trace-audit-5ff0a846/artifacts/failure-decomposition.pdf",
+      "bytes": 17814,
+      "sha256": "f5075d93d69871d073eecc2656a41226ff746e2463372a866925e87888b170ac"
+    }
+  ],
+  "total_files": 23,
+  "total_bytes": 39502293
+}
