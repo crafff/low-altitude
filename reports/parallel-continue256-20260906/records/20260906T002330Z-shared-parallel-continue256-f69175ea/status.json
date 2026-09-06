@@ -1,0 +1,11 @@
+{
+  "id": "20260906T002330Z-shared-parallel-continue256-f69175ea",
+  "stage": "train",
+  "state": "succeeded",
+  "started_at": "2026-09-06T00:23:30.867841+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-06T00:47:27.380323+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

@@ -2,9 +2,9 @@
 
 状态：`doing`（12类性能、场景、动作/观测/奖励和共享PPO已接通；正在验证小训练及路线执行缺陷）。负责人：主线程。目标顺序由用户确认：先有效基线，再冻结后加延迟。当前尚无有效新基线证据。
 
-最新范围：用户授权的四环境同步PPO接入、真实恢复验证和小训练已经完成。本轮64场景/16次池化更新、627.59s，未形成有效baseline；latest64/best32与结果已保存。CPU12–15、无GPU、保护其他实验，旧10h不继承。下一轮延长训练需新授权。
+最新范围：2026-09-06用户“好，继续”授权的64→256配置不变续训已完成，本轮新增192场景/48池化更新、内部1434.59s。最新256完成234/360、NMAC79.53秒/FH，无稳定学习收益；best仍32，latest256完整保存。CPU12–15、单线程PPO、无GPU，两个其他实验持续存活；旧10h不继承。下一步建议有界学习诊断，本轮不自动再训练或改奖励。
 
-当前可恢复结果：新refresh累计850轮、保存best775，仍无有效baseline。最终850sample233/360完成、340架次横向越界；best775为260/360完成、336越界。35点曲线、48例解码重放、F0203188行判据诊断均已完成；当前只做收尾复核和私有备份。入口：[NOW](../paper/NOW.md)、[850恢复点](../checkpoints/refresh-850-20260905/README.md)、[F020机制与下一配对方案](../reports/lane-completion-f020-20260905/README.md)。实际运行与交接在本文件末尾14:22–14:43节；后续训练需新的授权块。
+历史refresh结果：累计850轮、保存best775，仍无有效baseline，不作为当前共享导航训练的恢复点。最终850sample233/360完成、340架次横向越界；best775为260/360完成、336越界。35点曲线、48例解码重放、F0203188行判据诊断均已完成。入口：[NOW](../paper/NOW.md)、[850恢复点](../checkpoints/refresh-850-20260905/README.md)、[F020机制与下一配对方案](../reports/lane-completion-f020-20260905/README.md)。实际运行与交接在本文件14:22–14:43节。
 
 此前04:29执行块已结束：用户再次明确“开始”，2026-09-05 04:29:42 UTC起，预算至04:44:42 UTC、≤15分钟/≤2GiB输出；12类性能、论文式场景生成/入场退出、小批无避让诊断，不训练。6个串行job最后于04:41:05 UTC结束，约11分23秒内完成；保存80,354,700字节产物（约76.6MiB），随后仅记录和Git交付。两个具名Astra/xhigh builder分别只写paper_performance及机型配置/测试、paper_scenarios及NR配置/测试；只读scholar核对原PDF场景语义。主线程写NR执行器/事件统计、集成并独占实验执行。
 
@@ -963,3 +963,33 @@ GPU实际24次遥测：原有两个PID全程存在、各10045/9887MiB；我们�
 独立只读Astra审阅核对原始training/development/result：计数、种子、NR、best及负结果结论一致，无结果层阻断；提醒5.48%只是开发描述性变化，不能当稳定学习提升或多种子统计证据。已纳入最终报告。下一步最小实验是从latest64配置不变地有界续训，检查完成率趋势；本轮不自动追加训练。
 
 最终交付核对：50份索引产物/恢复点共5713099字节与源文件逐字节及SHA一致；正式latest64和best32均纳入本次私有备份。最终两代理最新turn_context再次核验Astra/xhigh。doctor入口/链接检查无issues/local_missing，diff空白检查通过；这些检查不作为科研有效性证据。
+
+
+## 2026-09-06 00:23 UTC：64→256配置不变续训
+
+用户“好，继续”承接先前建议，授权有界续训从reports/parallel-pilot-20260905/checkpoints/latest.pt的64至累计256，而非best32或旧850。沿configs/paper_train_parallel.json原配置/源码/12固定DEV文件；仅CLI覆盖--episodes 256 --wall-seconds 1980，外监督2040s/512MiB输出/每进程4GiB地址限制。至多192新seed9500064–9500255、48池化批次；初始恢复64评价再96/128/160/192/224/256，采样部署/完成优先选择规则不变。之前64用627.59s（训练182.98s、三评价410.18s），本轮预计约24分钟，预算留冷启动与完整终评余量。CPU12–15/nice15/idleIO、PPO/BLAS1，单lab无GPU；不操作他人进程，不继承过期10h。
+
+只读主机启动前00:22:39 UTC：保护PID3059945/3062529的start_ticks仍348614026/348620130；GPU20886MiB使用、3162MiB空闲、99%，可用RAM63717680KiB、可用磁盘134.25GiB，见新report/host-before.json。本次不改科学代码或配置，因此沿用40回归与真实连续/分段恢复验证，不重复无必要测试。所有计算仍经原lab；无子代理任务。
+
+实际唯一训练job为[20260906T002330Z-shared-parallel-continue256-f69175ea](../runs/20260906T002330Z-shared-parallel-continue256-f69175ea/manifest.json)，00:23:30.868 UTC启动，源快照身份承接bc0d59ef。报告独立归约脚本预先编写在reports/parallel-continue256-20260906/summarize.py；训练结束后再以第二个串行lab审计恢复64逐case一致、完整种子/样本/更新计数、全部DEV风险按暴露总和/航时总和归约、best选择和checkpoint身份，并导出曲线。该脚本不修改训练源码/配置，也不在训练期间另起计算job。
+
+00:47:27 UTC训练成功结束，累计256。首次归约启动错误地把既有runs路径直接作为--input，launcher以“input must be a project-relative, non-private, non-legacy file”在预检拒绝，未启动分析负载或放宽安全规则。改为先逐字节复制本轮明确产物/模型到新reports目录，再从reports作为只读输入；归约脚本显式--checkpoints指向模型备份。
+
+
+### 2026-09-06 00:47–00:52 UTC：256完成与归约
+
+唯一训练job20260906T002330Z-shared-parallel-continue256-f69175ea于00:47:27.380323 UTC succeeded/exit0，内1434.591331s/外约1436.51s，stop_reason=episode_target_reached，initial/final_evaluated均true。新增192场景/5760计划架次、48完整更新、794104样本、12433Adam小批次步；累计256/7680/64批/1055487样本/16524Adam步。新seed9500064–9500255连续，全部action/global seed和策略版本按绝对episode序号。无部分批次/预算截断或延长目标，科学配置/源码身份与前64完全一致。
+
+开发0/32/64/96/128/160/192/224/256完成245/248/244/244/247/243/235/246/234 of360；NMAC率80.35599/87.95412/75.95392/83.60922/83.84083/76.78671/75.76547/80.14844/79.53203秒/FH。最终相对64少10完成、NMAC+4.7109%、LoWC+3.3490%；相对初始少11完成、NMAC−1.0254%、LoWC−5.4074%。没有稳定学习收益，九候选均未过95%完成门槛，原规则best仍32。低于NR风险不是全由学习带来，不冻结做延迟实验。
+
+完整失败/暴露保留：64→256超时53→53、路线耗尽63→73，最终339横向越界架次/43491飞机秒、0高度。终止分类变化有事实依据，具体机型/动作/奖励因果尚未分析；用户要求继续搁置越界研究，没有新过滤器/输入特征/奖励罚项。
+
+[归约job20260906T004847Z-parallel-continue256-summary-f182bd7a](../runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/summary.json)00:48:47.692–00:48:51.793 UTC成功。脚本reports/parallel-continue256-20260906/summarize.py只读显式报告副本，在CPU14/120s/64MiB/4096MiB的独立lab运行；之前训练已完全退出，未同时开负载。确认恢复64逐case全部科学字段/动作直方图与旧64精确（排除计时/RSS），全部开发NR恒等，12case/360人口完整，暴露总和/航时总和和选择键正确；逐批样本访问、seed/global/action/policy、epoch/minibatch计数连续；latest256的配置/版本/评价和best32选择一致，独立best与嵌入checkpoint全部tensor/RNG/优化器精确一致。输出summary.json与标准Matplotlib PNG/PDF，并实际查看图。没有再跑未改动的40回归，也未把归约成功当baseline有效。
+
+本轮采样/IPC/PPO551.697553s、11.4937s/批、1439.38samples/s，七次评价847.678486s、池启动25.961905s；单worker峰值RSS578.296875MiB。32轮窗口PPO熵约2.22，末窗口KL均值2.026e-5，全批clip_fraction0、裁剪后gradient_norm接近0.5；速度1.05目标决策占比25.40%→27.51%，动作仍分散。mask/重复锁定目标影响分布及熵，不能由此直接推断优化器失效或确定学习率过小；为下一次奖励分量/优势/actor-value梯度诊断提供线索。
+
+保护PID3059945/3062529于00:22:39训练前、00:31:25/00:40:23中途、00:49:16结束后启动ticks均348614026/348620130；GPU前后20886MiB used/3162MiB free，本轮无GPU设备。可用RAM抽样约58.6–60.8GiB；没有向其他实验发信号、改优先级或工作区，不声称其短时吞吐完全未变。
+
+[报告](../reports/parallel-continue256-20260906/README.md)、[latest256](../reports/parallel-continue256-20260906/checkpoints/latest.pt)、[best32](../reports/parallel-continue256-20260906/checkpoints/best.pt)、[15文件备份索引](../reports/parallel-continue256-20260906/backup-index.json)已生成，3125241字节逐源/副本核对，含两个模型及曲线。源快照/临时缓存仍在本机runs，不冒称全量异地备份。本轮无新子代理；源码未改，root完成比例适当的归约/解释复核。两个lab成功及一次预检拒绝均记录；所有负载已结束，不自动开启后续训练。GitHub只读确认crafff/low-altitude仍PRIVATE/ADMIN、原研究分支，准备按既有授权提交push并主线程通知。
+
+最终备份核对：15份3125241字节源/副本SHA及全部暂存blob逐一相同，两个pt与导出PDF已显式纳入私有备份；当前14执行模块仍与训练result所记SHA一致，归约脚本也与实际执行快照一致。doctor无issues/local_missing。暂存空白检查只发现真实BlueSky原始log.txt第304行的尾随空格，保留原始日志字节；源码/文档和其余产物检查单独通过，不修改原始记录以满足格式检查。

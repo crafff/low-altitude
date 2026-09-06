@@ -1,0 +1,11 @@
+{
+  "id": "20260906T004847Z-parallel-continue256-summary-f182bd7a",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-06T00:48:47.691783+00:00",
+  "pid": 4,
+  "finished_at": "2026-09-06T00:48:51.792916+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

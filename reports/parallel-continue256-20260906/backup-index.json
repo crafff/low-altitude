@@ -1,0 +1,96 @@
+{
+  "files": [
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/manifest.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/manifest.json",
+      "bytes": 30827,
+      "sha256": "aed6956d9203ad2e380318ae01e611c303b367afdf9b28b7b53942f7fe181a15"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/status.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/status.json",
+      "bytes": 289,
+      "sha256": "8f99bbf888dabf8bbaea9ea0cb75a6beb6fe5bd693ef0011db460b3ff7b8856e"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/log.txt",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/log.txt",
+      "bytes": 81596,
+      "sha256": "e6a8bf7701fcfd1b7c0d06e81f79d917eaf6a7ca3af6534a247e0e59df255dd7"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/result.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/result.json",
+      "bytes": 171921,
+      "sha256": "127e2a8a16936d3dc3d93b81e81b15a8e3823461c64bf817938cc03c3467b5a8"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/training.jsonl",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/training.jsonl",
+      "bytes": 594393,
+      "sha256": "e6969a5fc31f1078921ec3825a717078d02880ea6cd6681476f2d1f48dabca3d"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/development.jsonl",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/development.jsonl",
+      "bytes": 293470,
+      "sha256": "bf220a91365f9070fb0599e74ad40f0262a75520ae9d35aafd7bab2f829a4fcb"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/collection.jsonl",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/collection.jsonl",
+      "bytes": 59,
+      "sha256": "cbd176a1ba7c3b0ba94f3269dcf883f89ec49300f42bb5ef760bdfc2af3ec0c0"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/latest.pt",
+      "backup": "reports/parallel-continue256-20260906/checkpoints/latest.pt",
+      "bytes": 1160329,
+      "sha256": "affad9079f586a37b48e8f6503c990a8106b7dba59fd9d6701855619a4c9e092"
+    },
+    {
+      "source": "runs/20260906T002330Z-shared-parallel-continue256-f69175ea/artifacts/best.pt",
+      "backup": "reports/parallel-continue256-20260906/checkpoints/best.pt",
+      "bytes": 580310,
+      "sha256": "1e45a951da760513cbc2cf05bb7f4b3e586a40e063bb2c9cc0e7def26c736fa3"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/manifest.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/manifest.json",
+      "bytes": 33316,
+      "sha256": "225429d35e92e06aa717ea63d7031f72bc6f8098fb60215a31a31c3969d643a4"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/status.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/status.json",
+      "bytes": 293,
+      "sha256": "9984762b7a692c8f10ce7ee785ea114607b000fff6c4ce1b0f1f6b5c1b04a576"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/log.txt",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/log.txt",
+      "bytes": 1502,
+      "sha256": "9ead88a2330de4f0b117a3e99b50d5e1e84c30816545dafa4e49059cf12d119b"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/summary.json",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/summary.json",
+      "bytes": 33692,
+      "sha256": "64f129a9aeb3e9763986a7eb1523cd4283c2f28a0eea057b584c5f02bc432d92"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/learning-curve.png",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/learning-curve.png",
+      "bytes": 121739,
+      "sha256": "5b62e99466ebc37c14811d3465436cd36aad534781d4427e03115a1e94e4be1c"
+    },
+    {
+      "source": "runs/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/learning-curve.pdf",
+      "backup": "reports/parallel-continue256-20260906/records/20260906T004847Z-parallel-continue256-summary-f182bd7a/artifacts/learning-curve.pdf",
+      "bytes": 21505,
+      "sha256": "5b9bed9cffe998238857b60c652e582243634696ba5d3a2f4111626e68cc0f46"
+    }
+  ],
+  "total_files": 15,
+  "total_bytes": 3125241
+}

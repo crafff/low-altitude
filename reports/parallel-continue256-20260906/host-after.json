@@ -1,0 +1,27 @@
+{
+  "time_utc": "2026-09-06T00:49:16.626838+00:00",
+  "protected": [
+    {
+      "pid": 3059945,
+      "state": "S",
+      "start_ticks": 348614026
+    },
+    {
+      "pid": 3062529,
+      "state": "R",
+      "start_ticks": 348620130
+    }
+  ],
+  "gpu": "NVIDIA GeForce RTX 4090, 24564, 20886, 3162, 99",
+  "gpu_processes": "3059945, 10045\n3062529, 9887",
+  "memory": {
+    "MemAvailable": "63573888 kB",
+    "SwapFree": "88 kB"
+  },
+  "load_average": [
+    2.68408203125,
+    3.80419921875,
+    3.8740234375
+  ],
+  "disk_available_gib": 134.14580535888672
+}
