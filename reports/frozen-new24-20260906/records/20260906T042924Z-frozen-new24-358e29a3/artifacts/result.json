@@ -1,0 +1,237 @@
+{
+  "protocol": {
+    "scope": "prospectively fixed same-distribution new-scene evaluation; no model selection or tuning",
+    "checkpoint": "reports/timeout2400-continue1024-20260906/checkpoints/best.pt",
+    "checkpoint_sha256": "76453bca0a5ad54aa5d9ece85268b2af586616ccfaab92037f265283d6588a44",
+    "environment": "configs/paper_environment_training2400.json",
+    "ppo": "configs/paper_ppo.json",
+    "initial_seed": 950001,
+    "action_seed_base": 810000,
+    "cases": [
+      {
+        "seed": 10730001,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730002,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730003,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730004,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730005,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730006,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730007,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730008,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730009,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730010,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730011,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730012,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730013,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730014,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730015,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730016,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730017,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730018,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730019,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730020,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730021,
+        "corridor_count": 5
+      },
+      {
+        "seed": 10730022,
+        "corridor_count": 3
+      },
+      {
+        "seed": 10730023,
+        "corridor_count": 4
+      },
+      {
+        "seed": 10730024,
+        "corridor_count": 5
+      }
+    ],
+    "policies": [
+      "nr",
+      "initial",
+      "frozen1024"
+    ],
+    "inner_seconds": 1140,
+    "outer_seconds": 1200,
+    "created_at": "2026-09-06T04:28:52.028680+00:00"
+  },
+  "versions": {
+    "python": "3.11.13",
+    "torch": "2.9.1+cpu",
+    "numpy": "2.4.6",
+    "bluesky": "1.1.1",
+    "source_sha256": {
+      "paper_train.py": "938535619dbc06a5aa84a83dc3091349772fefb10392adc96e83e079d309c118",
+      "shared_ppo.py": "3738896b483ab110fd7b3c8b78f41d99ccbb3ab8b8cd76c3de6ec8c4261755ec",
+      "paper_environment.py": "0f614d79f1af4c9f8a1109abb6c34aae27a8f848c286c43b36117396c4845148",
+      "paper_actions.py": "f3318793a827cd5e27b9deb15eaf8496460ebf4c25fde2aae0dbbec63c04ff96",
+      "paper_observation.py": "4689a67a626a13e2e7d006a8d93e15063e57ba3d087635d2f936df4d615380f7",
+      "paper_scenarios.py": "36c1ea8992ac3ec110162b7f510b36d295fd919435a4a155b43e2463fcbdc2ad",
+      "paper_performance.py": "dc327818cd6e308bbf6defadd474255bf69e91f5e7d2035bff59ca0be8a11ba4",
+      "nr_pilot.py": "d69a48130f1902c6cfd75bd76e5626a8ea739c021694931ead5d11aa11f4aaf0",
+      "bluesky_diagnostic.py": "9693e428c501079b2c3b6f33294628ad29010a7833dd2a0c5ca6009ef3243b40",
+      "route_completion.py": "3556b151293727b42af66940dc5fe00ffa74a5d86c0ac881cf46492fd676164c",
+      "navigation_refresh.py": "c7cf67ab4f99a308f1feca11041fbbb0b1d8e04d62abdc342f94f288112d0fd1",
+      "nominal_turn_speed.py": "af5c41ebb511868659925c9a387dfba680a8676cca37cbcd99f36ad5efa4971b",
+      "parallel_rollout.py": "1b00443410fbe7d3b5099cf13c559924b6d8d1ea5de6e68b12137c65ec5ff974",
+      "rollout_errors.py": "7ad3246cbdf6d3cf83e603b6eff17cfef160c623f4af773a966217689a6d3d11"
+    }
+  },
+  "model_parameters_unchanged": true,
+  "case_count": 24,
+  "aggregate": {
+    "nr": {
+      "completed": 720,
+      "failed_timeout": 0,
+      "path_length_m": 6660445.27963471,
+      "outside_corridor_aircraft_seconds": 0.0,
+      "outside_corridor_flights": 0,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "changed_instructions": 0,
+      "policy_decisions": 0,
+      "return_sum": -6678.830974951293,
+      "failed_route_exhausted": 0,
+      "outside_exit_crossings": 0,
+      "planned": 720,
+      "flight_hours": 113.05604166666666,
+      "completed_fraction": 1.0,
+      "max_centerline_distance_m": 38.64918351375423,
+      "risk": {
+        "lowc": {
+          "unordered_pair_seconds": 82795.25,
+          "directed_pair_seconds": 165590.5,
+          "unordered_seconds_per_flight_hour": 732.3381287672596,
+          "directed_seconds_per_flight_hour": 1464.6762575345192
+        },
+        "nmac": {
+          "unordered_pair_seconds": 20894.0,
+          "directed_pair_seconds": 41788.0,
+          "unordered_seconds_per_flight_hour": 184.81099896990617,
+          "directed_seconds_per_flight_hour": 369.62199793981233
+        }
+      }
+    },
+    "initial": {
+      "completed": 699,
+      "failed_timeout": 0,
+      "path_length_m": 7171784.60021534,
+      "outside_corridor_aircraft_seconds": 107419.25,
+      "outside_corridor_flights": 671,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "changed_instructions": 128835,
+      "policy_decisions": 107546,
+      "return_sum": -5087.028800135466,
+      "failed_route_exhausted": 21,
+      "outside_exit_crossings": 20,
+      "planned": 720,
+      "flight_hours": 149.31958333333336,
+      "completed_fraction": 0.9708333333333333,
+      "max_centerline_distance_m": 180.077289778788,
+      "risk": {
+        "lowc": {
+          "unordered_pair_seconds": 64928.0,
+          "directed_pair_seconds": 129856.0,
+          "unordered_seconds_per_flight_hour": 434.8257512549983,
+          "directed_seconds_per_flight_hour": 869.6515025099966
+        },
+        "nmac": {
+          "unordered_pair_seconds": 11998.75,
+          "directed_pair_seconds": 23997.5,
+          "unordered_seconds_per_flight_hour": 80.35617118763724,
+          "directed_seconds_per_flight_hour": 160.7123423752745
+        }
+      }
+    },
+    "frozen1024": {
+      "completed": 706,
+      "failed_timeout": 0,
+      "path_length_m": 7183089.144849723,
+      "outside_corridor_aircraft_seconds": 97892.75,
+      "outside_corridor_flights": 658,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "changed_instructions": 114459,
+      "policy_decisions": 99572,
+      "return_sum": -4893.030638888152,
+      "failed_route_exhausted": 14,
+      "outside_exit_crossings": 14,
+      "planned": 720,
+      "flight_hours": 138.23833333333332,
+      "completed_fraction": 0.9805555555555555,
+      "max_centerline_distance_m": 375.75671404855353,
+      "risk": {
+        "lowc": {
+          "unordered_pair_seconds": 58501.75,
+          "directed_pair_seconds": 117003.5,
+          "unordered_seconds_per_flight_hour": 423.19484465235166,
+          "directed_seconds_per_flight_hour": 846.3896893047033
+        },
+        "nmac": {
+          "unordered_pair_seconds": 12349.75,
+          "directed_pair_seconds": 24699.5,
+          "unordered_seconds_per_flight_hour": 89.33665288209977,
+          "directed_seconds_per_flight_hour": 178.67330576419954
+        }
+      }
+    }
+  },
+  "wall_seconds": 694.3613631329499
+}

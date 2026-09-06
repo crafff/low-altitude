@@ -1,0 +1,115 @@
+{
+  "scope": "prospectively fixed same-distribution new-scene evaluation; no model selection or tuning",
+  "checkpoint": "reports/timeout2400-continue1024-20260906/checkpoints/best.pt",
+  "checkpoint_sha256": "76453bca0a5ad54aa5d9ece85268b2af586616ccfaab92037f265283d6588a44",
+  "environment": "configs/paper_environment_training2400.json",
+  "ppo": "configs/paper_ppo.json",
+  "initial_seed": 950001,
+  "action_seed_base": 810000,
+  "cases": [
+    {
+      "seed": 10730001,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730002,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730003,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730004,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730005,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730006,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730007,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730008,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730009,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730010,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730011,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730012,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730013,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730014,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730015,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730016,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730017,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730018,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730019,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730020,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730021,
+      "corridor_count": 5
+    },
+    {
+      "seed": 10730022,
+      "corridor_count": 3
+    },
+    {
+      "seed": 10730023,
+      "corridor_count": 4
+    },
+    {
+      "seed": 10730024,
+      "corridor_count": 5
+    }
+  ],
+  "policies": [
+    "nr",
+    "initial",
+    "frozen1024"
+  ],
+  "inner_seconds": 1140,
+  "outer_seconds": 1200,
+  "created_at": "2026-09-06T04:28:52.028680+00:00"
+}
