@@ -1,0 +1,2 @@
+{"time": 1788652597.943426, "protected": {"3059945": {"state": "S", "start_ticks": "348614026"}, "3062529": {"state": "R", "start_ticks": "348620130"}}, "loadavg": "3.26 3.16 2.97 5/3423 2690906", "mem_available_kib": "63186988"}
+{"time": 1788652798.4593432, "protected": {"3059945": {"state": "S", "start_ticks": "348614026"}, "3062529": {"state": "S", "start_ticks": "348620130"}}, "loadavg": "4.34 3.93 3.32 6/3429 2696686", "mem_available_kib": "61507896"}

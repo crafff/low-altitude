@@ -57,3 +57,5 @@
 
 - 小网络不能按GPU标称算力推断训练速度：当前35325参数、真实3726样本，CPU1完整8.51s、共享GPU11.20s，主要耗时是环境step；4进程固定策略采样约3.50×。GPU异步同步、CPU采样和全部检查必须算进时间，采样并行不等于每episode更新的训练等价加速。来源：[速度报告](../reports/training-speed-20260905/README.md)。
 - 显存allocator限额不包括CUDA上下文/库；本次torch reserved24MiB而总进程最高观测492MiB。错误日志写失败不能绕过停止自己的进程；watchdog用finally退出，初始化后立即复查余量并做聚焦回归。来源：[测速实现/测试/报告](../reports/training-speed-20260905/README.md)。
+
+- 持久worker并行时，绝对episode序号决定随机源、按序合并完整样本后更新，才可跨进程重启精确恢复；本次真实8连续 vs4+恢复8已比较完整样本/模型/Adam/RNG和best。恢复测试还须对齐评价候选时点，否则“多看一个中间模型”会改变best。来源：[并行恢复验证](../reports/parallel-pilot-20260905/README.md)。

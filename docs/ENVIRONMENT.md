@@ -90,3 +90,19 @@ SharedActorCritic/PPO支持显式CPU/CUDA及1–4计算线程；生产paper_trai
 GPU只开一个上下文；torch allocator上限256MiB，启动前nvidia-smi实际free至少3000MiB、运行中至少2048MiB，自己的RSS软阈值2048MiB。每约1秒记录GPU原有PID/显存和自己的RSS，检查或日志失败都停止自己的进程。allocator上限不覆盖上下文和库分配，轮询不是显存预留或绝对保护；64GiB RLIMIT_AS只是每进程虚拟地址上限。GPU测试用实际总进程显存核对，而不只报告张量统计。
 
 依据：[PyTorch2.9.1构建矩阵](https://pytorch.org/get-started/previous-versions/#v291)、[CUDA异步计时](https://docs.pytorch.org/docs/2.9/notes/cuda.html#asynchronous-execution)、[allocator限制范围](https://docs.pytorch.org/docs/2.9/generated/torch.cuda.memory.set_per_process_memory_fraction.html)。这项测速不代表独占GPU速度、长期资源保证或MARL基线已有效。
+
+
+## 四环境同步CPU训练
+
+[parallel配置](../configs/paper_train_parallel.json)在同一lab job内spawn四个持久BlueSky环境，父进程仍用单线程PPO。环境种子和动作随机源按绝对episode序号固定，完整四场景提交一次更新；仅在完整批次保存/恢复。先完成的worker等待其余worker，避免使用已经更新的策略混采。原12开发场景作为显式只读输入；`--episodes`目标和评价/保存间隔必须为4的倍数。
+
+```bash
+nice -n 15 ionice -c 3 taskset -c 12-15 python3 -B tools/lab.py run \
+  --label shared-parallel-pilot --stage train --config configs/paper_train_parallel.json \
+  --seconds 900 --disk-mib 512 --memory-mib 4096 \
+  --input reports/policy-modes-refresh-850-20260905/scenarios.json \
+  --runtime "$PWD/.venv" --runtime "$PWD/environments/python" \
+  -- "$PWD/.venv/bin/python" -B src/paper_train.py --config configs/paper_train_parallel.json
+```
+
+CPU12–15是本机四个物理核；其他机器需明确新affinity并重新验证。恢复时额外把保存的checkpoint通过`--input`加入快照，然后传`--resume`，保留完全相同科学配置/源码；它不是旧850或单环境checkpoint的迁移工具。真实8连续与4+恢复8的样本、参数、Adam/RNG、best及评价聚合已精确比较，详见[并行报告](../reports/parallel-pilot-20260905/README.md)。这保证本次验证的恢复一致性，不证明多进程学习效果与原逐场景更新等价。

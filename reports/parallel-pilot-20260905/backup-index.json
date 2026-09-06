@@ -220,5 +220,83 @@
     "backup": "reports/parallel-pilot-20260905/validation/resumed-training.jsonl",
     "bytes": 12378,
     "sha256": "8109a9afc10397f512bca716a72231893872718174a9814f7acd950f93259697"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/manifest.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/manifest.json",
+    "bytes": 30316,
+    "sha256": "f48334dc9fb05b26b0299c3a1d1c1ff2b3daf73de52395a478e7a55db91ebc20"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/status.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/status.json",
+    "bytes": 285,
+    "sha256": "05bccb180e9e4828508c293eb085ff8e37987dd3aad1de12c57d973e4067ac16"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/log.txt",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/log.txt",
+    "bytes": 33496,
+    "sha256": "2b1fa1f338458d679e378813eeff282200a0d563770a780db8ef113f2fb6da65"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/result.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/result.json",
+    "bytes": 160612,
+    "sha256": "ac5d5b60e6ab914293899ead015b903c29fec71707711ae0d3c29267728ef668"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/collection.jsonl",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/collection.jsonl",
+    "bytes": 57,
+    "sha256": "7cc9c8ba3a154584b0193d1c503cb7b273961fab20e0281a84b11a84c4ef2f19"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/development.jsonl",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/development.jsonl",
+    "bytes": 125675,
+    "sha256": "e3d6a27988c3f0c8674bf0d2e1219d6e6ae066ab0e532cde874b3d6eadf6a20d"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/training.jsonl",
+    "backup": "reports/parallel-pilot-20260905/records/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/training.jsonl",
+    "bytes": 197208,
+    "sha256": "34d5e6d1d8155adbf477dc2097874f306d69204b62d8f1f8c706d67dae1a0c8f"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/latest.pt",
+    "backup": "reports/parallel-pilot-20260905/checkpoints/latest.pt",
+    "bytes": 1086857,
+    "sha256": "7665bec4002b2e3e3b1a1d25023404f5d0156487526db32f7a0b08cd461bea46"
+  },
+  {
+    "source": "runs/20260905T235405Z-shared-parallel-pilot64-85c0c4fe/artifacts/best.pt",
+    "backup": "reports/parallel-pilot-20260905/checkpoints/best.pt",
+    "bytes": 580310,
+    "sha256": "1e45a951da760513cbc2cf05bb7f4b3e586a40e063bb2c9cc0e7def26c736fa3"
+  },
+  {
+    "source": "runs/20260906T000728Z-parallel-pilot-summary-ad898170/manifest.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260906T000728Z-parallel-pilot-summary-ad898170/manifest.json",
+    "bytes": 38911,
+    "sha256": "df0243004de836cfae7fcd2fddc8a6bdea5e2f5f768355b537e22c260192d9c2"
+  },
+  {
+    "source": "runs/20260906T000728Z-parallel-pilot-summary-ad898170/status.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260906T000728Z-parallel-pilot-summary-ad898170/status.json",
+    "bytes": 287,
+    "sha256": "ef9c8c6d3cdbe1eed60baf4e2c55f608f28840babd7ddf9f900e3e6fe7500478"
+  },
+  {
+    "source": "runs/20260906T000728Z-parallel-pilot-summary-ad898170/log.txt",
+    "backup": "reports/parallel-pilot-20260905/records/20260906T000728Z-parallel-pilot-summary-ad898170/log.txt",
+    "bytes": 3146,
+    "sha256": "20a4508f673c3342e8c779bb2919d2ba472215c14cd1687f6ce50891a5cc190a"
+  },
+  {
+    "source": "runs/20260906T000728Z-parallel-pilot-summary-ad898170/artifacts/summary.json",
+    "backup": "reports/parallel-pilot-20260905/records/20260906T000728Z-parallel-pilot-summary-ad898170/artifacts/summary.json",
+    "bytes": 3636,
+    "sha256": "5ae995611178ead350d95183518b5bb0e4439f7a3f8ca89c39f305732e98b06d"
   }
 ]

@@ -1,0 +1,17 @@
+{
+  "time": 1788653180.7975645,
+  "protected": {
+    "3059945": {
+      "state": "S",
+      "start_ticks": "348614026"
+    },
+    "3062529": {
+      "state": "S",
+      "start_ticks": "348620130"
+    }
+  },
+  "same_start_times": true,
+  "gpu": "20886, 3162, 99",
+  "loadavg": "2.43 3.48 3.39 3/3418 2707582",
+  "mem_available_kib": "63686952"
+}
