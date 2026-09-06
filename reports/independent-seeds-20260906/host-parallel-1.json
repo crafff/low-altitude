@@ -1,0 +1,40 @@
+{
+  "utc": "2026-09-06T04:54:30.018006+00:00",
+  "protected": {
+    "3059945": {
+      "state": "R",
+      "start_ticks": "348614026"
+    },
+    "3062529": {
+      "state": "S",
+      "start_ticks": "348620130"
+    }
+  },
+  "own_workers": [
+    {
+      "pid": 3185439,
+      "status": [
+        "VmRSS:\t  655340 kB",
+        "Cpus_allowed_list:\t12-15"
+      ]
+    },
+    {
+      "pid": 3185440,
+      "status": [
+        "VmRSS:\t  669144 kB",
+        "Cpus_allowed_list:\t8-11"
+      ]
+    },
+    {
+      "pid": 3194126,
+      "status": [
+        "VmRSS:\t    3440 kB",
+        "Cpus_allowed_list:\t0-31"
+      ]
+    }
+  ],
+  "gpu": "20886, 3162, 98",
+  "memory": [
+    "MemAvailable:   59403360 kB"
+  ]
+}

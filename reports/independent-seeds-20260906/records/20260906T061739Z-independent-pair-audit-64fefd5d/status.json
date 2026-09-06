@@ -1,0 +1,11 @@
+{
+  "id": "20260906T061739Z-independent-pair-audit-64fefd5d",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-06T06:17:39.178639+00:00",
+  "pid": 6,
+  "finished_at": "2026-09-06T06:17:43.347628+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

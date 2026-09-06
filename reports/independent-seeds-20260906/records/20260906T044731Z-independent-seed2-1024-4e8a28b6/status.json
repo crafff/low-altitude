@@ -1,0 +1,12 @@
+{
+  "id": "20260906T044731Z-independent-seed2-1024-4e8a28b6",
+  "stage": "train",
+  "state": "failed",
+  "started_at": "2026-09-06T04:47:31.077289+00:00",
+  "pid": 4,
+  "received_signal": 15,
+  "finished_at": "2026-09-06T04:48:26.385412+00:00",
+  "reason": "supervisor_signal",
+  "exit_code": 143,
+  "error": null
+}

@@ -1,0 +1,4 @@
+{"seed": 2, "pid": 3, "cores": "12-15"}
+{"seed": 3, "pid": 4, "cores": "8-11"}
+{"seed": 2, "exit_code": 0}
+{"seed": 3, "exit_code": 0}
