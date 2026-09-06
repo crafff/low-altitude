@@ -1,0 +1,903 @@
+{
+  "all_checks_passed": true,
+  "scope": "new2400s lineage; one initialization seed; four seen DEV checkpoints; descriptive, not held-out efficacy",
+  "continuation": {
+    "episodes": 192,
+    "planned_flights": 5760,
+    "update_batches": 48,
+    "samples": 867872,
+    "optimizer_steps": 13584,
+    "batch_wall_seconds": {
+      "mean": 13.097512922075111,
+      "min": 11.531309019774199,
+      "max": 14.424269382376224,
+      "total": 628.6806202596053
+    },
+    "active_samples_per_second": 1380.4656482676749,
+    "payload_bytes": 312455908,
+    "max_worker_peak_rss_mib": 579.3671875
+  },
+  "cumulative": {
+    "episodes": 256,
+    "planned_flights": 7680,
+    "update_batches": 64,
+    "samples": 1156809,
+    "optimizer_steps": 18104,
+    "batch_wall_seconds": {
+      "mean": 13.025407018576516,
+      "min": 11.531309019774199,
+      "max": 14.735762032214552,
+      "total": 833.626049188897
+    },
+    "active_samples_per_second": 1387.6833636923343,
+    "payload_bytes": 416722371,
+    "max_worker_peak_rss_mib": 579.3671875
+  },
+  "development": [
+    {
+      "episodes": 0,
+      "planned": 360,
+      "completed": 349,
+      "completed_fraction": 0.9694444444444444,
+      "flight_hours": 72.37555555555555,
+      "path_length_m": 3579617.7070146035,
+      "failed_timeout": 0,
+      "failed_route_exhausted": 11,
+      "outside_corridor_flights": 340,
+      "outside_corridor_aircraft_seconds": 50707.75,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "return_sum": -3279.099692373622,
+      "changed_instructions": 62485,
+      "policy_decisions": 52136,
+      "nmac_pair_seconds": 6290.75,
+      "nmac_seconds_per_flight_hour": 86.91815837145752,
+      "lowc_pair_seconds": 33686.75,
+      "lowc_seconds_per_flight_hour": 465.44375019190034,
+      "actions": {
+        "total": 52136,
+        "nominal_action_fraction": 0.013790854687739757,
+        "speed_fractions": [
+          0.23803130274666257,
+          0.2500959030228633,
+          0.2579599508976523,
+          0.2539128433328218
+        ],
+        "altitude_fractions": [
+          0.22859444529691575,
+          0.18595596133190118,
+          0.17878241522172778,
+          0.19288015958263005,
+          0.21378701856682522
+        ],
+        "lane_fractions": [
+          0.36343409544268834,
+          0.28322080711984043,
+          0.3533450974374712
+        ],
+        "histogram": [
+          1152,
+          772,
+          944,
+          843,
+          749,
+          682,
+          977,
+          680,
+          772,
+          895,
+          631,
+          758,
+          904,
+          771,
+          880,
+          969,
+          838,
+          1102,
+          849,
+          644,
+          850,
+          907,
+          692,
+          835,
+          925,
+          763,
+          926,
+          969,
+          840,
+          930,
+          1112,
+          899,
+          1045,
+          968,
+          743,
+          911,
+          770,
+          719,
+          782,
+          909,
+          686,
+          995,
+          1140,
+          756,
+          1014,
+          1104,
+          779,
+          1202,
+          953,
+          608,
+          895,
+          679,
+          673,
+          835,
+          916,
+          646,
+          1006,
+          1007,
+          877,
+          1058
+        ]
+      }
+    },
+    {
+      "episodes": 64,
+      "planned": 360,
+      "completed": 353,
+      "completed_fraction": 0.9805555555555555,
+      "flight_hours": 72.29270833333334,
+      "path_length_m": 3575683.69795178,
+      "failed_timeout": 0,
+      "failed_route_exhausted": 7,
+      "outside_corridor_flights": 336,
+      "outside_corridor_aircraft_seconds": 51266.0,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "return_sum": -2983.9465253221715,
+      "changed_instructions": 62030,
+      "policy_decisions": 52078,
+      "nmac_pair_seconds": 6816.0,
+      "nmac_seconds_per_flight_hour": 94.28336767481736,
+      "lowc_pair_seconds": 32327.75,
+      "lowc_seconds_per_flight_hour": 447.17857091396377,
+      "actions": {
+        "total": 52078,
+        "nominal_action_fraction": 0.013614194093475172,
+        "speed_fractions": [
+          0.23962133722493184,
+          0.24837743384922617,
+          0.25655747148508007,
+          0.2554437574407619
+        ],
+        "altitude_fractions": [
+          0.2331886785206805,
+          0.18769922040016898,
+          0.17612043473251662,
+          0.19553362264295865,
+          0.20745804370367527
+        ],
+        "lane_fractions": [
+          0.3795652674833903,
+          0.26333576558239563,
+          0.35709896693421406
+        ],
+        "histogram": [
+          1160,
+          1142,
+          1021,
+          894,
+          747,
+          606,
+          1006,
+          489,
+          620,
+          1096,
+          679,
+          480,
+          1152,
+          607,
+          780,
+          695,
+          619,
+          1386,
+          810,
+          598,
+          803,
+          1181,
+          400,
+          741,
+          862,
+          882,
+          1026,
+          767,
+          846,
+          1319,
+          980,
+          861,
+          906,
+          1039,
+          659,
+          1203,
+          1152,
+          709,
+          860,
+          750,
+          787,
+          1051,
+          783,
+          570,
+          1051,
+          1474,
+          545,
+          1355,
+          1132,
+          585,
+          699,
+          751,
+          512,
+          751,
+          926,
+          671,
+          973,
+          1157,
+          806,
+          966
+        ]
+      }
+    },
+    {
+      "episodes": 128,
+      "planned": 360,
+      "completed": 350,
+      "completed_fraction": 0.9722222222222222,
+      "flight_hours": 72.51458333333333,
+      "path_length_m": 3590379.7022265675,
+      "failed_timeout": 0,
+      "failed_route_exhausted": 10,
+      "outside_corridor_flights": 331,
+      "outside_corridor_aircraft_seconds": 52079.75,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "return_sum": -2892.5677953690297,
+      "changed_instructions": 62444,
+      "policy_decisions": 52241,
+      "nmac_pair_seconds": 6190.0,
+      "nmac_seconds_per_flight_hour": 85.36213979946562,
+      "lowc_pair_seconds": 31613.25,
+      "lowc_seconds_per_flight_hour": 435.95713505903984,
+      "actions": {
+        "total": 52241,
+        "nominal_action_fraction": 0.014107693191171685,
+        "speed_fractions": [
+          0.23475814015811336,
+          0.250090924752589,
+          0.25726919469382287,
+          0.25788174039547485
+        ],
+        "altitude_fractions": [
+          0.23094887157596525,
+          0.18673072873796442,
+          0.174441530598572,
+          0.19522980034838536,
+          0.21264906873911296
+        ],
+        "lane_fractions": [
+          0.37080071208437815,
+          0.2740759173828985,
+          0.35512337053272336
+        ],
+        "histogram": [
+          1127,
+          1009,
+          995,
+          876,
+          766,
+          604,
+          975,
+          540,
+          651,
+          979,
+          636,
+          555,
+          1108,
+          642,
+          801,
+          693,
+          686,
+          1298,
+          805,
+          646,
+          807,
+          1099,
+          573,
+          724,
+          899,
+          924,
+          989,
+          799,
+          845,
+          1278,
+          991,
+          833,
+          963,
+          996,
+          804,
+          1110,
+          920,
+          737,
+          850,
+          790,
+          775,
+          955,
+          944,
+          632,
+          1140,
+          1501,
+          651,
+          1318,
+          1059,
+          553,
+          729,
+          693,
+          537,
+          814,
+          973,
+          723,
+          1001,
+          1144,
+          806,
+          970
+        ]
+      }
+    },
+    {
+      "episodes": 256,
+      "planned": 360,
+      "completed": 354,
+      "completed_fraction": 0.9833333333333333,
+      "flight_hours": 71.45854166666666,
+      "path_length_m": 3579333.5127167287,
+      "failed_timeout": 0,
+      "failed_route_exhausted": 6,
+      "outside_corridor_flights": 333,
+      "outside_corridor_aircraft_seconds": 51742.75,
+      "outside_altitude_aircraft_seconds": 0.0,
+      "return_sum": -2673.433652779666,
+      "changed_instructions": 61451,
+      "policy_decisions": 51472,
+      "nmac_pair_seconds": 5532.25,
+      "nmac_seconds_per_flight_hour": 77.41901627108959,
+      "lowc_pair_seconds": 30402.0,
+      "lowc_seconds_per_flight_hour": 425.44948848545636,
+      "actions": {
+        "total": 51472,
+        "nominal_action_fraction": 0.012977929748212621,
+        "speed_fractions": [
+          0.22250932545850172,
+          0.24537612682623564,
+          0.26006372396642835,
+          0.2720508237488343
+        ],
+        "altitude_fractions": [
+          0.22268417780540878,
+          0.19039477774323904,
+          0.17059760646565122,
+          0.20490752253652472,
+          0.21141591544917626
+        ],
+        "lane_fractions": [
+          0.39541886851103514,
+          0.26668868511035126,
+          0.3378924463786136
+        ],
+        "histogram": [
+          1223,
+          877,
+          752,
+          776,
+          666,
+          547,
+          1047,
+          476,
+          546,
+          1055,
+          569,
+          486,
+          1080,
+          666,
+          687,
+          727,
+          608,
+          1192,
+          1013,
+          575,
+          698,
+          1081,
+          517,
+          588,
+          1015,
+          986,
+          858,
+          732,
+          856,
+          1184,
+          1006,
+          796,
+          828,
+          1012,
+          725,
+          1336,
+          988,
+          668,
+          846,
+          752,
+          784,
+          949,
+          1025,
+          670,
+          1001,
+          1679,
+          612,
+          1162,
+          1147,
+          512,
+          793,
+          630,
+          589,
+          805,
+          1189,
+          794,
+          1110,
+          1176,
+          781,
+          1024
+        ]
+      }
+    }
+  ],
+  "no_resolution": {
+    "planned": 360,
+    "completed": 360,
+    "completed_fraction": 1.0,
+    "flight_hours": 55.051458333333336,
+    "path_length_m": 3329784.80093567,
+    "failed_timeout": 0,
+    "failed_route_exhausted": 0,
+    "outside_corridor_flights": 0,
+    "outside_corridor_aircraft_seconds": 0.0,
+    "outside_altitude_aircraft_seconds": 0.0,
+    "return_sum": -3026.6577632518565,
+    "changed_instructions": 0,
+    "policy_decisions": 0,
+    "nmac_pair_seconds": 8924.0,
+    "nmac_seconds_per_flight_hour": 162.1028810166246,
+    "lowc_pair_seconds": 36010.75,
+    "lowc_seconds_per_flight_hour": 654.1289021256626
+  },
+  "best_completed_episodes": 256,
+  "best_selection_key": [
+    0,
+    77.41901627108959,
+    425.44948848545636,
+    0.0
+  ],
+  "final_vs_initial": {
+    "completed_difference": 5,
+    "nmac_rate_percent": -10.928834984942915,
+    "lowc_rate_percent": -8.592716453911887
+  },
+  "final_vs_64": {
+    "completed_difference": 1,
+    "nmac_rate_percent": -17.886878480935042,
+    "lowc_rate_percent": -4.85915109574605
+  },
+  "final_meets_completion_gate": true,
+  "whole_job_wall_seconds": 1110.2725799218751,
+  "evaluation_wall_seconds": 447.4232412711717,
+  "pool_startup_seconds": 25.850887402892113,
+  "ppo_blocks": [
+    {
+      "through_episode": 32,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2320802904136583,
+          "min": 2.2216879273285235,
+          "max": 2.2433101769953216,
+          "total": 17.856642323309266
+        },
+        "approx_kl": {
+          "mean": 0.00014828691149272694,
+          "min": 3.4425900115386384e-05,
+          "max": 0.00025812797832296027,
+          "total": 0.0011862952919418153
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": 5.560799933784571e-05,
+          "min": -9.553816358921892e-05,
+          "max": 0.00033287853201034755,
+          "total": 0.00044486399470276567
+        },
+        "value_loss": {
+          "mean": 2.04755436613661,
+          "min": 1.0726776296536589,
+          "max": 2.6792450415497386,
+          "total": 16.380434929092882
+        },
+        "gradient_norm": {
+          "mean": 1.1592545268071999,
+          "min": 0.7763769533827757,
+          "max": 1.3859540645712247,
+          "total": 9.274036214457599
+        },
+        "gradient_norm_after": {
+          "mean": 0.4939818401889664,
+          "min": 0.4881402844472621,
+          "max": 0.497906357571412,
+          "total": 3.9518547215117312
+        }
+      }
+    },
+    {
+      "through_episode": 64,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2270852855939056,
+          "min": 2.204775256402666,
+          "max": 2.23972589728769,
+          "total": 17.816682284751245
+        },
+        "approx_kl": {
+          "mean": 3.9554161667728325e-05,
+          "min": 2.5238913174081895e-05,
+          "max": 7.549879502689905e-05,
+          "total": 0.0003164332933418266
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": 1.9556129477285007e-05,
+          "min": -3.3276259416589905e-05,
+          "max": 0.00011685456170124729,
+          "total": 0.00015644903581828006
+        },
+        "value_loss": {
+          "mean": 2.3954463114684996,
+          "min": 1.8434943584286512,
+          "max": 3.261754999209804,
+          "total": 19.163570491747997
+        },
+        "gradient_norm": {
+          "mean": 1.4106498139995607,
+          "min": 1.1387908705941152,
+          "max": 1.9184048402285367,
+          "total": 11.285198511996485
+        },
+        "gradient_norm_after": {
+          "mean": 0.4994999871807663,
+          "min": 0.49691953157636204,
+          "max": 0.49999954794101786,
+          "total": 3.9959998974461306
+        }
+      }
+    },
+    {
+      "through_episode": 96,
+      "metrics": {
+        "entropy": {
+          "mean": 2.222957131540964,
+          "min": 2.200115226511281,
+          "max": 2.2402323770845802,
+          "total": 17.78365705232771
+        },
+        "approx_kl": {
+          "mean": 3.1545634441797875e-05,
+          "min": 2.415228544912559e-05,
+          "max": 4.0452382109693663e-05,
+          "total": 0.000252365075534383
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": -2.1355790347486157e-06,
+          "min": -0.00013221619148641204,
+          "max": 0.00013486736497974472,
+          "total": -1.7084632277988905e-05
+        },
+        "value_loss": {
+          "mean": 2.741711398158751,
+          "min": 2.0006540906847476,
+          "max": 4.313183620058257,
+          "total": 21.933691185270007
+        },
+        "gradient_norm": {
+          "mean": 1.7487374432531941,
+          "min": 1.5026127965204499,
+          "max": 2.2130379448097224,
+          "total": 13.989899546025555
+        },
+        "gradient_norm_after": {
+          "mean": 0.49998671859373095,
+          "min": 0.4998960798826503,
+          "max": 0.49999973172639767,
+          "total": 3.9998937487498476
+        }
+      }
+    },
+    {
+      "through_episode": 128,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2380388757788894,
+          "min": 2.2284833724028195,
+          "max": 2.2545798464013354,
+          "total": 17.90431100623112
+        },
+        "approx_kl": {
+          "mean": 2.7295323035083e-05,
+          "min": 1.6341943495606348e-05,
+          "max": 4.8775030431626274e-05,
+          "total": 0.000218362584280664
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": -7.206074354552798e-06,
+          "min": -0.00010998658928956711,
+          "max": 4.974046221960753e-05,
+          "total": -5.7648594836422375e-05
+        },
+        "value_loss": {
+          "mean": 2.492842285329391,
+          "min": 1.791710329723412,
+          "max": 3.1118016514042113,
+          "total": 19.942738282635126
+        },
+        "gradient_norm": {
+          "mean": 1.814450732584096,
+          "min": 1.5011143668187459,
+          "max": 1.9871248049297483,
+          "total": 14.515605860672768
+        },
+        "gradient_norm_after": {
+          "mean": 0.4999613364667466,
+          "min": 0.4997312544812973,
+          "max": 0.49999971551511446,
+          "total": 3.9996906917339734
+        }
+      }
+    },
+    {
+      "through_episode": 160,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2231372780775382,
+          "min": 2.2116762791098084,
+          "max": 2.2335629432838116,
+          "total": 17.785098224620306
+        },
+        "approx_kl": {
+          "mean": 2.954530301581115e-05,
+          "min": 1.4293904079322438e-05,
+          "max": 5.597963756561416e-05,
+          "total": 0.00023636242412648922
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": -2.3844963369740332e-05,
+          "min": -8.345745691758454e-05,
+          "max": 7.415044672668808e-05,
+          "total": -0.0001907597069579227
+        },
+        "value_loss": {
+          "mean": 2.5565533839863126,
+          "min": 1.588909908233214,
+          "max": 3.1344180596748386,
+          "total": 20.452427071890497
+        },
+        "gradient_norm": {
+          "mean": 1.99226107169692,
+          "min": 1.6817017915570436,
+          "max": 2.286122654088762,
+          "total": 15.93808857357536
+        },
+        "gradient_norm_after": {
+          "mean": 0.4999710552347546,
+          "min": 0.4997705270712925,
+          "max": 0.4999997422658548,
+          "total": 3.9997684418780373
+        }
+      }
+    },
+    {
+      "through_episode": 192,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2277434005967445,
+          "min": 2.2135240906132467,
+          "max": 2.2440315414140652,
+          "total": 17.821947204773956
+        },
+        "approx_kl": {
+          "mean": 2.3381648173829624e-05,
+          "min": 1.6134370058109147e-05,
+          "max": 3.44913749583561e-05,
+          "total": 0.000187053185390637
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": 3.1387238297729764e-05,
+          "min": -4.099462682757838e-05,
+          "max": 0.00015378608715669847,
+          "total": 0.0002510979063818381
+        },
+        "value_loss": {
+          "mean": 2.5648868020984392,
+          "min": 1.8900595709794976,
+          "max": 3.7237457745797613,
+          "total": 20.519094416787514
+        },
+        "gradient_norm": {
+          "mean": 2.0292227711440214,
+          "min": 1.795996749098971,
+          "max": 2.469870698135511,
+          "total": 16.23378216915217
+        },
+        "gradient_norm_after": {
+          "mean": 0.4999997135123057,
+          "min": 0.49999968208823914,
+          "max": 0.49999976420623565,
+          "total": 3.9999977080984452
+        }
+      }
+    },
+    {
+      "through_episode": 224,
+      "metrics": {
+        "entropy": {
+          "mean": 2.2326941307486443,
+          "min": 2.210284988862473,
+          "max": 2.240180824128311,
+          "total": 17.86155304598915
+        },
+        "approx_kl": {
+          "mean": 2.2812247736023378e-05,
+          "min": 1.3656187995839862e-05,
+          "max": 3.272773647943073e-05,
+          "total": 0.000182497981888187
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": -2.144566468202295e-05,
+          "min": -0.0001060713724769198,
+          "max": 3.0981788797316934e-05,
+          "total": -0.00017156531745618356
+        },
+        "value_loss": {
+          "mean": 2.16169398723543,
+          "min": 1.6828736429030824,
+          "max": 2.7984925902112194,
+          "total": 17.29355189788344
+        },
+        "gradient_norm": {
+          "mean": 1.9657669504014077,
+          "min": 1.7822537531279428,
+          "max": 2.266170412322113,
+          "total": 15.72613560321126
+        },
+        "gradient_norm_after": {
+          "mean": 0.4999894522687067,
+          "min": 0.4999176860347385,
+          "max": 0.499999742336181,
+          "total": 3.999915618149654
+        }
+      }
+    },
+    {
+      "through_episode": 256,
+      "metrics": {
+        "entropy": {
+          "mean": 2.222511227883518,
+          "min": 2.1961514328202782,
+          "max": 2.2394280641384645,
+          "total": 17.780089823068145
+        },
+        "approx_kl": {
+          "mean": 2.4683019389675047e-05,
+          "min": 1.6886055679142175e-05,
+          "max": 4.245613458738251e-05,
+          "total": 0.00019746415511740038
+        },
+        "clip_fraction": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "total": 0.0
+        },
+        "policy_loss": {
+          "mean": -5.468382169785155e-05,
+          "min": -9.303894961415444e-05,
+          "max": -9.201945972387597e-06,
+          "total": -0.0004374705735828124
+        },
+        "value_loss": {
+          "mean": 2.2989243574354106,
+          "min": 1.9432958486586087,
+          "max": 3.2266239975213717,
+          "total": 18.39139485948328
+        },
+        "gradient_norm": {
+          "mean": 2.0676317602411554,
+          "min": 1.8212011361623313,
+          "max": 2.4756120491241624,
+          "total": 16.541054081929243
+        },
+        "gradient_norm_after": {
+          "mean": 0.49999971512316577,
+          "min": 0.4999996704995913,
+          "max": 0.49999976927482953,
+          "total": 3.999997720985326
+        }
+      }
+    }
+  ],
+  "action_note": "Marginals count all accepted policy decisions, including repeated masked/locked targets; not fresh maneuver probabilities.",
+  "exact_resume64_case_summaries": true,
+  "exact_embedded_and_standalone_best": true,
+  "checkpoint_sha256": {
+    "latest.pt": "5bf269850f406a5fbeb6150fa20513e94395e3e943c0defce4c956733cc6c42c",
+    "best.pt": "bba3415a3074f10e9e3ed15605abad63f4e0c4f352538088aae5281ac93ed0ba"
+  },
+  "frozen_old256_new2400": {
+    "planned": 360,
+    "completed": 348,
+    "completed_fraction": 0.9666666666666667,
+    "flight_hours": 71.58298611111113,
+    "path_length_m": 3573345.6750505143,
+    "failed_timeout": 0,
+    "failed_route_exhausted": 12,
+    "outside_corridor_flights": 337,
+    "outside_corridor_aircraft_seconds": 45814.75,
+    "outside_altitude_aircraft_seconds": 0.0,
+    "return_sum": -2851.253931904124,
+    "changed_instructions": 61324,
+    "policy_decisions": 51560,
+    "nmac_pair_seconds": 5983.0,
+    "nmac_seconds_per_flight_hour": 83.5813134522383,
+    "lowc_pair_seconds": 30389.25,
+    "lowc_seconds_per_flight_hour": 424.53174491533224
+  },
+  "final_vs_frozen_old256": {
+    "completed_difference": 6,
+    "nmac_rate_percent": -7.3728168733195325,
+    "lowc_rate_percent": 0.21617784326284362
+  }
+}

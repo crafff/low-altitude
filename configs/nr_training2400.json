@@ -1,0 +1,82 @@
+{
+  "schema": "bluesky.paper-like.nr-pilot.v1",
+  "bluesky_version": "1.1.1",
+  "stage": "dev",
+  "scenario_count": 8,
+  "seeds": [
+    51001,
+    51002,
+    51003,
+    51004,
+    51005,
+    51006,
+    51007,
+    51008
+  ],
+  "origin_lat_lon_deg": [
+    52.0,
+    4.0
+  ],
+  "origin_square_side_nm": 2.0,
+  "earth_radius_m": 6371000.0,
+  "route_length_nm": 5.0,
+  "corridor_counts": [
+    3,
+    4,
+    5
+  ],
+  "corridor_count_distribution": "uniform_choice",
+  "aircraft_per_scenario": 30,
+  "allocation_method": "balanced_corridor_order",
+  "origin_distribution": "uniform_square_rejection",
+  "minimum_origin_spacing_ft": 1630.0,
+  "max_origin_sampling_attempts": 10000,
+  "intermediate_waypoint_count_range": [
+    0,
+    3
+  ],
+  "waypoint_count_distribution": "uniform_integer",
+  "initial_bearing_deg_range": [
+    0.0,
+    360.0
+  ],
+  "initial_bearing_distribution": "uniform",
+  "signed_turn_deg_range": [
+    -90.0,
+    90.0
+  ],
+  "signed_turn_distribution": "uniform",
+  "first_entry_seconds": 0.0,
+  "entry_interval_seconds_range": [
+    60.0,
+    90.0
+  ],
+  "entry_interval_distribution": "uniform",
+  "type_count": 12,
+  "type_distribution": "uniform_choice",
+  "dt_seconds": 0.25,
+  "per_flight_timeout_seconds": 2400.0,
+  "arrival_radius_m": 25.0,
+  "altitude_ft": 350.0,
+  "lowc_horizontal_ft": 1630.0,
+  "nmac_horizontal_ft": 500.0,
+  "vertical_tolerance_ft": 100.0,
+  "corridor_width_ft": 500.0,
+  "corridor_height_ft": 200.0,
+  "store_full_trajectories": false,
+  "reconstruction_choices": [
+    "Paper-like reconstruction from REPRODUCTION and PDF pages 7 and 17; eight development scenarios, no held-out evaluation and no claim of an effective MARL baseline.",
+    "The 2 NM square is centered at latitude 52, longitude 4; independent uniform local north/east offsets are converted to degrees at the center latitude. Accepted origins satisfy spherical LoWC spacing with bounded sequential rejection.",
+    "Corridor count is uniform over 3, 4 and 5; intermediate waypoint count is independently uniform over integers 0 through 3 per corridor. These complete sampling distributions are reconstruction choices.",
+    "Every route has total geodesic length 5 NM with equal-length legs on a sphere of radius 6371000 m. Initial compass bearings are uniform over 0 through 360 degrees and signed turns are independently uniform over -90 through 90 degrees relative to the incoming course. Intersections are neither engineered nor required; no filtering uses NR outcomes.",
+    "Thirty scheduled aircraft are allocated as evenly as possible across corridors; any remainder goes to corridors in generation order. Each corridor starts at t=0, then independent uniform 60 through 90 second intervals are accumulated.",
+    "Aircraft types are independent uniform draws from the 12 Table 3 names supplied by the performance table; no balanced type quota is imposed.",
+    "Corridor-origin spacing does not enforce dynamic spacing against airborne aircraft at later scheduled entries; runtime admission semantics belong to the simulator adapter and must be reported separately.",
+    "No Resolution follows the nominal corridor centerline at 350 ft. Full corridor width 500 ft and full height 200 ft are metadata, not sampled position perturbations or corridor containment guarantees.",
+    "Physics dt=0.25 s, endpoint arrival radius=25 m, and per-flight timeout=2400 s are explicit execution settings; full trajectories need not be stored for this bounded pilot.",
+    "The 2400 s guard uses simulation age since actual admission; the paper calls its limit wall-time and does not resolve this implementation ambiguity. Scheduled entry is rounded up to the next physics tick without dynamic conflict filtering, and pending future admissions keep the episode alive.",
+    "Arrival requires the final route waypoint to be active and distance to the endpoint <=25 m. Continuous sampled violations per unordered pair define conflict events; exposure integrates interval-start states and retains the terminal interval before deletion.",
+    "Lateral route deviation is measured after each step using local equirectangular distance to the planned polyline. Native bank/turn behavior is retained; width compliance is reported separately and is not included in all_checks_passed.",
+    "Explicit 2400s simulated-age safeguard for the new training lineage after terminal calibration. This is not a verified author wall-time setting; original nr_pilot1200 remains a control. The enclosing environment selects finite-exit arrival and its width tolerance."
+  ]
+}

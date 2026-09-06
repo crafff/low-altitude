@@ -1,0 +1,11 @@
+{
+  "id": "20260906T030742Z-training2400-summary-b78ee0d5",
+  "stage": "analysis",
+  "state": "succeeded",
+  "started_at": "2026-09-06T03:07:42.404706+00:00",
+  "pid": 5,
+  "finished_at": "2026-09-06T03:07:46.452737+00:00",
+  "reason": "completed",
+  "exit_code": 0,
+  "error": null
+}

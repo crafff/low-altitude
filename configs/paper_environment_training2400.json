@@ -1,0 +1,38 @@
+{
+  "schema": "bluesky.paper-like.environment.v1",
+  "scenario_config": "configs/nr_training2400.json",
+  "action_config": "configs/paper_actions_shared_navigation.json",
+  "observation_config": "configs/paper_observation.json",
+  "types_config": "configs/uav_types.json",
+  "decision_seconds": 5.0,
+  "device": "cpu",
+  "reconstruction_choices": [
+    "Nominal and learned policies share native BlueSky motion, admissions, terminal recording and metrics. No conflict, width or altitude violation silently deletes an aircraft.",
+    "Control is applied on global five-second boundaries. Aircraft admitted between boundaries fly nominally until their first observation; their preceding physical exposure remains counted.",
+    "Reward uses the post-transition physical snapshot and accepted instruction cost once per decision; arriving or timing-out aircraft are scored before deletion. Exposure is independently integrated every0.25s using interval-start states.",
+    "Per-flight2400s simulation-age deadline is a terminal task failure with zero bootstrap and no arrival bonus. A resource interruption is not a completed scenario.",
+    "Literal paper lane and native turn execution currently have unresolved corridor-containment limitations. Report width and altitude violations explicitly; this environment does not claim an operational safety guarantee.",
+    "Explicit terminal-definition diagnostic. A native route ending before this success condition becomes route_exhausted_without_arrival, with no arrival reward and zero terminal bootstrap. Its shorter exposure is not a safety improvement.",
+    "Finite exit replaces the 25m point-target condition with forward crossing of the fixed nominal final cross-section inside the original corridor width and height. Final-leg activation must already have occurred; an artificial capture does not erase that progress. Crossing location/altitude are interpolated within the physics tick; terminal exposure still retains the whole tick. Native passed alone is never success.",
+    "Combine the explicitly declared finite exit with settled vertical completion and final-leg capture guard. Preserve nominal routes, Table3 speeds and native bank25; compare individual semantic changes before further training.",
+    "Explicit ordinary-flyby current-state reconstruction: immediately before each native reached call, refresh only ordinary flyby turndist using current actual TAS, native bankdef, current waypoint bearing and next_qdr. Cached turnspd and selected target speed do not enter this formula. Reject flyturn and its transition modes; native reached alone determines waypoint passage. This follows the audited old author-fork formula, not a confirmed 2026 setup or a safety filter.",
+    "Retain Table3 speeds, native bank25, corridor dimensions, actions, observations, rewards and execution terminal policies. Corridor containment remains unresolved; existing whole-tick terminal exposure remains unchanged. The adapter is installed only for one environment step and restored before reset or caller-side sampling. Cumulative per-episode navigation_audit is available separately from the unchanged episode summary schema.",
+    "Shared NR/policy corner-speed dispatcher is installed before admissions on every reset. Nominal-route geometry supplies the same cap for all target actions; neither traffic nor a full avoidance trajectory is certified. CAP and offset-route corner containment remain limitations, not hidden feasibility rejections.",
+    "Requested discrete speed, altitude and lane remain policy-owned absolute targets. Continuous execution speed is the minimum of the requested speed and active nominal corner caps, including caps below the policy minimum. A speed change cannot revive a completed past corner. Turn completion restores the current requested speed, never an old nominal request.",
+    "Execution feedback in info distinguishes requested/selected/actual speed, physical tracking, component completion and full-interval boundary exposure including terminal ticks. It is diagnostic only: the paper-like own7/intruder10 features and reward formula have not gained boundary feedback or a boundary penalty. Locks record command completion, not current safety. step(None) preserves previous targets.",
+    "No forced lane return, reference inset, fixed holding time, certified action filter or training change is supplied by this navigation integration. Existing action masks retain only component locks and the declared final-leg backward-capture guard.",
+    "New explicitly versioned training environment: simulation-age safeguard2400s and terminal-only width tolerance0.0001m. The 20260906 frozen-policy comparison supports testing this setting; it does not establish learning efficacy or full containment."
+  ],
+  "terminal_policy": "finite_exit",
+  "exit_width_tolerance_m": 0.0001,
+  "fail_on_native_route_exhaustion": true,
+  "ordinary_flyby_guidance": "current_state_refresh",
+  "shared_navigation": {
+    "mode": "shared_corner_speed",
+    "width_fraction": 0.5,
+    "tangent_leg_fraction": 0.45,
+    "release_track_tolerance_deg": 1.0,
+    "prediction_reserve_m": 1.0
+  },
+  "execution_feedback": true
+}
