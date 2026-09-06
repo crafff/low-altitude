@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/reports/timeout2400-continue1024-20260906/summarize.py", line 171, in <module>
+    main()
+  File "/workspace/reports/timeout2400-continue1024-20260906/summarize.py", line 134, in main
+    paired_cases=[dict(seed=case['seed'], corridor_count=case['corridor_count'],
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/reports/timeout2400-continue1024-20260906/summarize.py", line 135, in <listcomp>
+    initial=helpers.metrics(dev[0]['cases'][i]['sample']),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/reports/timeout2400-train256-20260906/summarize.py", line 57, in metrics
+    result = {k: aggregate[k] for k in fields}
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/reports/timeout2400-train256-20260906/summarize.py", line 57, in <dictcomp>
+    result = {k: aggregate[k] for k in fields}
+                 ~~~~~~~~~^^^
+KeyError: 'completed_fraction'

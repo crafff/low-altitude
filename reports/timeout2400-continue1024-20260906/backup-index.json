@@ -1,0 +1,122 @@
+[
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/manifest.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/manifest.json",
+    "bytes": 31803,
+    "sha256": "991cdc353de51da6039e13972eafd599bb5659ace65bfd699e8dce9c4b214ce2"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/status.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/status.json",
+    "bytes": 287,
+    "sha256": "69728411d3a636579b286889ceb0545f22ab0fb9627a5c190eb738a383474511"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/log.txt",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/log.txt",
+    "bytes": 241536,
+    "sha256": "6d5d060bcd5599568716dbf358e78cd27e4921a04b5cd1b41b547834983edb81"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/collection.jsonl",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/artifacts/collection.jsonl",
+    "bytes": 59,
+    "sha256": "2df3d8322cff32ae102ac4fbd135859ca028c962afe57d827e63b1f44c3d67b7"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/development.jsonl",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/artifacts/development.jsonl",
+    "bytes": 293760,
+    "sha256": "431ae43eef335f95748f1efe2c23cb8e0315cd5689ef76c0cd30092a689d87a3"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/training.jsonl",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/artifacts/training.jsonl",
+    "bytes": 2385416,
+    "sha256": "6a652d067b0dff7ef743e8822108feb47a17c081312b7c37819030f6355933ac"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/result.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T032008Z-training2400-continue1024-be791a23/artifacts/result.json",
+    "bytes": 172616,
+    "sha256": "9dce928fb75a18a5568a01fdb2bb4d7b43b54595deb00fbd50848498c42f3ab0"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/latest.pt",
+    "backup": "reports/timeout2400-continue1024-20260906/checkpoints/latest.pt",
+    "bytes": 1086985,
+    "sha256": "9a8c789a2dc01381faddd979420f025fbc20608a5c18baf264861e64dbef138b"
+  },
+  {
+    "source": "runs/20260906T032008Z-training2400-continue1024-be791a23/artifacts/best.pt",
+    "backup": "reports/timeout2400-continue1024-20260906/checkpoints/best.pt",
+    "bytes": 581078,
+    "sha256": "76453bca0a5ad54aa5d9ece85268b2af586616ccfaab92037f265283d6588a44"
+  },
+  {
+    "source": "runs/20260906T041736Z-training2400-summary1024-4777a291/manifest.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041736Z-training2400-summary1024-4777a291/manifest.json",
+    "bytes": 35917,
+    "sha256": "640671fbea1941a72a92fce1c5a2e719dc064ccbf3ae6c216f1a59f91931aff2"
+  },
+  {
+    "source": "runs/20260906T041736Z-training2400-summary1024-4777a291/status.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041736Z-training2400-summary1024-4777a291/status.json",
+    "bytes": 289,
+    "sha256": "2e934208f269c7029f6e42fb75886695968182a4260eb523f650c1bcf90dfdf0"
+  },
+  {
+    "source": "runs/20260906T041736Z-training2400-summary1024-4777a291/log.txt",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041736Z-training2400-summary1024-4777a291/log.txt",
+    "bytes": 1006,
+    "sha256": "48c99ccf43ed6d5fe16f64f1682c35d1fa16b8cc0a770e09483704b77548f063"
+  },
+  {
+    "source": "runs/20260906T041736Z-training2400-summary1024-4777a291/source/reports/timeout2400-continue1024-20260906/summarize.py",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041736Z-training2400-summary1024-4777a291/source/reports/timeout2400-continue1024-20260906/summarize.py",
+    "bytes": 10956,
+    "sha256": "a58c39e59e184a5675554ee370ceb5e59dc50dd95293f5383b0cfbe88db1b43b"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/manifest.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/manifest.json",
+    "bytes": 35917,
+    "sha256": "a2abda84e951db1a652dd09f35dfc0d3a06995a3db5b2387225079e665d9dcc6"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/status.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/status.json",
+    "bytes": 289,
+    "sha256": "00e38a1100e618b991db3a9d2115c306f6f654cf0841e7e0fcbb3c0afc1a425a"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/log.txt",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/log.txt",
+    "bytes": 1464,
+    "sha256": "becbdf7adc3108897464c25e7551784f14e8b51454600954996daae5f6db6266"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/learning-curve.png",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/learning-curve.png",
+    "bytes": 138326,
+    "sha256": "c211df82a918c9b061482b5144a467b8e8ba237aef1986937758f336686a1727"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/learning-curve.pdf",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/learning-curve.pdf",
+    "bytes": 22382,
+    "sha256": "4b4953f7f005d9a86cb534bf9dcd8b6265dc3b86effb302e1099d11ca8211e48"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/summary.json",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/artifacts/summary.json",
+    "bytes": 69856,
+    "sha256": "9c3305a8216181ab00225fd3ffa8d416078a11d1799e751003ab8e2bdd9de088"
+  },
+  {
+    "source": "runs/20260906T041831Z-training2400-summary1024-a7ad4ff4/source/reports/timeout2400-continue1024-20260906/summarize.py",
+    "backup": "reports/timeout2400-continue1024-20260906/records/20260906T041831Z-training2400-summary1024-a7ad4ff4/source/reports/timeout2400-continue1024-20260906/summarize.py",
+    "bytes": 11272,
+    "sha256": "a0c88e267c1d8fcb3d3a744761b2d41d921f0a4677120ccadc021edada1747fb"
+  }
+]
